@@ -12,8 +12,8 @@ FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
 
 def main():
     print("Loading data...")
-    teams = init_teams(DATA_DIR)
-    results = load_rounds(DATA_DIR)
+    teams, rev_fixes = init_teams(DATA_DIR)
+    results = load_rounds(DATA_DIR, extra_fixes=rev_fixes)
 
     print(f"Running pipeline ({len(results)} rounds, 5 passes)...")
     env = TrueSkill()

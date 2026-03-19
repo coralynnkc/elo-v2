@@ -7,18 +7,14 @@ from trueskill import TrueSkill, Rating, rate_1vs1
 MU = 25.0
 SIGMA = MU / 3
 
-# Canonical team name fixes (wrong -> right)
+# Non-reversed-initials name fixes (wrong -> right)
 TEAM_NAME_FIXES = {
     ' - ONLINE': '',
     ' - HYBRID': '',
-    'Baylor PM': 'Baylor MP',
-    'Harvard SJ': 'Harvard JS',
-    'Kansas LH': 'Kansas HL',
-    'Kansas PB': 'Kansas BP',
-    'Kentucky SR': 'Kentucky RS',
-    'UTD RP': 'UTD PR',
-    'Western Kentucky NK': 'Western Kentucky KN',
 }
+
+# These reversed-initials pairs refer to genuinely different teams — do not collapse
+REVERSED_INITIALS_EXCEPTIONS = frozenset({'Kansas BP', 'Kansas PB'})
 
 # Chronological order of tournaments — controls the final pass ordering.
 # Add new tournament codes here in the order they were held.
@@ -35,14 +31,39 @@ def _round_sort_key(name: str) -> tuple:
     return (t_idx, r_idx)
 
 
-def clean_teams(series: pd.Series) -> pd.Series:
+def build_reversed_initials_fixes(names) -> dict[str, str]:
+    """Find all pairs of team names that differ only by swapped last-two initials
+    (e.g. 'Baylor PM' / 'Baylor MP') and return a mapping from the
+    alphabetically-later form to the earlier (canonical) form.
+
+    Pairs listed in REVERSED_INITIALS_EXCEPTIONS are left alone.
+    """
+    fixes = {}
+    seen = {}  # name -> canonical name
+    for item in sorted(set(names)):
+        reversed_item = item[:-2] + item[-2:][::-1]
+        if item in REVERSED_INITIALS_EXCEPTIONS or reversed_item in REVERSED_INITIALS_EXCEPTIONS:
+            continue
+        if reversed_item in seen or item in seen:
+            canonical = seen.get(reversed_item) or seen.get(item)
+            fixes[item] = canonical
+        else:
+            seen[item] = item
+            seen[reversed_item] = item
+    return fixes
+
+
+def clean_teams(series: pd.Series, extra_fixes: dict | None = None) -> pd.Series:
     s = series.copy()
     for wrong, right in TEAM_NAME_FIXES.items():
         s = s.str.replace(wrong, right, regex=False)
+    if extra_fixes:
+        for wrong, right in extra_fixes.items():
+            s = s.str.replace(wrong, right, regex=False)
     return s
 
 
-def load_rounds(data_dir: str) -> dict[str, pd.DataFrame]:
+def load_rounds(data_dir: str, extra_fixes: dict | None = None) -> dict[str, pd.DataFrame]:
     """Auto-discover and load round CSVs from data_dir.
 
     Only loads files whose tournament prefix is in TOURNAMENT_ORDER — add a
@@ -64,16 +85,20 @@ def load_rounds(data_dir: str) -> dict[str, pd.DataFrame]:
     results = {}
     for name in names:
         df = pd.read_csv(os.path.join(data_dir, f'{name}.csv'))
-        df['Aff'] = clean_teams(df['Aff'])
-        df['Neg'] = clean_teams(df['Neg'])
+        df['Aff'] = clean_teams(df['Aff'], extra_fixes)
+        df['Neg'] = clean_teams(df['Neg'], extra_fixes)
         win = df['Win'].str.strip().str.upper()
         df['Win'] = win.map(lambda x: 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
         results[name] = df[['Aff', 'Neg', 'Win']]
     return results
 
 
-def init_teams(data_dir: str) -> pd.DataFrame:
-    """Load all *_entries.csv files from data_dir and initialize teams with default ratings."""
+def init_teams(data_dir: str) -> tuple[pd.DataFrame, dict]:
+    """Load all *_entries.csv files from data_dir and initialize teams with default ratings.
+
+    Returns (teams_df, reversed_initials_fixes) so the caller can pass the same
+    fixes to load_rounds, ensuring round CSVs use the same canonical names.
+    """
     entry_files = glob.glob(os.path.join(data_dir, '*_entries.csv'))
     if not entry_files:
         raise FileNotFoundError(f"No *_entries.csv files found in {data_dir}")
@@ -81,14 +106,16 @@ def init_teams(data_dir: str) -> pd.DataFrame:
         [pd.read_csv(f)['Code'] for f in entry_files],
         ignore_index=True,
     )
-    teams = clean_teams(all_codes).drop_duplicates().sort_values().reset_index(drop=True)
+    base_cleaned = clean_teams(all_codes)
+    rev_fixes = build_reversed_initials_fixes(base_cleaned)
+    teams = clean_teams(base_cleaned, rev_fixes).drop_duplicates().sort_values().reset_index(drop=True)
     return pd.DataFrame({
         'Team': teams,
         'Mu': MU, 'Sigma': SIGMA,
         'Aff_Mu': MU, 'Aff_Sigma': SIGMA,
         'Neg_Mu': MU, 'Neg_Sigma': SIGMA,
         'Aff_Rounds': 0, 'Neg_Rounds': 0,
-    })
+    }), rev_fixes
 
 
 def _apply_round(
