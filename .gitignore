@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Pipeline outputs in coding/ (copied to frontend/public/data/ by run.py)
+coding/teams_labor.csv
+coding/teams_labor_init.csv
+coding/match_history.csv
+
+# Frontend build
+frontend/dist/
+frontend/node_modules/
+
+# Personal docs
+INSTRUCTIONS.md
+
+# OS
+.DS_Store
