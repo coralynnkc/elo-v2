@@ -14,6 +14,8 @@ frontend/node_modules/
 
 # Personal docs
 INSTRUCTIONS.md
+adding_tournaments.md
+CLAUDE.md
 
 # OS
 .DS_Store
