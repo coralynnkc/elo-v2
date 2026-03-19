@@ -36,9 +36,10 @@ let _cache = null
 
 export async function loadData() {
   if (_cache) return _cache
+  const base = import.meta.env.BASE_URL
   const [teams, rawHistory] = await Promise.all([
-    parseCsv('/data/teams_labor.csv'),
-    parseCsv('/data/match_history.csv'),
+    parseCsv(`${base}data/teams_labor.csv`),
+    parseCsv(`${base}data/match_history.csv`),
   ])
   _cache = { teams, rawHistory }
   return _cache
