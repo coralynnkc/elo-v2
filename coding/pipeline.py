@@ -226,6 +226,21 @@ def run_pipeline(
     round_cols = ['Mu', 'Sigma', 'Aff_Mu', 'Aff_Sigma', 'Neg_Mu', 'Neg_Sigma', 'Conservative']
     teams[round_cols] = teams[round_cols].round(3)
     teams = teams[(teams['Aff_Rounds'] > 0) | (teams['Neg_Rounds'] > 0)]
+
+    # Exclude teams that competed in fewer than 2 tournaments
+    history_df = pd.DataFrame(all_history)
+    if not history_df.empty:
+        aff_tours = history_df[['Aff', 'Tournament']].rename(columns={'Aff': 'Team'})
+        neg_tours = history_df[['Neg', 'Tournament']].rename(columns={'Neg': 'Team'})
+        team_tour_counts = (
+            pd.concat([aff_tours, neg_tours])
+            .drop_duplicates()
+            .groupby('Team')['Tournament']
+            .nunique()
+        )
+        eligible = team_tour_counts[team_tour_counts >= 2].index
+        teams = teams[teams['Team'].isin(eligible)]
+
     teams = teams.sort_values('Mu', ascending=False).reset_index(drop=True)
 
     return teams, pd.DataFrame(all_history)
