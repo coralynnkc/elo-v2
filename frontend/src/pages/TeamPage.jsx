@@ -24,7 +24,7 @@ export default function TeamPage() {
 
   const sorted = sortBy === 'consequential'
     ? [...matches].sort((a, b) => b.absDelta - a.absDelta)
-    : matches
+    : [...matches].reverse()
 
   return (
     <div className="page">
