@@ -2,10 +2,12 @@ import Papa from 'papaparse'
 
 const TOURNAMENT_NAMES = {
   nu: 'Northwestern',
+  kentucky_rr: 'Kentucky RR',
   uk: 'Kentucky',
   gonzaga: 'Gonzaga',
   wake: 'Wake Forest',
   gt: 'Georgetown',
+  dartmouth_rr: 'Dartmouth RR',
   texas: 'Texas',
   ada: 'ADA',
 }
