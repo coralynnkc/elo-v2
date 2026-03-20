@@ -786,9 +786,6 @@ uk_octas,uk,octas,Georgetown AC,Emory KS,Aff,36.76,36.817,0.057,32.225,32.168,-0
 uk_octas,uk,octas,Iowa AP,Kansas OW,Aff,34.851,34.945,0.093,33.654,33.563,-0.09
 uk_octas,uk,octas,Michigan State GL,Stanford LL,Aff,34.671,34.716,0.045,28.911,28.86,-0.052
 uk_octas,uk,octas,Northwestern LR,Michigan SS,Aff,36.568,36.676,0.108,36.127,36.016,-0.111
-uk_octas,uk,octas,Emory RY,Emory GS,EMORY GS ADVANCES,31.276,31.276,0.0,41.217,41.217,0.0
-uk_octas,uk,octas,Michigan ES,Michigan BP,MICHIGAN BP ADVANCES,33.741,33.741,0.0,39.34,39.34,0.0
-uk_octas,uk,octas,Kentucky RW,Kentucky GS,KENTUCKY GS ADVANCES,31.349,31.349,0.0,29.987,29.987,0.0
 uk_quarters,uk,quarters,Northwestern LR,Emory GS,Neg,36.676,36.619,-0.058,41.217,41.28,0.064
 uk_quarters,uk,quarters,Kansas LS,Kentucky GS,Aff,39.754,39.774,0.019,29.987,29.97,-0.017
 uk_quarters,uk,quarters,Georgetown AC,Michigan BP,Neg,36.817,36.738,-0.079,39.34,39.423,0.083
@@ -2008,7 +2005,6 @@ gt_octas,gt,octas,Kansas HP,Iowa AP,Neg,33.857,33.765,-0.092,35.021,35.114,0.093
 gt_quarters,gt,quarters,Kansas LS,Michigan SS,Neg,40.771,40.571,-0.2,36.035,36.225,0.19
 gt_quarters,gt,quarters,CSU Long Beach OM,Iowa AP,Neg,35.14,35.033,-0.107,35.114,35.223,0.108
 gt_quarters,gt,quarters,Georgetown AC,Kansas AU,Aff,36.965,37.016,0.051,31.77,31.723,-0.047
-gt_quarters,gt,quarters,Kansas MS,Kansas OW,KANSAS OW ADVANCES,31.384,31.384,0.0,33.331,33.331,0.0
 gt_semis,gt,semis,Iowa AP,Michigan SS,Neg,35.223,35.128,-0.094,36.225,36.325,0.1
 gt_semis,gt,semis,Kansas OW,Georgetown AC,Neg,33.331,33.27,-0.061,37.016,37.082,0.066
 gt_finals,gt,finals,Georgetown AC,Michigan SS,Aff,37.082,37.185,0.103,36.325,36.222,-0.103
@@ -2567,13 +2563,10 @@ texas_octas,texas,octas,Kansas LS,Binghamton CK,Neg,40.396,40.185,-0.211,35.02,3
 texas_octas,texas,octas,Emory LY,Michigan SS,Neg,33.141,33.074,-0.067,36.351,36.423,0.072
 texas_octas,texas,octas,UC Berkeley MR,Iowa AP,Aff,33.717,33.845,0.128,35.195,35.065,-0.13
 texas_octas,texas,octas,Michigan ES,Georgetown AC,Aff,34.065,34.226,0.161,37.428,37.264,-0.164
-texas_octas,texas,octas,Emory RY,Emory KS,EMORY RY ADVANCES,31.184,31.184,0.0,32.138,32.138,0.0
 texas_quarters,texas,quarters,Emory RY,CSU Long Beach OM,Neg,31.184,31.126,-0.058,35.354,35.412,0.058
 texas_quarters,texas,quarters,UC Berkeley MR,Emory GS,Neg,33.845,33.815,-0.03,41.365,41.4,0.035
 texas_quarters,texas,quarters,Binghamton CK,Michigan SS,Neg,35.205,35.115,-0.089,36.423,36.52,0.097
-texas_quarters,texas,quarters,Michigan ES,Michigan BP,MICHIGAN BP ADVANCES,34.226,34.226,0.0,39.642,39.642,0.0
 texas_semis,texas,semis,CSU Long Beach OM,Emory GS,Neg,35.412,35.37,-0.042,41.4,41.449,0.049
-texas_semis,texas,semis,Michigan SS,Michigan BP,MICHIGAN BP ADVANCES,36.52,36.52,0.0,39.642,39.642,0.0
 texas_finals,texas,finals,Michigan BP,Emory GS,Neg,39.642,39.55,-0.092,41.449,41.547,0.099
 ada_1,ada,1,Georgia CP,Macalester WD,Aff,22.2,22.307,0.107,21.96,21.557,-0.403
 ada_1,ada,1,Michigan State FM,UTD DD,Aff,28.55,28.614,0.063,25.081,25.01,-0.072
@@ -2793,7 +2786,6 @@ ada_octas,ada,octas,Macalester KH,Northwestern AT,Aff,34.257,34.369,0.112,31.807
 ada_quarters,ada,quarters,Kansas LS,Northwestern LR,Aff,40.026,40.096,0.071,36.365,36.297,-0.068
 ada_quarters,ada,quarters,Kentucky GS,Georgetown AC,Neg,30.201,30.168,-0.033,37.087,37.123,0.035
 ada_quarters,ada,quarters,Emory GR,Macalester KH,Neg,40.313,39.603,-0.71,34.369,34.643,0.274
-ada_quarters,ada,quarters,Michigan BE,Michigan SS,MICHIGAN BE ADVANCES,38.691,38.691,0.0,36.628,36.628,0.0
 ada_semis,ada,semis,Macalester KH,Georgetown AC,Neg,34.643,34.534,-0.109,37.123,37.201,0.078
 ada_semis,ada,semis,Kansas LS,Michigan BE,Neg,40.096,39.957,-0.139,38.691,38.999,0.308
 ada_finals,ada,finals,Georgetown AC,Michigan BE,Neg,37.201,37.115,-0.086,38.999,39.199,0.2
