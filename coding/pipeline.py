@@ -140,6 +140,10 @@ def _apply_round(
         if aff_name not in team_idx.index or neg_name not in team_idx.index:
             continue
 
+        # Skip walkovers: same-school matchups where one team gets a bye
+        if aff_name.rsplit(' ', 1)[0] == neg_name.rsplit(' ', 1)[0]:
+            continue
+
         a = team_idx.loc[aff_name]
         n = team_idx.loc[neg_name]
 
@@ -230,7 +234,7 @@ def run_pipeline(
 
     Returns (teams_df, match_history_df).
     """
-    env = env or TrueSkill()
+    env = env or TrueSkill(draw_probability=0)
     rng = random.Random(seed)
     round_names = list(results.keys())
 
