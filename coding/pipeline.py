@@ -18,7 +18,7 @@ REVERSED_INITIALS_EXCEPTIONS = frozenset({'Kansas BP', 'Kansas PB'})
 
 # Chronological order of tournaments — controls the final pass ordering.
 # Add new tournament codes here in the order they were held.
-TOURNAMENT_ORDER = ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada']
+TOURNAMENT_ORDER = ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt']
 
 # Elim round sort order (prelim numbers sort before these automatically)
 _ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103, 'finals': 104}

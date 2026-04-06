@@ -10,6 +10,7 @@ const TOURNAMENT_NAMES = {
   dartmouthrr: 'Dartmouth RR',
   texas: 'Texas',
   ada: 'ADA',
+  ndt: 'NDT',
 }
 
 const ELIM_LABELS = {
