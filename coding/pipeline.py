@@ -11,6 +11,10 @@ SIGMA = MU / 3
 TEAM_NAME_FIXES = {
     ' - ONLINE': '',
     ' - HYBRID': '',
+    'Houston MH': 'Houston HM',
+    'Macalester HK': 'Macalester KH',
+    'Southern California MB': 'Southern California BM',
+    'Wichita State MG': 'Wichita State GM',
 }
 
 # These reversed-initials pairs refer to genuinely different teams — do not collapse
