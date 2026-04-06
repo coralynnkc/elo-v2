@@ -28,7 +28,7 @@ export default function Leaderboard() {
         <h1>Policy Debate Rankings</h1>
         <p className="subtitle">
           TrueSkill ratings · 2025–26 season · Northwestern, Kentucky RR, UK,
-          Gonzaga, Wake, Georgetown, Dartmouth RR, Texas, ADA
+          Gonzaga, Wake, Georgetown, Dartmouth RR, Texas, ADA, NDT
         </p>
       </header>
 
