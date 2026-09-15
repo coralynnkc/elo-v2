@@ -1,15 +1,21 @@
 import glob
 import os
-import random
 import re
 import unicodedata
 from collections import Counter, defaultdict
 from functools import partial
 import pandas as pd
+import trueskillthroughtime as ttt
 from trueskill import TrueSkill, Rating, rate_1vs1
 
 MU = 25.0
 SIGMA = MU / 3
+BETA = SIGMA / 2    # TrueSkill default: performance noise per round
+GAMMA = SIGMA / 100  # TrueSkill's default tau, applied here once per tournament
+
+# TrueSkill Through Time convergence
+TTT_ITERATIONS = 100
+TTT_EPSILON = 1e-4
 
 # Tabroom suffixes stripped from team codes in every season
 SUFFIX_FIXES = {
@@ -127,10 +133,10 @@ def load_season(
     """Load a season's round CSVs and identify each team as a debater partnership.
 
     Each side of each round is resolved, in order, from:
-      1. the speaker names in that row's points column,
-      2. that tournament's entries file (Code -> Entry),
-      3. the only partnership seen anywhere this season under that code,
-      4. the only partnership seen under that code with its initials in either order.
+      1. that tournament's entries file (Code -> Entry),
+      2. the speaker names in that row's points column (Tabroom shortens these, so entries win),
+      3. the partnership seen under that code at the nearest tournament that has one,
+      4. the same, matching the code's initials in either order.
     Anything still unresolved is keyed by its code.
 
     Teams are displayed by their most-used code; when partnerships share one, their
@@ -349,40 +355,56 @@ def _apply_round(
     return t, history
 
 
+def fit_through_time(
+    results: dict[str, pd.DataFrame],
+    gamma: float = GAMMA,
+) -> dict[str, ttt.Gaussian]:
+    """Fit TrueSkill Through Time over a season, one time step per tournament.
+
+    Every rating is smoothed over all results, before and after, so it doesn't depend
+    on round order and its uncertainty isn't shrunk by replaying results.
+
+    Returns each team's rating as of the last tournament it attended.
+    """
+    tournaments = list(dict.fromkeys(name.partition('_')[0] for name in results))
+    composition, outcomes, times = [], [], []
+    for name, rd in results.items():
+        t_idx = tournaments.index(name.partition('_')[0])
+        for row in rd.itertuples(index=False):
+            if row.Win in ('Aff', 'Neg') and isinstance(row.Aff, str) and isinstance(row.Neg, str):
+                composition.append([[row.Aff], [row.Neg]])
+                outcomes.append([1, 0] if row.Win == 'Aff' else [0, 1])  # higher score wins
+                times.append(t_idx)
+
+    history = ttt.History(composition, outcomes, times, mu=MU, sigma=SIGMA, beta=BETA, gamma=gamma)
+    history.convergence(epsilon=TTT_EPSILON, iterations=TTT_ITERATIONS, verbose=False)
+    return {team: curve[-1][1] for team, curve in history.learning_curves().items()}
+
+
 def run_pipeline(
     teams: pd.DataFrame,
     results: dict[str, pd.DataFrame],
-    n_passes: int = 5,
     env: TrueSkill = None,
-    seed: int = 42,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Run TrueSkill rating pipeline.
+    Rate a season.
 
-    Passes 1..n-1: shuffle round order to reduce order-dependent bias in warm-up.
-    Final pass: chronological order, tracking match history for the frontend.
+    Match history (and round counts, side ratings): one forward chronological TrueSkill
+    pass, so each round's before/after uses only earlier results.
+    Leaderboard Mu/Sigma: TrueSkill Through Time over the whole season.
 
     Returns (teams_df, match_history_df).
     """
-    env = env or TrueSkill(draw_probability=0)
-    rng = random.Random(seed)
-    round_names = list(results.keys())
-
-    for _ in range(n_passes - 1):
-        order = round_names[:]
-        rng.shuffle(order)
-        for name in order:
-            teams, _ = _apply_round(teams, results[name], env)
-
-    # Reset round counts — only the final chronological pass should count them
-    teams['Aff_Rounds'] = 0
-    teams['Neg_Rounds'] = 0
+    env = env or TrueSkill(mu=MU, sigma=SIGMA, beta=BETA, tau=GAMMA, draw_probability=0)
 
     all_history = []
-    for name in round_names:
+    for name in results:
         teams, history = _apply_round(teams, results[name], env, track_history=True, round_name=name)
         all_history.extend(history)
 
+    fit = fit_through_time(results)
+    teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
+    teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)
     teams['Conservative'] = teams['Mu'] - 3 * teams['Sigma']
     round_cols = ['Mu', 'Sigma', 'Aff_Mu', 'Aff_Sigma', 'Neg_Mu', 'Neg_Sigma', 'Conservative']
     teams[round_cols] = teams[round_cols].round(3)

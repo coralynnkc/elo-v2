@@ -1,557 +1,557 @@
 Round,Tournament,Round_Label,Aff,Neg,Win,Aff_Mu_Before,Aff_Mu_After,Aff_Mu_Delta,Neg_Mu_Before,Neg_Mu_After,Neg_Mu_Delta
-nu_1,nu,1,Michigan State LM,Kansas CC,Aff,35.048,35.136,0.088,27.343,27.26,-0.083
-nu_1,nu,1,Western Kentucky NI,Emory CrSm,Aff,30.935,30.968,0.033,20.397,20.343,-0.055
-nu_1,nu,1,Kansas BT,Dartmouth CG,Neg,28.197,27.894,-0.303,30.875,31.068,0.193
-nu_1,nu,1,Houston FI,MoState BM,Aff,24.878,24.952,0.074,15.826,15.747,-0.078
-nu_1,nu,1,Emory ChSt,Kansas SS,Neg,19.031,19.003,-0.028,32.22,32.239,0.019
-nu_1,nu,1,Michigan CS,Wake Forest PT,Aff,37.598,37.608,0.01,22.218,22.208,-0.01
-nu_1,nu,1,Indiana TF,Georgia CP,Neg,22.363,22.287,-0.076,31.181,31.259,0.078
-nu_1,nu,1,UC Berkeley GS,Wyoming LW,Aff,24.197,24.212,0.015,8.556,8.514,-0.043
-nu_1,nu,1,Emory GY,MoState NC,Aff,42.354,42.358,0.004,24.652,24.647,-0.004
-nu_1,nu,1,Indiana DJ,Georgetown LN,Neg,13.296,13.291,-0.005,31.044,31.049,0.004
-nu_1,nu,1,Emory HT,Michigan BS,Neg,26.228,26.199,-0.029,38.592,38.618,0.026
-nu_1,nu,1,Wake Forest AM,MoState DH,Aff,29.166,29.181,0.015,14.58,14.562,-0.018
-nu_1,nu,1,West Georgia HL,Michigan State KP,Neg,13.285,13.261,-0.024,27.287,27.307,0.02
-nu_1,nu,1,Emory CS,MoState CP,Aff,22.915,23.025,0.11,15.36,15.245,-0.116
-nu_1,nu,1,Kansas UO,Michigan AD,Aff,37.697,37.705,0.008,21.318,21.309,-0.009
-nu_1,nu,1,Utah BH,UC Berkeley AW,Neg,14.172,14.139,-0.033,26.336,26.369,0.033
-nu_1,nu,1,Georgia KL,Oklahoma BW,Neg,25.741,25.554,-0.187,30.45,30.657,0.207
-nu_1,nu,1,Emory SY,Georgetown LC,Aff,37.206,37.229,0.023,25.022,24.993,-0.029
-nu_1,nu,1,Trinity CO,Kansas FB,Neg,17.366,17.359,-0.008,33.352,33.36,0.008
-nu_1,nu,1,Northwestern KM,Harvard HL,Neg,27.668,27.438,-0.23,30.88,31.068,0.188
-nu_1,nu,1,Wichita State MG,Texas AL,Aff,33.128,33.817,0.689,30.919,30.37,-0.549
-nu_1,nu,1,Michigan AR,Trinity BK,Aff,23.331,23.531,0.2,18.852,18.671,-0.18
-nu_1,nu,1,Liberty CL,Harvard GM,Aff,29.819,30.122,0.303,30.104,29.703,-0.401
-nu_1,nu,1,Michigan LS,CSU Long Beach EM,Neg,26.314,26.132,-0.182,31.097,31.239,0.143
-nu_1,nu,1,Utah VP,Dartmouth RU,Neg,11.706,11.697,-0.009,27.817,27.824,0.006
-nu_1,nu,1,Dartmouth BJ,Macalester KS,Neg,18.349,18.33,-0.019,32.073,32.087,0.014
-nu_1,nu,1,Texas AG,Western Kentucky HM,Aff,31.433,31.436,0.003,13.517,13.513,-0.004
-nu_1,nu,1,West Georgia GK,Southern California BM,Neg,16.284,16.229,-0.055,26.568,26.616,0.049
-nu_1,nu,1,George Mason DC,Iowa LS,Aff,31.289,31.307,0.018,17.797,17.779,-0.018
-nu_1,nu,1,Michigan BB,Iowa PK,Neg,20.268,20.227,-0.041,31.775,31.806,0.03
-nu_1,nu,1,Kentucky SR,Iowa SB,Aff,26.914,27.013,0.099,19.679,19.569,-0.109
-nu_1,nu,1,Wyoming HW,Southern California TM,Neg,21.062,20.945,-0.117,28.234,28.332,0.097
-nu_1,nu,1,Wake Forest DM,Northwestern LT,Neg,24.59,24.468,-0.122,31.424,31.522,0.098
-nu_1,nu,1,Western Kentucky KN,Wake Forest NS,Aff,25.294,25.434,0.141,20.254,20.089,-0.166
-nu_1,nu,1,Gonzaga AG,Emory MW,Neg,10.442,10.421,-0.021,24.372,24.392,0.02
-nu_1,nu,1,Michigan ES,Baylor BK,Aff,41.685,41.688,0.003,23.364,23.361,-0.003
-nu_1,nu,1,Oklahoma PS,Kansas BB,Neg,10.809,10.789,-0.02,24.803,24.823,0.02
-nu_1,nu,1,Texas GS,Harvard DS,Neg,19.827,19.782,-0.045,30.924,30.962,0.038
-nu_1,nu,1,Michigan State FM,Michigan PF,Aff,27.228,27.43,0.203,23.288,23.078,-0.21
-nu_1,nu,1,Kansas AW,Michigan BP,Aff,27.125,27.171,0.046,16.603,16.551,-0.052
-nu_1,nu,1,MoState DS,Emory AT,Neg,18.962,18.878,-0.084,28.397,28.461,0.065
-nu_1,nu,1,Emory TY,Iowa EW,Neg,25.706,25.6,-0.106,33.675,33.751,0.075
-nu_1,nu,1,Northwestern LP,Kansas LL,Aff,32.152,32.152,0.0,9.602,9.601,-0.0
-nu_1,nu,1,UC Berkeley BM,Emory CF,Aff,37.39,37.393,0.003,19.434,19.431,-0.004
-nu_1,nu,1,Emory JR,Baylor PA,Aff,25.403,25.628,0.225,22.318,22.086,-0.232
-nu_1,nu,1,Northwestern JP,Kansas FH,Aff,30.235,30.279,0.044,19.681,19.627,-0.054
-nu_1,nu,1,Baylor MM,Emory OP,Neg,11.473,11.435,-0.038,24.238,24.266,0.028
-nu_1,nu,1,Emory ST,George Mason WW,Neg,17.329,17.289,-0.041,28.261,28.305,0.044
-nu_1,nu,1,Dartmouth RS,Kansas PL,Aff,20.587,20.937,0.35,21.14,20.801,-0.34
-nu_1,nu,1,Kentucky CS,Dartmouth DO,Aff,24.42,24.557,0.137,18.289,18.13,-0.159
-nu_1,nu,1,Gonzaga MP,Western Kentucky CS,Neg,20.796,20.578,-0.218,24.403,24.626,0.223
-nu_1,nu,1,Georgetown BP,Michigan AO,Neg,24.342,24.176,-0.165,29.827,29.969,0.142
-nu_1,nu,1,Dartmouth BC,Emory GW,Aff,26.696,26.698,0.002,6.281,6.277,-0.004
-nu_1,nu,1,UTD DH,Emory SW,Aff,33.786,33.858,0.072,25.347,25.268,-0.079
-nu_1,nu,1,Michigan BL,Wake Forest HN,Aff,21.028,21.363,0.335,20.984,20.614,-0.371
-nu_1,nu,1,Kansas PB,Dartmouth CS,Neg,22.472,22.351,-0.122,29.73,29.831,0.101
-nu_1,nu,1,Michigan GV,Washburn LR,Aff,30.772,30.784,0.012,15.838,15.824,-0.014
-nu_1,nu,1,Wake Forest LP,Dartmouth HH,Aff,32.017,32.038,0.021,19.151,19.124,-0.027
-nu_1,nu,1,Wake Forest LW,Kansas BS,Neg,21.973,21.768,-0.205,25.124,25.334,0.21
-nu_1,nu,1,Dartmouth JT,Kansas State SF,Neg,31.206,30.518,-0.688,21.916,22.675,0.759
-nu_1,nu,1,Northwestern CY,Kansas State DD,Aff,25.842,25.937,0.095,18.025,17.93,-0.095
-nu_1,nu,1,Southern California LP,Georgetown GT,Neg,18.566,18.528,-0.038,29.83,29.87,0.041
-nu_1,nu,1,Georgetown RM,UTD RH,Neg,14.29,14.244,-0.046,25.085,25.126,0.041
-nu_1,nu,1,Michigan State JS,Baylor LM,Aff,28.745,28.756,0.011,14.282,14.267,-0.015
-nu_1,nu,1,Georgetown VX,Harvard AB,Neg,22.12,22.028,-0.092,29.978,30.068,0.091
-nu_1,nu,1,Wake Forest BS,Michigan State BS,Aff,36.903,36.988,0.085,29.178,29.074,-0.104
-nu_1,nu,1,North Texas BV,Southern California DP,Aff,24.746,25.051,0.304,24.651,24.324,-0.327
-nu_2,nu,2,Kansas CC,Western Kentucky NI,Aff,27.26,27.729,0.469,30.968,30.59,-0.378
-nu_2,nu,2,Emory CrSm,Michigan State LM,Neg,20.343,20.329,-0.014,35.136,35.147,0.011
-nu_2,nu,2,Dartmouth CG,Houston FI,Aff,31.068,31.171,0.103,24.952,24.813,-0.138
-nu_2,nu,2,MoState BM,Kansas BT,Neg,15.747,15.714,-0.033,27.894,27.93,0.036
-nu_2,nu,2,Kansas SS,UC Berkeley GS,Aff,32.239,32.318,0.079,24.212,24.106,-0.106
-nu_2,nu,2,Wake Forest PT,Indiana TF,Neg,22.208,21.834,-0.373,22.287,22.641,0.354
-nu_2,nu,2,Georgia CP,Michigan CS,Neg,31.259,31.127,-0.132,37.608,37.736,0.128
-nu_2,nu,2,Wyoming LW,Emory ChSt,Neg,8.514,8.331,-0.183,19.003,19.075,0.072
-nu_2,nu,2,MoState NC,Indiana DJ,Aff,24.647,24.69,0.043,13.291,13.242,-0.049
-nu_2,nu,2,Georgetown LN,Emory GY,Neg,31.049,31.005,-0.044,42.358,42.398,0.04
-nu_2,nu,2,Michigan BS,Wake Forest AM,Aff,38.618,38.677,0.059,29.181,29.111,-0.07
-nu_2,nu,2,MoState DH,Emory HT,Neg,14.562,14.516,-0.046,26.199,26.236,0.037
-nu_2,nu,2,Michigan State KP,Michigan ES,Neg,27.307,27.29,-0.017,41.688,41.703,0.015
-nu_2,nu,2,Northwestern LT,Emory CS,Aff,31.522,31.588,0.066,23.025,22.939,-0.086
-nu_2,nu,2,Michigan AD,Utah BH,Aff,21.309,21.454,0.145,14.139,14.018,-0.121
-nu_2,nu,2,UC Berkeley AW,Kansas UO,Neg,26.369,26.327,-0.042,37.705,37.747,0.043
-nu_2,nu,2,Oklahoma BW,Michigan LS,Aff,30.657,30.863,0.206,26.132,25.948,-0.184
-nu_2,nu,2,Georgetown LC,Trinity CO,Aff,24.993,25.092,0.099,17.359,17.26,-0.098
-nu_2,nu,2,Kansas FB,Emory SY,Neg,33.36,33.149,-0.211,37.229,37.393,0.164
-nu_2,nu,2,Harvard HL,Michigan AR,Aff,31.068,31.148,0.08,23.531,23.426,-0.106
-nu_2,nu,2,Texas AL,Emory JR,Aff,30.37,30.729,0.359,25.628,25.465,-0.164
-nu_2,nu,2,Trinity BK,Northwestern KM,Neg,18.671,18.6,-0.072,27.438,27.512,0.073
-nu_2,nu,2,Emory AT,Michigan AC,Neg,28.461,28.221,-0.24,31.208,31.465,0.257
-nu_2,nu,2,CSU Long Beach EM,Georgia KL,Neg,31.239,30.718,-0.522,25.554,26.224,0.67
-nu_2,nu,2,Dartmouth RU,Liberty CL,Aff,27.824,28.223,0.399,30.122,29.748,-0.373
-nu_2,nu,2,Macalester KS,Texas AG,Neg,32.087,31.779,-0.308,31.436,31.815,0.379
-nu_2,nu,2,Western Kentucky HM,Dartmouth BJ,Neg,13.513,13.315,-0.198,18.33,18.518,0.188
-nu_2,nu,2,Southern California BM,Kentucky SR,Aff,26.616,26.973,0.357,27.013,26.67,-0.343
-nu_2,nu,2,Iowa LS,Georgetown VX,Neg,17.779,17.598,-0.182,22.028,22.213,0.185
-nu_2,nu,2,Iowa PK,Wake Forest BS,Aff,31.806,32.327,0.522,36.988,36.44,-0.548
-nu_2,nu,2,Iowa SB,West Georgia GK,Aff,19.569,19.791,0.222,16.229,15.993,-0.237
-nu_2,nu,2,Harvard GM,Utah VP,Aff,29.703,29.707,0.004,11.697,11.693,-0.004
-nu_2,nu,2,MoState CP,Wake Forest DM,Neg,15.245,15.168,-0.076,24.468,24.538,0.069
-nu_2,nu,2,Wake Forest NS,North Texas BV,Aff,20.089,20.682,0.593,25.051,24.546,-0.505
-nu_2,nu,2,Dartmouth HH,Gonzaga AG,Aff,19.124,19.212,0.088,10.421,10.328,-0.093
-nu_2,nu,2,Baylor BK,West Georgia HL,Aff,23.361,23.421,0.061,13.261,13.185,-0.076
-nu_2,nu,2,Kansas BB,UC Berkeley BM,Neg,24.823,24.793,-0.03,37.393,37.412,0.02
-nu_2,nu,2,Harvard DS,Michigan State FM,Aff,30.962,31.162,0.2,27.43,27.22,-0.21
-nu_2,nu,2,Michigan PF,Texas GS,Aff,23.078,23.303,0.225,19.782,19.537,-0.245
-nu_2,nu,2,Michigan BP,Wyoming HW,Neg,16.551,16.351,-0.2,20.945,21.141,0.196
-nu_2,nu,2,Southern California TM,Kansas AW,Aff,28.332,28.603,0.272,27.171,26.878,-0.293
-nu_2,nu,2,Iowa EW,Northwestern LP,Aff,33.751,33.988,0.237,32.152,31.875,-0.278
-nu_2,nu,2,Kansas LL,Emory TY,Neg,9.601,9.591,-0.01,25.6,25.609,0.009
-nu_2,nu,2,Emory CF,Oklahoma PS,Aff,19.431,19.522,0.091,10.789,10.698,-0.092
-nu_2,nu,2,Baylor PA,Wichita State MG,Neg,22.086,22.049,-0.037,33.817,33.914,0.096
-nu_2,nu,2,Kansas FH,Baylor MM,Aff,19.627,19.726,0.099,11.435,11.306,-0.129
-nu_2,nu,2,Emory OP,Northwestern JP,Neg,24.266,24.117,-0.149,30.279,30.406,0.127
-nu_2,nu,2,George Mason WW,Dartmouth RS,Aff,28.305,28.411,0.106,20.937,20.847,-0.09
-nu_2,nu,2,Kansas PL,Emory ST,Aff,20.801,20.984,0.184,17.289,17.083,-0.206
-nu_2,nu,2,Dartmouth DO,Gonzaga MP,Neg,18.13,17.839,-0.291,20.578,20.831,0.252
-nu_2,nu,2,Western Kentucky CS,Kentucky CS,Neg,24.626,24.261,-0.365,24.557,24.915,0.358
-nu_2,nu,2,Michigan AO,Dartmouth BC,Aff,29.969,30.173,0.204,26.698,26.432,-0.266
-nu_2,nu,2,Emory GW,Georgetown BP,Neg,6.277,6.265,-0.012,24.176,24.181,0.005
-nu_2,nu,2,Emory SW,Michigan BL,Aff,25.268,25.462,0.193,21.363,21.18,-0.183
-nu_2,nu,2,Wake Forest HN,UTD DH,Neg,20.614,20.593,-0.02,33.858,33.876,0.018
-nu_2,nu,2,Dartmouth CS,Michigan GV,Neg,29.831,29.538,-0.292,30.784,31.116,0.332
-nu_2,nu,2,Washburn LR,Kansas PB,Neg,15.824,15.68,-0.144,22.351,22.489,0.139
-nu_2,nu,2,Emory MW,Wake Forest LP,Neg,24.392,24.279,-0.113,32.038,32.126,0.088
-nu_2,nu,2,Kansas BS,Dartmouth JT,Neg,25.334,25.191,-0.143,30.518,30.64,0.122
-nu_2,nu,2,Kansas State SF,Wake Forest LW,Neg,22.675,22.34,-0.334,21.768,22.118,0.35
-nu_2,nu,2,Kansas State DD,Southern California LP,Neg,17.93,17.603,-0.327,18.528,18.85,0.322
-nu_2,nu,2,Georgetown GT,Northwestern CY,Aff,29.87,30.079,0.209,25.937,25.737,-0.2
-nu_2,nu,2,UTD RH,Michigan State JS,Aff,25.126,25.623,0.497,28.756,28.301,-0.455
-nu_2,nu,2,Baylor LM,Georgetown RM,Neg,14.267,13.882,-0.386,14.244,14.614,0.37
-nu_2,nu,2,Harvard AB,George Mason DC,Neg,30.068,29.778,-0.291,31.307,31.598,0.291
-nu_2,nu,2,Michigan State BS,Michigan BB,Aff,29.074,29.153,0.079,20.227,20.143,-0.084
-nu_2,nu,2,Southern California DP,Western Kentucky KN,Aff,24.324,24.689,0.365,25.434,25.092,-0.342
-nu_3,nu,3,Dartmouth CG,Michigan GV,Aff,31.171,31.438,0.268,31.116,30.756,-0.36
-nu_3,nu,3,Kentucky CS,Kansas UO,Neg,24.915,24.892,-0.023,37.747,37.773,0.026
-nu_3,nu,3,Michigan AO,Wake Forest LP,Aff,30.173,30.572,0.4,32.126,31.726,-0.4
-nu_3,nu,3,Oklahoma BW,Michigan ES,Neg,30.863,30.815,-0.048,41.703,41.747,0.045
-nu_3,nu,3,Michigan BS,Wichita State MG,Aff,38.677,38.834,0.158,33.914,33.486,-0.427
-nu_3,nu,3,George Mason DC,Southern California TM,Neg,31.598,31.131,-0.467,28.603,29.035,0.431
-nu_3,nu,3,Iowa PK,Michigan CS,Neg,32.327,32.204,-0.123,37.736,37.886,0.15
-nu_3,nu,3,Southern California BM,UC Berkeley BM,Neg,26.973,26.93,-0.043,37.412,37.449,0.037
-nu_3,nu,3,Emory GY,Michigan AC,Aff,42.398,42.442,0.044,31.465,31.422,-0.043
-nu_3,nu,3,Harvard DS,UTD RH,Aff,31.162,31.298,0.136,25.623,25.491,-0.133
-nu_3,nu,3,Northwestern JP,Texas AG,Neg,30.406,30.137,-0.268,31.815,32.092,0.277
-nu_3,nu,3,Georgetown GT,Dartmouth RU,Neg,30.079,29.629,-0.45,28.223,28.585,0.362
-nu_3,nu,3,Kansas SS,Michigan State LM,Neg,32.318,32.108,-0.21,35.147,35.365,0.218
-nu_3,nu,3,Harvard HL,Northwestern LT,Neg,31.148,30.877,-0.271,31.588,31.866,0.278
-nu_3,nu,3,George Mason WW,Emory SY,Neg,28.411,28.34,-0.07,37.393,37.449,0.056
-nu_3,nu,3,UTD DH,Iowa EW,Aff,33.876,34.197,0.321,33.988,33.698,-0.29
-nu_3,nu,3,Liberty CL,Indiana TF,Aff,29.748,29.831,0.083,22.641,22.536,-0.105
-nu_3,nu,3,Gonzaga MP,Dartmouth RS,Neg,20.831,20.487,-0.344,20.847,21.154,0.307
-nu_3,nu,3,Wake Forest BS,Kansas PB,Aff,36.44,36.453,0.013,22.489,22.472,-0.017
-nu_3,nu,3,Michigan BL,Kentucky SR,Neg,21.18,21.046,-0.134,26.67,26.803,0.133
-nu_3,nu,3,Michigan State JS,Georgetown VX,Aff,28.301,28.411,0.109,22.213,22.086,-0.127
-nu_3,nu,3,MoState DS,Houston FI,Neg,18.878,18.7,-0.178,24.813,24.953,0.14
-nu_3,nu,3,Dartmouth BC,Emory MW,Neg,26.432,25.915,-0.516,24.279,24.79,0.512
-nu_3,nu,3,MoState NC,Wake Forest AM,Neg,24.69,24.487,-0.204,29.111,29.311,0.2
-nu_3,nu,3,North Texas BV,Dartmouth BJ,Aff,24.546,24.655,0.109,18.518,18.373,-0.145
-nu_3,nu,3,Emory TY,Macalester KS,Neg,25.609,25.457,-0.153,31.779,31.881,0.102
-nu_3,nu,3,Emory AT,Wake Forest DM,Aff,28.221,28.421,0.2,24.538,24.326,-0.212
-nu_3,nu,3,Southern California LP,Georgia KL,Neg,18.85,18.753,-0.097,26.224,26.325,0.101
-nu_3,nu,3,Kansas AW,Michigan PF,Aff,26.878,27.074,0.196,23.303,23.094,-0.209
-nu_3,nu,3,Dartmouth HH,Texas AL,Neg,19.212,19.169,-0.043,30.729,30.804,0.075
-nu_3,nu,3,Kansas CC,Georgetown LC,Aff,27.729,27.931,0.203,25.092,24.845,-0.247
-nu_3,nu,3,Michigan State BS,Kansas State SF,Aff,29.153,29.275,0.122,22.34,22.247,-0.093
-nu_3,nu,3,Michigan State FM,Kansas FH,Aff,27.22,27.316,0.096,19.726,19.614,-0.112
-nu_3,nu,3,Harvard GM,Wake Forest NS,Aff,29.707,29.779,0.073,20.682,20.617,-0.065
-nu_3,nu,3,Michigan AD,Georgia CP,Neg,21.454,21.375,-0.078,31.127,31.187,0.061
-nu_3,nu,3,Michigan AR,Dartmouth JT,Neg,23.426,23.315,-0.111,30.64,30.719,0.079
-nu_3,nu,3,UC Berkeley GS,Emory JR,Aff,24.106,24.588,0.482,25.465,25.081,-0.384
-nu_3,nu,3,Emory HT,Baylor BK,Aff,26.236,26.486,0.249,23.421,23.16,-0.262
-nu_3,nu,3,Georgetown LN,Emory ChSt,Aff,31.005,31.042,0.037,19.075,19.033,-0.042
-nu_3,nu,3,Kansas FB,Emory CF,Aff,33.149,33.168,0.019,19.522,19.501,-0.021
-nu_3,nu,3,Southern California DP,Michigan State KP,Neg,24.689,24.477,-0.211,27.29,27.579,0.289
-nu_3,nu,3,Georgetown RM,Emory OP,Neg,14.614,14.552,-0.062,24.117,24.183,0.066
-nu_3,nu,3,Northwestern LP,Wyoming HW,Aff,31.875,31.916,0.041,21.141,21.096,-0.046
-nu_3,nu,3,Northwestern KM,Georgetown BP,Aff,27.512,27.726,0.214,24.181,23.947,-0.234
-nu_3,nu,3,Iowa SB,Northwestern CY,Neg,19.791,19.656,-0.135,25.737,25.871,0.134
-nu_3,nu,3,UC Berkeley AW,Harvard AB,Neg,26.327,26.092,-0.235,29.778,29.978,0.201
-nu_3,nu,3,Emory SW,Kansas BB,Aff,25.462,25.764,0.302,24.793,24.412,-0.38
-nu_3,nu,3,Dartmouth CS,Emory CS,Aff,29.538,29.647,0.109,22.939,22.81,-0.129
-nu_3,nu,3,Kansas BT,Western Kentucky NI,Neg,27.93,27.641,-0.289,30.59,30.754,0.165
-nu_3,nu,3,Kansas BS,Western Kentucky KN,Neg,25.191,24.875,-0.316,25.092,25.384,0.292
-nu_3,nu,3,CSU Long Beach EM,Western Kentucky CS,Aff,30.718,30.814,0.097,24.261,24.139,-0.122
-nu_3,nu,3,Kansas PL,Wake Forest LW,Aff,20.984,21.327,0.342,22.118,21.772,-0.346
-nu_3,nu,3,Emory CrSm,Gonzaga AG,Aff,20.329,20.393,0.064,10.328,10.262,-0.066
-nu_3,nu,3,Trinity CO,Emory ST,Aff,17.26,17.604,0.344,17.083,16.76,-0.323
-nu_3,nu,3,Michigan LS,Indiana DJ,Aff,25.948,25.973,0.025,13.242,13.21,-0.032
-nu_3,nu,3,MoState CP,West Georgia GK,Neg,15.168,14.815,-0.354,15.993,16.321,0.329
-nu_3,nu,3,Michigan BB,Trinity BK,Neg,20.143,19.668,-0.474,18.6,19.003,0.403
-nu_3,nu,3,Kansas State DD,Emory GW,Aff,17.603,17.643,0.04,6.265,6.161,-0.104
-nu_3,nu,3,Wake Forest HN,West Georgia HL,Aff,20.593,20.696,0.103,13.185,13.044,-0.141
-nu_3,nu,3,Baylor LM,Kansas LL,Aff,13.882,14.077,0.195,9.591,9.358,-0.233
-nu_3,nu,3,Washburn LR,Baylor PA,Neg,15.68,15.536,-0.144,22.049,22.172,0.124
-nu_3,nu,3,Texas GS,Utah BH,Aff,19.537,19.697,0.16,14.018,13.855,-0.163
-nu_3,nu,3,Dartmouth DO,Wake Forest PT,Neg,17.839,17.621,-0.218,21.834,22.036,0.201
-nu_3,nu,3,MoState BM,Oklahoma PS,Aff,15.714,15.894,0.18,10.698,10.507,-0.19
-nu_3,nu,3,MoState DH,Utah VP,Neg,14.516,13.9,-0.616,11.693,12.296,0.603
-nu_3,nu,3,Western Kentucky HM,Wyoming LW,Aff,13.315,13.499,0.184,8.331,7.808,-0.523
-nu_3,nu,3,Michigan BP,Iowa LS,Aff,16.351,16.783,0.431,17.598,17.214,-0.384
-nu_4,nu,4,Emory SY,Georgetown LN,Neg,37.449,36.913,-0.535,31.042,31.804,0.763
-nu_4,nu,4,Dartmouth RU,Northwestern LP,Neg,28.585,28.411,-0.174,31.916,32.12,0.204
-nu_4,nu,4,Michigan CS,UC Berkeley GS,Aff,37.886,37.905,0.019,24.588,24.566,-0.022
-nu_4,nu,4,Southern California TM,North Texas BV,Neg,29.035,28.557,-0.478,24.655,25.109,0.454
-nu_4,nu,4,Michigan State KP,Kansas SS,Neg,27.579,27.377,-0.202,32.108,32.261,0.153
-nu_4,nu,4,Michigan State LM,Harvard DS,Aff,35.365,35.538,0.172,31.298,31.124,-0.173
-nu_4,nu,4,Baylor BK,MoState NC,Neg,23.16,22.847,-0.313,24.487,24.805,0.318
-nu_4,nu,4,Kansas UO,Emory GY,Neg,37.773,37.58,-0.193,42.442,42.622,0.18
-nu_4,nu,4,Michigan ES,UTD DH,Aff,41.747,41.847,0.1,34.197,34.113,-0.084
-nu_4,nu,4,Texas AG,Michigan AO,Aff,32.092,32.355,0.263,30.572,30.324,-0.248
-nu_4,nu,4,Northwestern LT,Dartmouth CG,Neg,31.866,31.565,-0.302,31.438,31.716,0.278
-nu_4,nu,4,UC Berkeley BM,Michigan BS,Neg,37.449,37.22,-0.229,38.834,39.102,0.267
-nu_4,nu,4,Michigan AC,Michigan State BS,Aff,31.422,31.69,0.268,29.275,29.004,-0.271
-nu_4,nu,4,Wake Forest LP,Dartmouth CS,Aff,31.726,31.955,0.23,29.647,29.41,-0.237
-nu_4,nu,4,Houston FI,Emory HT,Aff,24.953,25.372,0.419,26.486,26.057,-0.429
-nu_4,nu,4,Iowa EW,Harvard GM,Neg,33.698,33.272,-0.425,29.779,30.342,0.563
-nu_4,nu,4,UTD RH,Northwestern KM,Neg,25.491,25.263,-0.227,27.726,27.972,0.247
-nu_4,nu,4,Dartmouth RS,Michigan State FM,Neg,21.154,21.044,-0.11,27.316,27.439,0.124
-nu_4,nu,4,Western Kentucky NI,Emory SW,Aff,30.754,30.863,0.109,25.764,25.614,-0.149
-nu_4,nu,4,Wake Forest AM,Kansas FB,Neg,29.311,29.097,-0.213,33.168,33.371,0.203
-nu_4,nu,4,Texas AL,Southern California BM,Aff,30.804,31.186,0.382,26.93,26.749,-0.181
-nu_4,nu,4,Northwestern CY,Kansas PL,Aff,25.871,26.042,0.17,21.327,21.182,-0.144
-nu_4,nu,4,Kentucky SR,CSU Long Beach EM,Neg,26.803,26.633,-0.171,30.814,30.965,0.151
-nu_4,nu,4,Macalester KS,Michigan State JS,Neg,31.881,31.478,-0.403,28.411,28.836,0.425
-nu_4,nu,4,Michigan GV,Kentucky CS,Aff,30.756,30.893,0.137,24.892,24.758,-0.134
-nu_4,nu,4,Georgia KL,George Mason DC,Neg,26.325,26.16,-0.165,31.131,31.284,0.152
-nu_4,nu,4,Georgia CP,Emory AT,Aff,31.187,31.428,0.24,28.421,28.197,-0.224
-nu_4,nu,4,Iowa LS,Emory CrSm,Aff,17.214,17.666,0.452,20.393,19.818,-0.575
-nu_4,nu,4,Baylor PA,Iowa PK,Neg,22.172,22.122,-0.05,32.204,32.246,0.042
-nu_4,nu,4,Indiana DJ,Iowa SB,Neg,13.21,13.051,-0.158,19.656,19.776,0.119
-nu_4,nu,4,Emory OP,Kansas AW,Neg,24.183,23.936,-0.247,27.074,27.285,0.212
-nu_4,nu,4,Wake Forest DM,Texas GS,Aff,24.326,24.5,0.174,19.697,19.514,-0.183
-nu_4,nu,4,Wake Forest NS,Baylor MM,Aff,20.617,20.678,0.061,11.306,11.211,-0.095
-nu_4,nu,4,Gonzaga AG,Kansas BT,Neg,10.262,10.257,-0.005,27.641,27.646,0.005
-nu_4,nu,4,Dartmouth JT,Kansas CC,Aff,30.719,30.898,0.178,27.931,27.738,-0.194
-nu_4,nu,4,Harvard AB,Georgetown GT,Neg,29.978,29.644,-0.334,29.629,29.988,0.359
-nu_4,nu,4,Emory MW,Wake Forest BS,Neg,24.79,24.754,-0.036,36.453,36.482,0.028
-nu_4,nu,4,Western Kentucky KN,Northwestern JP,Neg,25.384,25.249,-0.135,30.137,30.29,0.152
-nu_4,nu,4,Wake Forest PT,George Mason WW,Neg,22.036,21.908,-0.127,28.34,28.468,0.127
-nu_4,nu,4,Trinity BK,Liberty CL,Neg,19.003,18.964,-0.038,29.831,29.863,0.032
-nu_4,nu,4,West Georgia GK,Harvard HL,Neg,16.321,16.309,-0.012,30.877,30.887,0.01
-nu_4,nu,4,Kansas State SF,Trinity CO,Aff,22.247,22.387,0.14,17.604,17.436,-0.168
-nu_4,nu,4,Kansas BB,Kansas State DD,Aff,24.412,24.544,0.131,17.643,17.532,-0.111
-nu_4,nu,4,Emory CF,Gonzaga MP,Neg,19.501,19.146,-0.355,20.487,20.775,0.288
-nu_4,nu,4,Western Kentucky CS,Michigan BP,Aff,24.139,24.238,0.099,16.783,16.68,-0.103
-nu_4,nu,4,Michigan PF,Western Kentucky HM,Aff,23.094,23.152,0.058,13.499,13.433,-0.066
-nu_4,nu,4,Wake Forest LW,Southern California LP,Aff,21.772,21.96,0.188,18.753,18.538,-0.215
-nu_4,nu,4,Georgetown BP,Michigan BL,Aff,23.947,24.19,0.242,21.046,20.841,-0.205
-nu_4,nu,4,Wyoming HW,MoState BM,Aff,21.096,21.258,0.163,15.894,15.725,-0.169
-nu_4,nu,4,Emory CS,Dartmouth HH,Aff,22.81,23.027,0.217,19.169,18.937,-0.232
-nu_4,nu,4,Dartmouth BJ,Emory TY,Neg,18.373,18.259,-0.114,25.457,25.58,0.123
-nu_4,nu,4,Emory JR,Baylor LM,Aff,25.081,25.117,0.036,14.077,14.036,-0.041
-nu_4,nu,4,Georgetown LC,Michigan LS,Neg,24.845,24.55,-0.296,25.973,26.275,0.302
-nu_4,nu,4,Indiana TF,Kansas BS,Neg,22.536,22.291,-0.245,24.875,25.092,0.217
-nu_4,nu,4,Kansas FH,Georgetown RM,Aff,19.614,19.792,0.178,14.552,14.39,-0.162
-nu_4,nu,4,Utah VP,Wake Forest HN,Neg,12.296,12.198,-0.098,20.696,20.777,0.08
-nu_4,nu,4,Kansas PB,MoState DS,Aff,22.472,22.694,0.222,18.7,18.447,-0.253
-nu_4,nu,4,Georgetown VX,UC Berkeley AW,Neg,22.086,21.903,-0.183,26.092,26.299,0.207
-nu_4,nu,4,Emory ChSt,Michigan AD,Neg,19.033,18.711,-0.322,21.375,21.699,0.323
-nu_4,nu,4,Emory GW,Michigan AR,Neg,6.161,6.146,-0.015,23.315,23.321,0.006
-nu_4,nu,4,Wyoming LW,Dartmouth BC,Neg,7.808,7.794,-0.014,25.915,25.921,0.005
-nu_4,nu,4,Utah BH,Southern California DP,Neg,13.855,13.807,-0.048,24.477,24.515,0.038
-nu_4,nu,4,Emory ST,Washburn LR,Neg,16.76,16.393,-0.367,15.536,15.988,0.451
-nu_4,nu,4,Kansas LL,Dartmouth DO,Neg,9.358,9.256,-0.102,17.621,17.712,0.091
-nu_4,nu,4,West Georgia HL,MoState DH,Neg,13.044,12.628,-0.415,13.9,14.278,0.378
-nu_4,nu,4,Oklahoma PS,Michigan BB,Neg,10.507,10.431,-0.076,19.668,19.741,0.072
-nu_5,nu,5,Michigan State JS,Dartmouth CG,Aff,28.836,29.222,0.386,31.716,31.359,-0.357
-nu_5,nu,5,Emory GY,Michigan ES,Neg,42.622,42.235,-0.387,41.847,42.233,0.386
-nu_5,nu,5,Texas AG,Michigan CS,Neg,32.355,32.224,-0.13,37.905,38.047,0.142
-nu_5,nu,5,Michigan BS,Michigan State LM,Aff,39.102,39.286,0.185,35.538,35.355,-0.183
-nu_5,nu,5,Kansas SS,Wake Forest BS,Neg,32.261,32.103,-0.158,36.482,36.641,0.159
-nu_5,nu,5,Houston FI,Northwestern LT,Neg,25.372,25.248,-0.124,31.565,31.665,0.101
-nu_5,nu,5,Baylor BK,West Georgia GK,Aff,22.847,22.971,0.125,16.309,16.187,-0.122
-nu_5,nu,5,Michigan AO,Kansas FB,Neg,30.324,30.133,-0.191,33.371,33.596,0.225
-nu_5,nu,5,Dartmouth JT,UTD DH,Aff,30.898,31.27,0.373,34.113,33.679,-0.435
-nu_5,nu,5,Southern California TM,Northwestern KM,Neg,28.557,28.253,-0.304,27.972,28.322,0.35
-nu_5,nu,5,Michigan State FM,Dartmouth RU,Aff,27.439,27.809,0.369,28.411,28.102,-0.309
-nu_5,nu,5,Kansas UO,Michigan GV,Aff,37.58,37.707,0.127,30.893,30.78,-0.113
-nu_5,nu,5,Georgetown LN,Michigan AC,Neg,31.804,31.428,-0.376,31.69,32.04,0.351
-nu_5,nu,5,Harvard GM,Emory SY,Neg,30.342,30.224,-0.118,36.913,37.005,0.091
-nu_5,nu,5,Liberty CL,George Mason DC,Neg,29.863,29.641,-0.222,31.284,31.541,0.257
-nu_5,nu,5,Georgia CP,North Texas BV,Aff,31.428,31.551,0.123,25.109,25.013,-0.096
-nu_5,nu,5,Harvard DS,Western Kentucky NI,Aff,31.124,31.424,0.3,30.863,30.638,-0.225
-nu_5,nu,5,George Mason WW,Wake Forest LP,Neg,28.468,28.259,-0.208,31.955,32.134,0.178
-nu_5,nu,5,Kansas AW,Oklahoma BW,Neg,27.285,27.1,-0.185,30.815,31.048,0.234
-nu_5,nu,5,Harvard HL,Northwestern JP,Neg,30.887,30.587,-0.299,30.29,30.62,0.331
-nu_5,nu,5,Georgetown GT,UC Berkeley BM,Neg,29.988,29.891,-0.098,37.22,37.299,0.079
-nu_5,nu,5,CSU Long Beach EM,Northwestern CY,Aff,30.965,31.09,0.125,26.042,25.887,-0.155
-nu_5,nu,5,Gonzaga MP,Iowa EW,Neg,20.775,20.753,-0.023,33.272,33.291,0.019
-nu_5,nu,5,Wake Forest AM,UC Berkeley AW,Aff,29.097,29.342,0.245,26.299,26.056,-0.243
-nu_5,nu,5,Kansas PB,Macalester KS,Neg,22.694,22.617,-0.077,31.478,31.531,0.054
-nu_5,nu,5,Emory AT,Kansas FH,Aff,28.197,28.27,0.073,19.792,19.706,-0.086
-nu_5,nu,5,Trinity BK,Iowa LS,Neg,18.964,18.587,-0.377,17.666,18.023,0.357
-nu_5,nu,5,Iowa PK,Northwestern LP,Neg,32.246,31.962,-0.284,32.12,32.444,0.325
-nu_5,nu,5,Iowa SB,Georgetown BP,Neg,19.776,19.604,-0.171,24.19,24.371,0.182
-nu_5,nu,5,Emory TY,UC Berkeley GS,Aff,25.58,25.917,0.337,24.566,24.228,-0.337
-nu_5,nu,5,Dartmouth RS,Wake Forest DM,Neg,21.044,20.867,-0.177,24.5,24.708,0.207
-nu_5,nu,5,Michigan LS,Wake Forest NS,Aff,26.275,26.415,0.14,20.678,20.544,-0.134
-nu_5,nu,5,Gonzaga AG,Utah BH,Neg,10.257,10.008,-0.248,13.807,14.028,0.221
-nu_5,nu,5,Emory SW,MoState NC,Aff,25.614,25.895,0.28,24.805,24.475,-0.33
-nu_5,nu,5,Emory JR,UTD RH,Aff,25.117,25.437,0.32,25.263,24.958,-0.306
-nu_5,nu,5,Kentucky CS,Emory HT,Neg,24.758,24.479,-0.279,26.057,26.345,0.288
-nu_5,nu,5,Southern California DP,Kentucky SR,Neg,24.515,24.294,-0.221,26.633,26.857,0.225
-nu_5,nu,5,Georgia KL,Wyoming HW,Aff,26.16,26.318,0.158,21.258,21.091,-0.167
-nu_5,nu,5,Western Kentucky KN,Kansas CC,Aff,25.249,25.616,0.366,27.738,27.364,-0.374
-nu_5,nu,5,Emory MW,Kansas BS,Neg,24.754,24.39,-0.364,25.092,25.369,0.277
-nu_5,nu,5,Michigan AR,Kansas BT,Neg,23.321,23.131,-0.191,27.646,27.856,0.21
-nu_5,nu,5,Emory OP,Kansas State SF,Aff,23.936,24.228,0.292,22.387,22.163,-0.224
-nu_5,nu,5,Wake Forest HN,Kansas PL,Neg,20.777,20.449,-0.328,21.182,21.448,0.266
-nu_5,nu,5,Michigan AD,Dartmouth CS,Neg,21.699,21.582,-0.116,29.41,29.492,0.082
-nu_5,nu,5,Dartmouth BC,Michigan PF,Aff,25.921,26.182,0.262,23.152,22.926,-0.227
-nu_5,nu,5,Michigan State BS,Kansas BB,Aff,29.004,29.184,0.18,24.544,24.345,-0.199
-nu_5,nu,5,Western Kentucky CS,Southern California BM,Aff,24.238,24.685,0.447,26.749,26.328,-0.421
-nu_5,nu,5,Michigan State KP,Wake Forest LW,Aff,27.377,27.543,0.166,21.96,21.84,-0.121
-nu_5,nu,5,Harvard AB,Emory CS,Aff,29.644,29.748,0.104,23.027,22.906,-0.121
-nu_5,nu,5,Washburn LR,MoState DS,Neg,15.988,15.725,-0.263,18.447,18.746,0.299
-nu_5,nu,5,Indiana TF,MoState DH,Aff,22.291,22.373,0.082,14.278,14.175,-0.103
-nu_5,nu,5,Dartmouth DO,Baylor MM,Aff,17.712,17.842,0.13,11.211,11.036,-0.175
-nu_5,nu,5,Trinity CO,Wake Forest PT,Neg,17.436,17.268,-0.168,21.908,22.084,0.176
-nu_5,nu,5,Emory CF,Kansas State DD,Aff,19.146,19.457,0.311,17.532,17.267,-0.265
-nu_5,nu,5,Georgetown VX,Dartmouth BJ,Aff,21.903,22.092,0.189,18.259,18.046,-0.213
-nu_5,nu,5,Michigan BP,Western Kentucky HM,Aff,16.68,16.898,0.218,13.433,13.193,-0.24
-nu_5,nu,5,Georgetown RM,Texas GS,Neg,14.39,14.234,-0.156,19.514,19.676,0.163
-nu_5,nu,5,Dartmouth HH,MoState BM,Aff,18.937,19.177,0.24,15.725,15.495,-0.231
-nu_5,nu,5,MoState CP,Emory CrSm,Neg,14.815,14.638,-0.176,19.818,19.996,0.177
-nu_5,nu,5,Utah VP,Emory ChSt,Neg,12.198,12.054,-0.145,18.711,18.861,0.15
-nu_5,nu,5,Baylor LM,Michigan BL,Neg,14.036,13.92,-0.116,20.841,20.938,0.098
-nu_5,nu,5,Southern California LP,Baylor PA,Aff,18.538,19.014,0.476,22.122,21.623,-0.499
-nu_5,nu,5,Georgetown LC,Michigan BB,Aff,24.55,24.709,0.159,19.741,19.562,-0.179
-nu_5,nu,5,Indiana DJ,Kansas LL,Aff,13.051,13.3,0.249,9.256,9.018,-0.238
-nu_5,nu,5,Emory ST,Oklahoma PS,Aff,16.393,16.512,0.118,10.431,10.28,-0.152
-nu_6,nu,6,Michigan ES,Michigan State JS,Aff,42.233,42.253,0.02,29.222,29.206,-0.016
-nu_6,nu,6,Michigan CS,Dartmouth JT,Neg,38.047,37.385,-0.661,31.27,31.766,0.496
-nu_6,nu,6,Dartmouth CG,Michigan BS,Neg,31.359,31.298,-0.061,39.286,39.362,0.076
-nu_6,nu,6,Northwestern LT,Emory JR,Aff,31.665,31.764,0.098,25.437,25.327,-0.11
-nu_6,nu,6,Texas GS,Kansas SS,Neg,19.676,19.651,-0.026,32.103,32.125,0.021
-nu_6,nu,6,Michigan State LM,Emory TY,Aff,35.355,35.407,0.052,25.917,25.851,-0.066
-nu_6,nu,6,Emory SY,Western Kentucky CS,Aff,37.005,37.024,0.02,24.685,24.661,-0.024
-nu_6,nu,6,Oklahoma BW,Emory OP,Aff,31.048,31.17,0.122,24.228,24.116,-0.112
-nu_6,nu,6,Wake Forest BS,Dartmouth BC,Aff,36.641,36.68,0.039,26.182,26.133,-0.05
-nu_6,nu,6,Wake Forest LP,Michigan State FM,Aff,32.134,32.284,0.151,27.809,27.644,-0.164
-nu_6,nu,6,Northwestern JP,Wake Forest AM,Aff,30.62,30.868,0.248,29.342,29.046,-0.296
-nu_6,nu,6,George Mason DC,Georgia CP,Aff,31.541,31.84,0.299,31.551,31.215,-0.336
-nu_6,nu,6,Northwestern LP,Kansas UO,Neg,32.444,32.309,-0.135,37.707,37.871,0.164
-nu_6,nu,6,UC Berkeley BM,Harvard DS,Aff,37.299,37.402,0.103,31.424,31.308,-0.116
-nu_6,nu,6,Northwestern KM,Emory GY,Neg,28.322,28.308,-0.014,42.235,42.25,0.015
-nu_6,nu,6,UTD DH,Michigan LS,Aff,33.679,33.763,0.084,26.415,26.318,-0.097
-nu_6,nu,6,Dartmouth RU,Western Kentucky KN,Aff,28.102,28.29,0.188,25.616,25.429,-0.187
-nu_6,nu,6,Western Kentucky NI,Michigan State BS,Aff,30.638,30.824,0.186,29.184,28.9,-0.283
-nu_6,nu,6,Kansas FB,Texas AG,Aff,33.596,33.875,0.279,32.224,31.971,-0.253
-nu_6,nu,6,North Texas BV,Harvard AB,Neg,25.013,24.884,-0.129,29.748,29.896,0.148
-nu_6,nu,6,Michigan AC,CSU Long Beach EM,Neg,32.04,31.663,-0.377,31.09,31.384,0.294
-nu_6,nu,6,Northwestern CY,Emory SW,Aff,25.887,26.208,0.321,25.895,25.592,-0.302
-nu_6,nu,6,Macalester KS,Harvard GM,Aff,31.531,31.748,0.217,30.224,29.939,-0.285
-nu_6,nu,6,Michigan GV,Houston FI,Aff,30.78,30.919,0.139,25.248,25.11,-0.138
-nu_6,nu,6,Kentucky SR,Emory AT,Neg,26.857,26.616,-0.241,28.27,28.533,0.263
-nu_6,nu,6,Iowa LS,Michigan AO,Neg,18.023,18.0,-0.023,30.133,30.156,0.023
-nu_6,nu,6,MoState DS,Iowa PK,Neg,18.746,18.723,-0.023,31.962,31.977,0.015
-nu_6,nu,6,MoState NC,Iowa SB,Aff,24.475,24.643,0.167,19.604,19.451,-0.154
-nu_6,nu,6,Kansas BT,Georgia KL,Aff,27.856,28.17,0.314,26.318,26.055,-0.263
-nu_6,nu,6,Wake Forest DM,Kansas AW,Neg,24.708,24.47,-0.238,27.1,27.316,0.216
-nu_6,nu,6,Wake Forest NS,Baylor BK,Neg,20.544,20.319,-0.225,22.971,23.223,0.252
-nu_6,nu,6,Kansas LL,Gonzaga AG,Aff,9.018,9.464,0.447,10.008,9.563,-0.445
-nu_6,nu,6,Dartmouth CS,Georgetown LN,Aff,29.492,29.868,0.376,31.428,30.98,-0.448
-nu_6,nu,6,Kansas PL,Georgetown GT,Neg,21.448,21.387,-0.06,29.891,29.963,0.072
-nu_6,nu,6,Iowa EW,Michigan State KP,Aff,33.291,33.398,0.107,27.543,27.392,-0.151
-nu_6,nu,6,Georgetown BP,George Mason WW,Neg,24.371,24.178,-0.193,28.259,28.448,0.188
-nu_6,nu,6,Kansas BS,Liberty CL,Neg,25.369,25.22,-0.149,29.641,29.779,0.138
-nu_6,nu,6,Emory HT,Harvard HL,Neg,26.345,26.169,-0.176,30.587,30.73,0.142
-nu_6,nu,6,Emory CrSm,Southern California TM,Neg,19.996,19.909,-0.087,28.253,28.317,0.064
-nu_6,nu,6,UTD RH,Dartmouth DO,Aff,24.958,25.046,0.088,17.842,17.731,-0.111
-nu_6,nu,6,UC Berkeley GS,Southern California LP,Aff,24.228,24.395,0.167,19.014,18.877,-0.136
-nu_6,nu,6,Kansas CC,Gonzaga MP,Aff,27.364,27.454,0.09,20.753,20.645,-0.107
-nu_6,nu,6,Michigan PF,Dartmouth HH,Aff,22.926,23.113,0.188,19.177,18.964,-0.213
-nu_6,nu,6,Emory CS,Georgetown VX,Neg,22.906,22.52,-0.385,22.092,22.435,0.344
-nu_6,nu,6,Southern California BM,Georgetown LC,Aff,26.328,26.571,0.243,24.709,24.449,-0.26
-nu_6,nu,6,Kansas BB,Michigan BP,Aff,24.345,24.452,0.107,16.898,16.802,-0.096
-nu_6,nu,6,Wake Forest LW,Indiana TF,Neg,21.84,21.581,-0.258,22.373,22.674,0.301
-nu_6,nu,6,Wyoming HW,Emory CF,Aff,21.091,21.366,0.274,19.457,19.16,-0.297
-nu_6,nu,6,Kansas State SF,Kansas PB,Neg,22.163,21.91,-0.253,22.617,22.965,0.348
-nu_6,nu,6,UC Berkeley AW,Wake Forest HN,Aff,26.056,26.201,0.145,20.449,20.312,-0.137
-nu_6,nu,6,Kansas FH,Michigan AR,Neg,19.706,19.482,-0.225,23.131,23.346,0.215
-nu_6,nu,6,Wake Forest PT,Dartmouth RS,Aff,22.084,22.369,0.285,20.867,20.625,-0.242
-nu_6,nu,6,Michigan BL,Southern California DP,Neg,20.938,20.756,-0.183,24.294,24.471,0.177
-nu_6,nu,6,Emory ChSt,Kentucky CS,Neg,18.861,18.687,-0.174,24.479,24.611,0.133
-nu_6,nu,6,Baylor MM,Michigan AD,Neg,11.036,10.97,-0.066,21.582,21.64,0.058
-nu_6,nu,6,MoState DH,Emory MW,Neg,14.175,14.116,-0.059,24.39,24.443,0.053
-nu_6,nu,6,Dartmouth BJ,West Georgia HL,Aff,18.046,18.197,0.151,12.628,12.435,-0.194
-nu_6,nu,6,Emory GW,Washburn LR,Neg,6.146,5.989,-0.157,15.725,15.791,0.065
-nu_6,nu,6,Western Kentucky HM,MoState CP,Neg,13.193,12.891,-0.302,14.638,14.94,0.302
-nu_6,nu,6,Baylor PA,Emory ST,Aff,21.623,21.768,0.145,16.512,16.375,-0.136
-nu_6,nu,6,MoState BM,Trinity CO,Neg,15.495,15.217,-0.278,17.268,17.52,0.252
-nu_6,nu,6,Kansas State DD,Georgetown RM,Aff,17.267,17.475,0.208,14.234,14.017,-0.217
-nu_6,nu,6,West Georgia GK,Indiana DJ,Aff,16.187,16.416,0.229,13.3,13.023,-0.277
-nu_6,nu,6,Utah BH,Baylor LM,Neg,14.028,13.666,-0.362,13.92,14.271,0.351
-nu_6,nu,6,Michigan BB,Utah VP,Aff,19.562,19.663,0.102,12.054,11.94,-0.114
-nu_6,nu,6,Oklahoma PS,Trinity BK,Neg,10.28,10.191,-0.089,18.587,18.659,0.072
-nu_7,nu,7,UTD DH,Michigan State FM,Aff,33.763,33.868,0.105,27.644,27.53,-0.114
-nu_7,nu,7,Wake Forest BS,UC Berkeley BM,Aff,36.68,36.998,0.318,37.402,37.117,-0.285
-nu_7,nu,7,West Georgia HL,Indiana DJ,Aff,12.435,12.893,0.458,13.023,12.599,-0.424
-nu_7,nu,7,Northwestern LP,George Mason WW,Aff,32.309,32.479,0.17,28.448,28.264,-0.184
-nu_7,nu,7,Kansas BB,North Texas BV,Aff,24.452,24.841,0.389,24.884,24.611,-0.273
-nu_7,nu,7,Dartmouth RS,Michigan BB,Neg,20.625,20.315,-0.31,19.663,20.062,0.399
-nu_7,nu,7,Emory JR,Michigan AR,Aff,25.327,25.553,0.226,23.346,23.085,-0.261
-nu_7,nu,7,Southern California BM,Houston FI,Aff,26.571,26.812,0.241,25.11,24.846,-0.264
-nu_7,nu,7,Emory SW,Georgetown BP,Neg,25.592,25.247,-0.346,24.178,24.572,0.394
-nu_7,nu,7,Georgia CP,Western Kentucky NI,Aff,31.215,31.524,0.309,30.824,30.614,-0.21
-nu_7,nu,7,Emory CrSm,Dartmouth HH,Aff,19.909,20.228,0.32,18.964,18.652,-0.312
-nu_7,nu,7,Southern California TM,Kansas SS,Neg,28.317,28.162,-0.154,32.125,32.29,0.165
-nu_7,nu,7,Michigan AD,Michigan State BS,Neg,21.64,21.516,-0.124,28.9,28.998,0.098
-nu_7,nu,7,Kansas LL,Baylor MM,Neg,9.464,9.156,-0.308,10.97,11.354,0.384
-nu_7,nu,7,MoState CP,Texas GS,Neg,14.94,14.767,-0.173,19.651,19.82,0.169
-nu_7,nu,7,Georgetown LN,Wake Forest PT,Aff,30.98,31.054,0.074,22.369,22.3,-0.07
-nu_7,nu,7,Michigan State LM,Oklahoma BW,Aff,35.407,35.564,0.157,31.17,30.975,-0.195
-nu_7,nu,7,Oklahoma PS,Gonzaga AG,Neg,10.191,9.792,-0.399,9.563,9.971,0.408
-nu_7,nu,7,Emory ST,Utah BH,Aff,16.375,16.576,0.201,13.666,13.431,-0.236
-nu_7,nu,7,Western Kentucky CS,Southern California DP,Neg,24.661,24.334,-0.327,24.471,24.757,0.286
-nu_7,nu,7,Michigan BL,Trinity BK,Aff,20.756,20.972,0.216,18.659,18.43,-0.229
-nu_7,nu,7,Western Kentucky HM,Utah VP,Aff,12.891,13.201,0.31,11.94,11.594,-0.346
-nu_7,nu,7,Kansas CC,MoState NC,Aff,27.454,27.631,0.177,24.643,24.412,-0.231
-nu_7,nu,7,Emory TY,Michigan State KP,Neg,25.851,25.554,-0.297,27.392,27.687,0.295
-nu_7,nu,7,Dartmouth RU,Michigan GV,Neg,28.29,28.111,-0.179,30.919,31.144,0.225
-nu_7,nu,7,Western Kentucky KN,Kansas PB,Aff,25.429,25.611,0.181,22.965,22.714,-0.251
-nu_7,nu,7,Georgetown LC,Kansas State SF,Aff,24.449,24.669,0.22,21.91,21.726,-0.184
-nu_7,nu,7,Liberty CL,Northwestern CY,Aff,29.779,29.931,0.152,26.208,26.024,-0.184
-nu_7,nu,7,Georgetown VX,Dartmouth BC,Neg,22.435,22.26,-0.175,26.133,26.348,0.215
-nu_7,nu,7,MoState DS,Trinity CO,Aff,18.723,19.065,0.343,17.52,17.257,-0.263
-nu_7,nu,7,Kansas PL,Wake Forest DM,Neg,21.387,21.214,-0.173,24.47,24.677,0.207
-nu_7,nu,7,Iowa SB,Baylor PA,Neg,19.451,19.222,-0.229,21.768,21.995,0.226
-nu_7,nu,7,Northwestern KM,Texas AG,Neg,28.308,28.126,-0.183,31.971,32.144,0.173
-nu_7,nu,7,Dartmouth JT,Kansas UO,Neg,31.766,31.677,-0.089,37.871,38.006,0.135
-nu_7,nu,7,Emory GW,MoState DH,Neg,5.989,5.778,-0.21,14.116,14.217,0.101
-nu_7,nu,7,Kansas State DD,Wake Forest NS,Aff,17.475,17.906,0.431,20.319,19.895,-0.424
-nu_7,nu,7,Washburn LR,Emory CS,Neg,15.791,15.673,-0.117,22.52,22.631,0.111
-nu_7,nu,7,Gonzaga MP,Iowa LS,Aff,20.645,20.861,0.215,18.0,17.797,-0.202
-nu_7,nu,7,Harvard HL,Iowa PK,Aff,30.73,31.037,0.308,31.977,31.661,-0.317
-nu_7,nu,7,Emory GY,Kansas BT,Aff,42.25,42.264,0.015,28.17,28.154,-0.016
-nu_7,nu,7,Kansas FH,Dartmouth BJ,Aff,19.482,19.781,0.3,18.197,17.91,-0.287
-nu_7,nu,7,Macalester KS,Harvard DS,Aff,31.748,31.987,0.239,31.308,31.031,-0.277
-nu_7,nu,7,Michigan AC,Harvard AB,Neg,31.663,31.267,-0.396,29.896,30.262,0.366
-nu_7,nu,7,Emory AT,Dartmouth CG,Neg,28.533,28.324,-0.208,31.298,31.463,0.165
-nu_7,nu,7,Emory HT,Kansas BS,Aff,26.169,26.454,0.285,25.22,24.977,-0.243
-nu_7,nu,7,Georgetown RM,MoState BM,Neg,14.017,13.742,-0.275,15.217,15.507,0.29
-nu_7,nu,7,Harvard GM,Michigan PF,Aff,29.939,30.044,0.105,23.113,23.011,-0.102
-nu_7,nu,7,Wyoming HW,Kentucky SR,Neg,21.366,21.219,-0.147,26.616,26.741,0.125
-nu_7,nu,7,Michigan BP,Wake Forest LW,Neg,16.802,16.642,-0.16,21.581,21.711,0.129
-nu_7,nu,7,Northwestern JP,Michigan BS,Neg,30.868,30.805,-0.063,39.362,39.427,0.065
-nu_7,nu,7,Kansas AW,Michigan AO,Neg,27.316,27.12,-0.196,30.156,30.348,0.192
-nu_7,nu,7,Michigan ES,Kansas FB,Aff,42.253,42.33,0.077,33.875,33.801,-0.074
-nu_7,nu,7,Wake Forest AM,Indiana TF,Aff,29.046,29.166,0.12,22.674,22.564,-0.11
-nu_7,nu,7,Kentucky CS,Emory OP,Neg,24.611,24.278,-0.333,24.116,24.475,0.359
-nu_7,nu,7,Wake Forest HN,Southern California LP,Aff,20.312,20.579,0.267,18.877,18.631,-0.247
-nu_7,nu,7,Baylor BK,UTD RH,Neg,23.223,22.957,-0.266,25.046,25.268,0.222
-nu_7,nu,7,UC Berkeley AW,Emory MW,Aff,26.201,26.468,0.267,24.443,24.16,-0.283
-nu_7,nu,7,Northwestern LT,Wake Forest LP,Neg,31.764,31.514,-0.249,32.284,32.549,0.265
-nu_7,nu,7,Baylor LM,Emory CF,Neg,14.271,14.112,-0.158,19.16,19.329,0.169
-nu_7,nu,7,Dartmouth CS,Michigan State JS,Aff,29.868,30.135,0.267,29.206,28.963,-0.243
-nu_7,nu,7,Emory ChSt,West Georgia GK,Aff,18.687,18.983,0.296,16.416,16.172,-0.243
-nu_7,nu,7,Michigan LS,UC Berkeley GS,Aff,26.318,26.567,0.249,24.395,24.117,-0.278
-nu_7,nu,7,George Mason DC,Michigan CS,Neg,31.84,31.719,-0.121,37.385,37.516,0.131
-nu_7,nu,7,Georgetown GT,Iowa EW,Neg,29.963,29.768,-0.195,33.398,33.557,0.159
-nu_7,nu,7,Emory SY,CSU Long Beach EM,Aff,37.024,37.132,0.108,31.384,31.281,-0.104
-nu_8,nu,8,Michigan BS,Emory SY,Neg,39.427,39.041,-0.386,37.132,37.474,0.341
-nu_8,nu,8,Kansas UO,Michigan ES,Aff,38.006,38.565,0.559,42.33,41.802,-0.528
-nu_8,nu,8,Michigan CS,Michigan State LM,Aff,37.516,37.752,0.235,35.564,35.343,-0.221
-nu_8,nu,8,Wake Forest LP,Emory GY,Neg,32.549,32.505,-0.044,42.264,42.319,0.055
-nu_8,nu,8,Harvard AB,Wake Forest BS,Neg,30.262,30.168,-0.093,36.998,37.09,0.091
-nu_8,nu,8,Dartmouth CG,Macalester KS,Neg,31.463,31.239,-0.224,31.987,32.218,0.231
-nu_8,nu,8,CSU Long Beach EM,Dartmouth CS,Aff,31.281,31.496,0.215,30.135,29.893,-0.242
-nu_8,nu,8,UC Berkeley BM,Georgia CP,Aff,37.117,37.221,0.104,31.524,31.396,-0.128
-nu_8,nu,8,Texas AG,Harvard HL,Neg,32.144,31.812,-0.332,31.037,31.33,0.292
-nu_8,nu,8,Michigan AO,Liberty CL,Neg,30.348,30.052,-0.295,29.931,30.196,0.265
-nu_8,nu,8,Kansas SS,Dartmouth JT,Aff,32.29,32.551,0.261,31.677,31.458,-0.219
-nu_8,nu,8,Oklahoma BW,Northwestern LP,Neg,30.975,30.684,-0.291,32.479,32.717,0.238
-nu_8,nu,8,Iowa EW,George Mason DC,Aff,33.557,33.756,0.199,31.719,31.497,-0.222
-nu_8,nu,8,Kansas FB,Northwestern JP,Aff,33.801,34.01,0.209,30.805,30.621,-0.184
-nu_8,nu,8,Michigan GV,UTD DH,Neg,31.144,30.929,-0.214,33.868,34.057,0.189
-nu_8,nu,8,Georgetown BP,Northwestern LT,Neg,24.572,24.472,-0.1,31.514,31.595,0.081
-nu_8,nu,8,Harvard DS,Kansas BB,Aff,31.031,31.135,0.103,24.841,24.711,-0.13
-nu_8,nu,8,Michigan State JS,Southern California BM,Aff,28.963,29.154,0.191,26.812,26.6,-0.212
-nu_8,nu,8,Iowa PK,Emory HT,Aff,31.661,31.777,0.116,26.454,26.315,-0.138
-nu_8,nu,8,Western Kentucky NI,UC Berkeley AW,Aff,30.614,30.73,0.116,26.468,26.29,-0.178
-nu_8,nu,8,George Mason WW,Michigan LS,Aff,28.264,28.514,0.251,26.567,26.317,-0.249
-nu_8,nu,8,Northwestern CY,Wake Forest AM,Neg,26.024,25.832,-0.191,29.166,29.377,0.211
-nu_8,nu,8,Kansas BT,Emory JR,Aff,28.154,28.411,0.257,25.553,25.353,-0.2
-nu_8,nu,8,Kentucky SR,Western Kentucky KN,Aff,26.741,26.981,0.24,25.611,25.394,-0.216
-nu_8,nu,8,Dartmouth BC,Kansas CC,Aff,26.348,26.765,0.418,27.631,27.331,-0.3
-nu_8,nu,8,Georgia KL,Harvard GM,Neg,26.055,25.88,-0.175,30.044,30.221,0.177
-nu_8,nu,8,Michigan State FM,Georgetown LN,Neg,27.53,27.351,-0.18,31.054,31.255,0.201
-nu_8,nu,8,Michigan State KP,Emory AT,Neg,27.687,27.364,-0.323,28.324,28.597,0.273
-nu_8,nu,8,UTD RH,Kansas AW,Neg,25.268,25.052,-0.216,27.12,27.342,0.222
-nu_8,nu,8,Emory OP,Southern California TM,Neg,24.475,24.285,-0.19,28.162,28.316,0.154
-nu_8,nu,8,Michigan State BS,Northwestern KM,Aff,28.998,29.286,0.289,28.126,27.856,-0.27
-nu_8,nu,8,Southern California DP,Georgetown GT,Neg,24.757,24.632,-0.125,29.768,29.912,0.144
-nu_8,nu,8,Wake Forest DM,Michigan AC,Neg,24.677,24.572,-0.105,31.267,31.371,0.104
-nu_8,nu,8,Michigan BB,Dartmouth RU,Neg,20.062,19.979,-0.083,28.111,28.173,0.062
-nu_8,nu,8,UC Berkeley GS,Kansas State DD,Aff,24.117,24.245,0.128,17.906,17.796,-0.109
-nu_8,nu,8,North Texas BV,Gonzaga MP,Aff,24.611,24.756,0.145,20.861,20.686,-0.175
-nu_8,nu,8,Houston FI,Emory ChSt,Aff,24.846,24.968,0.122,18.983,18.829,-0.154
-nu_8,nu,8,Emory MW,Michigan BL,Aff,24.16,24.38,0.22,20.972,20.795,-0.177
-nu_8,nu,8,Kansas BS,Emory CrSm,Aff,24.977,25.106,0.129,20.228,20.058,-0.17
-nu_8,nu,8,Kansas PB,Georgetown LC,Neg,22.714,22.453,-0.261,24.669,24.9,0.232
-nu_8,nu,8,Michigan AR,Georgetown VX,Aff,23.085,23.381,0.297,22.26,21.998,-0.263
-nu_8,nu,8,Emory CS,Kansas FH,Aff,22.631,22.85,0.219,19.781,19.552,-0.229
-nu_8,nu,8,Texas GS,Wake Forest HN,Neg,19.82,19.515,-0.305,20.579,20.861,0.282
-nu_8,nu,8,Michigan PF,MoState DS,Aff,23.011,23.184,0.173,19.065,18.85,-0.216
-nu_8,nu,8,MoState NC,Wyoming HW,Aff,24.412,24.621,0.21,21.219,21.014,-0.205
-nu_8,nu,8,Indiana TF,Baylor BK,Neg,22.564,22.275,-0.289,22.957,23.269,0.312
-nu_8,nu,8,Emory CF,Kentucky CS,Neg,19.329,19.166,-0.163,24.278,24.42,0.141
-nu_8,nu,8,Wake Forest PT,Emory TY,Neg,22.3,22.101,-0.199,25.554,25.776,0.222
-nu_8,nu,8,Wake Forest LW,Michigan AD,Aff,21.711,21.965,0.254,21.516,21.12,-0.396
-nu_8,nu,8,Baylor PA,Kansas PL,Aff,21.995,22.269,0.274,21.214,20.977,-0.237
-nu_8,nu,8,MoState BM,Emory SW,Neg,15.507,15.454,-0.053,25.247,25.292,0.045
-nu_8,nu,8,MoState DH,Western Kentucky CS,Neg,14.217,14.159,-0.058,24.334,24.379,0.045
-nu_8,nu,8,Wake Forest NS,Western Kentucky HM,Aff,19.895,19.992,0.097,13.201,13.088,-0.113
-nu_8,nu,8,Southern California LP,Emory ST,Neg,18.631,18.26,-0.371,16.576,16.942,0.366
-nu_8,nu,8,Iowa LS,Dartmouth DO,Neg,17.797,17.511,-0.286,17.731,18.091,0.36
-nu_8,nu,8,Kansas State SF,West Georgia HL,Aff,21.726,21.778,0.052,12.893,12.809,-0.084
-nu_8,nu,8,Trinity BK,Washburn LR,Aff,18.43,18.63,0.2,15.673,15.438,-0.235
-nu_8,nu,8,Baylor MM,MoState CP,Neg,11.354,11.078,-0.275,14.767,14.976,0.209
-nu_8,nu,8,Dartmouth BJ,Baylor LM,Aff,17.91,18.099,0.189,14.112,13.926,-0.187
-nu_8,nu,8,Dartmouth HH,Michigan BP,Aff,18.652,18.911,0.259,16.642,16.397,-0.245
-nu_8,nu,8,West Georgia GK,Dartmouth RS,Neg,16.172,15.997,-0.176,20.315,20.459,0.144
-nu_8,nu,8,Trinity CO,Iowa SB,Neg,17.257,17.027,-0.23,19.222,19.456,0.234
-nu_8,nu,8,Utah VP,Oklahoma PS,Neg,11.594,11.131,-0.463,9.792,10.229,0.437
-nu_8,nu,8,Utah BH,Kansas LL,Aff,13.431,13.606,0.176,9.156,8.962,-0.194
-nu_8,nu,8,Indiana DJ,Emory GW,Aff,12.599,12.726,0.126,5.778,5.516,-0.262
-nu_8,nu,8,Gonzaga AG,Georgetown RM,Neg,9.971,9.761,-0.21,13.742,13.922,0.18
-nu_dubs,nu,dubs,Kentucky SR,Emory GY,Neg,26.981,26.974,-0.007,42.319,42.328,0.009
-nu_dubs,nu,dubs,Dartmouth JT,Michigan ES,Neg,31.458,31.427,-0.031,41.802,41.844,0.043
-nu_dubs,nu,dubs,Harvard DS,Emory SY,Neg,31.135,31.037,-0.098,37.474,37.563,0.089
-nu_dubs,nu,dubs,Wake Forest BS,Northwestern JP,Aff,37.09,37.185,0.095,30.621,30.526,-0.095
-nu_dubs,nu,dubs,George Mason WW,Michigan CS,Neg,28.514,28.459,-0.056,37.752,37.806,0.054
-nu_dubs,nu,dubs,Kansas SS,Michigan State JS,Aff,32.551,32.718,0.167,29.154,29.001,-0.153
-nu_dubs,nu,dubs,Western Kentucky NI,Liberty CL,Aff,30.73,30.93,0.2,30.196,29.967,-0.23
-nu_dubs,nu,dubs,Northwestern LT,Dartmouth RU,Aff,31.595,31.75,0.155,28.173,28.02,-0.153
-nu_dubs,nu,dubs,Iowa PK,Wake Forest LP,Aff,31.777,32.059,0.282,32.505,32.207,-0.298
-nu_dubs,nu,dubs,UTD DH,Dartmouth CG,Aff,34.057,34.24,0.183,31.239,31.083,-0.156
-nu_dubs,nu,dubs,Kansas FB,UC Berkeley BM,Neg,34.01,33.814,-0.196,37.221,37.377,0.156
-nu_dubs,nu,dubs,Iowa EW,Harvard HL,Aff,33.756,33.935,0.178,31.33,31.153,-0.177
-nu_dubs,nu,dubs,Macalester KS,CSU Long Beach EM,Aff,32.218,32.436,0.219,31.496,31.273,-0.223
-nu_dubs,nu,dubs,Northwestern LP,Michigan State LM,Neg,32.717,32.521,-0.197,35.343,35.537,0.194
-nu_octas,nu,octas,Emory GY,Michigan State LM,Aff,42.328,42.436,0.108,35.537,35.449,-0.088
-nu_octas,nu,octas,Michigan BS,Macalester KS,Aff,39.041,39.136,0.095,32.436,32.359,-0.078
-nu_octas,nu,octas,Michigan ES,Iowa EW,Aff,41.844,41.923,0.079,33.935,33.874,-0.061
-nu_octas,nu,octas,UC Berkeley BM,Kansas UO,Aff,37.377,37.657,0.28,38.565,38.177,-0.388
-nu_octas,nu,octas,Emory SY,UTD DH,Aff,37.563,37.716,0.153,34.24,34.076,-0.164
-nu_octas,nu,octas,Wake Forest BS,Iowa PK,Aff,37.185,37.307,0.122,32.059,31.947,-0.112
-nu_octas,nu,octas,Michigan CS,Northwestern LT,Aff,37.806,37.917,0.111,31.75,31.657,-0.093
-nu_octas,nu,octas,Western Kentucky NI,Kansas SS,Aff,30.93,31.189,0.26,32.718,32.385,-0.334
-nu_quarters,nu,quarters,Emory GY,Western Kentucky NI,Aff,42.436,42.47,0.034,31.189,31.169,-0.021
-nu_quarters,nu,quarters,Michigan ES,Wake Forest BS,Aff,41.923,42.077,0.154,37.307,37.175,-0.131
-nu_quarters,nu,quarters,Emory SY,UC Berkeley BM,Neg,37.716,37.47,-0.246,37.657,37.896,0.239
-nu_semis,nu,semis,UC Berkeley BM,Emory GY,Neg,37.896,37.782,-0.114,42.47,42.632,0.163
-nu_finals,nu,finals,Emory GY,Michigan BS,Aff,42.632,42.823,0.191,39.136,38.969,-0.167
+nu_1,nu,1,Michigan State LM,Kansas CC,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Western Kentucky NI,Emory CrSm,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Kansas BT,Dartmouth CG,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Houston FI,MoState BM,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Emory ChSt,Kansas SS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Michigan CS,Wake Forest PT,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Indiana TF,Georgia CP,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,UC Berkeley GS,Wyoming LW,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Emory GY,MoState NC,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Indiana DJ,Georgetown LN,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Emory HT,Michigan BS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Wake Forest AM,MoState DH,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,West Georgia HL,Michigan State KP,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Emory CS,MoState CP,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Kansas UO,Michigan AD,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Utah BH,UC Berkeley AW,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Georgia KL,Oklahoma BW,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Emory SY,Georgetown LC,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Trinity CO,Kansas FB,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Northwestern KM,Harvard HL,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Wichita State MG,Texas AL,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Michigan AR,Trinity BK,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Liberty CL,Harvard GM,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Michigan LS,CSU Long Beach EM,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Utah VP,Dartmouth RU,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Dartmouth BJ,Macalester KS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Texas AG,Western Kentucky HM,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,West Georgia GK,Southern California BM,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,George Mason DC,Iowa LS,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Michigan BB,Iowa PK,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Kentucky SR,Iowa SB,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Wyoming HW,Southern California TM,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Wake Forest DM,Northwestern LT,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Western Kentucky KN,Wake Forest NS,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Gonzaga AG,Emory MW,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Michigan ES,Baylor BK,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Oklahoma PS,Kansas BB,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Texas GS,Harvard DS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Michigan State FM,Michigan PF,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Kansas AW,Michigan BP,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,MoState DS,Emory AT,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Emory TY,Iowa EW,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Northwestern LP,Kansas LL,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,UC Berkeley BM,Emory CF,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Emory JR,Baylor PA,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Northwestern JP,Kansas FH,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Baylor MM,Emory OP,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Emory ST,George Mason WW,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Dartmouth RS,Kansas PL,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Kentucky CS,Dartmouth DO,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Gonzaga MP,Western Kentucky CS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Georgetown BP,Michigan AO,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Dartmouth BC,Emory GW,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,UTD DH,Emory SW,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Michigan BL,Wake Forest HN,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Kansas PB,Dartmouth CS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Michigan GV,Washburn LR,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Wake Forest LP,Dartmouth HH,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Wake Forest LW,Kansas BS,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Dartmouth JT,Kansas State SF,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Northwestern CY,Kansas State DD,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Southern California LP,Georgetown GT,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Georgetown RM,UTD RH,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Michigan State JS,Baylor LM,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,Georgetown VX,Harvard AB,Neg,25.0,20.795,-4.205,25.0,29.205,4.205
+nu_1,nu,1,Wake Forest BS,Michigan State BS,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_1,nu,1,North Texas BV,Southern California DP,Aff,25.0,29.205,4.205,25.0,20.795,-4.205
+nu_2,nu,2,Kansas CC,Western Kentucky NI,Aff,20.795,26.528,5.733,29.205,23.472,-5.733
+nu_2,nu,2,Emory CrSm,Michigan State LM,Neg,20.795,19.012,-1.783,29.205,30.988,1.783
+nu_2,nu,2,Dartmouth CG,Houston FI,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,MoState BM,Kansas BT,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Kansas SS,UC Berkeley GS,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Wake Forest PT,Indiana TF,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Georgia CP,Michigan CS,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Wyoming LW,Emory ChSt,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,MoState NC,Indiana DJ,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Georgetown LN,Emory GY,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Michigan BS,Wake Forest AM,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,MoState DH,Emory HT,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Michigan State KP,Michigan ES,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Northwestern LT,Emory CS,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Michigan AD,Utah BH,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,UC Berkeley AW,Kansas UO,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Oklahoma BW,Michigan LS,Aff,29.205,30.988,1.783,20.795,19.012,-1.783
+nu_2,nu,2,Georgetown LC,Trinity CO,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Kansas FB,Emory SY,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Harvard HL,Michigan AR,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Texas AL,Emory JR,Aff,20.795,26.528,5.733,29.205,23.472,-5.733
+nu_2,nu,2,Trinity BK,Northwestern KM,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Emory AT,Michigan AC,Neg,29.205,24.961,-4.245,25.0,30.695,5.695
+nu_2,nu,2,CSU Long Beach EM,Georgia KL,Neg,29.205,23.472,-5.733,20.795,26.528,5.733
+nu_2,nu,2,Dartmouth RU,Liberty CL,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Macalester KS,Texas AG,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Western Kentucky HM,Dartmouth BJ,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Southern California BM,Kentucky SR,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Iowa LS,Georgetown VX,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Iowa PK,Wake Forest BS,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Iowa SB,West Georgia GK,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Harvard GM,Utah VP,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,MoState CP,Wake Forest DM,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Wake Forest NS,North Texas BV,Aff,20.795,26.528,5.733,29.205,23.472,-5.733
+nu_2,nu,2,Dartmouth HH,Gonzaga AG,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Baylor BK,West Georgia HL,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Kansas BB,UC Berkeley BM,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Harvard DS,Michigan State FM,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Michigan PF,Texas GS,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Michigan BP,Wyoming HW,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Southern California TM,Kansas AW,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Iowa EW,Northwestern LP,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Kansas LL,Emory TY,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Emory CF,Oklahoma PS,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Baylor PA,Wichita State MG,Neg,20.795,19.012,-1.783,29.205,30.988,1.783
+nu_2,nu,2,Kansas FH,Baylor MM,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Emory OP,Northwestern JP,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,George Mason WW,Dartmouth RS,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Kansas PL,Emory ST,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Dartmouth DO,Gonzaga MP,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Western Kentucky CS,Kentucky CS,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Michigan AO,Dartmouth BC,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Emory GW,Georgetown BP,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Emory SW,Michigan BL,Aff,20.795,26.528,5.733,29.205,23.472,-5.733
+nu_2,nu,2,Wake Forest HN,UTD DH,Neg,20.795,19.012,-1.783,29.205,30.988,1.783
+nu_2,nu,2,Dartmouth CS,Michigan GV,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Washburn LR,Kansas PB,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Emory MW,Wake Forest LP,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Kansas BS,Dartmouth JT,Neg,29.205,23.472,-5.733,20.795,26.528,5.733
+nu_2,nu,2,Kansas State SF,Wake Forest LW,Neg,29.205,23.472,-5.733,20.795,26.528,5.733
+nu_2,nu,2,Kansas State DD,Southern California LP,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Georgetown GT,Northwestern CY,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,UTD RH,Michigan State JS,Aff,29.205,32.718,3.513,29.205,25.692,-3.513
+nu_2,nu,2,Baylor LM,Georgetown RM,Neg,20.795,17.282,-3.513,20.795,24.308,3.513
+nu_2,nu,2,Harvard AB,George Mason DC,Neg,29.205,25.692,-3.513,29.205,32.718,3.513
+nu_2,nu,2,Michigan State BS,Michigan BB,Aff,20.795,24.308,3.513,20.795,17.282,-3.513
+nu_2,nu,2,Southern California DP,Western Kentucky KN,Aff,20.795,26.528,5.733,29.205,23.472,-5.733
+nu_3,nu,3,Dartmouth CG,Michigan GV,Aff,32.718,35.671,2.952,32.718,29.766,-2.952
+nu_3,nu,3,Kentucky CS,Kansas UO,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,Michigan AO,Wake Forest LP,Aff,32.718,35.671,2.952,32.718,29.766,-2.952
+nu_3,nu,3,Oklahoma BW,Michigan ES,Neg,30.988,28.212,-2.776,32.718,35.265,2.547
+nu_3,nu,3,Michigan BS,Wichita State MG,Aff,32.718,35.265,2.547,30.988,28.212,-2.776
+nu_3,nu,3,George Mason DC,Southern California TM,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,Iowa PK,Michigan CS,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,Southern California BM,UC Berkeley BM,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,Emory GY,Michigan AC,Aff,32.718,35.166,2.447,30.695,27.735,-2.959
+nu_3,nu,3,Harvard DS,UTD RH,Aff,32.718,35.671,2.952,32.718,29.766,-2.952
+nu_3,nu,3,Northwestern JP,Texas AG,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,Georgetown GT,Dartmouth RU,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,Kansas SS,Michigan State LM,Neg,32.718,29.431,-3.288,30.988,34.572,3.584
+nu_3,nu,3,Harvard HL,Northwestern LT,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,George Mason WW,Emory SY,Neg,32.718,29.766,-2.952,32.718,35.671,2.952
+nu_3,nu,3,UTD DH,Iowa EW,Aff,30.988,34.572,3.584,32.718,29.431,-3.288
+nu_3,nu,3,Liberty CL,Indiana TF,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Gonzaga MP,Dartmouth RS,Neg,24.308,21.654,-2.653,25.692,28.346,2.653
+nu_3,nu,3,Wake Forest BS,Kansas PB,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Michigan BL,Kentucky SR,Neg,23.472,21.127,-2.345,25.692,28.195,2.502
+nu_3,nu,3,Michigan State JS,Georgetown VX,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,MoState DS,Houston FI,Neg,20.795,18.292,-2.502,25.692,27.598,1.906
+nu_3,nu,3,Dartmouth BC,Emory MW,Neg,25.692,22.74,-2.952,25.692,28.645,2.952
+nu_3,nu,3,MoState NC,Wake Forest AM,Neg,24.308,21.654,-2.653,25.692,28.346,2.653
+nu_3,nu,3,North Texas BV,Dartmouth BJ,Aff,23.472,26.449,2.977,24.308,21.131,-3.176
+nu_3,nu,3,Emory TY,Macalester KS,Neg,24.308,21.654,-2.653,25.692,28.346,2.653
+nu_3,nu,3,Emory AT,Wake Forest DM,Aff,24.961,27.785,2.824,24.308,21.501,-2.807
+nu_3,nu,3,Southern California LP,Georgia KL,Neg,24.308,21.805,-2.502,26.528,28.873,2.345
+nu_3,nu,3,Kansas AW,Michigan PF,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Dartmouth HH,Texas AL,Neg,24.308,21.805,-2.502,26.528,28.873,2.345
+nu_3,nu,3,Kansas CC,Georgetown LC,Aff,26.528,28.873,2.345,24.308,21.805,-2.502
+nu_3,nu,3,Michigan State BS,Kansas State SF,Aff,24.308,27.106,2.799,23.472,20.849,-2.623
+nu_3,nu,3,Michigan State FM,Kansas FH,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Harvard GM,Wake Forest NS,Aff,24.308,27.812,3.504,26.528,23.244,-3.284
+nu_3,nu,3,Michigan AD,Georgia CP,Neg,24.308,21.654,-2.653,25.692,28.346,2.653
+nu_3,nu,3,Michigan AR,Dartmouth JT,Neg,25.692,22.894,-2.799,26.528,29.151,2.623
+nu_3,nu,3,UC Berkeley GS,Emory JR,Aff,25.692,28.195,2.502,23.472,21.127,-2.345
+nu_3,nu,3,Emory HT,Baylor BK,Aff,24.308,27.26,2.952,24.308,21.355,-2.952
+nu_3,nu,3,Georgetown LN,Emory ChSt,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Kansas FB,Emory CF,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Southern California DP,Michigan State KP,Neg,26.528,23.551,-2.977,25.692,28.869,3.176
+nu_3,nu,3,Georgetown RM,Emory OP,Neg,24.308,21.654,-2.653,25.692,28.346,2.653
+nu_3,nu,3,Northwestern LP,Wyoming HW,Aff,25.692,28.346,2.653,24.308,21.654,-2.653
+nu_3,nu,3,Northwestern KM,Georgetown BP,Aff,24.308,27.26,2.952,24.308,21.355,-2.952
+nu_3,nu,3,Iowa SB,Northwestern CY,Neg,24.308,21.654,-2.653,25.692,28.346,2.653
+nu_3,nu,3,UC Berkeley AW,Harvard AB,Neg,25.692,22.74,-2.952,25.692,28.645,2.952
+nu_3,nu,3,Emory SW,Kansas BB,Aff,26.528,29.151,2.623,25.692,22.894,-2.799
+nu_3,nu,3,Dartmouth CS,Emory CS,Aff,25.692,28.645,2.952,25.692,22.74,-2.952
+nu_3,nu,3,Kansas BT,Western Kentucky NI,Neg,24.308,21.131,-3.176,23.472,26.449,2.977
+nu_3,nu,3,Kansas BS,Western Kentucky KN,Neg,23.472,20.643,-2.829,23.472,26.302,2.829
+nu_3,nu,3,CSU Long Beach EM,Western Kentucky CS,Aff,23.472,26.756,3.284,25.692,22.188,-3.504
+nu_3,nu,3,Kansas PL,Wake Forest LW,Aff,24.308,27.812,3.504,26.528,23.244,-3.284
+nu_3,nu,3,Emory CrSm,Gonzaga AG,Aff,19.012,21.788,2.776,17.282,14.735,-2.547
+nu_3,nu,3,Trinity CO,Emory ST,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_3,nu,3,Michigan LS,Indiana DJ,Aff,19.012,21.788,2.776,17.282,14.735,-2.547
+nu_3,nu,3,MoState CP,West Georgia GK,Neg,17.282,14.329,-2.952,17.282,20.234,2.952
+nu_3,nu,3,Michigan BB,Trinity BK,Neg,17.282,14.329,-2.952,17.282,20.234,2.952
+nu_3,nu,3,Kansas State DD,Emory GW,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_3,nu,3,Wake Forest HN,West Georgia HL,Aff,19.012,21.788,2.776,17.282,14.735,-2.547
+nu_3,nu,3,Baylor LM,Kansas LL,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_3,nu,3,Washburn LR,Baylor PA,Neg,17.282,14.735,-2.547,19.012,21.788,2.776
+nu_3,nu,3,Texas GS,Utah BH,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_3,nu,3,Dartmouth DO,Wake Forest PT,Neg,17.282,14.329,-2.952,17.282,20.234,2.952
+nu_3,nu,3,MoState BM,Oklahoma PS,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_3,nu,3,MoState DH,Utah VP,Neg,17.282,14.329,-2.952,17.282,20.234,2.952
+nu_3,nu,3,Western Kentucky HM,Wyoming LW,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_3,nu,3,Michigan BP,Iowa LS,Aff,17.282,20.234,2.952,17.282,14.329,-2.952
+nu_4,nu,4,Emory SY,Georgetown LN,Neg,35.671,31.527,-4.144,28.346,32.543,4.198
+nu_4,nu,4,Dartmouth RU,Northwestern LP,Neg,35.671,31.527,-4.144,28.346,32.543,4.198
+nu_4,nu,4,Michigan CS,UC Berkeley GS,Aff,35.671,36.873,1.203,28.195,26.973,-1.222
+nu_4,nu,4,Southern California TM,North Texas BV,Neg,35.671,30.975,-4.696,26.449,30.871,4.422
+nu_4,nu,4,Michigan State KP,Kansas SS,Neg,28.869,26.508,-2.361,29.431,31.811,2.38
+nu_4,nu,4,Michigan State LM,Harvard DS,Aff,34.572,37.423,2.851,35.671,32.969,-2.702
+nu_4,nu,4,Baylor BK,MoState NC,Neg,21.355,18.921,-2.435,21.654,24.121,2.466
+nu_4,nu,4,Kansas UO,Emory GY,Neg,35.671,33.083,-2.588,35.166,37.848,2.683
+nu_4,nu,4,Michigan ES,UTD DH,Aff,35.265,37.655,2.39,34.572,32.11,-2.462
+nu_4,nu,4,Texas AG,Michigan AO,Aff,35.671,38.171,2.5,35.671,33.171,-2.5
+nu_4,nu,4,Northwestern LT,Dartmouth CG,Neg,35.671,33.171,-2.5,35.671,38.171,2.5
+nu_4,nu,4,UC Berkeley BM,Michigan BS,Neg,35.671,33.098,-2.573,35.265,37.901,2.635
+nu_4,nu,4,Michigan AC,Michigan State BS,Aff,27.735,30.483,2.748,27.106,24.795,-2.311
+nu_4,nu,4,Wake Forest LP,Dartmouth CS,Aff,29.766,32.043,2.276,28.645,26.368,-2.276
+nu_4,nu,4,Houston FI,Emory HT,Aff,27.598,30.173,2.575,27.26,24.854,-2.405
+nu_4,nu,4,Iowa EW,Harvard GM,Neg,29.431,26.592,-2.838,27.812,30.592,2.78
+nu_4,nu,4,UTD RH,Northwestern KM,Neg,29.766,26.735,-3.031,27.26,30.291,3.031
+nu_4,nu,4,Dartmouth RS,Michigan State FM,Neg,28.346,25.824,-2.522,28.346,30.868,2.522
+nu_4,nu,4,Western Kentucky NI,Emory SW,Aff,26.449,29.403,2.953,29.151,26.155,-2.997
+nu_4,nu,4,Wake Forest AM,Kansas FB,Neg,28.346,25.824,-2.522,28.346,30.868,2.522
+nu_4,nu,4,Texas AL,Southern California BM,Aff,28.873,31.486,2.612,29.766,27.067,-2.699
+nu_4,nu,4,Northwestern CY,Kansas PL,Aff,28.346,30.774,2.428,27.812,25.477,-2.335
+nu_4,nu,4,Kentucky SR,CSU Long Beach EM,Neg,28.195,25.324,-2.871,26.756,29.388,2.632
+nu_4,nu,4,Macalester KS,Michigan State JS,Neg,28.346,25.824,-2.522,28.346,30.868,2.522
+nu_4,nu,4,Michigan GV,Kentucky CS,Aff,29.766,32.266,2.5,29.766,27.266,-2.5
+nu_4,nu,4,Georgia KL,George Mason DC,Neg,28.873,26.616,-2.257,29.766,32.098,2.332
+nu_4,nu,4,Georgia CP,Emory AT,Aff,28.346,30.755,2.409,27.785,25.38,-2.405
+nu_4,nu,4,Iowa LS,Emory CrSm,Aff,14.329,18.433,4.104,21.788,17.311,-4.477
+nu_4,nu,4,Baylor PA,Iowa PK,Neg,21.788,20.552,-1.236,29.766,30.899,1.133
+nu_4,nu,4,Indiana DJ,Iowa SB,Neg,14.735,13.422,-1.312,21.654,22.952,1.298
+nu_4,nu,4,Emory OP,Kansas AW,Neg,28.346,25.824,-2.522,28.346,30.868,2.522
+nu_4,nu,4,Wake Forest DM,Texas GS,Aff,21.501,23.762,2.261,20.234,17.988,-2.246
+nu_4,nu,4,Wake Forest NS,Baylor MM,Aff,23.244,24.556,1.312,17.282,15.473,-1.809
+nu_4,nu,4,Gonzaga AG,Kansas BT,Neg,14.735,13.342,-1.393,21.131,22.472,1.341
+nu_4,nu,4,Dartmouth JT,Kansas CC,Aff,29.151,31.515,2.363,28.873,26.479,-2.394
+nu_4,nu,4,Harvard AB,Georgetown GT,Neg,28.645,26.368,-2.276,29.766,32.043,2.276
+nu_4,nu,4,Emory MW,Wake Forest BS,Neg,28.645,26.089,-2.556,28.346,30.935,2.589
+nu_4,nu,4,Western Kentucky KN,Northwestern JP,Neg,26.302,24.556,-1.746,29.766,31.618,1.852
+nu_4,nu,4,Wake Forest PT,George Mason WW,Neg,20.234,19.3,-0.934,29.766,30.7,0.934
+nu_4,nu,4,Trinity BK,Liberty CL,Neg,20.234,19.118,-1.115,28.346,29.476,1.13
+nu_4,nu,4,West Georgia GK,Harvard HL,Neg,20.234,19.3,-0.934,29.766,30.7,0.934
+nu_4,nu,4,Kansas State SF,Trinity CO,Aff,20.849,23.135,2.286,20.234,17.841,-2.392
+nu_4,nu,4,Kansas BB,Kansas State DD,Aff,22.894,24.882,1.988,20.234,18.249,-1.985
+nu_4,nu,4,Emory CF,Gonzaga MP,Neg,21.654,19.132,-2.522,21.654,24.176,2.522
+nu_4,nu,4,Western Kentucky CS,Michigan BP,Aff,22.188,24.257,2.068,20.234,18.11,-2.124
+nu_4,nu,4,Michigan PF,Western Kentucky HM,Aff,21.654,23.898,2.243,20.234,18.019,-2.214
+nu_4,nu,4,Wake Forest LW,Southern California LP,Aff,23.244,25.321,2.078,21.805,19.539,-2.267
+nu_4,nu,4,Georgetown BP,Michigan BL,Aff,21.355,23.821,2.466,21.127,18.74,-2.387
+nu_4,nu,4,Wyoming HW,MoState BM,Aff,21.654,23.898,2.243,20.234,18.019,-2.214
+nu_4,nu,4,Emory CS,Dartmouth HH,Aff,22.74,25.048,2.308,21.805,19.461,-2.344
+nu_4,nu,4,Dartmouth BJ,Emory TY,Neg,21.131,18.77,-2.361,21.654,24.081,2.426
+nu_4,nu,4,Emory JR,Baylor LM,Aff,21.127,23.384,2.257,20.234,17.902,-2.332
+nu_4,nu,4,Georgetown LC,Michigan LS,Neg,21.805,19.305,-2.501,21.788,24.473,2.686
+nu_4,nu,4,Indiana TF,Kansas BS,Neg,21.654,18.888,-2.766,20.643,23.216,2.574
+nu_4,nu,4,Kansas FH,Georgetown RM,Aff,21.654,24.176,2.522,21.654,19.132,-2.522
+nu_4,nu,4,Utah VP,Wake Forest HN,Neg,20.234,18.068,-2.166,21.788,24.15,2.363
+nu_4,nu,4,Kansas PB,MoState DS,Aff,21.654,23.473,1.819,18.292,15.927,-2.365
+nu_4,nu,4,Georgetown VX,UC Berkeley AW,Neg,21.654,19.345,-2.309,22.74,25.019,2.279
+nu_4,nu,4,Emory ChSt,Michigan AD,Neg,21.654,19.132,-2.522,21.654,24.176,2.522
+nu_4,nu,4,Emory GW,Michigan AR,Neg,14.329,13.274,-1.056,22.894,23.951,1.057
+nu_4,nu,4,Wyoming LW,Dartmouth BC,Neg,14.329,13.253,-1.076,22.74,23.816,1.076
+nu_4,nu,4,Utah BH,Southern California DP,Neg,14.329,13.359,-0.97,23.551,24.465,0.914
+nu_4,nu,4,Emory ST,Washburn LR,Neg,14.329,11.92,-2.409,14.735,17.202,2.468
+nu_4,nu,4,Kansas LL,Dartmouth DO,Neg,14.329,11.829,-2.5,14.329,16.829,2.5
+nu_4,nu,4,West Georgia HL,MoState DH,Neg,14.735,12.099,-2.635,14.329,16.902,2.573
+nu_4,nu,4,Oklahoma PS,Michigan BB,Neg,14.329,11.829,-2.5,14.329,16.829,2.5
+nu_5,nu,5,Michigan State JS,Dartmouth CG,Aff,30.868,34.558,3.69,38.171,34.524,-3.647
+nu_5,nu,5,Emory GY,Michigan ES,Neg,37.848,35.64,-2.208,37.655,39.875,2.22
+nu_5,nu,5,Texas AG,Michigan CS,Neg,38.171,35.818,-2.353,36.873,39.413,2.54
+nu_5,nu,5,Michigan BS,Michigan State LM,Aff,37.901,39.967,2.066,37.423,35.319,-2.104
+nu_5,nu,5,Kansas SS,Wake Forest BS,Neg,31.811,29.514,-2.297,30.935,33.252,2.317
+nu_5,nu,5,Houston FI,Northwestern LT,Neg,30.173,28.475,-1.698,33.171,34.771,1.6
+nu_5,nu,5,Baylor BK,West Georgia GK,Aff,18.921,21.1,2.18,19.3,16.903,-2.396
+nu_5,nu,5,Michigan AO,Kansas FB,Neg,33.171,30.594,-2.577,30.868,33.475,2.607
+nu_5,nu,5,Dartmouth JT,UTD DH,Aff,31.515,33.673,2.159,32.11,29.747,-2.363
+nu_5,nu,5,Southern California TM,Northwestern KM,Neg,30.975,28.838,-2.137,30.291,32.54,2.249
+nu_5,nu,5,Michigan State FM,Dartmouth RU,Aff,30.868,33.169,2.301,31.527,29.371,-2.157
+nu_5,nu,5,Kansas UO,Michigan GV,Aff,33.083,35.066,1.983,32.266,30.28,-1.986
+nu_5,nu,5,Georgetown LN,Michigan AC,Neg,32.543,30.167,-2.377,30.483,33.368,2.885
+nu_5,nu,5,Harvard GM,Emory SY,Neg,30.592,28.675,-1.917,31.527,33.412,1.885
+nu_5,nu,5,Liberty CL,George Mason DC,Neg,29.476,27.659,-1.817,32.098,33.761,1.663
+nu_5,nu,5,Georgia CP,North Texas BV,Aff,30.755,32.978,2.223,30.871,28.916,-1.955
+nu_5,nu,5,Harvard DS,Western Kentucky NI,Aff,32.969,34.491,1.522,29.403,27.984,-1.418
+nu_5,nu,5,George Mason WW,Wake Forest LP,Neg,30.7,28.642,-2.058,32.043,33.927,1.884
+nu_5,nu,5,Kansas AW,Oklahoma BW,Neg,30.868,28.348,-2.52,28.212,31.622,3.41
+nu_5,nu,5,Harvard HL,Northwestern JP,Neg,30.7,28.567,-2.133,31.618,33.609,1.991
+nu_5,nu,5,Georgetown GT,UC Berkeley BM,Neg,32.043,30.082,-1.961,33.098,35.036,1.938
+nu_5,nu,5,CSU Long Beach EM,Northwestern CY,Aff,29.388,31.647,2.258,30.774,28.32,-2.454
+nu_5,nu,5,Gonzaga MP,Iowa EW,Neg,24.176,22.448,-1.729,26.592,28.265,1.673
+nu_5,nu,5,Wake Forest AM,UC Berkeley AW,Aff,25.824,27.829,2.005,25.019,23.016,-2.004
+nu_5,nu,5,Kansas PB,Macalester KS,Neg,23.473,21.662,-1.812,25.824,27.547,1.724
+nu_5,nu,5,Emory AT,Kansas FH,Aff,25.38,27.319,1.939,24.176,22.244,-1.932
+nu_5,nu,5,Trinity BK,Iowa LS,Neg,19.118,16.673,-2.446,18.433,20.583,2.15
+nu_5,nu,5,Iowa PK,Northwestern LP,Neg,30.899,28.909,-1.99,32.543,34.293,1.75
+nu_5,nu,5,Iowa SB,Georgetown BP,Neg,22.952,20.831,-2.121,23.821,25.774,1.953
+nu_5,nu,5,Emory TY,UC Berkeley GS,Aff,24.081,26.77,2.689,26.973,24.074,-2.899
+nu_5,nu,5,Dartmouth RS,Wake Forest DM,Neg,25.824,23.272,-2.551,23.762,26.327,2.565
+nu_5,nu,5,Michigan LS,Wake Forest NS,Aff,24.473,26.758,2.285,24.556,22.411,-2.145
+nu_5,nu,5,Gonzaga AG,Utah BH,Neg,13.342,11.083,-2.259,13.359,15.639,2.28
+nu_5,nu,5,Emory SW,MoState NC,Aff,26.155,27.824,1.67,24.121,22.314,-1.806
+nu_5,nu,5,Emory JR,UTD RH,Aff,23.384,26.148,2.763,26.735,23.977,-2.758
+nu_5,nu,5,Kentucky CS,Emory HT,Neg,27.266,24.666,-2.6,24.854,27.477,2.622
+nu_5,nu,5,Southern California DP,Kentucky SR,Neg,24.465,22.413,-2.052,25.324,27.28,1.957
+nu_5,nu,5,Georgia KL,Wyoming HW,Aff,26.616,28.24,1.624,23.898,22.202,-1.695
+nu_5,nu,5,Western Kentucky KN,Kansas CC,Aff,24.556,27.038,2.482,26.479,24.024,-2.455
+nu_5,nu,5,Emory MW,Kansas BS,Neg,26.089,23.368,-2.721,23.216,25.792,2.576
+nu_5,nu,5,Michigan AR,Kansas BT,Neg,23.951,21.368,-2.583,22.472,24.962,2.49
+nu_5,nu,5,Emory OP,Kansas State SF,Aff,25.824,27.508,1.684,23.135,21.523,-1.612
+nu_5,nu,5,Wake Forest HN,Kansas PL,Neg,24.15,22.103,-2.047,25.477,27.324,1.847
+nu_5,nu,5,Michigan AD,Dartmouth CS,Neg,24.176,22.416,-1.761,26.368,28.127,1.758
+nu_5,nu,5,Dartmouth BC,Michigan PF,Aff,23.816,26.122,2.306,23.898,21.731,-2.167
+nu_5,nu,5,Michigan State BS,Kansas BB,Aff,24.795,26.977,2.182,24.882,22.688,-2.194
+nu_5,nu,5,Western Kentucky CS,Southern California BM,Aff,24.257,26.938,2.681,27.067,24.403,-2.664
+nu_5,nu,5,Michigan State KP,Wake Forest LW,Aff,26.508,28.427,1.919,25.321,23.475,-1.847
+nu_5,nu,5,Harvard AB,Emory CS,Aff,26.368,28.279,1.91,25.048,23.138,-1.909
+nu_5,nu,5,Washburn LR,MoState DS,Neg,17.202,14.886,-2.316,15.927,18.871,2.944
+nu_5,nu,5,Indiana TF,MoState DH,Aff,18.888,20.663,1.775,16.902,15.124,-1.778
+nu_5,nu,5,Dartmouth DO,Baylor MM,Aff,16.829,18.648,1.819,15.473,13.092,-2.38
+nu_5,nu,5,Trinity CO,Wake Forest PT,Neg,17.841,15.991,-1.851,19.3,21.338,2.038
+nu_5,nu,5,Emory CF,Kansas State DD,Aff,19.132,21.119,1.987,18.249,16.235,-2.014
+nu_5,nu,5,Georgetown VX,Dartmouth BJ,Aff,19.345,21.413,2.068,18.77,16.757,-2.013
+nu_5,nu,5,Michigan BP,Western Kentucky HM,Aff,18.11,20.254,2.144,18.019,15.88,-2.139
+nu_5,nu,5,Georgetown RM,Texas GS,Neg,19.132,16.76,-2.372,17.988,20.361,2.373
+nu_5,nu,5,Dartmouth HH,MoState BM,Aff,19.461,21.368,1.907,18.019,16.127,-1.892
+nu_5,nu,5,MoState CP,Emory CrSm,Neg,14.329,12.358,-1.971,17.311,18.902,1.591
+nu_5,nu,5,Utah VP,Emory ChSt,Neg,18.068,16.094,-1.974,19.132,21.088,1.956
+nu_5,nu,5,Baylor LM,Michigan BL,Neg,17.902,15.903,-1.998,18.74,20.678,1.938
+nu_5,nu,5,Southern California LP,Baylor PA,Aff,19.539,21.846,2.308,20.552,17.906,-2.646
+nu_5,nu,5,Georgetown LC,Michigan BB,Aff,19.305,21.032,1.727,16.829,15.136,-1.693
+nu_5,nu,5,Indiana DJ,Kansas LL,Aff,13.422,15.423,2.001,11.829,10.003,-1.826
+nu_5,nu,5,Emory ST,Oklahoma PS,Aff,11.92,14.049,2.129,11.829,9.712,-2.117
+nu_6,nu,6,Michigan ES,Michigan State JS,Aff,39.875,40.945,1.07,34.558,33.558,-1.0
+nu_6,nu,6,Michigan CS,Dartmouth JT,Neg,39.413,36.352,-3.061,33.673,36.484,2.81
+nu_6,nu,6,Dartmouth CG,Michigan BS,Neg,34.524,33.547,-0.977,39.967,41.015,1.048
+nu_6,nu,6,Northwestern LT,Emory JR,Aff,34.771,35.457,0.685,26.148,25.511,-0.636
+nu_6,nu,6,Texas GS,Kansas SS,Neg,20.361,19.746,-0.614,29.514,30.123,0.609
+nu_6,nu,6,Michigan State LM,Emory TY,Aff,35.319,36.016,0.696,26.77,26.099,-0.67
+nu_6,nu,6,Emory SY,Western Kentucky CS,Aff,33.412,34.278,0.866,26.938,26.061,-0.877
+nu_6,nu,6,Oklahoma BW,Emory OP,Aff,31.622,33.111,1.489,27.508,26.29,-1.218
+nu_6,nu,6,Wake Forest BS,Dartmouth BC,Aff,33.252,34.074,0.822,26.122,25.237,-0.885
+nu_6,nu,6,Wake Forest LP,Michigan State FM,Aff,33.927,35.682,1.755,33.169,31.459,-1.71
+nu_6,nu,6,Northwestern JP,Wake Forest AM,Aff,33.609,34.63,1.021,27.829,26.83,-0.999
+nu_6,nu,6,George Mason DC,Georgia CP,Aff,33.761,35.522,1.761,32.978,31.267,-1.711
+nu_6,nu,6,Northwestern LP,Kansas UO,Neg,34.293,32.609,-1.684,35.066,36.791,1.725
+nu_6,nu,6,UC Berkeley BM,Harvard DS,Aff,35.036,36.793,1.757,34.491,32.704,-1.787
+nu_6,nu,6,Northwestern KM,Emory GY,Neg,32.54,31.228,-1.312,35.64,37.018,1.378
+nu_6,nu,6,UTD DH,Michigan LS,Aff,29.747,31.15,1.403,26.758,25.321,-1.437
+nu_6,nu,6,Dartmouth RU,Western Kentucky KN,Aff,29.371,30.776,1.405,27.038,25.609,-1.429
+nu_6,nu,6,Western Kentucky NI,Michigan State BS,Aff,27.984,29.607,1.623,26.977,25.269,-1.708
+nu_6,nu,6,Kansas FB,Texas AG,Aff,33.475,35.718,2.243,35.818,33.567,-2.251
+nu_6,nu,6,North Texas BV,Harvard AB,Neg,28.916,27.123,-1.793,28.279,30.291,2.012
+nu_6,nu,6,Michigan AC,CSU Long Beach EM,Neg,33.368,31.008,-2.359,31.647,33.636,1.989
+nu_6,nu,6,Northwestern CY,Emory SW,Aff,28.32,30.078,1.758,27.824,26.12,-1.704
+nu_6,nu,6,Macalester KS,Harvard GM,Aff,27.547,29.654,2.106,28.675,26.691,-1.983
+nu_6,nu,6,Michigan GV,Houston FI,Aff,30.28,31.822,1.542,28.475,26.82,-1.655
+nu_6,nu,6,Kentucky SR,Emory AT,Neg,27.28,25.443,-1.837,27.319,29.192,1.873
+nu_6,nu,6,Iowa LS,Michigan AO,Neg,20.583,20.069,-0.514,30.594,31.118,0.525
+nu_6,nu,6,MoState DS,Iowa PK,Neg,18.871,18.199,-0.672,28.909,29.503,0.594
+nu_6,nu,6,MoState NC,Iowa SB,Aff,22.314,23.934,1.619,20.831,19.128,-1.703
+nu_6,nu,6,Kansas BT,Georgia KL,Aff,24.962,27.469,2.508,28.24,25.803,-2.437
+nu_6,nu,6,Wake Forest DM,Kansas AW,Neg,26.327,24.819,-1.507,28.348,29.879,1.531
+nu_6,nu,6,Wake Forest NS,Baylor BK,Neg,22.411,20.322,-2.09,21.1,23.179,2.078
+nu_6,nu,6,Kansas LL,Gonzaga AG,Aff,10.003,12.043,2.04,11.083,8.923,-2.16
+nu_6,nu,6,Dartmouth CS,Georgetown LN,Aff,28.127,30.398,2.271,30.167,28.052,-2.115
+nu_6,nu,6,Kansas PL,Georgetown GT,Neg,27.324,25.923,-1.401,30.082,31.504,1.422
+nu_6,nu,6,Iowa EW,Michigan State KP,Aff,28.265,30.141,1.876,28.427,26.556,-1.871
+nu_6,nu,6,Georgetown BP,George Mason WW,Neg,25.774,24.389,-1.386,28.642,30.148,1.506
+nu_6,nu,6,Kansas BS,Liberty CL,Neg,25.792,24.366,-1.427,27.659,29.356,1.697
+nu_6,nu,6,Emory HT,Harvard HL,Neg,27.477,25.854,-1.623,28.567,30.37,1.803
+nu_6,nu,6,Emory CrSm,Southern California TM,Neg,18.902,18.331,-0.571,28.838,29.345,0.507
+nu_6,nu,6,UTD RH,Dartmouth DO,Aff,23.977,24.972,0.996,18.648,17.576,-1.072
+nu_6,nu,6,UC Berkeley GS,Southern California LP,Aff,24.074,25.62,1.546,21.846,20.347,-1.5
+nu_6,nu,6,Kansas CC,Gonzaga MP,Aff,24.024,25.545,1.521,22.448,20.815,-1.633
+nu_6,nu,6,Michigan PF,Dartmouth HH,Aff,21.731,23.543,1.812,21.368,19.544,-1.824
+nu_6,nu,6,Emory CS,Georgetown VX,Neg,23.138,20.964,-2.175,21.413,23.591,2.178
+nu_6,nu,6,Southern California BM,Georgetown LC,Aff,24.403,25.671,1.267,21.032,19.671,-1.36
+nu_6,nu,6,Kansas BB,Michigan BP,Aff,22.688,24.164,1.476,20.254,18.789,-1.465
+nu_6,nu,6,Wake Forest LW,Indiana TF,Neg,23.475,21.191,-2.284,20.663,23.049,2.385
+nu_6,nu,6,Wyoming HW,Emory CF,Aff,22.202,23.925,1.723,21.119,19.439,-1.681
+nu_6,nu,6,Kansas State SF,Kansas PB,Neg,21.523,19.727,-1.796,21.662,23.601,1.939
+nu_6,nu,6,UC Berkeley AW,Wake Forest HN,Aff,23.016,24.712,1.697,22.103,20.29,-1.814
+nu_6,nu,6,Kansas FH,Michigan AR,Neg,22.244,20.234,-2.011,21.368,23.47,2.101
+nu_6,nu,6,Wake Forest PT,Dartmouth RS,Aff,21.338,23.706,2.368,23.272,21.134,-2.139
+nu_6,nu,6,Michigan BL,Southern California DP,Neg,20.678,19.147,-1.531,22.413,24.031,1.619
+nu_6,nu,6,Emory ChSt,Kentucky CS,Neg,21.088,19.783,-1.305,24.666,25.921,1.255
+nu_6,nu,6,Baylor MM,Michigan AD,Neg,13.092,12.323,-0.769,22.416,23.042,0.626
+nu_6,nu,6,MoState DH,Emory MW,Neg,15.124,14.409,-0.715,23.368,24.051,0.683
+nu_6,nu,6,Dartmouth BJ,West Georgia HL,Aff,16.757,17.871,1.114,12.099,10.71,-1.389
+nu_6,nu,6,Emory GW,Washburn LR,Neg,13.274,11.242,-2.032,14.886,16.445,1.559
+nu_6,nu,6,Western Kentucky HM,MoState CP,Neg,15.88,13.472,-2.409,12.358,15.32,2.962
+nu_6,nu,6,Baylor PA,Emory ST,Aff,17.906,19.294,1.387,14.049,12.815,-1.233
+nu_6,nu,6,MoState BM,Trinity CO,Neg,16.127,14.225,-1.902,15.991,17.882,1.892
+nu_6,nu,6,Kansas State DD,Georgetown RM,Aff,16.235,18.216,1.981,16.76,14.835,-1.926
+nu_6,nu,6,West Georgia GK,Indiana DJ,Aff,16.903,18.598,1.694,15.423,13.708,-1.715
+nu_6,nu,6,Utah BH,Baylor LM,Neg,15.639,13.709,-1.93,15.903,17.696,1.793
+nu_6,nu,6,Michigan BB,Utah VP,Aff,15.136,17.176,2.04,16.094,14.046,-2.048
+nu_6,nu,6,Oklahoma PS,Trinity BK,Neg,9.712,8.869,-0.843,16.673,17.567,0.894
+nu_7,nu,7,UTD DH,Michigan State FM,Aff,31.15,32.888,1.739,31.459,29.808,-1.651
+nu_7,nu,7,Wake Forest BS,UC Berkeley BM,Aff,34.074,36.24,2.165,36.793,34.743,-2.05
+nu_7,nu,7,West Georgia HL,Indiana DJ,Aff,10.71,13.226,2.515,13.708,11.523,-2.185
+nu_7,nu,7,Northwestern LP,George Mason WW,Aff,32.609,33.829,1.22,30.148,28.778,-1.37
+nu_7,nu,7,Kansas BB,North Texas BV,Aff,24.164,26.355,2.191,27.123,25.191,-1.932
+nu_7,nu,7,Dartmouth RS,Michigan BB,Neg,21.134,18.9,-2.233,17.176,19.472,2.296
+nu_7,nu,7,Emory JR,Michigan AR,Aff,25.511,26.856,1.345,23.47,22.115,-1.354
+nu_7,nu,7,Southern California BM,Houston FI,Aff,25.671,27.442,1.772,26.82,24.903,-1.917
+nu_7,nu,7,Emory SW,Georgetown BP,Neg,26.12,24.293,-1.827,24.389,26.343,1.955
+nu_7,nu,7,Georgia CP,Western Kentucky NI,Aff,31.267,32.64,1.373,29.607,28.276,-1.331
+nu_7,nu,7,Emory CrSm,Dartmouth HH,Aff,18.331,20.35,2.019,19.544,17.735,-1.809
+nu_7,nu,7,Southern California TM,Kansas SS,Neg,29.345,27.829,-1.516,30.123,31.711,1.588
+nu_7,nu,7,Michigan AD,Michigan State BS,Neg,23.042,21.624,-1.418,25.269,26.555,1.286
+nu_7,nu,7,Kansas LL,Baylor MM,Neg,12.043,10.527,-1.515,12.323,14.35,2.026
+nu_7,nu,7,MoState CP,Texas GS,Neg,15.32,14.186,-1.134,19.746,20.807,1.061
+nu_7,nu,7,Georgetown LN,Wake Forest PT,Aff,28.052,28.998,0.946,23.706,22.646,-1.06
+nu_7,nu,7,Michigan State LM,Oklahoma BW,Aff,36.016,37.297,1.281,33.111,31.655,-1.456
+nu_7,nu,7,Oklahoma PS,Gonzaga AG,Neg,8.869,7.189,-1.681,8.923,10.586,1.663
+nu_7,nu,7,Emory ST,Utah BH,Aff,12.815,14.61,1.795,13.709,11.86,-1.849
+nu_7,nu,7,Western Kentucky CS,Southern California DP,Neg,26.061,24.085,-1.977,24.031,26.037,2.006
+nu_7,nu,7,Michigan BL,Trinity BK,Aff,19.147,20.502,1.355,17.567,16.048,-1.518
+nu_7,nu,7,Western Kentucky HM,Utah VP,Aff,13.472,15.163,1.691,14.046,12.327,-1.719
+nu_7,nu,7,Kansas CC,MoState NC,Aff,25.545,26.877,1.332,23.934,22.521,-1.412
+nu_7,nu,7,Emory TY,Michigan State KP,Neg,26.099,24.457,-1.642,26.556,28.076,1.519
+nu_7,nu,7,Dartmouth RU,Michigan GV,Neg,30.776,29.366,-1.41,31.822,33.303,1.481
+nu_7,nu,7,Western Kentucky KN,Kansas PB,Aff,25.609,26.894,1.285,23.601,22.217,-1.383
+nu_7,nu,7,Georgetown LC,Kansas State SF,Aff,19.671,21.374,1.702,19.727,18.124,-1.604
+nu_7,nu,7,Liberty CL,Northwestern CY,Aff,29.356,31.231,1.876,30.078,28.388,-1.69
+nu_7,nu,7,Georgetown VX,Dartmouth BC,Neg,23.591,22.246,-1.346,25.237,26.762,1.526
+nu_7,nu,7,MoState DS,Trinity CO,Aff,18.199,20.187,1.988,17.882,16.361,-1.521
+nu_7,nu,7,Kansas PL,Wake Forest DM,Neg,25.923,24.105,-1.818,24.819,26.617,1.797
+nu_7,nu,7,Iowa SB,Baylor PA,Neg,19.128,17.466,-1.662,19.294,21.062,1.768
+nu_7,nu,7,Northwestern KM,Texas AG,Neg,31.228,29.963,-1.265,33.567,34.799,1.232
+nu_7,nu,7,Dartmouth JT,Kansas UO,Neg,36.484,35.014,-1.47,36.791,38.373,1.582
+nu_7,nu,7,Emory GW,MoState DH,Neg,11.242,9.794,-1.448,14.409,15.629,1.22
+nu_7,nu,7,Kansas State DD,Wake Forest NS,Aff,18.216,20.195,1.979,20.322,18.383,-1.939
+nu_7,nu,7,Washburn LR,Emory CS,Neg,16.445,15.421,-1.024,20.964,21.939,0.975
+nu_7,nu,7,Gonzaga MP,Iowa LS,Aff,20.815,22.344,1.529,20.069,18.504,-1.565
+nu_7,nu,7,Harvard HL,Iowa PK,Aff,30.37,31.927,1.557,29.503,27.802,-1.7
+nu_7,nu,7,Emory GY,Kansas BT,Aff,37.018,37.508,0.49,27.469,26.997,-0.472
+nu_7,nu,7,Kansas FH,Dartmouth BJ,Aff,20.234,21.5,1.267,17.871,16.557,-1.313
+nu_7,nu,7,Macalester KS,Harvard DS,Aff,29.654,31.784,2.131,32.704,30.558,-2.147
+nu_7,nu,7,Michigan AC,Harvard AB,Neg,31.008,29.191,-1.818,30.291,32.003,1.712
+nu_7,nu,7,Emory AT,Dartmouth CG,Neg,29.192,28.178,-1.013,33.547,34.545,0.998
+nu_7,nu,7,Emory HT,Kansas BS,Aff,25.854,27.243,1.389,24.366,23.034,-1.331
+nu_7,nu,7,Georgetown RM,MoState BM,Neg,14.835,13.143,-1.692,14.225,15.958,1.732
+nu_7,nu,7,Harvard GM,Michigan PF,Aff,26.691,27.808,1.116,23.543,22.364,-1.179
+nu_7,nu,7,Wyoming HW,Kentucky SR,Neg,23.925,22.491,-1.434,25.443,26.819,1.376
+nu_7,nu,7,Michigan BP,Wake Forest LW,Neg,18.789,17.493,-1.295,21.191,22.388,1.197
+nu_7,nu,7,Northwestern JP,Michigan BS,Neg,34.63,33.801,-0.829,41.015,41.825,0.81
+nu_7,nu,7,Kansas AW,Michigan AO,Neg,29.879,28.438,-1.441,31.118,32.633,1.515
+nu_7,nu,7,Michigan ES,Kansas FB,Aff,40.945,41.897,0.952,35.718,34.853,-0.865
+nu_7,nu,7,Wake Forest AM,Indiana TF,Aff,26.83,27.968,1.138,23.049,21.998,-1.05
+nu_7,nu,7,Kentucky CS,Emory OP,Neg,25.921,24.367,-1.554,26.29,27.938,1.649
+nu_7,nu,7,Wake Forest HN,Southern California LP,Aff,20.29,22.01,1.72,20.347,18.695,-1.652
+nu_7,nu,7,Baylor BK,UTD RH,Neg,23.179,21.849,-1.33,24.972,26.32,1.348
+nu_7,nu,7,UC Berkeley AW,Emory MW,Aff,24.712,26.241,1.528,24.051,22.482,-1.569
+nu_7,nu,7,Northwestern LT,Wake Forest LP,Neg,35.457,33.737,-1.72,35.682,37.269,1.588
+nu_7,nu,7,Baylor LM,Emory CF,Neg,17.696,16.338,-1.358,19.439,20.813,1.375
+nu_7,nu,7,Dartmouth CS,Michigan State JS,Aff,30.398,32.529,2.131,33.558,31.413,-2.145
+nu_7,nu,7,Emory ChSt,West Georgia GK,Aff,19.783,21.256,1.473,18.598,17.071,-1.527
+nu_7,nu,7,Michigan LS,UC Berkeley GS,Aff,25.321,27.076,1.755,25.62,23.893,-1.727
+nu_7,nu,7,George Mason DC,Michigan CS,Neg,35.522,33.998,-1.524,36.352,37.824,1.472
+nu_7,nu,7,Georgetown GT,Iowa EW,Neg,31.504,29.62,-1.883,30.141,31.956,1.815
+nu_7,nu,7,Emory SY,CSU Long Beach EM,Aff,34.278,35.828,1.549,33.636,32.22,-1.416
+nu_8,nu,8,Michigan BS,Emory SY,Neg,41.825,39.235,-2.59,35.828,38.185,2.358
+nu_8,nu,8,Kansas UO,Michigan ES,Aff,38.373,40.301,1.928,41.897,39.77,-2.127
+nu_8,nu,8,Michigan CS,Michigan State LM,Aff,37.824,39.15,1.326,37.297,35.797,-1.499
+nu_8,nu,8,Wake Forest LP,Emory GY,Neg,37.269,35.875,-1.394,37.508,39.043,1.535
+nu_8,nu,8,Harvard AB,Wake Forest BS,Neg,32.003,31.133,-0.869,36.24,37.14,0.9
+nu_8,nu,8,Dartmouth CG,Macalester KS,Neg,34.545,32.652,-1.893,31.784,33.59,1.806
+nu_8,nu,8,CSU Long Beach EM,Dartmouth CS,Aff,32.22,33.612,1.392,32.529,31.088,-1.441
+nu_8,nu,8,UC Berkeley BM,Georgia CP,Aff,34.743,35.861,1.118,32.64,31.49,-1.15
+nu_8,nu,8,Texas AG,Harvard HL,Neg,34.799,32.983,-1.816,31.927,33.916,1.989
+nu_8,nu,8,Michigan AO,Liberty CL,Neg,32.633,30.921,-1.712,31.231,32.946,1.715
+nu_8,nu,8,Kansas SS,Dartmouth JT,Aff,31.711,33.765,2.054,35.014,33.208,-1.806
+nu_8,nu,8,Oklahoma BW,Northwestern LP,Neg,31.655,30.273,-1.382,33.829,34.937,1.108
+nu_8,nu,8,Iowa EW,George Mason DC,Aff,31.956,33.651,1.694,33.998,32.229,-1.769
+nu_8,nu,8,Kansas FB,Northwestern JP,Aff,34.853,36.126,1.273,33.801,32.376,-1.425
+nu_8,nu,8,Michigan GV,UTD DH,Neg,33.303,31.805,-1.498,32.888,34.417,1.529
+nu_8,nu,8,Georgetown BP,Northwestern LT,Neg,26.343,25.778,-0.565,33.737,34.346,0.61
+nu_8,nu,8,Harvard DS,Kansas BB,Aff,30.558,31.43,0.873,26.355,25.475,-0.88
+nu_8,nu,8,Michigan State JS,Southern California BM,Aff,31.413,32.302,0.888,27.442,26.545,-0.897
+nu_8,nu,8,Iowa PK,Emory HT,Aff,27.802,29.336,1.534,27.243,25.92,-1.322
+nu_8,nu,8,Western Kentucky NI,UC Berkeley AW,Aff,28.276,29.404,1.128,26.241,25.075,-1.165
+nu_8,nu,8,George Mason WW,Michigan LS,Aff,28.778,30.074,1.296,27.076,25.836,-1.24
+nu_8,nu,8,Northwestern CY,Wake Forest AM,Neg,28.388,26.938,-1.45,27.968,29.564,1.595
+nu_8,nu,8,Kansas BT,Emory JR,Aff,26.997,28.498,1.501,26.856,25.412,-1.445
+nu_8,nu,8,Kentucky SR,Western Kentucky KN,Aff,26.819,28.262,1.443,26.894,25.465,-1.43
+nu_8,nu,8,Dartmouth BC,Kansas CC,Aff,26.762,28.358,1.596,26.877,25.477,-1.401
+nu_8,nu,8,Georgia KL,Harvard GM,Neg,25.803,24.494,-1.309,27.808,28.931,1.123
+nu_8,nu,8,Michigan State FM,Georgetown LN,Neg,29.808,28.271,-1.537,28.998,30.516,1.518
+nu_8,nu,8,Michigan State KP,Emory AT,Neg,28.076,26.681,-1.395,28.178,29.643,1.465
+nu_8,nu,8,UTD RH,Kansas AW,Neg,26.32,25.178,-1.143,28.438,29.599,1.161
+nu_8,nu,8,Emory OP,Southern California TM,Neg,27.938,26.432,-1.506,27.829,29.293,1.463
+nu_8,nu,8,Michigan State BS,Northwestern KM,Aff,26.555,28.547,1.992,29.963,28.014,-1.949
+nu_8,nu,8,Southern California DP,Georgetown GT,Neg,26.037,25.069,-0.968,29.62,30.583,0.962
+nu_8,nu,8,Wake Forest DM,Michigan AC,Neg,26.617,25.549,-1.068,29.191,30.308,1.117
+nu_8,nu,8,Michigan BB,Dartmouth RU,Neg,19.472,19.118,-0.354,29.366,29.722,0.356
+nu_8,nu,8,UC Berkeley GS,Kansas State DD,Aff,23.893,24.873,0.98,20.195,19.267,-0.929
+nu_8,nu,8,North Texas BV,Gonzaga MP,Aff,25.191,26.137,0.946,22.344,21.266,-1.078
+nu_8,nu,8,Houston FI,Emory ChSt,Aff,24.903,25.891,0.988,21.256,20.275,-0.981
+nu_8,nu,8,Emory MW,Michigan BL,Aff,22.482,23.676,1.193,20.502,19.344,-1.158
+nu_8,nu,8,Kansas BS,Emory CrSm,Aff,23.034,24.055,1.021,20.35,19.182,-1.168
+nu_8,nu,8,Kansas PB,Georgetown LC,Neg,22.217,20.598,-1.619,21.374,22.964,1.591
+nu_8,nu,8,Michigan AR,Georgetown VX,Aff,22.115,23.619,1.503,22.246,20.797,-1.448
+nu_8,nu,8,Emory CS,Kansas FH,Aff,21.939,23.336,1.397,21.5,20.117,-1.383
+nu_8,nu,8,Texas GS,Wake Forest HN,Neg,20.807,19.431,-1.376,22.01,23.318,1.308
+nu_8,nu,8,Michigan PF,MoState DS,Aff,22.364,23.504,1.139,20.187,18.798,-1.389
+nu_8,nu,8,MoState NC,Wyoming HW,Aff,22.521,23.975,1.454,22.491,21.025,-1.466
+nu_8,nu,8,Indiana TF,Baylor BK,Neg,21.998,20.538,-1.46,21.849,23.29,1.441
+nu_8,nu,8,Emory CF,Kentucky CS,Neg,20.813,19.833,-0.98,24.367,25.329,0.962
+nu_8,nu,8,Wake Forest PT,Emory TY,Neg,22.646,21.389,-1.257,24.457,25.687,1.229
+nu_8,nu,8,Wake Forest LW,Michigan AD,Aff,22.388,23.653,1.265,21.624,20.166,-1.457
+nu_8,nu,8,Baylor PA,Kansas PL,Aff,21.062,23.137,2.075,24.105,22.246,-1.859
+nu_8,nu,8,MoState BM,Emory SW,Neg,15.958,15.477,-0.481,24.293,24.751,0.458
+nu_8,nu,8,MoState DH,Western Kentucky CS,Neg,15.629,15.103,-0.526,24.085,24.561,0.476
+nu_8,nu,8,Wake Forest NS,Western Kentucky HM,Aff,18.383,19.357,0.974,15.163,14.178,-0.984
+nu_8,nu,8,Southern California LP,Emory ST,Neg,18.695,16.604,-2.09,14.61,16.695,2.085
+nu_8,nu,8,Iowa LS,Dartmouth DO,Neg,18.504,16.928,-1.576,17.576,19.466,1.889
+nu_8,nu,8,Kansas State SF,West Georgia HL,Aff,18.124,18.917,0.793,13.226,12.281,-0.945
+nu_8,nu,8,Trinity BK,Washburn LR,Aff,16.048,17.5,1.451,15.421,14.011,-1.41
+nu_8,nu,8,Baylor MM,MoState CP,Neg,14.35,12.587,-1.762,14.186,15.809,1.623
+nu_8,nu,8,Dartmouth BJ,Baylor LM,Aff,16.557,18.012,1.455,16.338,14.934,-1.404
+nu_8,nu,8,Dartmouth HH,Michigan BP,Aff,17.735,19.133,1.399,17.493,16.061,-1.432
+nu_8,nu,8,West Georgia GK,Dartmouth RS,Neg,17.071,15.814,-1.257,18.9,20.012,1.112
+nu_8,nu,8,Trinity CO,Iowa SB,Neg,16.361,15.079,-1.282,17.466,18.807,1.341
+nu_8,nu,8,Utah VP,Oklahoma PS,Neg,12.327,10.118,-2.209,7.189,9.513,2.324
+nu_8,nu,8,Utah BH,Kansas LL,Aff,11.86,13.149,1.289,10.527,9.278,-1.249
+nu_8,nu,8,Indiana DJ,Emory GW,Aff,11.523,12.744,1.221,9.794,8.321,-1.473
+nu_8,nu,8,Gonzaga AG,Georgetown RM,Neg,10.586,9.465,-1.121,13.143,14.201,1.058
+nu_dubs,nu,dubs,Kentucky SR,Emory GY,Neg,28.262,28.001,-0.261,39.043,39.331,0.288
+nu_dubs,nu,dubs,Dartmouth JT,Michigan ES,Neg,33.208,32.702,-0.506,39.77,40.347,0.577
+nu_dubs,nu,dubs,Harvard DS,Emory SY,Neg,31.43,30.889,-0.542,38.185,38.703,0.518
+nu_dubs,nu,dubs,Wake Forest BS,Northwestern JP,Aff,37.14,37.887,0.748,32.376,31.582,-0.793
+nu_dubs,nu,dubs,George Mason WW,Michigan CS,Neg,30.074,29.676,-0.398,39.15,39.51,0.36
+nu_dubs,nu,dubs,Kansas SS,Michigan State JS,Aff,33.765,34.87,1.105,32.302,31.219,-1.083
+nu_dubs,nu,dubs,Western Kentucky NI,Liberty CL,Aff,29.404,31.155,1.751,32.946,31.107,-1.839
+nu_dubs,nu,dubs,Northwestern LT,Dartmouth RU,Aff,34.346,35.172,0.826,29.722,28.957,-0.765
+nu_dubs,nu,dubs,Iowa PK,Wake Forest LP,Aff,29.336,31.816,2.48,35.875,33.654,-2.221
+nu_dubs,nu,dubs,UTD DH,Dartmouth CG,Aff,34.417,35.485,1.068,32.652,31.608,-1.044
+nu_dubs,nu,dubs,Kansas FB,UC Berkeley BM,Neg,36.126,34.804,-1.322,35.861,37.156,1.295
+nu_dubs,nu,dubs,Iowa EW,Harvard HL,Aff,33.651,34.908,1.257,33.916,32.561,-1.355
+nu_dubs,nu,dubs,Macalester KS,CSU Long Beach EM,Aff,33.59,34.827,1.237,33.612,32.409,-1.204
+nu_dubs,nu,dubs,Northwestern LP,Michigan State LM,Neg,34.937,33.769,-1.168,35.797,37.061,1.264
+nu_octas,nu,octas,Emory GY,Michigan State LM,Aff,39.331,40.354,1.023,37.061,36.119,-0.942
+nu_octas,nu,octas,Michigan BS,Macalester KS,Aff,39.235,40.025,0.79,34.827,34.194,-0.633
+nu_octas,nu,octas,Michigan ES,Iowa EW,Aff,40.347,40.971,0.624,34.908,34.359,-0.549
+nu_octas,nu,octas,UC Berkeley BM,Kansas UO,Aff,37.156,38.665,1.509,40.301,38.603,-1.698
+nu_octas,nu,octas,Emory SY,UTD DH,Aff,38.703,39.498,0.794,35.485,34.687,-0.798
+nu_octas,nu,octas,Wake Forest BS,Iowa PK,Aff,37.887,38.447,0.56,31.816,31.263,-0.553
+nu_octas,nu,octas,Michigan CS,Northwestern LT,Aff,39.51,40.22,0.709,35.172,34.401,-0.772
+nu_octas,nu,octas,Western Kentucky NI,Kansas SS,Aff,31.155,32.734,1.579,34.87,33.204,-1.666
+nu_quarters,nu,quarters,Emory GY,Western Kentucky NI,Aff,40.354,40.771,0.417,32.734,32.398,-0.336
+nu_quarters,nu,quarters,Michigan ES,Wake Forest BS,Aff,40.971,41.817,0.847,38.447,37.604,-0.843
+nu_quarters,nu,quarters,Emory SY,UC Berkeley BM,Neg,39.498,38.331,-1.167,38.665,39.755,1.09
+nu_semis,nu,semis,UC Berkeley BM,Emory GY,Neg,39.755,38.961,-0.794,40.771,41.779,1.008
+nu_finals,nu,finals,Emory GY,Michigan BS,Aff,41.779,42.582,0.803,40.025,39.021,-1.004

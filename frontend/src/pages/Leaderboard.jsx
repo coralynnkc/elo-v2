@@ -39,7 +39,7 @@ export default function Leaderboard() {
           ))}
         </nav>
         <p className="subtitle">
-          TrueSkill ratings · {SEASONS[season].label} season · {tournaments.join(", ")}
+          TrueSkill Through Time ratings · {SEASONS[season].label} season · {tournaments.join(", ")}
         </p>
         {tournaments.length < 2 && (
           <p className="provisional">

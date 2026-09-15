@@ -2,7 +2,6 @@
 import os
 import shutil
 import sys
-from trueskill import TrueSkill
 from pipeline import CURRENT_SEASON, SEASONS, load_season, run_pipeline
 
 CODING_DIR = os.path.dirname(__file__)
@@ -20,9 +19,8 @@ def run_season(season: str):
     if unresolved:
         print(f"  {len(unresolved)} code(s) not tied to debaters, rated by code: {', '.join(unresolved)}")
 
-    print(f"Running pipeline ({len(results)} rounds, 5 passes)...")
-    env = TrueSkill(draw_probability=0)  # debate rounds can't be drawn
-    final_teams, history = run_pipeline(teams, results, n_passes=5, env=env)
+    print(f"Rating {len(results)} rounds...")
+    final_teams, history = run_pipeline(teams, results)
 
     final_teams.to_csv(output_teams, index=False)
     history.to_csv(output_history, index=False)
