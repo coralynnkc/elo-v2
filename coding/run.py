@@ -3,7 +3,7 @@ import os
 import shutil
 import sys
 from trueskill import TrueSkill
-from pipeline import CURRENT_SEASON, SEASONS, init_teams, load_rounds, run_pipeline
+from pipeline import CURRENT_SEASON, SEASONS, load_season, run_pipeline
 
 CODING_DIR = os.path.dirname(__file__)
 FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
@@ -16,8 +16,9 @@ def run_season(season: str):
     output_history = os.path.join(CODING_DIR, cfg['history_file'])
 
     print(f"Loading {season} data...")
-    teams, rev_fixes = init_teams(data_dir, cfg['tournaments'], cfg['name_fixes'], cfg['teams_from_rounds'])
-    results = load_rounds(data_dir, cfg['tournaments'], cfg['name_fixes'], rev_fixes)
+    teams, results, unresolved = load_season(data_dir, cfg['tournaments'], cfg['name_fixes'])
+    if unresolved:
+        print(f"  {len(unresolved)} code(s) not tied to debaters, rated by code: {', '.join(unresolved)}")
 
     print(f"Running pipeline ({len(results)} rounds, 5 passes)...")
     env = TrueSkill(draw_probability=0)  # debate rounds can't be drawn

@@ -1,6 +1,9 @@
 import glob
 import os
 import random
+import re
+import unicodedata
+from collections import Counter, defaultdict
 from functools import partial
 import pandas as pd
 from trueskill import TrueSkill, Rating, rate_1vs1
@@ -14,16 +17,13 @@ SUFFIX_FIXES = {
     ' - HYBRID': '',
 }
 
-# These reversed-initials pairs refer to genuinely different teams — do not collapse
-REVERSED_INITIALS_EXCEPTIONS = frozenset({'Kansas BP', 'Kansas PB'})
-
 # Per-season config.
-#   tournaments:       chronological order of tournament codes — controls round ordering.
-#                      Add new codes here in the order they were held; files with other
-#                      prefixes are ignored.
-#   name_fixes:        non-reversed-initials name fixes (wrong -> right) for that season only.
-#   teams_from_rounds: also rate teams that debated but are missing from the entries lists,
-#                      instead of silently dropping their rounds.
+#   tournaments: chronological order of tournament codes — controls round ordering.
+#                Add new codes here in the order they were held; files with other
+#                prefixes are ignored.
+#   name_fixes:  code fixes (wrong -> right) for that season only. Only needed when a code
+#                can't be tied to its debaters (no speaker names or entries) and differs
+#                from the code used elsewhere.
 SEASONS = {
     'labor': {
         'data_dir': 'data_labor',
@@ -35,7 +35,6 @@ SEASONS = {
             'Southern California MB': 'Southern California BM',
             'Wichita State MG': 'Wichita State GM',
         },
-        'teams_from_rounds': True,
         'teams_file': 'teams_labor.csv',
         'history_file': 'match_history.csv',
     },
@@ -43,7 +42,6 @@ SEASONS = {
         'data_dir': 'data_arms',
         'tournaments': ['nu'],
         'name_fixes': {},
-        'teams_from_rounds': True,
         'teams_file': 'teams_arms.csv',
         'history_file': 'match_history_arms.csv',
     },
@@ -56,6 +54,9 @@ _ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103, 'finals
 
 # Teams must appear in this many tournaments to be ranked (capped at the number loaded)
 MIN_TOURNAMENTS = 2
+
+# One speaker in a points cell: "JGonzalez Arce 28.7" (several scores when judged by a panel)
+_SPEAKER = re.compile(r'([^\d\s][^\d]*?)\s+(?:\d+(?:\.\d+)?\s*)+')
 
 
 def _round_sort_key(name: str, tournament_order: list[str]) -> tuple:
@@ -75,28 +76,6 @@ def _round_names(data_dir: str, tournament_order: list[str]) -> list[str]:
     )
 
 
-def build_reversed_initials_fixes(names) -> dict[str, str]:
-    """Find all pairs of team names that differ only by swapped last-two initials
-    (e.g. 'Baylor PM' / 'Baylor MP') and return a mapping from the
-    alphabetically-later form to the earlier (canonical) form.
-
-    Pairs listed in REVERSED_INITIALS_EXCEPTIONS are left alone.
-    """
-    fixes = {}
-    seen = {}  # name -> canonical name
-    for item in sorted(set(names)):
-        reversed_item = item[:-2] + item[-2:][::-1]
-        if item in REVERSED_INITIALS_EXCEPTIONS or reversed_item in REVERSED_INITIALS_EXCEPTIONS:
-            continue
-        if reversed_item in seen or item in seen:
-            canonical = seen.get(reversed_item) or seen.get(item)
-            fixes[item] = canonical
-        else:
-            seen[item] = item
-            seen[reversed_item] = item
-    return fixes
-
-
 def clean_teams(series: pd.Series, *fixes: dict | None) -> pd.Series:
     """Strip Tabroom suffixes, then apply each fixes dict (wrong -> right) in order."""
     s = series.copy()
@@ -106,61 +85,172 @@ def clean_teams(series: pd.Series, *fixes: dict | None) -> pd.Series:
     return s
 
 
-def load_rounds(
+def _normalize_surname(name: str) -> str:
+    ascii_name = unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode()
+    return re.sub(r'[^a-z]', '', ascii_name.casefold())
+
+
+def _partnership_key(surnames: list[str]) -> str:
+    """Order-, case-, accent- and punctuation-insensitive key for a set of debaters."""
+    return '/'.join(sorted(_normalize_surname(s) for s in surnames))
+
+
+def _entry_surnames(entry) -> list[str] | None:
+    """'Gallagher & Young' -> ['Gallagher', 'Young']"""
+    if pd.isna(entry):
+        return None
+    names = [n.strip() for n in str(entry).split('&') if n.strip()]
+    return names if len(names) == 2 else None
+
+
+def _speaker_surnames(cell) -> list[str] | None:
+    """'AHant 28.6 JGonzalez Arce 28.7' -> ['Hant', 'Gonzalez Arce']. Names are Tabroom's
+    first initial + surname. None unless exactly two speakers are listed (mavericks fall
+    back to the team code)."""
+    if pd.isna(cell):
+        return None
+    names = [m.group(1).strip() for m in _SPEAKER.finditer(re.sub(r'\s+', ' ', str(cell)))]
+    return [n[1:] for n in names] if len(names) == 2 else None
+
+
+def _initials_signature(code: str) -> str:
+    """'Baylor PM' and 'Baylor MP' share a signature."""
+    school, _, initials = code.rpartition(' ')
+    return f"{school} {''.join(sorted(initials))}"
+
+
+def load_season(
     data_dir: str,
     tournament_order: list[str],
     name_fixes: dict | None = None,
-    extra_fixes: dict | None = None,
-) -> dict[str, pd.DataFrame]:
-    """Auto-discover and load round CSVs from data_dir.
+) -> tuple[pd.DataFrame, dict[str, pd.DataFrame], list[str]]:
+    """Load a season's round CSVs and identify each team as a debater partnership.
 
-    Only loads files whose tournament prefix is in tournament_order. Sorted by
-    tournament_order then round number (prelims before elims).
+    Each side of each round is resolved, in order, from:
+      1. the speaker names in that row's points column,
+      2. that tournament's entries file (Code -> Entry),
+      3. the only partnership seen anywhere this season under that code,
+      4. the only partnership seen under that code with its initials in either order.
+    Anything still unresolved is keyed by its code.
+
+    Teams are displayed by their most-used code; when partnerships share one, their
+    surnames are appended ('Kansas BP (Bauman/Persson)').
+
+    Returns (teams_df, results, unresolved_codes). results maps round name to a
+    DataFrame of Aff, Neg (display names) and Win.
     """
-    results = {}
+    entries = defaultdict(dict)  # tournament -> code -> surnames
+    for tournament in tournament_order:
+        for f in sorted(glob.glob(os.path.join(data_dir, f'{tournament}_entries*.csv'))):
+            e = pd.read_csv(f)
+            for code, entry in zip(clean_teams(e['Code'], name_fixes), e['Entry']):
+                if (surnames := _entry_surnames(entry)):
+                    entries[tournament][code] = surnames
+
+    rounds = {}
     for name in _round_names(data_dir, tournament_order):
         df = pd.read_csv(os.path.join(data_dir, f'{name}.csv'))
-        df['Aff'] = clean_teams(df['Aff'], name_fixes, extra_fixes)
-        df['Neg'] = clean_teams(df['Neg'], name_fixes, extra_fixes)
-        win = df['Win'].str.strip().str.upper()
-        df['Win'] = win.map(lambda x: 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
-        results[name] = df[['Aff', 'Neg', 'Win']]
-    return results
+        out = pd.DataFrame(index=df.index)
+        for side in ('Aff', 'Neg'):
+            out[side] = clean_teams(df[side], name_fixes)
+            points = next((c for c in df.columns if c.startswith(side) and 'Points' in c), None)
+            out[f'{side}_Speakers'] = df[points].map(_speaker_surnames) if points else None
+        win = df['Win'].astype(str).str.strip().str.upper()
+        out['Win'] = win.map(lambda x: 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
+        rounds[name] = out
 
+    # Where each partnership appeared under each code / initials signature this season
+    surnames_by_key = {}
+    by_code = defaultdict(lambda: defaultdict(set))       # code -> key -> tournament indices
+    by_signature = defaultdict(lambda: defaultdict(set))  # signature -> key -> tournament indices
 
-def init_teams(
-    data_dir: str,
-    tournament_order: list[str],
-    name_fixes: dict | None = None,
-    teams_from_rounds: bool = False,
-) -> tuple[pd.DataFrame, dict]:
-    """Load all *_entries.csv files from data_dir and initialize teams with default ratings.
+    def observe(code, surnames, tournament):
+        key = _partnership_key(surnames)
+        surnames_by_key.setdefault(key, surnames)
+        t_idx = tournament_order.index(tournament)
+        by_code[code][key].add(t_idx)
+        by_signature[_initials_signature(code)][key].add(t_idx)
 
-    With teams_from_rounds, teams that appear in round CSVs but not in any entries
-    list are added too.
+    for tournament, code_map in entries.items():
+        for code, surnames in code_map.items():
+            observe(code, surnames, tournament)
+    # Speaker names fill in where entries are missing; entries win when both exist, since
+    # Tabroom speaker names can be shortened ("JSay" for Sayoto)
+    for name, df in rounds.items():
+        tournament = name.partition('_')[0]
+        for side in ('Aff', 'Neg'):
+            for code, surnames in zip(df[side], df[f'{side}_Speakers']):
+                if isinstance(code, str) and surnames and code not in entries[tournament]:
+                    observe(code, surnames, tournament)
 
-    Returns (teams_df, reversed_initials_fixes) so the caller can pass the same
-    fixes to load_rounds, ensuring round CSVs use the same canonical names.
-    """
-    entry_files = glob.glob(os.path.join(data_dir, '*_entries.csv'))
-    if not entry_files:
-        raise FileNotFoundError(f"No *_entries.csv files found in {data_dir}")
-    codes = [pd.read_csv(f)['Code'] for f in entry_files]
-    if teams_from_rounds:
-        for name in _round_names(data_dir, tournament_order):
-            df = pd.read_csv(os.path.join(data_dir, f'{name}.csv'))
-            codes += [df['Aff'].dropna(), df['Neg'].dropna()]
-    all_codes = pd.concat(codes, ignore_index=True)
-    base_cleaned = clean_teams(all_codes, name_fixes)
-    rev_fixes = build_reversed_initials_fixes(base_cleaned)
-    teams = clean_teams(base_cleaned, rev_fixes).drop_duplicates().sort_values().reset_index(drop=True)
-    return pd.DataFrame({
-        'Team': teams,
+    def nearest(candidates: dict, tournament: str) -> str | None:
+        """The partnership seen closest in time under this code, if exactly one is."""
+        t_idx = tournament_order.index(tournament)
+        distance = {key: min(abs(i - t_idx) for i in idxs) for key, idxs in candidates.items()}
+        if not distance:
+            return None
+        closest = min(distance.values())
+        keys = [key for key, d in distance.items() if d == closest]
+        return keys[0] if len(keys) == 1 else None
+
+    unresolved = set()
+
+    def resolve(code, surnames, tournament):
+        if not isinstance(code, str):
+            return None  # bye
+        if code in entries[tournament]:
+            return _partnership_key(entries[tournament][code])
+        if surnames:
+            return _partnership_key(surnames)
+        key = nearest(by_code[code], tournament) or nearest(by_signature[_initials_signature(code)], tournament)
+        if key:
+            return key
+        unresolved.add(code)
+        return f'code:{code}'
+
+    tournaments_by_code = defaultdict(lambda: defaultdict(set))  # key -> code -> tournaments
+    for name, df in rounds.items():
+        tournament = name.partition('_')[0]
+        for side in ('Aff', 'Neg'):
+            keys = [resolve(c, s, tournament) for c, s in zip(df[side], df[f'{side}_Speakers'])]
+            for key, code in zip(keys, df[side]):
+                if key:
+                    tournaments_by_code[key][code].add(tournament_order.index(tournament))
+            df[f'{side}_Key'] = keys
+
+    # Display name: the initials ordering-group used at the most tournaments (ties: most
+    # recent), shown in its alphabetically first ordering so names stay stable
+    display = {}
+    for key, codes in tournaments_by_code.items():
+        groups = defaultdict(set)
+        for code, idxs in codes.items():
+            groups[_initials_signature(code)] |= idxs
+        best = max(groups, key=lambda sig: (len(groups[sig]), max(groups[sig])))
+        display[key] = min(code for code in codes if _initials_signature(code) == best)
+    shared = Counter(display.values())
+    for key, code in display.items():
+        if shared[code] > 1:
+            label = '/'.join(surnames_by_key[key]) if key in surnames_by_key else 'unidentified'
+            display[key] = f'{code} ({label})'
+
+    results = {}
+    for name, df in rounds.items():
+        results[name] = pd.DataFrame({
+            'Aff': df['Aff_Key'].map(display),
+            'Neg': df['Neg_Key'].map(display),
+            'Win': df['Win'],
+        })
+
+    keys = sorted(display, key=display.get)
+    teams = pd.DataFrame({
+        'Team': [display[k] for k in keys],
+        'Debaters': [' & '.join(surnames_by_key[k]) if k in surnames_by_key else '' for k in keys],
         'Mu': MU, 'Sigma': SIGMA,
         'Aff_Mu': MU, 'Aff_Sigma': SIGMA,
         'Neg_Mu': MU, 'Neg_Sigma': SIGMA,
         'Aff_Rounds': 0, 'Neg_Rounds': 0,
-    }), rev_fixes
+    })
+    return teams, results, sorted(unresolved)
 
 
 def _apply_round(
