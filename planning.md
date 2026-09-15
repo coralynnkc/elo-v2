@@ -7,10 +7,14 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 - **Draws:** `draw_probability=0`. Debate rounds can't be drawn.
 - **Non-decisive rows:** rows whose `Win` isn't Aff/Neg (closeouts such as "EMORY GS ADVANCES", byes) are skipped. This replaced the same-school rule, which only ever matched labor closeouts.
 - **Teams missing from entries:** both seasons rate them (`teams_from_rounds: True`). Labor has no entries files for `nu`, `ndt`, `kentuckyrr` or `dartmouthrr`. Turning this on for labor added 140 rounds and 4 ranked teams and republished 2025–26.
-- **Team identity:** a team is a debater partnership, keyed by surnames (#10). If one debater changes partners, that's a new team.
-- **Merges made so far:**
-  - `Emory CrTa` → `Emory CT` (Cross & Taylor, labor)
-  - `Southern California ZB` and `BR` stay separate: both debated at the same tournaments
+- **Team identity:** a team is a debater partnership, keyed by normalized sorted surnames (`load_season`). If one debater changes partners, that's a new team.
+  - **Resolution order:** that tournament's entries → speaker names in the points column → the partnership seen under the same code at the nearest tournament → the same with initials in either order → the bare code.
+  - **Entries beat speaker names** because Tabroom shortens speaker names ("JSay" for Sayoto).
+  - **Display name:** the code group (initials in any order) used at the most tournaments, shown alphabetically first so URLs stay stable. When partnerships share a code, surnames are appended: `Kansas BP (Bauman/Persson)`.
+  - **Result:** this replaced the reversed-initials heuristic and the Kansas BP/PB exception. In labor it split Dartmouth GH, Emory CS, Kansas BP, Kansas MS, Michigan CS/SS, Kentucky RS and Western Kentucky SS, and merged Missouri State NS into MoState NS.
+  - **Labor limit:** NU (no entries, no speaker names) leaves 12 codes rated by code.
+- **Kentucky (labor) re-export:** `uk_1`–`uk_6` were re-exported with speaker points, because the old files had merged Dartmouth GH and HG.
+- **Manual fixes:** `Emory CrTa` → `Emory CT` (Cross & Taylor), plus the older labor `name_fixes`, for codes with no names attached.
 
 ## Evidence (2026-09-15, labor + Northwestern arms)
 
@@ -61,24 +65,13 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 
 ### 8. Carry priors across seasons
 - **Problem:** every arms team starts at μ = 25, σ = 8.33.
-- **Proposal:** seed each partnership from its debaters' prior-season ratings, with σ inflated. Needs #10.
+- **Proposal:** seed each partnership from its debaters' prior-season ratings, with σ inflated. `Debaters` now provides the surnames, but individuals are keyed by surname only, so shared surnames (Shah, Smith) need care.
 
 ### 9. Speaker points (low priority)
 - **Data:** arms prelim files have points per debater.
 - **Proposal:** use them as a weak margin signal, only if the harness shows a gain.
 
 ## Priority 3: data hygiene and process
-
-### 10. Identify teams by debater surnames, not code initials (in progress)
-- **Why codes fail** (entries scan):
-  - Labor has 10 codes that cover more than one pair. For example, `Dartmouth GH` is both Gonzalez Arce & Hant and Guo & Hatton, and both are exported as `GH` in the same Kentucky rounds. `Kansas BP` is Bauman & Persson at Texas and UK, and Blaser & Pace at Wake.
-  - 4 pairs appear under several codes: `Kansas BP`/`PB`, `Dartmouth GH`/`GuHa`, `MInnesota HU` (typo), `MoState NS`/`Missouri State NS`.
-  - Arms is clean (132 codes, 132 pairs).
-- **Plan:**
-  - Canonical key: sorted surnames from entries `Entry`.
-  - For tournaments without entries, or for ambiguous codes, use the speaker names in the prelim points columns.
-  - Drop the reversed-initials heuristic, `REVERSED_INITIALS_EXCEPTIONS`, and most `name_fixes`.
-  - Keep a readable display name (school + code).
 
 ### 11. Validation script (`coding/validate.py`, in progress)
 - **Checks:** config (unlisted prefixes, missing entries file, missing `TOURNAMENT_NAMES`); names missing from entries, with similar codes; byes and closeouts; duplicate teams in a round; missing prelim files; even-round side flips (≥90%) and record gaps (≤1.5 from R3), skipped for fields under 16; bracket advancement; ballot counts vs result.

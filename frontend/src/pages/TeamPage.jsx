@@ -37,7 +37,8 @@ export default function TeamPage() {
 
       <header className="team-header">
         <h1>{name}</h1>
-        {rank && <span className="team-rank">Ranked #{rank} of {teams.length}</span>}
+        {team?.Debaters && <p className="subtitle">{team.Debaters}</p>}
+        {rank &&<span className="team-rank">Ranked #{rank} of {teams.length}</span>}
       </header>
 
       {team && (
