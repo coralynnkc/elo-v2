@@ -1,38 +1,77 @@
 import glob
 import os
 import random
+from functools import partial
 import pandas as pd
 from trueskill import TrueSkill, Rating, rate_1vs1
 
 MU = 25.0
 SIGMA = MU / 3
 
-# Non-reversed-initials name fixes (wrong -> right)
-TEAM_NAME_FIXES = {
+# Tabroom suffixes stripped from team codes in every season
+SUFFIX_FIXES = {
     ' - ONLINE': '',
     ' - HYBRID': '',
-    'Houston MH': 'Houston HM',
-    'Macalester HK': 'Macalester KH',
-    'Southern California MB': 'Southern California BM',
-    'Wichita State MG': 'Wichita State GM',
 }
 
 # These reversed-initials pairs refer to genuinely different teams — do not collapse
 REVERSED_INITIALS_EXCEPTIONS = frozenset({'Kansas BP', 'Kansas PB'})
 
-# Chronological order of tournaments — controls the final pass ordering.
-# Add new tournament codes here in the order they were held.
-TOURNAMENT_ORDER = ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt']
+# Per-season config.
+#   tournaments:       chronological order of tournament codes — controls round ordering.
+#                      Add new codes here in the order they were held; files with other
+#                      prefixes are ignored.
+#   name_fixes:        non-reversed-initials name fixes (wrong -> right) for that season only.
+#   teams_from_rounds: also rate teams that debated but are missing from the entries lists,
+#                      instead of silently dropping their rounds.
+SEASONS = {
+    'labor': {
+        'data_dir': 'data_labor',
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt'],
+        'name_fixes': {
+            'Houston MH': 'Houston HM',
+            'Macalester HK': 'Macalester KH',
+            'Southern California MB': 'Southern California BM',
+            'Wichita State MG': 'Wichita State GM',
+        },
+        'teams_from_rounds': False,
+        'teams_file': 'teams_labor.csv',
+        'history_file': 'match_history.csv',
+    },
+    'arms': {
+        'data_dir': 'data_arms',
+        'tournaments': ['nu'],
+        'name_fixes': {},
+        'teams_from_rounds': True,
+        'teams_file': 'teams_arms.csv',
+        'history_file': 'match_history_arms.csv',
+    },
+}
+
+CURRENT_SEASON = 'arms'
 
 # Elim round sort order (prelim numbers sort before these automatically)
 _ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103, 'finals': 104}
 
+# Teams must appear in this many tournaments to be ranked (capped at the number loaded)
+MIN_TOURNAMENTS = 2
 
-def _round_sort_key(name: str) -> tuple:
+
+def _round_sort_key(name: str, tournament_order: list[str]) -> tuple:
     tournament, _, round_label = name.partition('_')
-    t_idx = TOURNAMENT_ORDER.index(tournament) if tournament in TOURNAMENT_ORDER else len(TOURNAMENT_ORDER)
+    t_idx = tournament_order.index(tournament) if tournament in tournament_order else len(tournament_order)
     r_idx = int(round_label) if round_label.isdigit() else _ELIM_ORDER.get(round_label, 99)
     return (t_idx, r_idx)
+
+
+def _round_names(data_dir: str, tournament_order: list[str]) -> list[str]:
+    """Round CSV basenames (no extension) in data_dir whose tournament prefix is in
+    tournament_order, sorted chronologically (prelims before elims)."""
+    names = [os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(data_dir, '*.csv'))]
+    return sorted(
+        [n for n in names if 'entries' not in n and n.partition('_')[0] in tournament_order],
+        key=partial(_round_sort_key, tournament_order=tournament_order),
+    )
 
 
 def build_reversed_initials_fixes(names) -> dict[str, str]:
@@ -57,48 +96,47 @@ def build_reversed_initials_fixes(names) -> dict[str, str]:
     return fixes
 
 
-def clean_teams(series: pd.Series, extra_fixes: dict | None = None) -> pd.Series:
+def clean_teams(series: pd.Series, *fixes: dict | None) -> pd.Series:
+    """Strip Tabroom suffixes, then apply each fixes dict (wrong -> right) in order."""
     s = series.copy()
-    for wrong, right in TEAM_NAME_FIXES.items():
-        s = s.str.replace(wrong, right, regex=False)
-    if extra_fixes:
-        for wrong, right in extra_fixes.items():
+    for fix in (SUFFIX_FIXES, *fixes):
+        for wrong, right in (fix or {}).items():
             s = s.str.replace(wrong, right, regex=False)
     return s
 
 
-def load_rounds(data_dir: str, extra_fixes: dict | None = None) -> dict[str, pd.DataFrame]:
+def load_rounds(
+    data_dir: str,
+    tournament_order: list[str],
+    name_fixes: dict | None = None,
+    extra_fixes: dict | None = None,
+) -> dict[str, pd.DataFrame]:
     """Auto-discover and load round CSVs from data_dir.
 
-    Only loads files whose tournament prefix is in TOURNAMENT_ORDER — add a
-    tournament there to opt it in. Sorted by TOURNAMENT_ORDER then round number
-    (prelims before elims).
+    Only loads files whose tournament prefix is in tournament_order. Sorted by
+    tournament_order then round number (prelims before elims).
     """
-    files = glob.glob(os.path.join(data_dir, '*.csv'))
-    names = sorted(
-        [
-            os.path.splitext(os.path.basename(f))[0]
-            for f in files
-            if (
-            'entries' not in os.path.basename(f)
-            and os.path.splitext(os.path.basename(f))[0].partition('_')[0] in TOURNAMENT_ORDER
-        )
-        ],
-        key=_round_sort_key,
-    )
     results = {}
-    for name in names:
+    for name in _round_names(data_dir, tournament_order):
         df = pd.read_csv(os.path.join(data_dir, f'{name}.csv'))
-        df['Aff'] = clean_teams(df['Aff'], extra_fixes)
-        df['Neg'] = clean_teams(df['Neg'], extra_fixes)
+        df['Aff'] = clean_teams(df['Aff'], name_fixes, extra_fixes)
+        df['Neg'] = clean_teams(df['Neg'], name_fixes, extra_fixes)
         win = df['Win'].str.strip().str.upper()
         df['Win'] = win.map(lambda x: 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
         results[name] = df[['Aff', 'Neg', 'Win']]
     return results
 
 
-def init_teams(data_dir: str) -> tuple[pd.DataFrame, dict]:
+def init_teams(
+    data_dir: str,
+    tournament_order: list[str],
+    name_fixes: dict | None = None,
+    teams_from_rounds: bool = False,
+) -> tuple[pd.DataFrame, dict]:
     """Load all *_entries.csv files from data_dir and initialize teams with default ratings.
+
+    With teams_from_rounds, teams that appear in round CSVs but not in any entries
+    list are added too.
 
     Returns (teams_df, reversed_initials_fixes) so the caller can pass the same
     fixes to load_rounds, ensuring round CSVs use the same canonical names.
@@ -106,11 +144,13 @@ def init_teams(data_dir: str) -> tuple[pd.DataFrame, dict]:
     entry_files = glob.glob(os.path.join(data_dir, '*_entries.csv'))
     if not entry_files:
         raise FileNotFoundError(f"No *_entries.csv files found in {data_dir}")
-    all_codes = pd.concat(
-        [pd.read_csv(f)['Code'] for f in entry_files],
-        ignore_index=True,
-    )
-    base_cleaned = clean_teams(all_codes)
+    codes = [pd.read_csv(f)['Code'] for f in entry_files]
+    if teams_from_rounds:
+        for name in _round_names(data_dir, tournament_order):
+            df = pd.read_csv(os.path.join(data_dir, f'{name}.csv'))
+            codes += [df['Aff'].dropna(), df['Neg'].dropna()]
+    all_codes = pd.concat(codes, ignore_index=True)
+    base_cleaned = clean_teams(all_codes, name_fixes)
     rev_fixes = build_reversed_initials_fixes(base_cleaned)
     teams = clean_teams(base_cleaned, rev_fixes).drop_duplicates().sort_values().reset_index(drop=True)
     return pd.DataFrame({
@@ -262,7 +302,8 @@ def run_pipeline(
     teams[round_cols] = teams[round_cols].round(3)
     teams = teams[(teams['Aff_Rounds'] > 0) | (teams['Neg_Rounds'] > 0)]
 
-    # Exclude teams that competed in fewer than 2 tournaments
+    # Exclude teams that competed in fewer than MIN_TOURNAMENTS tournaments
+    # (relaxed early in a season, before that many tournaments exist)
     history_df = pd.DataFrame(all_history)
     if not history_df.empty:
         aff_tours = history_df[['Aff', 'Tournament']].rename(columns={'Aff': 'Team'})
@@ -273,7 +314,8 @@ def run_pipeline(
             .groupby('Team')['Tournament']
             .nunique()
         )
-        eligible = team_tour_counts[team_tour_counts >= 2].index
+        min_tournaments = min(MIN_TOURNAMENTS, history_df['Tournament'].nunique())
+        eligible = team_tour_counts[team_tour_counts >= min_tournaments].index
         teams = teams[teams['Team'].isin(eligible)]
 
     teams = teams.sort_values('Mu', ascending=False).reset_index(drop=True)

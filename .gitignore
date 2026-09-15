@@ -7,6 +7,8 @@ __pycache__/
 coding/teams_labor.csv
 coding/teams_labor_init.csv
 coding/match_history.csv
+coding/teams_arms.csv
+coding/match_history_arms.csv
 
 # Frontend build
 frontend/dist/

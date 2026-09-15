@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { loadData, getTeamMatches } from "../utils/data";
+import { Link, Navigate, NavLink, useParams } from "react-router-dom";
+import { SEASONS, loadData, getTeamMatches, getTournaments } from "../utils/data";
 
 export default function Leaderboard() {
+  const { season } = useParams();
   const [data, setData] = useState(null);
   const [expanded, setExpanded] = useState(new Set());
 
   useEffect(() => {
-    loadData().then(setData);
-  }, []);
+    if (!SEASONS[season]) return;
+    setExpanded(new Set());
+    loadData(season).then((d) => setData({ season, ...d }));
+  }, [season]);
 
   function toggle(teamName) {
     setExpanded((prev) => {
@@ -18,18 +21,32 @@ export default function Leaderboard() {
     });
   }
 
-  if (!data) return <div className="loading">Loading…</div>;
+  if (!SEASONS[season]) return <Navigate to="/" replace />;
+  if (!data || data.season !== season) return <div className="loading">Loading…</div>;
 
   const { teams, rawHistory } = data;
+  const tournaments = getTournaments(rawHistory);
 
   return (
     <div className="page">
       <header className="page-header">
         <h1>Policy Debate Rankings</h1>
+        <nav className="season-nav">
+          {Object.entries(SEASONS).map(([key, s]) => (
+            <NavLink key={key} to={`/${key}`}>
+              {s.label}
+            </NavLink>
+          ))}
+        </nav>
         <p className="subtitle">
-          TrueSkill ratings · 2025–26 season · Northwestern, Kentucky RR, UK,
-          Gonzaga, Wake, Georgetown, Dartmouth RR, Texas, ADA, NDT
+          TrueSkill ratings · {SEASONS[season].label} season · {tournaments.join(", ")}
         </p>
+        {tournaments.length < 2 && (
+          <p className="provisional">
+            Provisional — based on one tournament. Ratings and σ will settle as more
+            tournaments are added.
+          </p>
+        )}
       </header>
 
       <div className="table-wrap">
@@ -63,7 +80,7 @@ export default function Leaderboard() {
                     <td className="rank">{i + 1}</td>
                     <td className="team-name">
                       <Link
-                        to={`/team/${encodeURIComponent(team.Team)}`}
+                        to={`/${season}/team/${encodeURIComponent(team.Team)}`}
                         onClick={(e) => e.stopPropagation()}
                       >
                         {team.Team}
@@ -99,7 +116,7 @@ export default function Leaderboard() {
                                   <td>{m.roundDisplay}</td>
                                   <td>
                                     <Link
-                                      to={`/team/${encodeURIComponent(m.opponent)}`}
+                                      to={`/${season}/team/${encodeURIComponent(m.opponent)}`}
                                       onClick={(e) => e.stopPropagation()}
                                     >
                                       {m.opponent}

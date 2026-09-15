@@ -1,5 +1,13 @@
 import Papa from 'papaparse'
 
+export const CURRENT_SEASON = 'arms'
+
+// Keys and file names match SEASONS in coding/pipeline.py; listed newest first
+export const SEASONS = {
+  arms: { label: '2026–27', teams: 'teams_arms.csv', history: 'match_history_arms.csv' },
+  labor: { label: '2025–26', teams: 'teams_labor.csv', history: 'match_history.csv' },
+}
+
 const TOURNAMENT_NAMES = {
   nu: 'Northwestern',
   kentuckyrr: 'Kentucky RR',
@@ -21,12 +29,20 @@ const ELIM_LABELS = {
   finals: 'Finals',
 }
 
+function tournamentName(tournament) {
+  return TOURNAMENT_NAMES[tournament] || tournament.toUpperCase()
+}
+
 export function formatRound(tournament, roundLabel) {
-  const t = TOURNAMENT_NAMES[tournament] || tournament.toUpperCase()
   const r = isNaN(Number(roundLabel))
     ? (ELIM_LABELS[roundLabel] || roundLabel)
     : `R${roundLabel}`
-  return `${t} ${r}`
+  return `${tournamentName(tournament)} ${r}`
+}
+
+// Tournament display names in chronological order (history rows are chronological)
+export function getTournaments(rawHistory) {
+  return [...new Set(rawHistory.map(m => m.Tournament))].map(tournamentName)
 }
 
 async function parseCsv(path) {
@@ -35,17 +51,18 @@ async function parseCsv(path) {
   return Papa.parse(text, { header: true, dynamicTyping: true, skipEmptyLines: true }).data
 }
 
-let _cache = null
+const _cache = {}
 
-export async function loadData() {
-  if (_cache) return _cache
+export async function loadData(season) {
+  if (_cache[season]) return _cache[season]
   const base = import.meta.env.BASE_URL
+  const { teams: teamsFile, history: historyFile } = SEASONS[season]
   const [teams, rawHistory] = await Promise.all([
-    parseCsv(`${base}data/teams_labor.csv`),
-    parseCsv(`${base}data/match_history.csv`),
+    parseCsv(`${base}data/${teamsFile}`),
+    parseCsv(`${base}data/${historyFile}`),
   ])
-  _cache = { teams, rawHistory }
-  return _cache
+  _cache[season] = { teams, rawHistory }
+  return _cache[season]
 }
 
 export function getTeamMatches(rawHistory, teamName) {

@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { loadData, getTeamMatches } from '../utils/data'
+import { Link, Navigate, useParams } from 'react-router-dom'
+import { SEASONS, loadData, getTeamMatches } from '../utils/data'
 
 export default function TeamPage() {
-  const { teamName } = useParams()
+  const { season, teamName } = useParams()
   const name = decodeURIComponent(teamName)
   const [data, setData] = useState(null)
   const [sortBy, setSortBy] = useState('consequential')
 
-  useEffect(() => { loadData().then(setData) }, [])
+  useEffect(() => {
+    if (SEASONS[season]) loadData(season).then(d => setData({ season, ...d }))
+  }, [season])
 
-  if (!data) return <div className="loading">Loading…</div>
+  if (!SEASONS[season]) return <Navigate to="/" replace />
+  if (!data || data.season !== season) return <div className="loading">Loading…</div>
 
   const { teams, rawHistory } = data
   const team = teams.find(t => t.Team === name)
@@ -29,7 +32,7 @@ export default function TeamPage() {
   return (
     <div className="page">
       <div className="back-link">
-        <Link to="/">← Rankings</Link>
+        <Link to={`/${season}`}>← {SEASONS[season].label} Rankings</Link>
       </div>
 
       <header className="team-header">
@@ -102,7 +105,7 @@ export default function TeamPage() {
               <tr key={i}>
                 <td>{m.roundDisplay}</td>
                 <td>
-                  <Link to={`/team/${encodeURIComponent(m.opponent)}`}>
+                  <Link to={`/${season}/team/${encodeURIComponent(m.opponent)}`}>
                     {m.opponent}
                   </Link>
                 </td>

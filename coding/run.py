@@ -1,34 +1,49 @@
+"""Usage: python run.py [season ...]   (default: current season; 'all' runs every season)"""
 import os
 import shutil
+import sys
 from trueskill import TrueSkill
-from pipeline import init_teams, load_rounds, run_pipeline
+from pipeline import CURRENT_SEASON, SEASONS, init_teams, load_rounds, run_pipeline
 
 CODING_DIR = os.path.dirname(__file__)
-DATA_DIR = os.path.join(CODING_DIR, 'data_labor')
-OUTPUT_TEAMS = os.path.join(CODING_DIR, 'teams_labor.csv')
-OUTPUT_HISTORY = os.path.join(CODING_DIR, 'match_history.csv')
 FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
 
 
-def main():
-    print("Loading data...")
-    teams, rev_fixes = init_teams(DATA_DIR)
-    results = load_rounds(DATA_DIR, extra_fixes=rev_fixes)
+def run_season(season: str):
+    cfg = SEASONS[season]
+    data_dir = os.path.join(CODING_DIR, cfg['data_dir'])
+    output_teams = os.path.join(CODING_DIR, cfg['teams_file'])
+    output_history = os.path.join(CODING_DIR, cfg['history_file'])
+
+    print(f"Loading {season} data...")
+    teams, rev_fixes = init_teams(data_dir, cfg['tournaments'], cfg['name_fixes'], cfg['teams_from_rounds'])
+    results = load_rounds(data_dir, cfg['tournaments'], cfg['name_fixes'], rev_fixes)
 
     print(f"Running pipeline ({len(results)} rounds, 5 passes)...")
     env = TrueSkill()
     final_teams, history = run_pipeline(teams, results, n_passes=5, env=env)
 
-    final_teams.to_csv(OUTPUT_TEAMS, index=False)
-    history.to_csv(OUTPUT_HISTORY, index=False)
+    final_teams.to_csv(output_teams, index=False)
+    history.to_csv(output_history, index=False)
 
     # Keep frontend data in sync
     os.makedirs(FRONTEND_DATA, exist_ok=True)
-    shutil.copy(OUTPUT_TEAMS, FRONTEND_DATA)
-    shutil.copy(OUTPUT_HISTORY, FRONTEND_DATA)
+    shutil.copy(output_teams, FRONTEND_DATA)
+    shutil.copy(output_history, FRONTEND_DATA)
 
     print(f"\n{len(final_teams)} teams ranked. Top 5:")
     print(final_teams[['Team', 'Mu', 'Conservative']].head().to_string(index=False))
+
+
+def main():
+    seasons = sys.argv[1:] or [CURRENT_SEASON]
+    if seasons == ['all']:
+        seasons = list(SEASONS)
+    unknown = [s for s in seasons if s not in SEASONS]
+    if unknown:
+        sys.exit(f"Unknown season(s): {', '.join(unknown)}. Choose from: {', '.join(SEASONS)}, all")
+    for season in seasons:
+        run_season(season)
 
 
 if __name__ == '__main__':
