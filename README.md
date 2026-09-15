@@ -47,7 +47,8 @@ cd frontend && npm run dev      # http://localhost:5173/elo-v2/
    - `<code>_<round>.csv`: one file per round, with `Aff`, `Neg` and `Win` columns. Rounds are `1`–`8`, then `dubs`, `octas`, `quarters`, `semis`, `finals`.
 2. Append `<code>` to `SEASONS[<season>]['tournaments']` in `coding/pipeline.py`. Keep the list in chronological order, because it sets the order rounds are rated in.
 3. If the code is new, add a display name to `TOURNAMENT_NAMES` in `frontend/src/utils/data.js`.
-4. Run `python coding/run.py`, then commit the data files.
+4. Run `python coding/validate.py <season> <code>`. Fix any `ERROR` lines, and read the `WARN` lines: they flag misnumbered round files, missing entries, and teams that can't be tied to their debaters.
+5. Run `python coding/run.py`, then commit the data files.
 
 ### Team names
 

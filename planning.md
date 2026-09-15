@@ -15,6 +15,9 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
   - **Labor limit:** NU (no entries, no speaker names) leaves 12 codes rated by code.
 - **Kentucky (labor) re-export:** `uk_1`–`uk_6` were re-exported with speaker points, because the old files had merged Dartmouth GH and HG.
 - **Manual fixes:** `Emory CrTa` → `Emory CT` (Cross & Taylor), plus the older labor `name_fixes`, for codes with no names attached.
+- **Validation:** `coding/validate.py` runs before rating a tournament.
+  - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped.
+  - **Calibration:** every labor and arms tournament passes. It caught the merged Dartmouth GH in the old Kentucky files.
 
 ## Evidence (2026-09-15, labor + Northwestern arms)
 
@@ -72,10 +75,6 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 - **Proposal:** use them as a weak margin signal, only if the harness shows a gain.
 
 ## Priority 3: data hygiene and process
-
-### 11. Validation script (`coding/validate.py`, in progress)
-- **Checks:** config (unlisted prefixes, missing entries file, missing `TOURNAMENT_NAMES`); names missing from entries, with similar codes; byes and closeouts; duplicate teams in a round; missing prelim files; even-round side flips (≥90%) and record gaps (≤1.5 from R3), skipped for fields under 16; bracket advancement; ballot counts vs result.
-- **Calibration:** clean on every labor and arms tournament, apart from the round robins (now skipped). It flags the duplicate `Dartmouth GH` in UK R1–6.
 
 ### 12. Remaining cleanups
 - **Eligibility:** once σ is honest, consider ranking by conservative score or showing σ bands, rather than filtering by tournament count.
