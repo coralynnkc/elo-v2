@@ -184,8 +184,8 @@ def _apply_round(
         if aff_name not in team_idx.index or neg_name not in team_idx.index:
             continue
 
-        # Skip walkovers: same-school matchups where one team gets a bye
-        if aff_name.rsplit(' ', 1)[0] == neg_name.rsplit(' ', 1)[0]:
+        # Skip rows with no debated result, e.g. closeouts ("EMORY GS ADVANCES") and byes
+        if win not in ('Aff', 'Neg'):
             continue
 
         a = team_idx.loc[aff_name]
@@ -199,15 +199,10 @@ def _apply_round(
         if win == 'Aff':
             new_aff, new_neg = rate_1vs1(r_aff, r_neg, env=env)
             new_aff_side, new_neg_side = rate_1vs1(r_aff_side, r_neg_side, env=env)
-            inc = 1
-        elif win == 'Neg':
+        else:
             new_neg, new_aff = rate_1vs1(r_neg, r_aff, env=env)
             new_neg_side, new_aff_side = rate_1vs1(r_neg_side, r_aff_side, env=env)
-            inc = 1
-        else:
-            new_aff, new_neg = r_aff, r_neg
-            new_aff_side, new_neg_side = r_aff_side, r_neg_side
-            inc = 0
+        inc = 1
 
         out_aff.append({
             'Team': aff_name,
