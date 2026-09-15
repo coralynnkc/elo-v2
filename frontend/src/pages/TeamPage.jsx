@@ -88,6 +88,11 @@ export default function TeamPage() {
         </div>
       </div>
 
+      <p className="subtitle">
+        Before and After show the rating at the time, from earlier rounds only. The rating
+        above uses the whole season, so it can differ from the last After.
+      </p>
+
       <div className="table-wrap">
         <table className="match-table">
           <thead>

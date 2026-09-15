@@ -13,8 +13,10 @@ The site has a sortable leaderboard for each season and a page per team with its
 
 ## How ratings work
 
-Each team has a TrueSkill rating: a skill estimate **μ** (starting at 25) and an uncertainty **σ** (starting at 25/3). Each round is a 1-vs-1 result that moves the winner up and the loser down. Upsets move ratings more, and so does a large σ.
+Each team has a skill estimate **μ** (starting at 25) and an uncertainty **σ** (starting at 25/3). Each round is a 1-vs-1 result: winning moves a team's rating up and losing moves it down. Upsets move ratings more, and so does a large σ.
 
+- **Leaderboard ratings:** [TrueSkill Through Time](https://github.com/glandfried/TrueSkillThroughTime.py), fit over the whole season. Each rating uses all of a team's results, earlier and later, and skill can drift a little between tournaments.
+- **Match history:** a single chronological TrueSkill pass. Each round's before/after rating uses only the results before it, so the history shows what that round did at the time.
 - **Leaderboard order:** by μ.
 - **Conservative score:** μ − 3σ, a lower bound that penalizes teams with few rounds.
 - **Eligibility:** a team needs at least 2 tournaments to be ranked. Until a season has 2 tournaments, every team is shown and the site marks the rankings as provisional.
@@ -24,7 +26,7 @@ Known limitations and planned methodology changes are tracked in [`planning.md`]
 ## Setup
 
 ```bash
-pip install pandas trueskill
+pip install -r requirements.txt
 cd frontend && npm install
 ```
 
@@ -51,11 +53,12 @@ cd frontend && npm run dev      # http://localhost:5173/elo-v2/
 
 ### Team names
 
-Tabroom team codes aren't always consistent, so the pipeline normalizes them:
+A team is a debater partnership, not a Tabroom code. If a debater changes partners, the new partnership is a new team.
 
-- **Suffixes:** ` - ONLINE` and ` - HYBRID` are stripped.
-- **Reversed initials:** codes that differ only by swapped final initials (`Baylor PM` / `Baylor MP`) are merged. To keep a real pair of different teams apart, add them to `REVERSED_INITIALS_EXCEPTIONS`.
-- **Other fixes:** anything else goes in that season's `name_fixes` in `SEASONS`.
+- **Suffixes:** ` - ONLINE` and ` - HYBRID` are stripped from codes.
+- **Debaters:** each code is matched to surnames using that tournament's entries file, then the speaker names in the points column. Failing that, the code gets the partnership seen under it (with initials in either order) at the nearest tournament.
+- **Display name:** the code the team used most. When two partnerships share a code, surnames are appended: `Kansas BP (Bauman/Persson)`.
+- **Other fixes:** codes that can't be matched to debaters go in that season's `name_fixes` in `SEASONS`. `python coding/run.py` lists them.
 
 ## Deploying
 
