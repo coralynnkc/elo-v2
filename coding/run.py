@@ -20,7 +20,7 @@ def run_season(season: str):
     results = load_rounds(data_dir, cfg['tournaments'], cfg['name_fixes'], rev_fixes)
 
     print(f"Running pipeline ({len(results)} rounds, 5 passes)...")
-    env = TrueSkill()
+    env = TrueSkill(draw_probability=0)  # debate rounds can't be drawn
     final_teams, history = run_pipeline(teams, results, n_passes=5, env=env)
 
     final_teams.to_csv(output_teams, index=False)
