@@ -29,12 +29,13 @@ SEASONS = {
         'data_dir': 'data_labor',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt'],
         'name_fixes': {
+            'Emory CrTa': 'Emory CT',  # Northwestern code for Cross & Taylor
             'Houston MH': 'Houston HM',
             'Macalester HK': 'Macalester KH',
             'Southern California MB': 'Southern California BM',
             'Wichita State MG': 'Wichita State GM',
         },
-        'teams_from_rounds': False,
+        'teams_from_rounds': True,
         'teams_file': 'teams_labor.csv',
         'history_file': 'match_history.csv',
     },
