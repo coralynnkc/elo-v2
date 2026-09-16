@@ -36,6 +36,8 @@ SPLIT_BALLOTS = False
 # Skill points of uncertainty added to a partnership seeded from a previous season,
 # covering the off-season and the fact that a new partnership is not its debaters' sum
 PRIOR_INFLATION = 4.0
+# The same gap on the per-debater scale, so two debaters' variances sum to PRIOR_INFLATION^2
+DEBATER_INFLATION = PRIOR_INFLATION / math.sqrt(2)
 
 # Tabroom suffixes stripped from team codes in every season
 SUFFIX_FIXES = {
@@ -52,8 +54,17 @@ SUFFIX_FIXES = {
 #                can't be tied to its debaters (no speaker names or entries) and differs
 #                from the code used elsewhere.
 SEASONS = {
+    'energy': {
+        'data_dir': 'data_energy',
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'georgetown',
+                        'dartmouthrr', 'texas'],
+        'name_fixes': {},
+        'teams_file': 'teams_energy.csv',
+        'history_file': 'match_history_energy.csv',
+    },
     'labor': {
         'data_dir': 'data_labor',
+        'prior_season': 'energy',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt'],
         'name_fixes': {
             'Emory CrTa': 'Emory CT',  # Northwestern code for Cross & Taylor
@@ -78,7 +89,8 @@ SEASONS = {
 CURRENT_SEASON = 'arms'
 
 # Elim round sort order (prelim numbers sort before these automatically)
-_ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103, 'finals': 104}
+_ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103,
+               'semis_2': 104, 'finals': 105}  # semis_2: Harvard's third-place debate
 
 # Teams must appear in this many tournaments to be ranked (capped at the number loaded)
 MIN_TOURNAMENTS = 2
@@ -494,6 +506,7 @@ def fit_debaters(
     results: dict[str, pd.DataFrame],
     gamma: float = DEBATER_GAMMA,
     split_ballots: bool = False,
+    priors: dict[str, ttt.Gaussian] | None = None,
 ) -> dict[str, ttt.Gaussian]:
     """Rate individual debaters over a season, so their skill can be carried into the
     next one even though their partnership won't survive it.
@@ -501,6 +514,9 @@ def fit_debaters(
     Same TTT fit as fit_through_time, but each side is a two-player team, so the model
     splits the credit between partners. Matches where either side's debaters are unknown
     (labor's 12 code-only teams) are left out, as are debaters flagged ambiguous.
+
+    `priors` (from carry_debaters) starts a debater where the previous season left them,
+    so ratings chain along energy -> labor -> arms rather than restarting each year.
     """
     keys = debater_keys(teams)
     ambiguous = _ambiguous_debaters(keys, results)
@@ -517,8 +533,12 @@ def fit_debaters(
 
     if not composition:
         return {}
+    players = {
+        debater: ttt.Player(ttt.Gaussian(p.mu, p.sigma), DEBATER_BETA, gamma)
+        for debater, p in (priors or {}).items()
+    }
     history = ttt.History(
-        composition, outcomes, times,
+        composition, outcomes, times, players,
         mu=DEBATER_MU, sigma=DEBATER_SIGMA, beta=DEBATER_BETA, gamma=gamma,
     )
     history.convergence(epsilon=TTT_EPSILON, iterations=TTT_ITERATIONS, verbose=False)
@@ -527,6 +547,32 @@ def fit_debaters(
         for debater, curve in history.learning_curves().items()
         if debater not in ambiguous
     }
+
+
+def carry_debaters(
+    debater_fit: dict[str, ttt.Gaussian],
+    inflation: float = DEBATER_INFLATION,
+) -> dict[str, ttt.Gaussian]:
+    """Widen a season's debater ratings so they can prime the next season's fit."""
+    return {
+        debater: ttt.Gaussian(r.mu, math.sqrt(r.sigma ** 2 + inflation ** 2))
+        for debater, r in debater_fit.items()
+    }
+
+
+def season_debaters(season: str, load, cache: dict | None = None) -> dict[str, ttt.Gaussian]:
+    """Debater ratings for a season, chained back through its prior_season.
+
+    `load(season)` returns that season's (teams, results); run.py and evaluate.py each
+    pass their own, so the recursion lives in one place. energy -> labor -> arms carries
+    a debater's history the whole way rather than restarting each year.
+    """
+    cache = {} if cache is None else cache
+    if season not in cache:
+        prior = SEASONS[season].get('prior_season')
+        priors = carry_debaters(season_debaters(prior, load, cache)) if prior else None
+        cache[season] = fit_debaters(*load(season), priors=priors)
+    return cache[season]
 
 
 def seed_priors(

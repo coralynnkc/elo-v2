@@ -2,10 +2,22 @@
 import os
 import shutil
 import sys
-from pipeline import CURRENT_SEASON, SEASONS, fit_debaters, load_season, run_pipeline, seed_priors
+from pipeline import (CURRENT_SEASON, SEASONS, load_season, run_pipeline, season_debaters,
+                      seed_priors)
 
 CODING_DIR = os.path.dirname(__file__)
 FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
+
+
+_DEBATERS = {}   # cached so labor is fitted once, for its own run and for arms
+
+
+def load(season: str):
+    cfg = SEASONS[season]
+    teams, results, _ = load_season(
+        os.path.join(CODING_DIR, cfg['data_dir']), cfg['tournaments'], cfg['name_fixes'],
+    )
+    return teams, results
 
 
 def run_season(season: str):
@@ -21,13 +33,8 @@ def run_season(season: str):
 
     priors = None
     if (prior_season := cfg.get('prior_season')):
-        prior_cfg = SEASONS[prior_season]
         print(f"Seeding from {prior_season}...")
-        prior_teams, prior_results, _ = load_season(
-            os.path.join(CODING_DIR, prior_cfg['data_dir']),
-            prior_cfg['tournaments'], prior_cfg['name_fixes'],
-        )
-        priors = seed_priors(teams, fit_debaters(prior_teams, prior_results))
+        priors = seed_priors(teams, season_debaters(prior_season, load, _DEBATERS))
         print(f"  {len(priors)} of {len(teams)} teams start from last season's debaters")
 
     print(f"Rating {len(results)} rounds...")

@@ -15,6 +15,10 @@ from pipeline import CURRENT_SEASON, SEASONS, _ELIM_ORDER, load_season
 CODING_DIR = os.path.dirname(__file__)
 DATA_JS = os.path.join(CODING_DIR, '..', 'frontend', 'src', 'utils', 'data.js')
 
+# Rounds that sit outside the elimination bracket: their teams already lost, so they
+# neither advance nor knock anyone out (Harvard's third-place debate)
+CONSOLATION_ROUNDS = {'semis_2'}
+
 # Round robins have fixed schedules, so the side and record checks below don't apply
 MIN_POWER_MATCHED_FIELD = 16
 # Even prelims are side-flipped from the round before, so nearly every team should switch
@@ -112,7 +116,9 @@ def check_prelim_order(tournament: str, rounds: dict, report: Report):
 
 
 def check_bracket(tournament: str, rounds: dict, report: Report):
-    elims = [label for label in _ELIM_ORDER if f'{tournament}_{label}' in rounds]
+    elims = [label for label in _ELIM_ORDER
+             if f'{tournament}_{label}' in rounds and label not in CONSOLATION_ROUNDS]
+
     for prev, cur in zip(elims, elims[1:]):
         p = rounds[f'{tournament}_{prev}'].dropna(subset=['Aff', 'Neg'])
         c = _teams_in(rounds[f'{tournament}_{cur}'])
@@ -123,10 +129,37 @@ def check_bracket(tournament: str, rounds: dict, report: Report):
                 losers.add(row.Neg if row.Win == 'Aff' else row.Aff)
         for team in sorted(c & losers):
             report.error(f'{cur}: {team} lost in {prev} but debates again')
-        for team in sorted(winners - c):
+        missing = winners - c
+        # Closeouts and byes drop a team or two; losing a third of the winners means the
+        # round between these two wasn't exported
+        if winners and len(missing) * 3 > len(winners):
+            report.warn(f'{cur}: {len(missing)} of {len(winners)} {prev} winners never '
+                        f'appear again — a round between {prev} and {cur} looks missing')
+        for team in sorted(missing):
             report.info(f'{cur}: {team} won {prev} but has no {cur} row (closeout or elimination bye in the export)')
         for team in sorted(c - _teams_in(p)):
             report.info(f'{cur}: {team} did not debate {prev} (bye or closeout)')
+
+    check_consolation(tournament, rounds, elims, report)
+
+
+def check_consolation(tournament: str, rounds: dict, elims: list[str], report: Report):
+    """A consolation round is debated by teams that just lost, so its field should be
+    exactly that — not winners who still belong in the bracket."""
+    for label in CONSOLATION_ROUNDS:
+        if f'{tournament}_{label}' not in rounds:
+            continue
+        order = list(_ELIM_ORDER)
+        prev = next((e for e in reversed(elims) if order.index(e) < order.index(label)), None)
+        if prev is None:
+            continue
+        p = rounds[f'{tournament}_{prev}'].dropna(subset=['Aff', 'Neg'])
+        losers = {row.Neg if row.Win == 'Aff' else row.Aff
+                  for row in p.itertuples() if row.Win in ('Aff', 'Neg')}
+        for team in sorted(_teams_in(rounds[f'{tournament}_{label}']) - losers):
+            report.error(f'{label}: {team} did not lose in {prev}, so it does not belong '
+                         f'in a consolation round')
+        report.info(f'{label}: consolation round between {prev} losers, not part of the bracket')
 
 
 def check_ballots(season: str, tournament: str, report: Report):
