@@ -1,4 +1,5 @@
 import glob
+import math
 import os
 import re
 import unicodedata
@@ -17,6 +18,18 @@ GAMMA = SIGMA / 100  # TrueSkill's default tau, applied here once per tournament
 TTT_ITERATIONS = 100
 TTT_EPSILON = 1e-4
 
+# Per-debater scale, used only to carry ratings across seasons. A team's performance is
+# the sum of its two debaters', so halving mu and dividing the spreads by sqrt(2) puts a
+# rated partnership back on the team scale above.
+DEBATER_MU = MU / 2
+DEBATER_SIGMA = SIGMA / math.sqrt(2)
+DEBATER_BETA = BETA / math.sqrt(2)
+DEBATER_GAMMA = GAMMA / math.sqrt(2)
+
+# Skill points of uncertainty added to a partnership seeded from a previous season,
+# covering the off-season and the fact that a new partnership is not its debaters' sum
+PRIOR_INFLATION = 4.0
+
 # Tabroom suffixes stripped from team codes in every season
 SUFFIX_FIXES = {
     ' - ONLINE': '',
@@ -27,6 +40,7 @@ SUFFIX_FIXES = {
 #   tournaments: chronological order of tournament codes — controls round ordering.
 #                Add new codes here in the order they were held; files with other
 #                prefixes are ignored.
+#   prior_season: season whose debater ratings seed this one's teams (optional).
 #   name_fixes:  code fixes (wrong -> right) for that season only. Only needed when a code
 #                can't be tied to its debaters (no speaker names or entries) and differs
 #                from the code used elsewhere.
@@ -47,6 +61,7 @@ SEASONS = {
     'arms': {
         'data_dir': 'data_arms',
         'tournaments': ['nu'],
+        'prior_season': 'labor',
         'name_fixes': {},
         'teams_file': 'teams_arms.csv',
         'history_file': 'match_history_arms.csv',
@@ -361,6 +376,7 @@ def fit_through_time(
     mu: float = MU,
     sigma: float = SIGMA,
     beta: float = BETA,
+    priors: dict[str, ttt.Gaussian] | None = None,
 ) -> dict[str, ttt.Gaussian]:
     """Fit TrueSkill Through Time over a season, one time step per tournament.
 
@@ -368,7 +384,8 @@ def fit_through_time(
     on round order and its uncertainty isn't shrunk by replaying results.
 
     The prior and noise parameters are arguments so evaluate.py can tune them; the
-    pipeline always uses the module defaults.
+    pipeline always uses the module defaults. `priors` overrides the flat starting
+    rating for named teams, e.g. with seed_priors from the previous season.
 
     Returns each team's rating as of the last tournament it attended.
     """
@@ -382,15 +399,117 @@ def fit_through_time(
                 outcomes.append([1, 0] if row.Win == 'Aff' else [0, 1])  # higher score wins
                 times.append(t_idx)
 
-    history = ttt.History(composition, outcomes, times, mu=mu, sigma=sigma, beta=beta, gamma=gamma)
+    players = {
+        team: ttt.Player(ttt.Gaussian(prior.mu, prior.sigma), beta, gamma)
+        for team, prior in (priors or {}).items()
+    }
+    history = ttt.History(composition, outcomes, times, players,
+                          mu=mu, sigma=sigma, beta=beta, gamma=gamma)
     history.convergence(epsilon=TTT_EPSILON, iterations=TTT_ITERATIONS, verbose=False)
     return {team: curve[-1][1] for team, curve in history.learning_curves().items()}
+
+
+def _school(team: str) -> str:
+    """'Kansas BP (Bauman/Persson)' -> 'Kansas'."""
+    return re.sub(r'\s*\(.*\)$', '', team).rpartition(' ')[0]
+
+
+def debater_keys(teams: pd.DataFrame) -> dict[str, list[str]]:
+    """Team display name -> one key per debater, 'Emory/wang'.
+
+    Keyed by school as well as surname: across two seasons, surname alone merges eight
+    different Smiths, while school and surname together leave only a handful of clashes
+    (see _ambiguous_debaters). Teams with no debater names are absent.
+    """
+    return {
+        team: [f'{_school(team)}/{_normalize_surname(n)}' for n in debaters.split(' & ')]
+        for team, debaters in zip(teams['Team'], teams['Debaters'])
+        if debaters
+    }
+
+
+def _ambiguous_debaters(keys: dict[str, list[str]], results: dict[str, pd.DataFrame]) -> set[str]:
+    """Keys that competed on two teams at the same tournament, so they are really two
+    people who share a school and a surname (labor has 4, arms 3). Nobody debates twice
+    in one tournament, but changing partners between tournaments is ordinary."""
+    ambiguous = set()
+    for name, rd in results.items():
+        teams_by_key = defaultdict(set)
+        for row in rd.itertuples(index=False):
+            for team in (row.Aff, row.Neg):
+                for key in keys.get(team, ()):
+                    teams_by_key[key].add(team)
+        ambiguous |= {key for key, teams in teams_by_key.items() if len(teams) > 1}
+    return ambiguous
+
+
+def fit_debaters(
+    teams: pd.DataFrame,
+    results: dict[str, pd.DataFrame],
+    gamma: float = DEBATER_GAMMA,
+) -> dict[str, ttt.Gaussian]:
+    """Rate individual debaters over a season, so their skill can be carried into the
+    next one even though their partnership won't survive it.
+
+    Same TTT fit as fit_through_time, but each side is a two-player team, so the model
+    splits the credit between partners. Matches where either side's debaters are unknown
+    (labor's 12 code-only teams) are left out, as are debaters flagged ambiguous.
+    """
+    keys = debater_keys(teams)
+    ambiguous = _ambiguous_debaters(keys, results)
+
+    tournaments = list(dict.fromkeys(name.partition('_')[0] for name in results))
+    composition, outcomes, times = [], [], []
+    for name, rd in results.items():
+        t_idx = tournaments.index(name.partition('_')[0])
+        for row in rd.itertuples(index=False):
+            if row.Win in ('Aff', 'Neg') and row.Aff in keys and row.Neg in keys:
+                composition.append([keys[row.Aff], keys[row.Neg]])
+                outcomes.append([1, 0] if row.Win == 'Aff' else [0, 1])
+                times.append(t_idx)
+
+    if not composition:
+        return {}
+    history = ttt.History(
+        composition, outcomes, times,
+        mu=DEBATER_MU, sigma=DEBATER_SIGMA, beta=DEBATER_BETA, gamma=gamma,
+    )
+    history.convergence(epsilon=TTT_EPSILON, iterations=TTT_ITERATIONS, verbose=False)
+    return {
+        debater: curve[-1][1]
+        for debater, curve in history.learning_curves().items()
+        if debater not in ambiguous
+    }
+
+
+def seed_priors(
+    teams: pd.DataFrame,
+    debater_fit: dict[str, ttt.Gaussian],
+    inflation: float = PRIOR_INFLATION,
+) -> dict[str, ttt.Gaussian]:
+    """Team display name -> starting rating, built from last season's debater ratings.
+
+    A partnership's skill is its debaters' sum, so the means add and the variances add.
+    A debater who didn't compete last season contributes the default half-team prior, so
+    a returning debater with a novice partner still starts above a wholly unknown team.
+    Teams with no rated debater at all are left out and keep the flat prior.
+    """
+    priors = {}
+    for team, keys in debater_keys(teams).items():
+        if not any(key in debater_fit for key in keys):
+            continue
+        rated = [debater_fit.get(key) for key in keys]
+        mu = sum(r.mu if r else DEBATER_MU for r in rated)
+        variance = sum(r.sigma ** 2 if r else DEBATER_SIGMA ** 2 for r in rated)
+        priors[team] = ttt.Gaussian(mu, math.sqrt(variance + inflation ** 2))
+    return priors
 
 
 def run_pipeline(
     teams: pd.DataFrame,
     results: dict[str, pd.DataFrame],
     env: TrueSkill = None,
+    priors: dict[str, ttt.Gaussian] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Rate a season.
@@ -399,16 +518,28 @@ def run_pipeline(
     pass, so each round's before/after uses only earlier results.
     Leaderboard Mu/Sigma: TrueSkill Through Time over the whole season.
 
+    `priors` (from seed_priors) starts named teams above or below the flat 25, so a
+    returning partnership isn't treated as unknown. Both the forward pass and the TTT
+    fit use them, so a seeded team's first "Before" in the history is its seed.
+
     Returns (teams_df, match_history_df).
     """
     env = env or TrueSkill(mu=MU, sigma=SIGMA, beta=BETA, tau=GAMMA, draw_probability=0)
+
+    if priors:
+        seed_mu = teams['Team'].map({t: p.mu for t, p in priors.items()})
+        seed_sigma = teams['Team'].map({t: p.sigma for t, p in priors.items()})
+        for column in ('Mu', 'Aff_Mu', 'Neg_Mu'):
+            teams[column] = seed_mu.fillna(teams[column])
+        for column in ('Sigma', 'Aff_Sigma', 'Neg_Sigma'):
+            teams[column] = seed_sigma.fillna(teams[column])
 
     all_history = []
     for name in results:
         teams, history = _apply_round(teams, results[name], env, track_history=True, round_name=name)
         all_history.extend(history)
 
-    fit = fit_through_time(results)
+    fit = fit_through_time(results, priors=priors)
     teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
     teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)
     teams['Conservative'] = teams['Mu'] - 3 * teams['Sigma']

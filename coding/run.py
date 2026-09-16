@@ -2,7 +2,7 @@
 import os
 import shutil
 import sys
-from pipeline import CURRENT_SEASON, SEASONS, load_season, run_pipeline
+from pipeline import CURRENT_SEASON, SEASONS, fit_debaters, load_season, run_pipeline, seed_priors
 
 CODING_DIR = os.path.dirname(__file__)
 FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
@@ -19,8 +19,19 @@ def run_season(season: str):
     if unresolved:
         print(f"  {len(unresolved)} code(s) not tied to debaters, rated by code: {', '.join(unresolved)}")
 
+    priors = None
+    if (prior_season := cfg.get('prior_season')):
+        prior_cfg = SEASONS[prior_season]
+        print(f"Seeding from {prior_season}...")
+        prior_teams, prior_results, _ = load_season(
+            os.path.join(CODING_DIR, prior_cfg['data_dir']),
+            prior_cfg['tournaments'], prior_cfg['name_fixes'],
+        )
+        priors = seed_priors(teams, fit_debaters(prior_teams, prior_results))
+        print(f"  {len(priors)} of {len(teams)} teams start from last season's debaters")
+
     print(f"Rating {len(results)} rounds...")
-    final_teams, history = run_pipeline(teams, results)
+    final_teams, history = run_pipeline(teams, results, priors=priors)
 
     final_teams.to_csv(output_teams, index=False)
     history.to_csv(output_history, index=False)
