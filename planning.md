@@ -20,13 +20,18 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 - **Manual fixes:** `Emory CrTa` → `Emory CT` (Cross & Taylor), plus the older labor `name_fixes`, for codes with no names attached.
 - **Evaluation:** `coding/evaluate.py` scores the model walk-forward — for each tournament, fit on the ones before it and predict it. Reports accuracy, log loss and Brier, split by prelim/elim and by whether both teams were already rated, against coin-flip and aff-base-rate baselines. `--sweep beta,gamma,aff-offset` scans a parameter; `--model forward` scores the history pass instead.
   - **Why walk-forward:** the 80.7% from the old 5-pass replay was not a forecast — those ratings had already seen the results.
+- **Seasons:** energy (2024–25) → labor (2025–26) → arms (2026–27), chained by `prior_season`.
+  - **Energy order:** `nu, kentuckyrr, uk, harvard, wake, georgetown, dartmouthrr, texas`, confirmed by Cora. Seriation on 137 team codes (each code should occupy a contiguous run of tournaments) independently pins `nu → uk → wake → texas`; it can't fix the direction or place Georgetown and Harvard.
+  - **Energy quirks:** everything is old-format, so no ballot margins and no speaker names outside the two round robins, whose exports are school-only and were renamed from their Tabroom IDs. `texas` has no entries file. Harvard ran a third-place debate between its semis losers, kept as `semis_2`.
 - **Cross-season priors:** a season with a `prior_season` in `SEASONS` seeds its teams from that season's debater ratings. `fit_debaters` runs the same TTT fit with each side as a two-player team, so partners split the credit; `seed_priors` adds a new partnership's two debaters (means add, variances add) plus `PRIOR_INFLATION` = 4 skill points. Arms is seeded from labor.
   - **Debater key:** school and normalized surname. Surname alone merges eight different Smiths; school and surname leave 4 clashes in labor and 3 in arms, which `_ambiguous_debaters` finds automatically (a key on two teams at one tournament must be two people) and drops.
   - **Coverage:** 107 of 135 arms teams. A team with one returning debater is seeded from that debater plus a default half-team prior, so it still starts above a wholly unknown team.
   - **Where it applies:** both the forward pass and the TTT fit, so a seeded team's first history `Before` is its seed rather than 25.
+  - **Chaining:** `season_debaters` recurses through `prior_season`, so a debater's rating carries energy → labor → arms instead of restarting each year. `carry_debaters` widens it by `DEBATER_INFLATION` at each hop.
 - **Ballot margins:** `load_season` parses the panel split from `Win` ("3-0 AFF") into `Ballots_Win`/`Ballots_Lose`. `round_matches(rd, split_ballots=True)` then rates a paneled round once per judge, so a 3-0 moves ratings further than a 2-1 with no tuned weighting. `SPLIT_BALLOTS` is **off** — see the evidence below; flip the constant once the early tournaments carry margins.
 - **Validation:** `coding/validate.py` runs before rating a tournament.
-  - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped.
+  - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped. A round is reported missing when more than a third of an elim round's winners never appear again — closeouts and byes drop one or two, not half the field.
+  - **Consolation rounds:** `CONSOLATION_ROUNDS` (`semis_2`) sit outside the bracket chain; their field is checked to be exactly the previous round's losers.
   - **Calibration:** every labor and arms tournament passes. It caught the merged Dartmouth GH in the old Kentucky files.
 
 ## Evidence (2026-09-15, labor + Northwestern arms)
@@ -71,6 +76,28 @@ Every team at a season's opener is a cold start, so without priors the model can
 
 ## Priority 2: model fit
 
+### Cross-season priors, second test: labor seeded from energy (2026-09-15)
+
+Adding energy gives the priors idea a much bigger test than arms' 556 matches — and unlike arms, labor has nine further tournaments to show downstream effects.
+
+**Labor's opener stops being a coin flip.** 463 matches at Northwestern, none of them previously scorable:
+
+| | Accuracy | Log loss |
+|---|---|---|
+| Seeded from energy | 70.7% | 0.5706 |
+| No priors | 50.0% | 0.6931 |
+
+**And the whole season improves,** on the identical 2783 matches that were scorable either way:
+
+| | Accuracy | Log loss |
+|---|---|---|
+| No priors | 71.6% | 0.5528 |
+| Seeded from energy | **73.2%** | **0.5372** |
+
+Every tournament improves except the 21-match Kentucky RR. The gains are largest where a team's own season record is still thin — `ada` −0.1055, `gt` −0.0306, `gonzaga` −0.0115 — and vanish by the NDT (−0.0003), where nine tournaments of current-season data have long since swamped the prior. That is exactly the shape a good prior should have.
+
+Energy's own walk-forward, with no season before it, is 70.7% / 0.5688 on 1878 matches.
+
 ### Ballot margins (2026-09-15)
 
 The margin is in the `Win` column, not just `Votes`: 397 of labor's 3264 rows and 27 of arms' 559 read "3-0 AFF" or "2-1 NEG".
@@ -110,7 +137,8 @@ That gap is +0.208, se 0.024, z = +8.7.
 
 ### 8. Carry priors across seasons — **done**
 - Shipped; see the evidence above. Shared surnames are handled by keying on school as well, and dropping the handful of keys that turn up on two teams at one tournament.
-- **Still open:** labor's 12 code-only teams contribute no debater ratings, and a debater who transfers schools (`Emory/Columbia AH`) loses their history.
+- **Confirmed twice:** arms from labor (+16.6 points of accuracy on the opener) and labor from energy (+23.2 on the opener, +1.6 across the whole season). See the evidence above.
+- **Still open:** labor's 12 code-only teams contribute no debater ratings, and a debater who transfers schools (`Emory/Columbia AH`) loses their history, since the key includes the school.
 
 ### 9. Speaker points (low priority)
 - **Data:** arms prelim files have points per debater.
