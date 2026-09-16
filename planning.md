@@ -20,6 +20,10 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 - **Manual fixes:** `Emory CrTa` → `Emory CT` (Cross & Taylor), plus the older labor `name_fixes`, for codes with no names attached.
 - **Evaluation:** `coding/evaluate.py` scores the model walk-forward — for each tournament, fit on the ones before it and predict it. Reports accuracy, log loss and Brier, split by prelim/elim and by whether both teams were already rated, against coin-flip and aff-base-rate baselines. `--sweep beta,gamma,aff-offset` scans a parameter; `--model forward` scores the history pass instead.
   - **Why walk-forward:** the 80.7% from the old 5-pass replay was not a forecast — those ratings had already seen the results.
+- **Cross-season priors:** a season with a `prior_season` in `SEASONS` seeds its teams from that season's debater ratings. `fit_debaters` runs the same TTT fit with each side as a two-player team, so partners split the credit; `seed_priors` adds a new partnership's two debaters (means add, variances add) plus `PRIOR_INFLATION` = 4 skill points. Arms is seeded from labor.
+  - **Debater key:** school and normalized surname. Surname alone merges eight different Smiths; school and surname leave 4 clashes in labor and 3 in arms, which `_ambiguous_debaters` finds automatically (a key on two teams at one tournament must be two people) and drops.
+  - **Coverage:** 107 of 135 arms teams. A team with one returning debater is seeded from that debater plus a default half-team prior, so it still starts above a wholly unknown team.
+  - **Where it applies:** both the forward pass and the TTT fit, so a seeded team's first history `Before` is its seed rather than 25.
 - **Validation:** `coding/validate.py` runs before rating a tournament.
   - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped.
   - **Calibration:** every labor and arms tournament passes. It caught the merged Dartmouth GH in the old Kentucky files.
@@ -51,6 +55,19 @@ Out-of-sample, so these are lower than the replay numbers above and directly com
 - **γ:** completely flat from 0 to 8× the default — one season is too short for drift to show. The current 25/300 is as good as turning it off.
 - **Global aff offset:** best at −0.25 to −0.5 skill points (a slight neg edge), worth 0.0008 nats. Noise.
 
+### Cross-season priors, scored on the first arms tournament
+
+Every team at a season's opener is a cold start, so without priors the model can only guess. `evaluate.py arms --priors labor` scores exactly that, on 556 matches:
+
+| Setting | Accuracy | Log loss | Brier |
+|---|---|---|---|
+| Seeded from labor debaters | 66.6% | 0.6051 | 0.2079 |
+| No priors (coin flip) | 50.0% | 0.6931 | 0.2500 |
+
+- **The largest gain so far**, and the only change that has beaten flat priors by more than noise.
+- **Inflation:** swept 1–12; 4 is the minimum, and the curve is shallow between 2 and 6.
+- **Effect on the site:** arms median σ 3.24 → 2.97, Spearman 0.99 against the unseeded leaderboard, the top 6 unchanged. Labor is byte-identical, since it has no prior season.
+
 ## Priority 2: model fit
 
 ### 5. Model side advantage directly — **rejected as a global offset**
@@ -64,17 +81,17 @@ Out-of-sample, so these are lower than the replay numbers above and directly com
 
 ### 7. Dynamics
 - **Within a season:** settled — γ makes no measurable difference over one season (see above). Keep 25/300.
-- **Between seasons:** inflate σ explicitly. Untested until a second season can be chained; needs #8.
+- **Between seasons:** done as part of #8 — `PRIOR_INFLATION` = 4 skill points, tuned by sweep.
 
-### 8. Carry priors across seasons
-- **Problem:** every arms team starts at μ = 25, σ = 8.33.
-- **Proposal:** seed each partnership from its debaters' prior-season ratings, with σ inflated. `Debaters` provides the surnames, but individuals are keyed by surname only, so shared surnames (Shah, Smith) need care.
+### 8. Carry priors across seasons — **done**
+- Shipped; see the evidence above. Shared surnames are handled by keying on school as well, and dropping the handful of keys that turn up on two teams at one tournament.
+- **Still open:** labor's 12 code-only teams contribute no debater ratings, and a debater who transfers schools (`Emory/Columbia AH`) loses their history.
 
 ### 9. Speaker points (low priority)
 - **Data:** arms prelim files have points per debater.
 - **Proposal:** use them as a weak margin signal, only if the harness shows a gain.
 
-**Bar for #6, #8 and #9:** beat 0.5528 log loss on labor walk-forward. Given how flat β and γ turned out, only changes that add *information* (ballot margins, prior-season priors, speaker points) are likely to move it.
+**Bar for #6 and #9:** beat 0.5528 log loss on labor walk-forward. Given how flat β and γ turned out, only changes that add *information* (ballot margins, prior-season priors, speaker points) are likely to move it.
 
 ## Priority 3: data hygiene and process
 
