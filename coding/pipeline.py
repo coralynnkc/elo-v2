@@ -26,6 +26,13 @@ DEBATER_SIGMA = SIGMA / math.sqrt(2)
 DEBATER_BETA = BETA / math.sqrt(2)
 DEBATER_GAMMA = GAMMA / math.sqrt(2)
 
+# Rate a paneled round once per judge, so a 3-0 moves ratings further than a 2-1.
+# Off by default: only 12% of labor rounds carry a ballot count, and all of them fall at
+# the end of the season, so the harness measures a gain of 0.001 nats against a 10% drop
+# in published sigma. Worth revisiting once the early tournaments are re-exported —
+# evaluate.py --ballots scores it.
+SPLIT_BALLOTS = False
+
 # Skill points of uncertainty added to a partnership seeded from a previous season,
 # covering the off-season and the fact that a new partnership is not its debaters' sum
 PRIOR_INFLATION = 4.0
@@ -178,6 +185,9 @@ def load_season(
             out[f'{side}_Speakers'] = df[points].map(_speaker_surnames) if points else None
         win = df['Win'].astype(str).str.strip().str.upper()
         out['Win'] = win.map(lambda x: 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
+        # Paneled rounds report the ballot count in Win ("3-0 AFF"); one-judge rounds don't
+        ballots = win.str.extract(r'(\d+)\s*-\s*(\d+)').astype('Int64')
+        out['Ballots_Win'], out['Ballots_Lose'] = ballots[0], ballots[1]
         rounds[name] = out
 
     # Where each partnership appeared under each code / initials signature this season
@@ -260,6 +270,8 @@ def load_season(
             'Aff': df['Aff_Key'].map(display),
             'Neg': df['Neg_Key'].map(display),
             'Win': df['Win'],
+            'Ballots_Win': df['Ballots_Win'],
+            'Ballots_Lose': df['Ballots_Lose'],
         })
 
     keys = sorted(display, key=display.get)
@@ -280,12 +292,18 @@ def _apply_round(
     env: TrueSkill,
     track_history: bool = False,
     round_name: str = '',
+    split_ballots: bool = False,
 ) -> tuple[pd.DataFrame, list[dict]]:
     """
     Apply TrueSkill updates for one round.
 
     All match ratings are read from the BEFORE state so matches within a round
     don't affect each other. Updates are merged back after all rows are processed.
+
+    With split_ballots, a paneled row is applied one judge at a time, each ballot
+    building on the last, so a 3-0 moves further than a 2-1. A team debates once per
+    round, so this still can't leak between rows. Round counts stay per round, not
+    per ballot.
     """
     team_idx = teams.set_index('Team')
     out_aff, out_neg, history = [], [], []
@@ -308,12 +326,15 @@ def _apply_round(
         r_aff_side = Rating(a['Aff_Mu'], a['Aff_Sigma'])
         r_neg_side = Rating(n['Neg_Mu'], n['Neg_Sigma'])
 
-        if win == 'Aff':
-            new_aff, new_neg = rate_1vs1(r_aff, r_neg, env=env)
-            new_aff_side, new_neg_side = rate_1vs1(r_aff_side, r_neg_side, env=env)
-        else:
-            new_neg, new_aff = rate_1vs1(r_neg, r_aff, env=env)
-            new_neg_side, new_aff_side = rate_1vs1(r_neg_side, r_aff_side, env=env)
+        new_aff, new_neg = r_aff, r_neg
+        new_aff_side, new_neg_side = r_aff_side, r_neg_side
+        for aff_won in _ballot_outcomes(row, split_ballots):
+            if aff_won:
+                new_aff, new_neg = rate_1vs1(new_aff, new_neg, env=env)
+                new_aff_side, new_neg_side = rate_1vs1(new_aff_side, new_neg_side, env=env)
+            else:
+                new_neg, new_aff = rate_1vs1(new_neg, new_aff, env=env)
+                new_neg_side, new_aff_side = rate_1vs1(new_neg_side, new_aff_side, env=env)
         inc = 1
 
         out_aff.append({
@@ -370,6 +391,31 @@ def _apply_round(
     return t, history
 
 
+def _ballot_outcomes(row, split_ballots: bool) -> list[bool]:
+    """The aff-won flags a decisive row contributes: one per judge when the panel split
+    is known and split_ballots is on, otherwise a single flag for the round."""
+    aff_won = row.Win == 'Aff'
+    won, lost = getattr(row, 'Ballots_Win', None), getattr(row, 'Ballots_Lose', None)
+    if not split_ballots or pd.isna(won) or pd.isna(lost):
+        return [aff_won]
+    return [aff_won] * int(won) + [not aff_won] * int(lost)
+
+
+def round_matches(rd: pd.DataFrame, split_ballots: bool = False):
+    """Yield (aff, neg, aff_won) for each decisive row of a round.
+
+    With split_ballots, a paneled round yields one match per judge — a 2-1 aff is two
+    aff wins and one neg win — so a unanimous decision moves ratings further than a
+    split one without any hand-tuned weighting. Rounds with no ballot count (one judge,
+    or an older export) yield a single match either way.
+    """
+    for row in rd.itertuples(index=False):
+        if row.Win not in ('Aff', 'Neg') or not isinstance(row.Aff, str) or not isinstance(row.Neg, str):
+            continue  # closeouts ("EMORY GS ADVANCES") and byes
+        for aff_won in _ballot_outcomes(row, split_ballots):
+            yield row.Aff, row.Neg, aff_won
+
+
 def fit_through_time(
     results: dict[str, pd.DataFrame],
     gamma: float = GAMMA,
@@ -377,6 +423,7 @@ def fit_through_time(
     sigma: float = SIGMA,
     beta: float = BETA,
     priors: dict[str, ttt.Gaussian] | None = None,
+    split_ballots: bool = False,
 ) -> dict[str, ttt.Gaussian]:
     """Fit TrueSkill Through Time over a season, one time step per tournament.
 
@@ -393,11 +440,10 @@ def fit_through_time(
     composition, outcomes, times = [], [], []
     for name, rd in results.items():
         t_idx = tournaments.index(name.partition('_')[0])
-        for row in rd.itertuples(index=False):
-            if row.Win in ('Aff', 'Neg') and isinstance(row.Aff, str) and isinstance(row.Neg, str):
-                composition.append([[row.Aff], [row.Neg]])
-                outcomes.append([1, 0] if row.Win == 'Aff' else [0, 1])  # higher score wins
-                times.append(t_idx)
+        for aff, neg, aff_won in round_matches(rd, split_ballots):
+            composition.append([[aff], [neg]])
+            outcomes.append([1, 0] if aff_won else [0, 1])  # higher score wins
+            times.append(t_idx)
 
     players = {
         team: ttt.Player(ttt.Gaussian(prior.mu, prior.sigma), beta, gamma)
@@ -447,6 +493,7 @@ def fit_debaters(
     teams: pd.DataFrame,
     results: dict[str, pd.DataFrame],
     gamma: float = DEBATER_GAMMA,
+    split_ballots: bool = False,
 ) -> dict[str, ttt.Gaussian]:
     """Rate individual debaters over a season, so their skill can be carried into the
     next one even though their partnership won't survive it.
@@ -462,10 +509,10 @@ def fit_debaters(
     composition, outcomes, times = [], [], []
     for name, rd in results.items():
         t_idx = tournaments.index(name.partition('_')[0])
-        for row in rd.itertuples(index=False):
-            if row.Win in ('Aff', 'Neg') and row.Aff in keys and row.Neg in keys:
-                composition.append([keys[row.Aff], keys[row.Neg]])
-                outcomes.append([1, 0] if row.Win == 'Aff' else [0, 1])
+        for aff, neg, aff_won in round_matches(rd, split_ballots):
+            if aff in keys and neg in keys:
+                composition.append([keys[aff], keys[neg]])
+                outcomes.append([1, 0] if aff_won else [0, 1])
                 times.append(t_idx)
 
     if not composition:
@@ -510,6 +557,7 @@ def run_pipeline(
     results: dict[str, pd.DataFrame],
     env: TrueSkill = None,
     priors: dict[str, ttt.Gaussian] | None = None,
+    split_ballots: bool = SPLIT_BALLOTS,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Rate a season.
@@ -536,10 +584,11 @@ def run_pipeline(
 
     all_history = []
     for name in results:
-        teams, history = _apply_round(teams, results[name], env, track_history=True, round_name=name)
+        teams, history = _apply_round(teams, results[name], env, track_history=True,
+                                      round_name=name, split_ballots=split_ballots)
         all_history.extend(history)
 
-    fit = fit_through_time(results, priors=priors)
+    fit = fit_through_time(results, priors=priors, split_ballots=split_ballots)
     teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
     teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)
     teams['Conservative'] = teams['Mu'] - 3 * teams['Sigma']
