@@ -24,6 +24,7 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
   - **Debater key:** school and normalized surname. Surname alone merges eight different Smiths; school and surname leave 4 clashes in labor and 3 in arms, which `_ambiguous_debaters` finds automatically (a key on two teams at one tournament must be two people) and drops.
   - **Coverage:** 107 of 135 arms teams. A team with one returning debater is seeded from that debater plus a default half-team prior, so it still starts above a wholly unknown team.
   - **Where it applies:** both the forward pass and the TTT fit, so a seeded team's first history `Before` is its seed rather than 25.
+- **Ballot margins:** `load_season` parses the panel split from `Win` ("3-0 AFF") into `Ballots_Win`/`Ballots_Lose`. `round_matches(rd, split_ballots=True)` then rates a paneled round once per judge, so a 3-0 moves ratings further than a 2-1 with no tuned weighting. `SPLIT_BALLOTS` is **off** — see the evidence below; flip the constant once the early tournaments carry margins.
 - **Validation:** `coding/validate.py` runs before rating a tournament.
   - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped.
   - **Calibration:** every labor and arms tournament passes. It caught the merged Dartmouth GH in the old Kentucky files.
@@ -70,14 +71,38 @@ Every team at a season's opener is a cold start, so without priors the model can
 
 ## Priority 2: model fit
 
+### Ballot margins (2026-09-15)
+
+The margin is in the `Win` column, not just `Votes`: 397 of labor's 3264 rows and 27 of arms' 559 read "3-0 AFF" or "2-1 NEG".
+
+**The signal is real and large.** Split decisions happen when the round was close; unanimous ones when it wasn't:
+
+| Panel result | n | Model P(winner wins), computed beforehand |
+|---|---|---|
+| Unanimous (3-0, 5-0) | 236 | 0.784 |
+| Split (2-1, 3-2, 4-1) | 161 | 0.576 |
+
+That gap is +0.208, se 0.024, z = +8.7.
+
+**But rating on it barely moves the needle**, because of where the data sits:
+
+| | Log loss |
+|---|---|
+| Baseline | 0.5528 |
+| `--ballots` | 0.5518 |
+
+- **All of labor's margin data is at the end of the season.** `ndt` is fully paneled (339/339, NDT prelims sit on panels) but nothing comes after it; `texas` and `ada` contribute 28 and 30 elim rows. Per-tournament, `--ballots` changes exactly nothing before `texas`, and only `ada` (−0.0038) and `ndt` (−0.0057) improve. 2 of 9 tournaments can benefit at all.
+- **Cost:** labor median σ 1.76 → 1.59. Three judges watching one debate aren't three independent observations, so some of that shrinkage is not earned — though calibration on the reachable matches is unchanged (mean |gap| 0.042 vs 0.043), and retuning β doesn't help (same optimum, same 0.001).
+- **Verdict:** shipped but off. The mechanism is right and needs no tuning knob; it's starved of data.
+- **What would change it:** re-exporting `nu`, `uk`, `gonzaga`, `wake`, `gt` elims in the current Tabroom format (~23 files, ~144 rows) would put margins at the *front* of labor, where they can inform seven downstream tournaments instead of two. Their prelims are single-judge, so there's nothing to gain there. Arms needs nothing — its exports already carry margins.
+
 ### 5. Model side advantage directly — **rejected as a global offset**
 - **Result:** the sweep above found no useful global aff/neg offset. The side effect is real but far smaller than a rating point.
 - **Still open, low priority:** a per-tournament offset, and dropping the unused Aff/Neg side ratings from the forward pass (they each see half the data and never reach the site).
 
-### 6. Use panel information in elims
-- **Problem:** a 2–1 elim counts the same as a 3–0.
-- **Options:** rate each ballot separately, or scale the update by ballot margin.
-- **Data:** `Votes` exists in arms files and in newer-format labor elims. Older labor files have only `Aff, Neg, Win`.
+### 6. Use panel information — **built, off by default**
+- Implemented as one match per ballot (see above). Blocked on data, not on modelling: re-export the five old labor tournaments' elims, then re-run `evaluate.py labor --ballots` and flip `SPLIT_BALLOTS` if it clears the bar.
+- **Not just elims:** NDT prelims are paneled too, so this reaches ordinary rounds wherever the export records a split.
 
 ### 7. Dynamics
 - **Within a season:** settled — γ makes no measurable difference over one season (see above). Keep 25/300.
@@ -91,7 +116,7 @@ Every team at a season's opener is a cold start, so without priors the model can
 - **Data:** arms prelim files have points per debater.
 - **Proposal:** use them as a weak margin signal, only if the harness shows a gain.
 
-**Bar for #6 and #9:** beat 0.5528 log loss on labor walk-forward. Given how flat β and γ turned out, only changes that add *information* (ballot margins, prior-season priors, speaker points) are likely to move it.
+**Bar for #9:** beat 0.5528 log loss on labor walk-forward. Given how flat β and γ turned out, only changes that add *information* (ballot margins, prior-season priors, speaker points) are likely to move it.
 
 ## Priority 3: data hygiene and process
 

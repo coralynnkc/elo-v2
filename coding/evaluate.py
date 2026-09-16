@@ -14,6 +14,7 @@ Usage: python evaluate.py [season ...|all] [options]
   --priors SEASON       seed teams from that season's debater ratings, which makes the
                         first tournament predictable too
   --inflation N         uncertainty added to a seeded team (default 4, needs --priors)
+  --ballots             rate a paneled round once per judge, so a 3-0 counts more than a 2-1
   --sweep beta|gamma|aff-offset|inflation[,...]   scan parameters and print a table
 """
 import math
@@ -23,7 +24,7 @@ import pandas as pd
 from trueskill import TrueSkill, Rating, rate_1vs1
 from pipeline import (
     BETA, CURRENT_SEASON, GAMMA, MU, PRIOR_INFLATION, SEASONS, SIGMA,
-    fit_debaters, fit_through_time, load_season, seed_priors,
+    fit_debaters, fit_through_time, load_season, round_matches, seed_priors,
 )
 import os
 
@@ -51,7 +52,8 @@ def win_probability(aff, neg, beta: float, aff_offset: float = 0.0) -> float:
 
 
 def decisive_rows(rd: pd.DataFrame):
-    """The rows of a round that were actually debated and won by a side."""
+    """The rows of a round that were actually debated and won by a side. Predictions are
+    always scored once per round, even when the fit splits a panel into ballots."""
     for row in rd.itertuples(index=False):
         if row.Win in ('Aff', 'Neg') and isinstance(row.Aff, str) and isinstance(row.Neg, str):
             yield row
@@ -61,7 +63,8 @@ def _tournament(round_name: str) -> str:
     return round_name.partition('_')[0]
 
 
-def fit_ttt(results, beta: float, gamma: float, sigma: float, priors: dict) -> dict:
+def fit_ttt(results, beta: float, gamma: float, sigma: float, priors: dict,
+            split_ballots: bool = False) -> dict:
     """TTT ratings after the last fitted tournament, drifted one step forward.
 
     fit_through_time returns each team's rating as of the last tournament it attended;
@@ -71,14 +74,16 @@ def fit_ttt(results, beta: float, gamma: float, sigma: float, priors: dict) -> d
     seeded = {team: Rating(p.mu, p.sigma) for team, p in priors.items()}
     if not results:
         return seeded
-    fit = fit_through_time(results, gamma=gamma, mu=MU, sigma=sigma, beta=beta, priors=priors)
+    fit = fit_through_time(results, gamma=gamma, mu=MU, sigma=sigma, beta=beta,
+                           priors=priors, split_ballots=split_ballots)
     return seeded | {
         team: Rating(r.mu, math.sqrt(r.sigma ** 2 + gamma ** 2))
         for team, r in fit.items()
     }
 
 
-def fit_forward(results, beta: float, gamma: float, sigma: float, priors: dict) -> dict:
+def fit_forward(results, beta: float, gamma: float, sigma: float, priors: dict,
+                split_ballots: bool = False) -> dict:
     """One chronological TrueSkill pass, the model behind the site's match history.
 
     Like _apply_round, every match in a round is read from the state before that round,
@@ -88,13 +93,14 @@ def fit_forward(results, beta: float, gamma: float, sigma: float, priors: dict) 
     ratings = {team: Rating(p.mu, p.sigma) for team, p in priors.items()}
     for rd in results.values():
         updates = {}
-        for row in decisive_rows(rd):
-            aff = ratings.get(row.Aff, Rating(MU, sigma))
-            neg = ratings.get(row.Neg, Rating(MU, sigma))
-            if row.Win == 'Aff':
-                updates[row.Aff], updates[row.Neg] = rate_1vs1(aff, neg, env=env)
+        for aff_name, neg_name, aff_won in round_matches(rd, split_ballots):
+            # ballots within a round build on each other, but the round's rows don't
+            aff = updates.get(aff_name) or ratings.get(aff_name, Rating(MU, sigma))
+            neg = updates.get(neg_name) or ratings.get(neg_name, Rating(MU, sigma))
+            if aff_won:
+                updates[aff_name], updates[neg_name] = rate_1vs1(aff, neg, env=env)
             else:
-                updates[row.Neg], updates[row.Aff] = rate_1vs1(neg, aff, env=env)
+                updates[neg_name], updates[aff_name] = rate_1vs1(neg, aff, env=env)
         ratings.update(updates)
     return ratings
 
@@ -110,6 +116,7 @@ def walk_forward(
     sigma: float = SIGMA,
     aff_offset: float = 0.0,
     priors: dict | None = None,
+    split_ballots: bool = False,
 ) -> pd.DataFrame:
     """Predict every tournament from the ones before it. One row per decisive match.
 
@@ -126,7 +133,7 @@ def walk_forward(
             continue  # nothing to fit on
         seen = set(tournaments[:k])
         prefix = {n: rd for n, rd in results.items() if _tournament(n) in seen}
-        fit = fit_fn(prefix, beta, gamma, sigma, priors)
+        fit = fit_fn(prefix, beta, gamma, sigma, priors, split_ballots)
         prior = Rating(MU, sigma)
 
         for name, rd in results.items():
@@ -245,6 +252,9 @@ def parse_args(argv: list[str]) -> tuple[list[str], dict, list[str]]:
         if arg == '--sweep':
             swept = argv[i + 1].split(',')
             i += 2
+        elif arg == '--ballots':
+            options['split_ballots'] = True
+            i += 1
         elif arg in ('--model', '--priors'):
             options[arg[2:]] = argv[i + 1]
             i += 2
@@ -287,7 +297,8 @@ def main():
 
     for season in seasons:
         teams, results, _ = _load(season)
-        settings = {'model': 'ttt', 'beta': BETA, 'gamma': GAMMA, 'sigma': SIGMA, 'aff_offset': 0.0}
+        settings = {'model': 'ttt', 'beta': BETA, 'gamma': GAMMA, 'sigma': SIGMA,
+                    'aff_offset': 0.0, 'split_ballots': False}
         settings.update(options)
 
         reseed = None
