@@ -18,6 +18,8 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
   - **Labor limit:** NU (no entries, no speaker names) leaves 12 codes rated by code.
 - **Kentucky (labor) re-export:** `uk_1`–`uk_6` were re-exported with speaker points, because the old files had merged Dartmouth GH and HG.
 - **Manual fixes:** `Emory CrTa` → `Emory CT` (Cross & Taylor), plus the older labor `name_fixes`, for codes with no names attached.
+- **Evaluation:** `coding/evaluate.py` scores the model walk-forward — for each tournament, fit on the ones before it and predict it. Reports accuracy, log loss and Brier, split by prelim/elim and by whether both teams were already rated, against coin-flip and aff-base-rate baselines. `--sweep beta,gamma,aff-offset` scans a parameter; `--model forward` scores the history pass instead.
+  - **Why walk-forward:** the 80.7% from the old 5-pass replay was not a forecast — those ratings had already seen the results.
 - **Validation:** `coding/validate.py` runs before rating a tournament.
   - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped.
   - **Calibration:** every labor and arms tournament passes. It caught the merged Dartmouth GH in the old Kentucky files.
@@ -32,17 +34,28 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 | Same, from the forward-pass history | labor 72.8% overall · 74.1% after the first tournament · 79.1% in elims · arms 66.6% |
 | Aff win rate | labor 47.7% · NU arms prelims 50.9% |
 
+## Evidence (2026-09-15, walk-forward on labor, 2783 matches)
+
+Out-of-sample, so these are lower than the replay numbers above and directly comparable to each other.
+
+| Setting | Accuracy | Log loss | Brier |
+|---|---|---|---|
+| TTT (current) | 71.6% | 0.5528 | 0.1856 |
+| Forward pass (match history) | 71.3% | 0.5584 | 0.1875 |
+| Coin flip | 50.0% | 0.6931 | 0.2500 |
+| Always pick neg (aff won 48.2%) | 51.8% | 0.6925 | 0.2497 |
+
+- **TTT beats the forward pass out-of-sample**, which is independent support for rating the leaderboard with it.
+- **Where the skill is:** 76.8% when both teams are already rated, 60.3% when one isn't; 77.2% in elims, 71.2% in prelims. Accuracy climbs over the season (67.7% at Kentucky, the first tournament with anything to fit on, → 81.3% at the NDT).
+- **β:** flat. 1.5× the default (6.25) is best by 0.005 nats of log loss, with no accuracy gain. Not worth changing.
+- **γ:** completely flat from 0 to 8× the default — one season is too short for drift to show. The current 25/300 is as good as turning it off.
+- **Global aff offset:** best at −0.25 to −0.5 skill points (a slight neg edge), worth 0.0008 nats. Noise.
+
 ## Priority 2: model fit
 
-### 4. Evaluation harness
-- **Method:** for each tournament *k*, fit on tournaments before *k* and predict *k*.
-- **Metrics:** log loss, Brier score, accuracy.
-- **Baseline:** 72.8% accuracy (labor forward pass).
-- **Use it to:** tune β, γ and priors, and to accept or reject #5–#9.
-
-### 5. Model side advantage directly
-- **Problem:** separate Aff and Neg ratings (forward pass only) each see half the data and never appear on the site.
-- **Proposal:** a global aff/neg offset, or one per tournament. Labor neg had a small edge (aff won 47.7%).
+### 5. Model side advantage directly — **rejected as a global offset**
+- **Result:** the sweep above found no useful global aff/neg offset. The side effect is real but far smaller than a rating point.
+- **Still open, low priority:** a per-tournament offset, and dropping the unused Aff/Neg side ratings from the forward pass (they each see half the data and never reach the site).
 
 ### 6. Use panel information in elims
 - **Problem:** a 2–1 elim counts the same as a 3–0.
@@ -50,8 +63,8 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 - **Data:** `Votes` exists in arms files and in newer-format labor elims. Older labor files have only `Aff, Neg, Win`.
 
 ### 7. Dynamics
-- **Within a season:** tune γ (now 25/300 per tournament) to how fast teams actually improve.
-- **Between seasons:** inflate σ explicitly.
+- **Within a season:** settled — γ makes no measurable difference over one season (see above). Keep 25/300.
+- **Between seasons:** inflate σ explicitly. Untested until a second season can be chained; needs #8.
 
 ### 8. Carry priors across seasons
 - **Problem:** every arms team starts at μ = 25, σ = 8.33.
@@ -60,6 +73,8 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
 ### 9. Speaker points (low priority)
 - **Data:** arms prelim files have points per debater.
 - **Proposal:** use them as a weak margin signal, only if the harness shows a gain.
+
+**Bar for #6, #8 and #9:** beat 0.5528 log loss on labor walk-forward. Given how flat β and γ turned out, only changes that add *information* (ballot margins, prior-season priors, speaker points) are likely to move it.
 
 ## Priority 3: data hygiene and process
 

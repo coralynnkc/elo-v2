@@ -358,11 +358,17 @@ def _apply_round(
 def fit_through_time(
     results: dict[str, pd.DataFrame],
     gamma: float = GAMMA,
+    mu: float = MU,
+    sigma: float = SIGMA,
+    beta: float = BETA,
 ) -> dict[str, ttt.Gaussian]:
     """Fit TrueSkill Through Time over a season, one time step per tournament.
 
     Every rating is smoothed over all results, before and after, so it doesn't depend
     on round order and its uncertainty isn't shrunk by replaying results.
+
+    The prior and noise parameters are arguments so evaluate.py can tune them; the
+    pipeline always uses the module defaults.
 
     Returns each team's rating as of the last tournament it attended.
     """
@@ -376,7 +382,7 @@ def fit_through_time(
                 outcomes.append([1, 0] if row.Win == 'Aff' else [0, 1])  # higher score wins
                 times.append(t_idx)
 
-    history = ttt.History(composition, outcomes, times, mu=MU, sigma=SIGMA, beta=BETA, gamma=gamma)
+    history = ttt.History(composition, outcomes, times, mu=mu, sigma=sigma, beta=beta, gamma=gamma)
     history.convergence(epsilon=TTT_EPSILON, iterations=TTT_ITERATIONS, verbose=False)
     return {team: curve[-1][1] for team, curve in history.learning_curves().items()}
 
