@@ -27,10 +27,10 @@ DEBATER_BETA = BETA / math.sqrt(2)
 DEBATER_GAMMA = GAMMA / math.sqrt(2)
 
 # Rate a paneled round once per judge, so a 3-0 moves ratings further than a 2-1.
-# Off by default: only 12% of labor rounds carry a ballot count, and all of them fall at
-# the end of the season, so the harness measures a gain of 0.001 nats against a 10% drop
-# in published sigma. Worth revisiting once the early tournaments are re-exported —
-# evaluate.py --ballots scores it.
+# Off by default: with labor's early elims re-exported (16.5% of rounds carry a ballot
+# count, spread across the season), the harness measures a 0.001 nat *loss* against a 12%
+# drop in published sigma — three judges watching one debate aren't three independent
+# observations. evaluate.py --ballots scores it.
 SPLIT_BALLOTS = False
 
 # Skill points of uncertainty added to a partnership seeded from a previous season,

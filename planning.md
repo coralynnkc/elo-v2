@@ -28,7 +28,7 @@ Open work on the rating pipeline (`coding/pipeline.py`), in priority order. Data
   - **Coverage:** 107 of 135 arms teams. A team with one returning debater is seeded from that debater plus a default half-team prior, so it still starts above a wholly unknown team.
   - **Where it applies:** both the forward pass and the TTT fit, so a seeded team's first history `Before` is its seed rather than 25.
   - **Chaining:** `season_debaters` recurses through `prior_season`, so a debater's rating carries energy → labor → arms instead of restarting each year. `carry_debaters` widens it by `DEBATER_INFLATION` at each hop.
-- **Ballot margins:** `load_season` parses the panel split from `Win` ("3-0 AFF") into `Ballots_Win`/`Ballots_Lose`. `round_matches(rd, split_ballots=True)` then rates a paneled round once per judge, so a 3-0 moves ratings further than a 2-1 with no tuned weighting. `SPLIT_BALLOTS` is **off** — see the evidence below; flip the constant once the early tournaments carry margins.
+- **Ballot margins:** `load_season` parses the panel split from `Win` ("3-0 AFF") into `Ballots_Win`/`Ballots_Lose`. `round_matches(rd, split_ballots=True)` then rates a paneled round once per judge, so a 3-0 moves ratings further than a 2-1 with no tuned weighting. `SPLIT_BALLOTS` is **off, and settled** — labor's early elims were re-exported so margins now sit at the front of the season, and one ballot per judge still loses to one match per round (see below).
 - **Validation:** `coding/validate.py` runs before rating a tournament.
   - **Thresholds:** even-round side flip ≥90%; mean record gap ≤1.5 from R3; fields under 16 are treated as round robins and skipped. A round is reported missing when more than a third of an elim round's winners never appear again — closeouts and byes drop one or two, not half the field.
   - **Consolation rounds:** `CONSOLATION_ROUNDS` (`semis_2`) sit outside the bracket chain; their field is checked to be exactly the previous round's losers.
@@ -98,37 +98,37 @@ Every tournament improves except the 21-match Kentucky RR. The gains are largest
 
 Energy's own walk-forward, with no season before it, is 70.7% / 0.5688 on 1878 matches.
 
-### Ballot margins (2026-09-15)
+### Ballot margins (2026-09-15, re-tested 2026-09-16)
 
-The margin is in the `Win` column, not just `Votes`: 397 of labor's 3264 rows and 27 of arms' 559 read "3-0 AFF" or "2-1 NEG".
+The margin is in the `Win` column, not just `Votes`: after re-exporting labor's early elims, 537 of labor's 3264 rows (16.5%) and 27 of arms' 559 read "3-0 AFF" or "2-1 NEG".
 
 **The signal is real and large.** Split decisions happen when the round was close; unanimous ones when it wasn't:
 
 | Panel result | n | Model P(winner wins), computed beforehand |
 |---|---|---|
-| Unanimous (3-0, 5-0) | 236 | 0.784 |
-| Split (2-1, 3-2, 4-1) | 161 | 0.576 |
+| Unanimous (3-0, 5-0) | 300 | 0.799 |
+| Split (2-1, 3-2, 4-1) | 237 | 0.587 |
 
-That gap is +0.208, se 0.024, z = +8.7.
+That gap is +0.212, se 0.019, z = +11.0.
 
-**But rating on it barely moves the needle**, because of where the data sits:
+**Rating on it still doesn't pay.** The 2026-09-15 test was starved of data — every margin sat at the end of the season. Re-exporting `nu`, `uk`, `gonzaga`, `wake` and `gt` elims (25 files, 140 rows) put margins at the front, where they can inform seven downstream tournaments. Walk-forward on labor, seeded from energy:
 
-| | Log loss |
-|---|---|
-| Baseline | 0.5528 |
-| `--ballots` | 0.5518 |
+| | Accuracy | Log loss |
+|---|---|---|
+| Baseline | 72.9% | 0.5420 |
+| `--ballots` | 72.6% | 0.5427 |
 
-- **All of labor's margin data is at the end of the season.** `ndt` is fully paneled (339/339, NDT prelims sit on panels) but nothing comes after it; `texas` and `ada` contribute 28 and 30 elim rows. Per-tournament, `--ballots` changes exactly nothing before `texas`, and only `ada` (−0.0038) and `ndt` (−0.0057) improve. 2 of 9 tournaments can benefit at all.
-- **Cost:** labor median σ 1.76 → 1.59. Three judges watching one debate aren't three independent observations, so some of that shrinkage is not earned — though calibration on the reachable matches is unchanged (mean |gap| 0.042 vs 0.043), and retuning β doesn't help (same optimum, same 0.001).
-- **Verdict:** shipped but off. The mechanism is right and needs no tuning knob; it's starved of data.
-- **What would change it:** re-exporting `nu`, `uk`, `gonzaga`, `wake`, `gt` elims in the current Tabroom format (~23 files, ~144 rows) would put margins at the *front* of labor, where they can inform seven downstream tournaments instead of two. Their prelims are single-judge, so there's nothing to gain there. Arms needs nothing — its exports already carry margins.
+- **It is now slightly worse, not slightly better**, and worse at every β in the sweep (best with ballots 0.5393 at β = 6.25, against 0.5381 without). Per tournament the sign is mixed: `ada` and `gt` improve, `gonzaga`, `uk` and `dartmouthrr` get worse.
+- **Cost:** labor median σ 1.76 → 1.54. Three judges watching one debate aren't three independent observations, and that overcounting is what the log loss is now picking up.
+- **Verdict:** shipped but off, and the data excuse is gone. The signal belongs in a *weighting* of one match, not in three matches; that would need a tuned knob, so it is only worth building if something else runs out first.
+- **Kept from the re-export:** the new files carry `Judges` and `Votes`, so the panel composition is available for any later judge-level work. Team identities, the 177-team leaderboard and the top 10 are unchanged (max |Δμ| 0.03).
 
 ### 5. Model side advantage directly — **rejected as a global offset**
 - **Result:** the sweep above found no useful global aff/neg offset. The side effect is real but far smaller than a rating point.
 - **Still open, low priority:** a per-tournament offset, and dropping the unused Aff/Neg side ratings from the forward pass (they each see half the data and never reach the site).
 
-### 6. Use panel information — **built, off by default**
-- Implemented as one match per ballot (see above). Blocked on data, not on modelling: re-export the five old labor tournaments' elims, then re-run `evaluate.py labor --ballots` and flip `SPLIT_BALLOTS` if it clears the bar.
+### 6. Use panel information — **built, off, closed**
+- Implemented as one match per ballot (see above). The re-export it was waiting on is done, and it did not clear the bar; one ballot per judge overstates a panel's independence. Reopen only as a weighted single match.
 - **Not just elims:** NDT prelims are paneled too, so this reaches ordinary rounds wherever the export records a split.
 
 ### 7. Dynamics
