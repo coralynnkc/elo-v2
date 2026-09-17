@@ -45,6 +45,12 @@ SUFFIX_FIXES = {
     ' - HYBRID': '',
 }
 
+# One school, two names in Tabroom. Applied in every season, before name_fixes: a school
+# that changes name between seasons splits its debaters' keys and breaks their priors.
+SCHOOL_ALIASES = {
+    'MoState ': 'Missouri State ',
+}
+
 # Per-season config.
 #   tournaments: chronological order of tournament codes — controls round ordering.
 #                Add new codes here in the order they were held; files with other
@@ -117,9 +123,9 @@ def _round_names(data_dir: str, tournament_order: list[str]) -> list[str]:
 
 
 def clean_teams(series: pd.Series, *fixes: dict | None) -> pd.Series:
-    """Strip Tabroom suffixes, then apply each fixes dict (wrong -> right) in order."""
+    """Strip Tabroom suffixes and school aliases, then apply each fixes dict in order."""
     s = series.copy()
-    for fix in (SUFFIX_FIXES, *fixes):
+    for fix in (SUFFIX_FIXES, SCHOOL_ALIASES, *fixes):
         for wrong, right in (fix or {}).items():
             s = s.str.replace(wrong, right, regex=False)
     return s
@@ -291,8 +297,6 @@ def load_season(
         'Team': [display[k] for k in keys],
         'Debaters': [' & '.join(surnames_by_key[k]) if k in surnames_by_key else '' for k in keys],
         'Mu': MU, 'Sigma': SIGMA,
-        'Aff_Mu': MU, 'Aff_Sigma': SIGMA,
-        'Neg_Mu': MU, 'Neg_Sigma': SIGMA,
         'Aff_Rounds': 0, 'Neg_Rounds': 0,
     })
     return teams, results, sorted(unresolved)
@@ -333,34 +337,17 @@ def _apply_round(
         a = team_idx.loc[aff_name]
         n = team_idx.loc[neg_name]
 
-        r_aff = Rating(a['Mu'], a['Sigma'])
-        r_neg = Rating(n['Mu'], n['Sigma'])
-        r_aff_side = Rating(a['Aff_Mu'], a['Aff_Sigma'])
-        r_neg_side = Rating(n['Neg_Mu'], n['Neg_Sigma'])
+        new_aff = Rating(a['Mu'], a['Sigma'])
+        new_neg = Rating(n['Mu'], n['Sigma'])
 
-        new_aff, new_neg = r_aff, r_neg
-        new_aff_side, new_neg_side = r_aff_side, r_neg_side
         for aff_won in _ballot_outcomes(row, split_ballots):
             if aff_won:
                 new_aff, new_neg = rate_1vs1(new_aff, new_neg, env=env)
-                new_aff_side, new_neg_side = rate_1vs1(new_aff_side, new_neg_side, env=env)
             else:
                 new_neg, new_aff = rate_1vs1(new_neg, new_aff, env=env)
-                new_neg_side, new_aff_side = rate_1vs1(new_neg_side, new_aff_side, env=env)
-        inc = 1
 
-        out_aff.append({
-            'Team': aff_name,
-            'New_Mu': new_aff.mu, 'New_Sigma': new_aff.sigma,
-            'New_Aff_Mu': new_aff_side.mu, 'New_Aff_Sigma': new_aff_side.sigma,
-            'Inc': inc,
-        })
-        out_neg.append({
-            'Team': neg_name,
-            'New_Mu': new_neg.mu, 'New_Sigma': new_neg.sigma,
-            'New_Neg_Mu': new_neg_side.mu, 'New_Neg_Sigma': new_neg_side.sigma,
-            'Inc': inc,
-        })
+        out_aff.append({'Team': aff_name, 'New_Mu': new_aff.mu, 'New_Sigma': new_aff.sigma})
+        out_neg.append({'Team': neg_name, 'New_Mu': new_neg.mu, 'New_Sigma': new_neg.sigma})
 
         if track_history:
             tournament, _, round_label = round_name.partition('_')
@@ -387,18 +374,14 @@ def _apply_round(
         mask = t['Team'].isin(aff_df.index)
         t.loc[mask, 'Mu'] = t.loc[mask, 'Team'].map(aff_df['New_Mu'])
         t.loc[mask, 'Sigma'] = t.loc[mask, 'Team'].map(aff_df['New_Sigma'])
-        t.loc[mask, 'Aff_Mu'] = t.loc[mask, 'Team'].map(aff_df['New_Aff_Mu'])
-        t.loc[mask, 'Aff_Sigma'] = t.loc[mask, 'Team'].map(aff_df['New_Aff_Sigma'])
-        t.loc[mask, 'Aff_Rounds'] += t.loc[mask, 'Team'].map(aff_df['Inc']).fillna(0).astype(int)
+        t.loc[mask, 'Aff_Rounds'] += 1
 
     if out_neg:
         neg_df = pd.DataFrame(out_neg).drop_duplicates(subset='Team', keep='last').set_index('Team')
         mask = t['Team'].isin(neg_df.index)
         t.loc[mask, 'Mu'] = t.loc[mask, 'Team'].map(neg_df['New_Mu'])
         t.loc[mask, 'Sigma'] = t.loc[mask, 'Team'].map(neg_df['New_Sigma'])
-        t.loc[mask, 'Neg_Mu'] = t.loc[mask, 'Team'].map(neg_df['New_Neg_Mu'])
-        t.loc[mask, 'Neg_Sigma'] = t.loc[mask, 'Team'].map(neg_df['New_Neg_Sigma'])
-        t.loc[mask, 'Neg_Rounds'] += t.loc[mask, 'Team'].map(neg_df['Inc']).fillna(0).astype(int)
+        t.loc[mask, 'Neg_Rounds'] += 1
 
     return t, history
 
@@ -478,12 +461,26 @@ def debater_keys(teams: pd.DataFrame) -> dict[str, list[str]]:
     Keyed by school as well as surname: across two seasons, surname alone merges eight
     different Smiths, while school and surname together leave only a handful of clashes
     (see _ambiguous_debaters). Teams with no debater names are absent.
+
+    A hybrid entry carries both schools ('Harvard/Massachusetts, Amherst AL'), which
+    would give its debaters a key that matches nothing in any other season. Each of them
+    is placed at whichever half of the pairing they debate for elsewhere this season; a
+    debater who only ever appears in the hybrid keeps the compound school.
     """
-    return {
-        team: [f'{_school(team)}/{_normalize_surname(n)}' for n in debaters.split(' & ')]
-        for team, debaters in zip(teams['Team'], teams['Debaters'])
-        if debaters
-    }
+    named = [(team, debaters.split(' & ')) for team, debaters in
+             zip(teams['Team'], teams['Debaters']) if debaters]
+    solo = {(_school(team), _normalize_surname(n))
+            for team, names in named for n in names if '/' not in _school(team)}
+
+    def key(school: str, name: str) -> str:
+        surname = _normalize_surname(name)
+        if '/' in school:
+            halves = [h for h in school.split('/') if (h, surname) in solo]
+            if len(halves) == 1:
+                school = halves[0]
+        return f'{school}/{surname}'
+
+    return {team: [key(_school(team), n) for n in names] for team, names in named}
 
 
 def _ambiguous_debaters(keys: dict[str, list[str]], results: dict[str, pd.DataFrame]) -> set[str]:
@@ -608,7 +605,7 @@ def run_pipeline(
     """
     Rate a season.
 
-    Match history (and round counts, side ratings): one forward chronological TrueSkill
+    Match history (and round counts): one forward chronological TrueSkill
     pass, so each round's before/after uses only earlier results.
     Leaderboard Mu/Sigma: TrueSkill Through Time over the whole season.
 
@@ -623,10 +620,8 @@ def run_pipeline(
     if priors:
         seed_mu = teams['Team'].map({t: p.mu for t, p in priors.items()})
         seed_sigma = teams['Team'].map({t: p.sigma for t, p in priors.items()})
-        for column in ('Mu', 'Aff_Mu', 'Neg_Mu'):
-            teams[column] = seed_mu.fillna(teams[column])
-        for column in ('Sigma', 'Aff_Sigma', 'Neg_Sigma'):
-            teams[column] = seed_sigma.fillna(teams[column])
+        teams['Mu'] = seed_mu.fillna(teams['Mu'])
+        teams['Sigma'] = seed_sigma.fillna(teams['Sigma'])
 
     all_history = []
     for name in results:
@@ -638,7 +633,7 @@ def run_pipeline(
     teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
     teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)
     teams['Conservative'] = teams['Mu'] - 3 * teams['Sigma']
-    round_cols = ['Mu', 'Sigma', 'Aff_Mu', 'Aff_Sigma', 'Neg_Mu', 'Neg_Sigma', 'Conservative']
+    round_cols = ['Mu', 'Sigma', 'Conservative']
     teams[round_cols] = teams[round_cols].round(3)
     teams = teams[(teams['Aff_Rounds'] > 0) | (teams['Neg_Rounds'] > 0)]
 
