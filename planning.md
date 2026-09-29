@@ -1,6 +1,6 @@
-# Planning: methodology
+# Planning
 
-Open work on the rating pipeline (`coding/pipeline.py`). CLAUDE.md covers how the pipeline works and README.md covers data entry. Settled questions get one line each.
+Open work on the rating pipeline (`coding/pipeline.py`) and the frontend (`frontend/src/`). CLAUDE.md covers how the pipeline works and README.md covers data entry. Settled questions get one line each.
 
 ## Benchmarks
 
@@ -37,3 +37,8 @@ Seeded and unseeded runs score different match sets, because seeding makes the o
 - **Seasons:** energy → labor → arms, chained by `prior_season`. Energy's tournament order was confirmed by hand and by seriation.
 - **Validation** (`validate.py`): side flips ≥90%, record gap ≤1.5 from R3, round robins skipped, missing elims detected, `CONSOLATION_ROUNDS` checked. Every labor and arms tournament passes.
 - **Storage:** data is canonical in git. The Dropbox damage (empty placeholder files, broken `.git`) is gone, and `git fsck` is clean.
+
+## Frontend
+
+- **Handle load errors.** A failed CSV fetch leaves "Loading…" up forever. Show an error message and a retry. Not urgent. Note that `parseCsv` now caches the fetch promise, so a failed fetch stays cached until reload.
+- **Cross-season links are approximate.** The team page matches other seasons on `School/surname` taken from the team name and `Debaters`. It doesn't apply `SCHOOL_ALIASES` or the hybrid placement, and it can link two different debaters who share a surname at one school.

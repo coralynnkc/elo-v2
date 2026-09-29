@@ -48,7 +48,8 @@ def run_season(season: str):
     shutil.copy(output_teams, FRONTEND_DATA)
     shutil.copy(output_history, FRONTEND_DATA)
 
-    print(f"\n{len(final_teams)} teams ranked. Top 5:")
+    n_ranked = final_teams['Ranked'].sum()
+    print(f"\n{n_ranked} teams ranked ({len(final_teams) - n_ranked} more unranked). Top 5:")
     print(final_teams[['Team', 'Mu', 'Conservative']].head().to_string(index=False))
 
 

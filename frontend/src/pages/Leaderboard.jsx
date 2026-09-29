@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate, NavLink, useParams } from "react-router-dom";
-import { SEASONS, loadData, getTeamMatches, getTournaments } from "../utils/data";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { SEASONS, loadData, getTeamMatches } from "../utils/data";
+import SeasonHeader from "../components/SeasonHeader";
 
 const COLUMNS = [
-  { key: "rank", label: "#", value: (r) => r.rank, defaultDir: "asc", className: "rank" },
+  { key: "rank", label: "#", value: (r) => r.order, defaultDir: "asc", className: "rank" },
   { key: "team", label: "Team", value: (r) => r.team.Team, defaultDir: "asc" },
   { key: "mu", label: "Rating", value: (r) => r.team.Mu, defaultDir: "desc", numeric: true,
-    title: "μ: the model's best estimate of team strength" },
-  { key: "sigma", label: "σ", value: (r) => r.team.Sigma, defaultDir: "asc", numeric: true,
-    className: "col-sigma", title: "σ: uncertainty in the rating; shrinks as a team debates more" },
+    tip: "μ: the model's best estimate of team strength, fitted on the whole season" },
+  { key: "sigma", label: <span className="greek">σ</span>, value: (r) => r.team.Sigma, defaultDir: "asc", numeric: true,
+    className: "col-sigma", tip: "σ: uncertainty in the rating. It shrinks as a team debates more" },
   { key: "rounds", label: "Rounds", value: (r) => r.team.Aff_Rounds + r.team.Neg_Rounds,
-    defaultDir: "desc", numeric: true, className: "col-rounds" },
+    defaultDir: "desc", numeric: true, className: "col-rounds", tip: "Decisive rounds this season, prelims and elims" },
   { key: "conservative", label: "Conservative", value: (r) => r.team.Conservative,
-    defaultDir: "desc", numeric: true, title: "μ − 3σ: a rating the team very likely exceeds" },
+    defaultDir: "desc", numeric: true, tip: "μ − 3σ: a rating the team very likely exceeds. Ranks new teams more cautiously" },
 ];
 
 export default function Leaderboard() {
@@ -20,10 +21,13 @@ export default function Leaderboard() {
   const [data, setData] = useState(null);
   const [expanded, setExpanded] = useState(new Set());
   const [sort, setSort] = useState({ key: "rank", dir: "asc" });
+  const [showAll, setShowAll] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     if (!SEASONS[season]) return;
     setExpanded(new Set());
+    setQuery("");
     loadData(season).then((d) => setData({ season, ...d }));
   }, [season]);
 
@@ -39,10 +43,22 @@ export default function Leaderboard() {
   if (!data || data.season !== season) return <div className="loading">Loading…</div>;
 
   const { teams, rawHistory } = data;
-  const tournaments = getTournaments(rawHistory);
 
-  // Rank stays the μ rank (the CSV order) whatever column the table is sorted by
-  const rows = teams.map((team, i) => ({ team, rank: i + 1 }));
+  // Rank stays the μ rank among ranked teams whatever column the table is sorted by.
+  // Unranked teams (too few tournaments) get no rank and sort after ranked ones.
+  // A search looks through unranked teams too, so any team can be found.
+  const ranked = teams.filter((t) => t.Ranked);
+  const unranked = teams.filter((t) => !t.Ranked);
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const matches = (t) => {
+    const text = `${t.Team} ${t.Debaters ?? ""}`.toLowerCase();
+    return terms.every((term) => text.includes(term));
+  };
+  let rows = ranked.map((team, i) => ({ team, rank: i + 1, order: i }));
+  if (showAll || terms.length) {
+    unranked.forEach((team, i) => rows.push({ team, rank: null, order: ranked.length + i }));
+  }
+  if (terms.length) rows = rows.filter((r) => matches(r.team));
   const col = COLUMNS.find((c) => c.key === sort.key);
   rows.sort((a, b) => {
     const va = col.value(a), vb = col.value(b);
@@ -60,28 +76,55 @@ export default function Leaderboard() {
 
   return (
     <div className="page">
-      <header className="page-header">
-        <h1>Policy Debate Rankings</h1>
-        <nav className="season-nav">
-          {Object.entries(SEASONS).map(([key, s]) => (
-            <NavLink key={key} to={`/${key}`}>
-              {s.label}
-            </NavLink>
-          ))}
-        </nav>
-        <p className="subtitle">
-          TrueSkill Through Time ratings · {SEASONS[season].label} season · {tournaments.join(", ")}
+      <SeasonHeader season={season} rawHistory={rawHistory} view="" />
+
+      <details className="explainer">
+        <summary>How ratings work</summary>
+        <p>
+          Each team's <strong>rating (μ)</strong> estimates its strength. A team rated 5
+          points higher wins about 80% of the time. <strong>σ</strong> is the uncertainty:
+          a team starts wide and narrows as it debates. <strong>Conservative</strong> is
+          μ − 3σ, a rating the team very likely exceeds.
         </p>
-        {tournaments.length < 2 && (
-          <p className="provisional">
-            Provisional — based on one tournament. Ratings and σ will settle as more
-            tournaments are added.
-          </p>
+        <p>
+          Ratings use TrueSkill Through Time, which fits the whole season at once, so a
+          result at a later tournament also informs the earlier estimates. A team page's
+          match history instead shows the rating as it stood before each round, using
+          earlier rounds only, so the leaderboard μ can differ from the last After.
+        </p>
+        <p>
+          From 2025–26 on, teams start from their debaters' ratings the season before,
+          widened for change over the summer. A team is ranked once it has debated at two
+          tournaments.
+        </p>
+      </details>
+
+      <div className="table-controls">
+        <input
+          type="search"
+          className="search-box"
+          placeholder="Search teams or debaters"
+          aria-label="Search teams or debaters"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        {unranked.length > 0 && (
+          <label className="table-toggle">
+            <input
+              type="checkbox"
+              checked={showAll}
+              onChange={(e) => setShowAll(e.target.checked)}
+            />
+            Show unranked teams
+            <span className="dim">
+              {" "}({unranked.length} with too few tournaments)
+            </span>
+          </label>
         )}
-      </header>
+      </div>
 
       <div className="table-wrap">
-        <table className="leaderboard-table">
+        <table className="data-table leaderboard-table">
           <thead>
             <tr>
               {COLUMNS.map((c) => {
@@ -89,9 +132,9 @@ export default function Leaderboard() {
                 return (
                   <th
                     key={c.key}
-                    className={`${c.className ?? ""}${c.numeric ? " align-right" : ""}`}
+                    className={`${c.className ?? ""}${c.numeric ? " align-right" : ""}${c.tip ? " has-tip" : ""}`}
                     aria-sort={active ? (sort.dir === "asc" ? "ascending" : "descending") : "none"}
-                    title={c.title}
+                    data-tip={c.tip}
                   >
                     <button
                       type="button"
@@ -112,6 +155,11 @@ export default function Leaderboard() {
             </tr>
           </thead>
           <tbody>
+            {rows.length === 0 && (
+              <tr>
+                <td colSpan={7} className="empty">No teams match “{query}”</td>
+              </tr>
+            )}
             {rows.map(({ team, rank }) => {
               const isExpanded = expanded.has(team.Team);
               const top5 = isExpanded
@@ -123,10 +171,12 @@ export default function Leaderboard() {
               return (
                 <React.Fragment key={team.Team}>
                   <tr
-                    className={`team-row${isExpanded ? " is-expanded" : ""}`}
+                    className={`team-row${isExpanded ? " is-expanded" : ""}${rank ? "" : " is-unranked"}`}
                     onClick={() => toggle(team.Team)}
                   >
-                    <td className="rank">{rank}</td>
+                    <td className="rank" title={rank ? undefined : `Unranked: ${team.Tournaments} tournament${team.Tournaments === 1 ? "" : "s"}`}>
+                      {rank ?? "–"}
+                    </td>
                     <td className="team-name">
                       <Link
                         to={`/${season}/team/${encodeURIComponent(team.Team)}`}
@@ -161,7 +211,7 @@ export default function Leaderboard() {
                           <p className="exp-label">
                             Top 5 most consequential rounds
                           </p>
-                          <table className="mini-table">
+                          <table className="data-table compact">
                             <thead>
                               <tr>
                                 <th>Round</th>
@@ -191,7 +241,7 @@ export default function Leaderboard() {
                                     className={`num ${m.delta > 0 ? "positive" : "negative"}`}
                                   >
                                     {m.delta > 0 ? "+" : ""}
-                                    {m.delta.toFixed(3)}
+                                    {m.delta.toFixed(2)}
                                   </td>
                                 </tr>
                               ))}
