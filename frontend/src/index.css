@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --bg: #0d1117;
   --surface: #161b22;
   --surface2: #21262d;
@@ -10,6 +11,29 @@
   --loss: #f85149;
   --positive: #3fb950;
   --negative: #f85149;
+  --favored: #388bfd;
+  --unfavored: #f85149;
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --surface2: #eaeef2;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text-dim: #59636e;
+    --accent: #0969da;
+    --win: #1a7f37;
+    --loss: #cf222e;
+    --positive: #1a7f37;
+    --negative: #cf222e;
+    --favored: #0969da;
+    --unfavored: #cf222e;
+    --shadow: rgba(31, 35, 40, 0.12);
+  }
 }
 
 * {
@@ -49,7 +73,7 @@ a:hover {
 
 /* ── Page header ── */
 .page-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 .page-header h1 {
   font-size: 1.75rem;
@@ -91,7 +115,7 @@ a:hover {
 .season-nav a.active {
   background: var(--surface);
   color: var(--text);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  box-shadow: 0 1px 2px var(--shadow);
 }
 
 /* ── Note above a table ── */
@@ -122,6 +146,19 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow-x: auto;
+}
+/* Wide screens don't need the scroll, and dropping it lets header tooltips spill
+   past a short table. Header corners are rounded to stay inside the border. */
+@media (min-width: 641px) {
+  .table-wrap:not(.scroll) {
+    overflow: visible;
+  }
+  .table-wrap:not(.scroll) thead tr > :first-child {
+    border-top-left-radius: 7px;
+  }
+  .table-wrap:not(.scroll) thead tr > :last-child {
+    border-top-right-radius: 7px;
+  }
 }
 
 .visually-hidden {
@@ -160,15 +197,15 @@ a:hover {
   border-radius: 3px;
 }
 
-/* ── Leaderboard table ── */
-.leaderboard-table {
+/* ── Tables: shared base ── */
+.data-table {
   width: 100%;
   border-collapse: collapse;
 }
-.leaderboard-table thead tr {
+.data-table thead tr {
   background: var(--surface2);
 }
-.leaderboard-table th {
+.data-table th {
   padding: 0.625rem 1rem;
   text-align: left;
   font-size: 0.72rem;
@@ -178,25 +215,56 @@ a:hover {
   letter-spacing: 0.06em;
   border-bottom: 1px solid var(--border);
 }
-
-.team-row {
-  cursor: pointer;
-  border-bottom: 1px solid var(--border);
-  transition: background 0.1s;
+.data-table th.align-right {
+  text-align: right;
 }
-.team-row:last-child {
+.data-table td {
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border);
+}
+.data-table > tbody:last-child > tr:last-child > td {
   border-bottom: none;
 }
-.team-row:hover {
+.data-table > tbody > tr:hover {
   background: var(--surface);
+}
+.data-table td.empty {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+/* Compact variant: nested inside another table's expanded row */
+.data-table.compact thead tr {
+  background: none;
+}
+.data-table.compact th {
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.625rem;
+}
+.data-table.compact td {
+  padding: 0.4rem 0.625rem;
+}
+.data-table.compact > tbody > tr:hover {
+  background: var(--surface2);
+}
+
+/* ── Leaderboard table ── */
+.team-row {
+  cursor: pointer;
+  transition: background 0.1s;
 }
 .team-row.is-expanded {
   background: var(--surface);
-  border-bottom: none;
 }
-.team-row td {
+.data-table .team-row td {
   padding: 0.75rem 1rem;
   font-size: 0.9rem;
+}
+.team-row.is-expanded td {
+  border-bottom: none;
 }
 .team-row.is-unranked td:not(.chevron) {
   opacity: 0.6;
@@ -222,6 +290,10 @@ a:hover {
 .dim {
   color: var(--text-dim);
 }
+/* Uppercase labels would turn μ into M and σ into Σ */
+.greek {
+  text-transform: none;
+}
 .chevron {
   text-align: right;
   width: 2rem;
@@ -246,11 +318,11 @@ a:hover {
 }
 
 /* ── Expanded row ── */
-.expanded-row {
-  border-bottom: 1px solid var(--border);
-}
-.expanded-row td {
+.data-table .expanded-row > td {
   padding: 0;
+}
+.data-table > tbody > tr.expanded-row:hover {
+  background: none;
 }
 .expanded-content {
   background: var(--surface);
@@ -266,31 +338,129 @@ a:hover {
   margin-bottom: 0.625rem;
 }
 
-/* ── Mini table (inside expanded row) ── */
-.mini-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
+/* ── Tooltips: hover or focus an element with data-tip ── */
+.has-tip {
+  position: relative;
+  cursor: help;
+  text-decoration: underline dotted var(--text-dim);
+  text-underline-offset: 3px;
 }
-.mini-table th {
-  color: var(--text-dim);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.2rem 0.625rem;
+.has-tip .sort-header {
+  text-decoration: inherit;
+  text-underline-offset: inherit;
+}
+.has-tip::after {
+  content: attr(data-tip);
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  width: max-content;
+  max-width: 16rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px var(--shadow);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-transform: none;
   text-align: left;
+  white-space: normal;
+}
+.has-tip:hover::after,
+.has-tip:focus-visible::after,
+.has-tip:focus-within::after {
+  display: block;
+}
+.align-right.has-tip::after {
+  left: auto;
+  right: 0;
+}
+
+/* ── View tabs (Rankings / Head-to-head) ── */
+.view-tabs {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
   border-bottom: 1px solid var(--border);
+}
+.view-tabs a {
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  padding: 0.4rem 0;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+}
+.view-tabs a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+.view-tabs a.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ── "How ratings work" ── */
+.explainer {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  max-width: 65ch;
+  margin-bottom: 1.25rem;
+}
+.explainer summary {
+  color: var(--accent);
+  cursor: pointer;
+  width: max-content;
+}
+.explainer p {
+  margin-top: 0.5rem;
+}
+.explainer strong {
+  color: var(--text);
   font-weight: 600;
 }
-.mini-table td {
-  padding: 0.4rem 0.625rem;
-  border-bottom: 1px solid var(--border);
+
+/* ── Search + toggle above the leaderboard ── */
+.table-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 0.75rem;
 }
-.mini-table tbody tr:last-child td {
-  border-bottom: none;
+.table-controls .table-toggle {
+  margin: 0;
 }
-.mini-table tbody tr:hover {
-  background: var(--surface2);
+.search-box {
+  width: min(100%, 18rem);
+  padding: 0.4rem 0.7rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.875rem;
+}
+.search-box::placeholder {
+  color: var(--text-dim);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.link-button:hover {
+  text-decoration: underline;
 }
 
 /* ── Win / Loss / Delta colors ── */
@@ -318,6 +488,11 @@ a:hover {
   margin-top: 0.25rem;
 }
 
+.other-seasons {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
 /* ── Stat cards ── */
 .stat-cards {
   display: grid;
@@ -343,6 +518,18 @@ a:hover {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   font-family: ui-monospace, 'SF Mono', monospace;
+}
+
+.stat-sub {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.stat-split {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.25rem;
 }
 
 /* ── Section header + sort toggle ── */
@@ -378,40 +565,10 @@ a:hover {
 .sort-toggle button.active {
   background: var(--surface);
   color: var(--text);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  box-shadow: 0 1px 2px var(--shadow);
 }
 .sort-toggle button:hover:not(.active) {
   color: var(--text);
-}
-
-/* ── Match history table (team page) ── */
-.match-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.match-table thead tr {
-  background: var(--surface2);
-}
-.match-table th {
-  padding: 0.625rem 1rem;
-  text-align: left;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-bottom: 1px solid var(--border);
-}
-.match-table td {
-  padding: 0.625rem 1rem;
-  font-size: 0.875rem;
-  border-bottom: 1px solid var(--border);
-}
-.match-table tbody tr:last-child td {
-  border-bottom: none;
-}
-.match-table tbody tr:hover {
-  background: var(--surface);
 }
 
 /* ── Rating chart (team page) ── */
@@ -477,7 +634,7 @@ a:hover {
   padding: 0.4rem 0.6rem;
   font-size: 0.78rem;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px var(--shadow);
   z-index: 1;
 }
 .tt-title {
@@ -487,6 +644,120 @@ a:hover {
 .tt-value {
   font-family: ui-monospace, 'SF Mono', monospace;
   font-variant-numeric: tabular-nums;
+}
+
+/* ── Match history grouped by tournament ── */
+.data-table .group-row > td {
+  padding: 0;
+  background: var(--surface);
+}
+.data-table > tbody > tr.group-row:hover {
+  background: none;
+}
+.group-row button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.group-row button:hover {
+  background: var(--surface2);
+}
+.group-caret {
+  color: var(--text-dim);
+  width: 0.75rem;
+}
+.group-name {
+  flex: 1;
+}
+.group-record,
+.group-delta {
+  font-family: ui-monospace, 'SF Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+.group-delta {
+  min-width: 4rem;
+  text-align: right;
+}
+
+/* ── Head-to-head matrix ── */
+.matrix-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.legend-bar {
+  width: 10rem;
+  height: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: linear-gradient(to right,
+    color-mix(in srgb, var(--unfavored) 70%, var(--surface)),
+    var(--surface),
+    color-mix(in srgb, var(--favored) 70%, var(--surface)));
+}
+.data-table.matrix > tbody > tr:hover {
+  background: none;
+}
+.data-table.matrix th.matrix-col {
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+}
+.data-table.matrix .matrix-corner,
+.data-table.matrix .matrix-row {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+.data-table.matrix .matrix-row {
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  padding: 0.3rem 0.75rem;
+  border-bottom: none;
+}
+.data-table.matrix .matrix-row.is-hover,
+.data-table.matrix .matrix-col.is-hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.data-table.matrix td {
+  border: 2px solid var(--bg);
+  padding: 0.3rem 0.25rem;
+  min-width: 2.75rem;
+  text-align: center;
+  line-height: 1.25;
+}
+.data-table.matrix td.matrix-self {
+  background: var(--surface2);
+}
+.matrix-p {
+  display: block;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+.matrix-rec {
+  display: block;
+  font-size: 0.68rem;
+  opacity: 0.75;
 }
 
 /* ── Responsive ── */
@@ -502,7 +773,7 @@ a:hover {
     display: none;
   }
   .leaderboard-table th,
-  .team-row td {
+  .data-table .team-row td {
     padding-left: 0.625rem;
     padding-right: 0.625rem;
   }

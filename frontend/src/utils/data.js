@@ -33,7 +33,7 @@ const ELIM_LABELS = {
   finals: 'Finals',
 }
 
-function tournamentName(tournament) {
+export function tournamentName(tournament) {
   return TOURNAMENT_NAMES[tournament] || tournament.toUpperCase()
 }
 
@@ -49,26 +49,92 @@ export function getTournaments(rawHistory) {
   return [...new Set(rawHistory.map(m => m.Tournament))].map(tournamentName)
 }
 
-async function parseCsv(path) {
-  const res = await fetch(path)
-  const text = await res.text()
-  return Papa.parse(text, { header: true, dynamicTyping: true, skipEmptyLines: true }).data
+// One parse per file, shared by every caller
+const _files = {}
+
+function parseCsv(file) {
+  _files[file] ??= fetch(`${import.meta.env.BASE_URL}data/${file}`)
+    .then(res => res.text())
+    .then(text => Papa.parse(text, { header: true, dynamicTyping: true, skipEmptyLines: true }).data)
+  return _files[file]
 }
 
-const _cache = {}
-
-export async function loadData(season) {
-  if (_cache[season]) return _cache[season]
-  const base = import.meta.env.BASE_URL
-  const { teams: teamsFile, history: historyFile } = SEASONS[season]
-  const [teams, rawHistory] = await Promise.all([
-    parseCsv(`${base}data/${teamsFile}`),
-    parseCsv(`${base}data/${historyFile}`),
-  ])
+export async function loadTeams(season) {
+  const teams = await parseCsv(SEASONS[season].teams)
   // Teams below the pipeline's MIN_TOURNAMENTS are exported with Ranked = False
   for (const t of teams) t.Ranked = t.Ranked !== false && t.Ranked !== 'False'
-  _cache[season] = { teams, rawHistory }
-  return _cache[season]
+  return teams
+}
+
+export async function loadData(season) {
+  const [teams, rawHistory] = await Promise.all([
+    loadTeams(season),
+    parseCsv(SEASONS[season].history),
+  ])
+  return { teams, rawHistory }
+}
+
+// TTT performance noise per team, as in coding/pipeline.py
+const BETA = 25 / 6
+
+// P(a beats b) from season μ and σ
+export function winProbability(a, b) {
+  const spread = Math.sqrt(2 * BETA * BETA + a.Sigma ** 2 + b.Sigma ** 2)
+  return normalCdf((a.Mu - b.Mu) / spread)
+}
+
+function normalCdf(z) {
+  // Abramowitz & Stegun 7.1.26, error < 1.5e-7
+  const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2)
+  const poly = t * (0.254829592 + t * (-0.284496736 + t * (1.421413741 + t * (-1.453152027 + t * 1.061405429))))
+  const erf = 1 - poly * Math.exp(-(z * z) / 2)
+  return z >= 0 ? (1 + erf) / 2 : (1 - erf) / 2
+}
+
+// Wins by each team over each opponent: h2h[winner][loser] = count
+export function headToHead(rawHistory) {
+  const h2h = {}
+  for (const m of rawHistory) {
+    if (m.Win !== 'Aff' && m.Win !== 'Neg') continue
+    const [w, l] = m.Win === 'Aff' ? [m.Aff, m.Neg] : [m.Neg, m.Aff]
+    h2h[w] ??= {}
+    h2h[w][l] = (h2h[w][l] ?? 0) + 1
+  }
+  return h2h
+}
+
+function normalizeSurname(name) {
+  return name.normalize('NFKD').replace(/[^a-z]/gi, '').toLowerCase()
+}
+
+// Frontend approximation of the pipeline's School/surname debater keys. Team names are
+// "School XY" or "School XY (A/B)"; a hybrid's school is "A/B", and each debater could
+// belong to either half, so a debater gets one key per school.
+export function debaterKeys(team) {
+  if (!team.Debaters) return []
+  const schools = team.Team.replace(/ \(.*\)$/, '').replace(/ \S+$/, '').split('/')
+  return team.Debaters.split(' & ').map(name => ({
+    name,
+    keys: schools.map(school => `${school}/${normalizeSurname(name)}`),
+  }))
+}
+
+// Teams in other seasons sharing a debater with this one, newest season first
+export async function otherSeasonTeams(season, team) {
+  const debaters = debaterKeys(team)
+  if (debaters.length === 0) return []
+  const found = []
+  for (const other of Object.keys(SEASONS)) {
+    if (other === season) continue
+    let teams
+    try { teams = await loadTeams(other) } catch { continue }
+    for (const t of teams) {
+      const theirs = new Set(debaterKeys(t).flatMap(d => d.keys))
+      const shared = debaters.filter(d => d.keys.some(k => theirs.has(k))).map(d => d.name)
+      if (shared.length) found.push({ season: other, team: t, shared })
+    }
+  }
+  return found
 }
 
 export function getTeamMatches(rawHistory, teamName) {

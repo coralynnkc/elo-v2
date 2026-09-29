@@ -40,14 +40,5 @@ Seeded and unseeded runs score different match sets, because seeding makes the o
 
 ## Frontend
 
-- **Search the leaderboard.** A season has 170+ teams, and finding one means scrolling. Add a filter box that matches team names and debaters.
-- **Explain the numbers.** Header tooltips cover μ, σ and Conservative. A short "How ratings work" note would still help readers from outside debate stats: TTT, why the leaderboard μ differs from the last After, and what σ means. This could go with the σ-bands idea under Eligibility above.
-- **Fewer decimals in match history.** Before, After and Δ show 3 decimals, and 1–2 would be easier to read. The leaderboard keeps 3 so columns line up.
-- **Team page context.**
-  - Show the overall record next to the Aff/Neg split.
-  - Group match history by tournament, with collapsible headers.
-  - Link to the same partnership in other seasons, using the same debater keys as the cross-season priors.
-- **Shorten the leaderboard subtitle.** It lists every tournament inline, which gets long by the NDT. Use chips, or "through NDT (11 tournaments)".
-- **Handle load errors.** A failed CSV fetch leaves "Loading…" up forever. Show an error message and a retry.
-- **Share the table CSS.** `leaderboard-table`, `match-table` and `mini-table` repeat the same header and cell rules.
-- **Light mode.** Colors are all `:root` tokens, so a light theme is one `prefers-color-scheme` block. The chart would need its own check against the light surface.
+- **Handle load errors.** A failed CSV fetch leaves "Loading…" up forever. Show an error message and a retry. Not urgent. Note that `parseCsv` now caches the fetch promise, so a failed fetch stays cached until reload.
+- **Cross-season links are approximate.** The team page matches other seasons on `School/surname` taken from the team name and `Debaters`. It doesn't apply `SCHOOL_ALIASES` or the hybrid placement, and it can link two different debaters who share a surname at one school.
