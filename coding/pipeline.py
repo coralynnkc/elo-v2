@@ -84,7 +84,7 @@ SEASONS = {
     },
     'arms': {
         'data_dir': 'data_arms',
-        'tournaments': ['nu'],
+        'tournaments': ['nu', 'kentuckyrr', 'uk'],
         'prior_season': 'labor',
         'name_fixes': {},
         'teams_file': 'teams_arms.csv',

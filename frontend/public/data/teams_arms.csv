@@ -1,136 +1,85 @@
 Team,Debaters,Mu,Sigma,Aff_Rounds,Neg_Rounds,Conservative
-Emory GY,Gallagher & Young,44.066,2.793,7,6,35.686
-Michigan ES,Esmailzadeh & Shah,43.213,2.801,6,5,34.81
-Michigan BS,Barrett & Song,40.134,2.965,5,5,31.239
-Kansas UO,Ulven & Owings,39.413,2.785,4,5,31.058
-UC Berkeley BM,Boguslavsky & Modi,38.143,2.743,6,6,29.914
-Emory SY,Stumpff & Yang,37.221,2.41,6,5,29.992
-Wake Forest BS,Brown & Sencion,37.066,2.862,6,5,28.479
-Michigan CS,Chamarthy & Shetty,37.037,2.555,5,5,29.372
-Michigan State LM,Lewis & Martin,35.912,2.637,4,6,28.001
-Northwestern LT,Li & Tahirkheli,34.45,2.545,5,5,26.814
-Macalester KS,Kochel & Schaffhausen,34.355,2.784,5,5,26.003
-UTD DH,Dickey & Hale,34.133,2.514,5,5,26.592
-Iowa EW,Eltyeb & Weimar,33.82,2.471,5,5,26.405
-Kansas FB,Falin & Blaser,33.82,2.788,5,4,25.455
-Dartmouth CG,Cai & Goldberg,33.248,2.409,4,5,26.021
-Wake Forest LP,Leverett & Patel,33.04,2.642,4,5,25.113
-Kansas SS,Shaw & Suleman,32.768,2.858,5,5,24.195
-Northwestern LP,Leonard & Peng,32.515,3.026,5,4,23.438
-Texas AG,Ali & Gade,32.448,2.931,4,4,23.653
-Iowa PK,Parfenoff & Kleiman,32.354,2.514,5,5,24.814
-Harvard HL,Howard & Li,32.278,2.894,4,5,23.596
-Harvard DS,Deshpande & Sridharan,32.175,2.625,5,4,24.302
-Wichita State MG,Griffith & Mallett,31.973,4.766,1,2,17.674
-Michigan GV,George & Vadathavoor,31.541,3.207,4,4,21.92
-Northwestern JP,Jayaratne & Patterson,31.45,2.945,4,5,22.616
-Dartmouth JT,Jones & Tapia,31.129,2.776,5,4,22.799
-George Mason DC,Davis & clough,31.067,2.935,4,4,22.263
-Western Kentucky NI,Niendorf & Ingram,31.044,2.558,6,5,23.37
-Michigan State JS,Jarman & Shehzad,31.013,2.499,4,5,23.515
-Michigan AO,Agustin & Ou,30.931,2.593,4,4,23.153
-Liberty CL,Cunningham & Layton,30.794,2.52,4,5,23.235
-Texas AL,Low & Andrew,30.791,4.207,2,2,18.169
-CSU Long Beach EM,Escobar & Medina,30.706,2.48,4,5,23.267
-Michigan AC,Almand & Chalamalasetti,30.697,3.091,3,4,21.424
-Emory AT,Aggarwal & Taylor,30.438,2.723,4,4,22.268
-Harvard GM,Gheith & Mazumdar,30.378,3.302,4,4,20.473
-Kansas BT,Baxter-Kauf & Terreros,30.124,3.504,4,4,19.613
-Dartmouth CS,Canabou & Seibels,29.972,3.028,4,4,20.887
-Harvard AB,Aoki & Bodet,29.878,2.666,4,4,21.879
-Georgia CP,Cannon & Pack,29.512,2.731,4,4,21.321
-George Mason WW,Witkov & Wright,29.49,2.732,5,4,21.295
-Georgetown GT,Greenberg & Tamfu,29.158,2.721,4,4,20.994
-Michigan State BS,Buhl & sterbenc,28.926,3.262,4,4,19.141
-Georgetown LN,Lastelick & Nanji,28.846,2.763,4,4,20.559
-Dartmouth RU,ribo & Utovac,28.772,2.924,4,5,20.0
-Wake Forest AM,Aderibigbe & Mbye,28.559,2.935,4,4,19.753
-Kansas AW,Ain & Walawender,28.394,2.565,4,4,20.7
-Northwestern KM,Kung & Miramontes,28.344,3.111,4,4,19.012
-Kentucky SR,Schedler & Rimpson,28.328,2.602,5,4,20.523
-Michigan State KP,Kincaid & Patel,28.039,3.378,4,4,17.904
-Southern California TM,Troup & Mills,27.95,2.541,4,4,20.328
-Michigan State FM,Foster & Morris,27.848,3.05,4,4,18.698
-Southern California BM,Bradley & Martin,27.614,2.665,4,4,19.62
-Emory TY,Tahirkheli & Yang,27.194,3.382,4,4,17.046
-Emory HT,Hight & Tharp,27.089,3.216,4,4,17.44
-UTD RH,Ravi & Hoch,26.555,2.624,4,4,18.684
-Dartmouth BC,Ben-Abdallah & Carpenter,26.359,2.841,4,4,17.837
-Kansas CC,Chidambaranathan & Chaudhry,26.328,2.604,4,4,18.516
-UC Berkeley AW,Antony & Wilson,26.273,3.277,4,4,16.443
-Houston FI,Fernandez & Ibarra,26.014,2.909,4,4,17.288
-Oklahoma BW,Ballinger & Wright,26.007,2.998,4,3,17.012
-Kentucky CS,Coale & Slish,25.947,3.122,4,4,16.58
-Emory JR,Johnston & Ravikumar,25.939,3.06,4,4,16.76
-Western Kentucky KN,Kumar & Ney,25.909,2.548,4,4,18.265
-Northwestern CY,Camp & Yao,25.732,3.076,4,4,16.503
-Georgetown BP,Perez-Rubio & Barbiere,25.429,3.203,4,4,15.82
-Michigan LS,Laskar & Sivasubramanian,25.398,3.191,4,4,15.825
-Emory SW,So & Wang,25.381,3.048,4,4,16.236
-Western Kentucky CS,Carter & Schintgen,25.362,2.765,4,4,17.069
-Kansas BS,Brown & Suleman,25.32,2.992,4,4,16.343
-Emory OP,okahata & Park,25.256,2.839,4,4,16.738
-Southern California DP,Dollinger & Presley,24.966,2.914,4,4,16.223
-Georgia KL,Kaidar-Heafetz & Lackey,24.965,2.962,4,3,16.079
-Wake Forest DM,Dingley & McDonald,24.833,3.227,4,4,15.152
-Missouri State NC,Neal & Cooper,24.822,3.124,4,4,15.451
-UC Berkeley GS,Gilrain-Lennon & Situ,24.675,2.881,4,4,16.032
-Emory MW,Mansoor & Walsh,24.571,3.375,4,4,14.444
-Kansas BB,Bath & Boyle,24.275,2.924,4,4,15.503
-Michigan AR,Apfaltrer & Ryan,24.053,3.396,4,4,13.864
-Georgetown LC,Li & Ciancanelli,23.866,3.106,4,4,14.548
-Baylor BK,Benton & Keeler,23.419,2.824,4,4,14.946
-North Texas BV,bowman & Vargas,23.306,2.71,4,4,15.176
-Michigan PF,Pazona & Furtek,23.267,3.261,4,4,13.484
-Emory CS,Charabuddi & Shaeffer,22.758,3.292,4,4,12.882
-Wake Forest HN,Hale & Namikas,22.726,2.771,4,4,14.414
-Kansas PB,Persson & Bauman,22.67,2.982,4,4,13.723
-Wyoming HW,Hawley & Widi,22.349,2.792,4,4,13.972
-Kansas PL,Pace & LaPoint,22.136,2.667,4,4,14.135
-Baylor PA,Phillips & Arroyo,22.096,3.056,4,4,12.928
-Georgetown VX,Valame & Xiao,21.904,2.891,4,4,13.231
-Wake Forest PT,Prabhakar & Timsah,21.708,3.255,4,4,11.942
-Wake Forest LW,Laforest & Williams,21.561,2.912,4,4,12.826
-Emory CF,Cannaday & Feldman,21.341,3.007,4,4,12.318
-Iowa SB,Bilicki & Severson,21.28,2.734,4,4,13.08
-Dartmouth RS,Rao & Song,21.106,2.924,4,4,12.333
-Gonzaga MP,Murray & Pascas,20.967,3.068,4,4,11.764
-Michigan AD,Athanassiou & Davidov,20.901,3.617,4,4,10.049
-Michigan BL,Baba & Ledesma,20.597,2.698,4,4,12.503
-Kansas State SF,Spurlock & Fellows,20.574,2.955,4,4,11.708
-Kansas FH,Fordyce & Hasiuk,19.932,3.404,4,4,9.719
-Indiana TF,Truemper & Fish,19.775,2.802,4,4,11.37
-Texas GS,Garza & Stevenson,19.403,3.399,4,4,9.208
-Michigan BB,Brashear & Byron-Smarra,19.288,3.394,4,4,9.107
-Emory CrSm,Cross & Smith,18.786,3.441,4,4,8.462
-Wake Forest NS,Sampat & Nounawon-Castro,18.759,3.114,4,4,9.417
-Missouri State DS,DeAngelis & Siever,18.702,3.07,4,3,9.493
-Dartmouth DO,Dinerman & Okuna,18.672,3.476,3,4,8.245
-Emory ChSt,Chen & Sterenberg,18.643,3.503,4,4,8.135
-Dartmouth HH,Hatton & Hilario-Peralta,18.479,3.344,4,4,8.448
-Dartmouth BJ,Brody & Jiang,18.297,3.276,4,4,8.468
-Southern California LP,Lee & Plotkin,18.025,3.053,4,4,8.868
-Kansas State DD,Day & Draeger,17.038,2.828,4,4,8.553
-Iowa LS,Sanderson & Larsen,17.009,3.11,4,4,7.678
-Trinity BK,Barden & Khalikov,16.971,2.913,4,4,8.232
-Michigan BP,Beg & Pandit,16.821,3.271,4,4,7.007
-Emory ST,Stearns & Tai,16.62,2.707,4,4,8.501
-West Georgia GK,Kennon & García,16.525,3.311,4,4,6.594
-Trinity CO,Olabanji & Crowley,15.987,3.213,4,4,6.347
-Washburn LR,Raines & Largent,15.309,3.336,4,4,5.303
-Baylor LM,Li & Merriwether,14.795,3.045,4,4,5.661
-Missouri State DH,Dua & Hahn,14.061,3.514,4,4,3.52
-Georgetown RM,Ross & Molina-Jimenez,13.891,3.279,4,4,4.055
-Missouri State BM,Bates & McSorley,13.869,3.489,4,4,3.401
-Missouri State CP,Cowdrey-Mota & Petty,13.729,3.416,4,3,3.481
-Utah BH,Boscan & Hicks,13.213,3.396,4,4,3.023
-West Georgia HL,Lovering & Handley,13.175,3.684,3,4,2.121
-Western Kentucky HM,Hendrix & Mike,13.12,3.388,4,4,2.957
-Indiana DJ,Duggal & Jones,13.11,3.327,4,4,3.127
-Baylor MM,Marek & Mathews,11.672,3.711,3,4,0.539
-Utah VP,Verbeck-O'Brien & Parrish,11.382,3.221,4,4,1.72
-Oklahoma PS,Smith & prather,10.116,3.338,4,4,0.103
-Wyoming LW,Lyday & Willson,9.696,5.071,2,2,-5.516
-Kansas LL,Lemaster & Levin,9.581,3.055,4,4,0.415
-Gonzaga AG,atkin & Gibson,9.36,3.495,4,4,-1.124
-Emory GW,granchi & Wang,7.974,4.214,4,3,-4.667
+Emory GY,Gallagher & Young,45.135,2.513,10,10,37.596
+Michigan ES,Esmailzadeh & Shah,41.725,2.335,9,9,34.721
+Michigan BS,Barrett & Song,41.634,2.073,12,14,35.416
+Michigan CS,Chamarthy & Shetty,39.484,2.214,8,11,32.843
+Kansas UO,Ulven & Owings,38.9,1.849,10,14,33.354
+Dartmouth CG,Cai & Goldberg,36.816,1.67,14,12,31.807
+Emory SY,Stumpff & Yang,36.808,1.874,10,10,31.187
+UTD DH,Dickey & Hale,35.867,2.014,8,11,29.825
+UC Berkeley BM,Boguslavsky & Modi,35.224,2.039,9,10,29.108
+Michigan State LM,Lewis & Martin,34.811,1.879,11,12,29.174
+Northwestern LT,Li & Tahirkheli,34.668,2.082,10,8,28.421
+Kansas SS,Shaw & Suleman,34.37,1.968,9,10,28.467
+Iowa EW,Eltyeb & Weimar,34.339,1.976,9,9,28.41
+Wake Forest BS,Brown & Sencion,34.274,2.144,9,8,27.842
+Wake Forest LP,Leverett & Patel,33.65,2.059,9,8,27.472
+CSU Long Beach EM,Escobar & Medina,32.989,1.788,11,11,27.625
+Iowa KP,Parfenoff & Kleiman,32.96,1.984,8,9,27.008
+Northwestern LP,Leonard & Peng,31.903,2.342,8,7,24.878
+Liberty CL,Cunningham & Layton,31.725,1.97,7,9,25.817
+Harvard HL,Howard & Li,31.598,2.23,7,8,24.909
+Kansas BF,Falin & Blaser,31.591,2.136,8,7,25.182
+Michigan GV,George & Vadathavoor,31.557,2.354,7,8,24.495
+Northwestern JP,Jayaratne & Patterson,31.353,2.137,9,8,24.943
+Michigan State JS,Jarman & Shehzad,31.231,2.062,8,7,25.044
+Northwestern CY,Camp & Yao,31.175,2.176,9,7,24.649
+George Mason CD,Davis & clough,31.036,2.265,8,7,24.241
+Michigan AO,Agustin & Ou,30.62,2.073,6,7,24.4
+Michigan AC,Almand & Chalamalasetti,30.565,2.428,6,7,23.281
+Harvard AB,Aoki & Bodet,30.549,2.15,8,7,24.098
+Georgetown LN,Lastelick & Nanji,30.389,2.302,7,7,23.484
+Emory AT,Aggarwal & Taylor,30.273,2.218,7,7,23.621
+Kansas BS,Brown & Suleman,30.206,2.327,7,7,23.224
+Kentucky RS,Schedler & Rimpson,30.182,2.063,8,8,23.993
+George Mason WW,Witkov & Wright,29.414,2.1,8,8,23.114
+Michigan State FM,Foster & Morris,29.158,2.654,6,5,21.196
+Western Kentucky KN,Kumar & Ney,29.151,1.972,7,8,23.234
+Western Kentucky IN,Niendorf & Ingram,29.141,2.12,9,8,22.782
+Kansas BB,Bath & Boyle,28.985,2.042,8,8,22.86
+Kansas AW,Ain & Walawender,28.92,2.04,8,7,22.799
+Dartmouth BC,Ben-Abdallah & Carpenter,28.453,2.313,7,7,21.514
+Southern California MT,Troup & Mills,28.411,2.174,7,7,21.888
+Georgetown GT,Greenberg & Tamfu,28.1,2.197,7,7,21.509
+Emory HT,Hight & Tharp,28.097,2.487,7,7,20.637
+Southern California BM,Bradley & Martin,28.063,2.065,9,7,21.867
+Wake Forest AM,Aderibigbe & Mbye,28.053,2.294,7,7,21.17
+Michigan State BS,Buhl & sterbenc,27.782,2.408,7,7,20.558
+Kansas BT,Baxter-Kauf & Terreros,27.715,2.529,7,7,20.129
+Northwestern KM,Kung & Miramontes,27.519,2.439,7,7,20.2
+Georgia CP,Cannon & Pack,27.466,2.248,7,7,20.723
+Kentucky CS,Coale & Slish,27.311,2.179,10,10,20.774
+Emory OP,okahata & Park,27.187,2.211,7,7,20.555
+Michigan State KP,Kincaid & Patel,26.714,2.738,7,7,18.499
+Michigan FP,Pazona & Furtek,26.613,2.346,7,7,19.576
+Dartmouth RS,Rao & Song,26.613,2.289,7,7,19.747
+Georgetown CL,Li & Ciancanelli,26.586,2.492,6,7,19.111
+Emory MW,Mansoor & Walsh,26.065,2.524,7,7,18.492
+Georgetown BP,Perez-Rubio & Barbiere,26.019,2.285,7,7,19.165
+UC Berkeley GS,Gilrain-Lennon & Situ,25.572,2.39,7,7,18.402
+Houston FI,Fernandez & Ibarra,25.563,2.258,7,7,18.79
+Western Kentucky CS,Carter & Schintgen,25.498,2.179,7,7,18.961
+Wichita State GM,Griffith & Mallett,25.145,2.889,4,5,16.479
+Kansas PL,Pace & LaPoint,24.737,2.227,7,7,18.057
+Michigan BB,Brashear & Byron-Smarra,24.641,2.351,7,7,17.588
+Oklahoma BW,Ballinger & Wright,24.137,2.384,7,6,16.985
+Baylor BK,Benton & Keeler,23.849,2.203,7,7,17.24
+Wake Forest LW,Laforest & Williams,23.237,2.347,7,7,16.194
+Wyoming HW,Hawley & Widi,22.946,2.211,7,7,16.313
+Wake Forest NS,Sampat & Nounawon-Castro,22.91,2.3,7,7,16.01
+Wake Forest HN,Hale & Namikas,22.835,2.304,6,6,15.923
+Michigan AD,Athanassiou & Davidov,22.757,2.735,7,7,14.55
+Gonzaga MP,Murray & Pascas,22.489,2.378,7,7,15.356
+Kansas FH,Fordyce & Hasiuk,22.152,2.513,7,7,14.613
+Southern California LP,Lee & Plotkin,22.117,2.3,7,7,15.219
+Texas GS,Garza & Stevenson,21.986,2.563,7,7,14.297
+Missouri State DS,DeAngelis & Siever,21.265,2.445,7,6,13.931
+Iowa BS,Bilicki & Severson,21.125,2.302,7,7,14.218
+Dartmouth HH,Hatton & Hilario-Peralta,20.887,2.374,7,7,13.764
+Indiana TF,Truemper & Fish,18.705,2.388,7,7,11.542
+Western Kentucky HM,Hendrix & Mike,15.907,2.772,7,7,7.59
+Baylor MM,Marek & Mathews,15.547,2.767,6,7,7.246
+Indiana DJ,Duggal & Jones,14.689,2.643,7,7,6.76
+West Georgia HL,Lovering & Handley,12.499,3.307,5,6,2.58
+Gonzaga AG,atkin & Gibson,9.699,2.932,7,7,0.902
+Emory GW,granchi & Wang,9.211,3.464,7,6,-1.181
