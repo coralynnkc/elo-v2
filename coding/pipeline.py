@@ -98,7 +98,8 @@ CURRENT_SEASON = 'arms'
 _ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103,
                'semis_2': 104, 'finals': 105}  # semis_2: Harvard's third-place debate
 
-# Teams must appear in this many tournaments to be ranked (capped at the number loaded)
+# Teams must appear in this many tournaments to be ranked (capped at the number loaded).
+# Unranked teams are still exported, with Ranked = False, so the frontend can show them.
 MIN_TOURNAMENTS = 2
 
 # One speaker in a points cell: "JGonzalez Arce 28.7" (several scores when judged by a panel)
@@ -637,10 +638,13 @@ def run_pipeline(
     teams[round_cols] = teams[round_cols].round(3)
     teams = teams[(teams['Aff_Rounds'] > 0) | (teams['Neg_Rounds'] > 0)]
 
-    # Exclude teams that competed in fewer than MIN_TOURNAMENTS tournaments
+    # Flag teams that competed in fewer than MIN_TOURNAMENTS tournaments
     # (relaxed early in a season, before that many tournaments exist)
     history_df = pd.DataFrame(all_history)
-    if not history_df.empty:
+    if history_df.empty:
+        teams['Tournaments'] = 0
+        teams['Ranked'] = True
+    else:
         aff_tours = history_df[['Aff', 'Tournament']].rename(columns={'Aff': 'Team'})
         neg_tours = history_df[['Neg', 'Tournament']].rename(columns={'Neg': 'Team'})
         team_tour_counts = (
@@ -650,8 +654,8 @@ def run_pipeline(
             .nunique()
         )
         min_tournaments = min(MIN_TOURNAMENTS, history_df['Tournament'].nunique())
-        eligible = team_tour_counts[team_tour_counts >= min_tournaments].index
-        teams = teams[teams['Team'].isin(eligible)]
+        teams['Tournaments'] = teams['Team'].map(team_tour_counts).fillna(0).astype(int)
+        teams['Ranked'] = teams['Tournaments'] >= min_tournaments
 
     teams = teams.sort_values('Mu', ascending=False).reset_index(drop=True)
 

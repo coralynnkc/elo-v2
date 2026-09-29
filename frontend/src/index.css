@@ -103,6 +103,20 @@ a:hover {
   margin: 0.5rem 0 1rem;
 }
 
+/* ── Toggle above a table ── */
+.table-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  margin: 0 0 0.75rem;
+  cursor: pointer;
+}
+.table-toggle input {
+  accent-color: var(--accent);
+  margin: 0;
+}
+
 /* ── Table wrapper ── */
 .table-wrap {
   border: 1px solid var(--border);
@@ -183,6 +197,9 @@ a:hover {
 .team-row td {
   padding: 0.75rem 1rem;
   font-size: 0.9rem;
+}
+.team-row.is-unranked td:not(.chevron) {
+  opacity: 0.6;
 }
 
 .rank {

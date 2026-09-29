@@ -1,6 +1,6 @@
-# Planning: methodology
+# Planning
 
-Open work on the rating pipeline (`coding/pipeline.py`). CLAUDE.md covers how the pipeline works and README.md covers data entry. Settled questions get one line each.
+Open work on the rating pipeline (`coding/pipeline.py`) and the frontend (`frontend/src/`). CLAUDE.md covers how the pipeline works and README.md covers data entry. Settled questions get one line each.
 
 ## Benchmarks
 
@@ -37,3 +37,17 @@ Seeded and unseeded runs score different match sets, because seeding makes the o
 - **Seasons:** energy → labor → arms, chained by `prior_season`. Energy's tournament order was confirmed by hand and by seriation.
 - **Validation** (`validate.py`): side flips ≥90%, record gap ≤1.5 from R3, round robins skipped, missing elims detected, `CONSOLATION_ROUNDS` checked. Every labor and arms tournament passes.
 - **Storage:** data is canonical in git. The Dropbox damage (empty placeholder files, broken `.git`) is gone, and `git fsck` is clean.
+
+## Frontend
+
+- **Search the leaderboard.** A season has 170+ teams, and finding one means scrolling. Add a filter box that matches team names and debaters.
+- **Explain the numbers.** Header tooltips cover μ, σ and Conservative. A short "How ratings work" note would still help readers from outside debate stats: TTT, why the leaderboard μ differs from the last After, and what σ means. This could go with the σ-bands idea under Eligibility above.
+- **Fewer decimals in match history.** Before, After and Δ show 3 decimals, and 1–2 would be easier to read. The leaderboard keeps 3 so columns line up.
+- **Team page context.**
+  - Show the overall record next to the Aff/Neg split.
+  - Group match history by tournament, with collapsible headers.
+  - Link to the same partnership in other seasons, using the same debater keys as the cross-season priors.
+- **Shorten the leaderboard subtitle.** It lists every tournament inline, which gets long by the NDT. Use chips, or "through NDT (11 tournaments)".
+- **Handle load errors.** A failed CSV fetch leaves "Loading…" up forever. Show an error message and a retry.
+- **Share the table CSS.** `leaderboard-table`, `match-table` and `mini-table` repeat the same header and cell rules.
+- **Light mode.** Colors are all `:root` tokens, so a light theme is one `prefers-color-scheme` block. The chart would need its own check against the light surface.

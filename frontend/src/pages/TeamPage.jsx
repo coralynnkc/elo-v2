@@ -18,7 +18,8 @@ export default function TeamPage() {
 
   const { teams, rawHistory } = data
   const team = teams.find(t => t.Team === name)
-  const rank = team ? teams.indexOf(team) + 1 : null
+  const ranked = teams.filter(t => t.Ranked)
+  const rank = team?.Ranked ? ranked.indexOf(team) + 1 : null
   const matches = getTeamMatches(rawHistory, name)
 
   const affWins = matches.filter(m => m.side === 'Aff' && m.win).length
@@ -39,7 +40,12 @@ export default function TeamPage() {
       <header className="team-header">
         <h1>{name}</h1>
         {team?.Debaters && <p className="subtitle">{team.Debaters}</p>}
-        {rank &&<span className="team-rank">Ranked #{rank} of {teams.length}</span>}
+        {rank && <span className="team-rank">Ranked #{rank} of {ranked.length}</span>}
+        {team && !team.Ranked && (
+          <span className="team-rank">
+            Unranked · {team.Tournaments} tournament{team.Tournaments === 1 ? '' : 's'}
+          </span>
+        )}
       </header>
 
       {team && (

@@ -65,6 +65,8 @@ export async function loadData(season) {
     parseCsv(`${base}data/${teamsFile}`),
     parseCsv(`${base}data/${historyFile}`),
   ])
+  // Teams below the pipeline's MIN_TOURNAMENTS are exported with Ranked = False
+  for (const t of teams) t.Ranked = t.Ranked !== false && t.Ranked !== 'False'
   _cache[season] = { teams, rawHistory }
   return _cache[season]
 }

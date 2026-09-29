@@ -3,7 +3,7 @@ import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { SEASONS, loadData, getTeamMatches, getTournaments } from "../utils/data";
 
 const COLUMNS = [
-  { key: "rank", label: "#", value: (r) => r.rank, defaultDir: "asc", className: "rank" },
+  { key: "rank", label: "#", value: (r) => r.order, defaultDir: "asc", className: "rank" },
   { key: "team", label: "Team", value: (r) => r.team.Team, defaultDir: "asc" },
   { key: "mu", label: "Rating", value: (r) => r.team.Mu, defaultDir: "desc", numeric: true,
     title: "μ: the model's best estimate of team strength" },
@@ -20,6 +20,7 @@ export default function Leaderboard() {
   const [data, setData] = useState(null);
   const [expanded, setExpanded] = useState(new Set());
   const [sort, setSort] = useState({ key: "rank", dir: "asc" });
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     if (!SEASONS[season]) return;
@@ -41,8 +42,14 @@ export default function Leaderboard() {
   const { teams, rawHistory } = data;
   const tournaments = getTournaments(rawHistory);
 
-  // Rank stays the μ rank (the CSV order) whatever column the table is sorted by
-  const rows = teams.map((team, i) => ({ team, rank: i + 1 }));
+  // Rank stays the μ rank among ranked teams whatever column the table is sorted by.
+  // Unranked teams (too few tournaments) get no rank and sort after ranked ones.
+  const ranked = teams.filter((t) => t.Ranked);
+  const unranked = teams.filter((t) => !t.Ranked);
+  const rows = ranked.map((team, i) => ({ team, rank: i + 1, order: i }));
+  if (showAll) {
+    unranked.forEach((team, i) => rows.push({ team, rank: null, order: ranked.length + i }));
+  }
   const col = COLUMNS.find((c) => c.key === sort.key);
   rows.sort((a, b) => {
     const va = col.value(a), vb = col.value(b);
@@ -79,6 +86,20 @@ export default function Leaderboard() {
           </p>
         )}
       </header>
+
+      {unranked.length > 0 && (
+        <label className="table-toggle">
+          <input
+            type="checkbox"
+            checked={showAll}
+            onChange={(e) => setShowAll(e.target.checked)}
+          />
+          Show unranked teams
+          <span className="dim">
+            {" "}({unranked.length} with too few tournaments)
+          </span>
+        </label>
+      )}
 
       <div className="table-wrap">
         <table className="leaderboard-table">
@@ -123,10 +144,12 @@ export default function Leaderboard() {
               return (
                 <React.Fragment key={team.Team}>
                   <tr
-                    className={`team-row${isExpanded ? " is-expanded" : ""}`}
+                    className={`team-row${isExpanded ? " is-expanded" : ""}${rank ? "" : " is-unranked"}`}
                     onClick={() => toggle(team.Team)}
                   >
-                    <td className="rank">{rank}</td>
+                    <td className="rank" title={rank ? undefined : `Unranked: ${team.Tournaments} tournament${team.Tournaments === 1 ? "" : "s"}`}>
+                      {rank ?? "–"}
+                    </td>
                     <td className="team-name">
                       <Link
                         to={`/${season}/team/${encodeURIComponent(team.Team)}`}
