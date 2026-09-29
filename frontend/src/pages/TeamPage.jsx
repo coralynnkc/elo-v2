@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { SEASONS, loadData, getTeamMatches } from '../utils/data'
+import RatingChart from '../components/RatingChart'
 
 export default function TeamPage() {
   const { season, teamName } = useParams()
@@ -68,6 +69,15 @@ export default function TeamPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {matches.length > 0 && (
+        <>
+          <div className="section-header">
+            <h2>Rating Over the Season</h2>
+          </div>
+          <RatingChart matches={matches} seasonMu={team?.Mu} />
+        </>
       )}
 
       <div className="section-header">

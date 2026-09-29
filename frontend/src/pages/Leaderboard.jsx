@@ -2,10 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate, NavLink, useParams } from "react-router-dom";
 import { SEASONS, loadData, getTeamMatches, getTournaments } from "../utils/data";
 
+const COLUMNS = [
+  { key: "rank", label: "#", value: (r) => r.rank, defaultDir: "asc", className: "rank" },
+  { key: "team", label: "Team", value: (r) => r.team.Team, defaultDir: "asc" },
+  { key: "mu", label: "Rating", value: (r) => r.team.Mu, defaultDir: "desc", numeric: true,
+    title: "μ: the model's best estimate of team strength" },
+  { key: "sigma", label: "σ", value: (r) => r.team.Sigma, defaultDir: "asc", numeric: true,
+    className: "col-sigma", title: "σ: uncertainty in the rating; shrinks as a team debates more" },
+  { key: "rounds", label: "Rounds", value: (r) => r.team.Aff_Rounds + r.team.Neg_Rounds,
+    defaultDir: "desc", numeric: true, className: "col-rounds" },
+  { key: "conservative", label: "Conservative", value: (r) => r.team.Conservative,
+    defaultDir: "desc", numeric: true, title: "μ − 3σ: a rating the team very likely exceeds" },
+];
+
 export default function Leaderboard() {
   const { season } = useParams();
   const [data, setData] = useState(null);
   const [expanded, setExpanded] = useState(new Set());
+  const [sort, setSort] = useState({ key: "rank", dir: "asc" });
 
   useEffect(() => {
     if (!SEASONS[season]) return;
@@ -26,6 +40,23 @@ export default function Leaderboard() {
 
   const { teams, rawHistory } = data;
   const tournaments = getTournaments(rawHistory);
+
+  // Rank stays the μ rank (the CSV order) whatever column the table is sorted by
+  const rows = teams.map((team, i) => ({ team, rank: i + 1 }));
+  const col = COLUMNS.find((c) => c.key === sort.key);
+  rows.sort((a, b) => {
+    const va = col.value(a), vb = col.value(b);
+    const cmp = typeof va === "string" ? va.localeCompare(vb) : va - vb;
+    return sort.dir === "asc" ? cmp : -cmp;
+  });
+
+  function sortBy(key) {
+    setSort((prev) =>
+      prev.key === key
+        ? { key, dir: prev.dir === "asc" ? "desc" : "asc" }
+        : { key, dir: COLUMNS.find((c) => c.key === key).defaultDir }
+    );
+  }
 
   return (
     <div className="page">
@@ -53,17 +84,35 @@ export default function Leaderboard() {
         <table className="leaderboard-table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Team</th>
-              <th className="align-right">Rating</th>
-              <th className="align-right">σ</th>
-              <th className="align-right">Rounds</th>
-              <th className="align-right">Conservative</th>
-              <th></th>
+              {COLUMNS.map((c) => {
+                const active = sort.key === c.key;
+                return (
+                  <th
+                    key={c.key}
+                    className={`${c.className ?? ""}${c.numeric ? " align-right" : ""}`}
+                    aria-sort={active ? (sort.dir === "asc" ? "ascending" : "descending") : "none"}
+                    title={c.title}
+                  >
+                    <button
+                      type="button"
+                      className={`sort-header${active ? " is-active" : ""}`}
+                      onClick={() => sortBy(c.key)}
+                    >
+                      {c.label}
+                      <span className="sort-arrow" aria-hidden="true">
+                        {active ? (sort.dir === "asc" ? "↑" : "↓") : ""}
+                      </span>
+                    </button>
+                  </th>
+                );
+              })}
+              <th>
+                <span className="visually-hidden">Details</span>
+              </th>
             </tr>
           </thead>
           <tbody>
-            {teams.map((team, i) => {
+            {rows.map(({ team, rank }) => {
               const isExpanded = expanded.has(team.Team);
               const top5 = isExpanded
                 ? getTeamMatches(rawHistory, team.Team)
@@ -77,7 +126,7 @@ export default function Leaderboard() {
                     className={`team-row${isExpanded ? " is-expanded" : ""}`}
                     onClick={() => toggle(team.Team)}
                   >
-                    <td className="rank">{i + 1}</td>
+                    <td className="rank">{rank}</td>
                     <td className="team-name">
                       <Link
                         to={`/${season}/team/${encodeURIComponent(team.Team)}`}
@@ -86,11 +135,23 @@ export default function Leaderboard() {
                         {team.Team}
                       </Link>
                     </td>
-                    <td className="num">{team.Mu}</td>
-                    <td className="num dim">{team.Sigma}</td>
-                    <td className="num">{team.Aff_Rounds + team.Neg_Rounds}</td>
-                    <td className="num">{team.Conservative}</td>
-                    <td className="chevron">{isExpanded ? "▲" : "▼"}</td>
+                    <td className="num">{team.Mu.toFixed(3)}</td>
+                    <td className="num dim col-sigma">{team.Sigma.toFixed(3)}</td>
+                    <td className="num col-rounds">{team.Aff_Rounds + team.Neg_Rounds}</td>
+                    <td className="num">{team.Conservative.toFixed(3)}</td>
+                    <td className="chevron">
+                      <button
+                        type="button"
+                        aria-expanded={isExpanded}
+                        aria-label={`${isExpanded ? "Hide" : "Show"} top rounds for ${team.Team}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggle(team.Team);
+                        }}
+                      >
+                        {isExpanded ? "▲" : "▼"}
+                      </button>
+                    </td>
                   </tr>
 
                   {isExpanded && (
