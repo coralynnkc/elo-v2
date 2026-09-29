@@ -4,8 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Policy Debate Rankings</title>
-    <script type="module" crossorigin src="/elo-v2/assets/index-BC_4C-QO.js"></script>
-    <link rel="stylesheet" crossorigin href="/elo-v2/assets/index-DQSGvFVr.css">
+    <script>
+      // Set the theme before first paint: the saved choice, else the system setting
+      try {
+        var t = localStorage.getItem('theme')
+      } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+      }
+      document.documentElement.dataset.theme = t
+    </script>
+    <script type="module" crossorigin src="/elo-v2/assets/index-D4bCmfHI.js"></script>
+    <link rel="stylesheet" crossorigin href="/elo-v2/assets/index-RwRXkipq.css">
   </head>
   <body>
     <div id="root"></div>
