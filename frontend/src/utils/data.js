@@ -78,6 +78,7 @@ export function getTeamMatches(rawHistory, teamName) {
       return {
         round: m.Round,
         tournament: m.Tournament,
+        tournamentName: tournamentName(m.Tournament),
         roundLabel: m.Round_Label,
         roundDisplay: formatRound(m.Tournament, String(m.Round_Label)),
         side: isAff ? 'Aff' : 'Neg',
