@@ -44,9 +44,10 @@ export default function Leaderboard() {
 
   const { teams, rawHistory } = data;
 
-  // Rank stays the μ rank among ranked teams whatever column the table is sorted by.
-  // Unranked teams (too few tournaments) get no rank and sort after ranked ones.
-  // A search looks through unranked teams too, so any team can be found.
+  // Rank is the μ rank whatever column the table is sorted by. With unranked teams
+  // (too few tournaments) shown, everyone is ranked together by μ; otherwise only
+  // ranked teams get a number. A search looks through unranked teams too, so any team
+  // can be found; those rows sit at their μ position with no number.
   const ranked = teams.filter((t) => t.Ranked);
   const unranked = teams.filter((t) => !t.Ranked);
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
@@ -54,10 +55,10 @@ export default function Leaderboard() {
     const text = `${t.Team} ${t.Debaters ?? ""}`.toLowerCase();
     return terms.every((term) => text.includes(term));
   };
-  let rows = ranked.map((team, i) => ({ team, rank: i + 1, order: i }));
-  if (showAll || terms.length) {
-    unranked.forEach((team, i) => rows.push({ team, rank: null, order: ranked.length + i }));
-  }
+  const rankOf = new Map((showAll ? teams : ranked).map((t, i) => [t, i + 1]));
+  let rows = teams
+    .map((team, order) => ({ team, rank: rankOf.get(team) ?? null, order }))
+    .filter((r) => r.team.Ranked || showAll || terms.length);
   if (terms.length) rows = rows.filter((r) => matches(r.team));
   const col = COLUMNS.find((c) => c.key === sort.key);
   rows.sort((a, b) => {
@@ -171,10 +172,10 @@ export default function Leaderboard() {
               return (
                 <React.Fragment key={team.Team}>
                   <tr
-                    className={`team-row${isExpanded ? " is-expanded" : ""}${rank ? "" : " is-unranked"}`}
+                    className={`team-row${isExpanded ? " is-expanded" : ""}${team.Ranked ? "" : " is-unranked"}`}
                     onClick={() => toggle(team.Team)}
                   >
-                    <td className="rank" title={rank ? undefined : `Unranked: ${team.Tournaments} tournament${team.Tournaments === 1 ? "" : "s"}`}>
+                    <td className="rank" title={team.Ranked ? undefined : `Unranked: ${team.Tournaments} tournament${team.Tournaments === 1 ? "" : "s"}`}>
                       {rank ?? "–"}
                     </td>
                     <td className="team-name">

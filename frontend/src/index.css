@@ -16,24 +16,23 @@
   --shadow: rgba(0, 0, 0, 0.4);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg: #ffffff;
-    --surface: #f6f8fa;
-    --surface2: #eaeef2;
-    --border: #d0d7de;
-    --text: #1f2328;
-    --text-dim: #59636e;
-    --accent: #0969da;
-    --win: #1a7f37;
-    --loss: #cf222e;
-    --positive: #1a7f37;
-    --negative: #cf222e;
-    --favored: #0969da;
-    --unfavored: #cf222e;
-    --shadow: rgba(31, 35, 40, 0.12);
-  }
+/* data-theme is set before first paint by the script in index.html */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f6f8fa;
+  --surface2: #eaeef2;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --text-dim: #59636e;
+  --accent: #0969da;
+  --win: #1a7f37;
+  --loss: #cf222e;
+  --positive: #1a7f37;
+  --negative: #cf222e;
+  --favored: #0969da;
+  --unfavored: #cf222e;
+  --shadow: rgba(31, 35, 40, 0.12);
 }
 
 * {
@@ -69,6 +68,26 @@ a:hover {
   justify-content: center;
   height: 50vh;
   color: var(--text-dim);
+}
+
+/* ── Theme toggle ── */
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  color: var(--text);
 }
 
 /* ── Page header ── */
@@ -764,6 +783,11 @@ a:hover {
 @media (max-width: 640px) {
   .page {
     padding: 1.5rem 1rem 3rem;
+  }
+  /* Keep long titles clear of the theme toggle */
+  .page-header h1,
+  .team-header h1 {
+    padding-right: 2.5rem;
   }
   .stat-cards {
     grid-template-columns: repeat(2, 1fr);
