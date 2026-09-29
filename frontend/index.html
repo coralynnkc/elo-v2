@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Policy Debate Rankings</title>
+    <script>
+      // Set the theme before first paint: the saved choice, else the system setting
+      try {
+        var t = localStorage.getItem('theme')
+      } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+      }
+      document.documentElement.dataset.theme = t
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route, Navigate, useParams } from 'react-router-dom
 import Leaderboard from './pages/Leaderboard'
 import TeamPage from './pages/TeamPage'
 import HeadToHead from './pages/HeadToHead'
+import ThemeToggle from './components/ThemeToggle'
 import { CURRENT_SEASON } from './utils/data'
 
 // Links shared before seasons existed (#/team/X) pointed at the 2025–26 rankings
@@ -13,6 +14,7 @@ function LegacyTeamRedirect() {
 export default function App() {
   return (
     <HashRouter>
+      <ThemeToggle />
       <Routes>
         <Route path="/" element={<Navigate to={`/${CURRENT_SEASON}`} replace />} />
         <Route path="/team/:teamName" element={<LegacyTeamRedirect />} />
