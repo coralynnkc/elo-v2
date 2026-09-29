@@ -1,33 +1,39 @@
-# Planning: methodology improvements
+# Planning: methodology
 
-Open work on the rating pipeline (`coding/pipeline.py`). How the pipeline works is in CLAUDE.md; data-entry steps are in README.md. Closed questions are one line each under **Settled**; anything with detail below it is still open.
+Open work on the rating pipeline (`coding/pipeline.py`). CLAUDE.md covers how the pipeline works and README.md covers data entry. Settled questions get one line each.
 
-**Current benchmark:** labor walk-forward, seeded from energy — **72.9% accuracy, 0.5420 log loss** on 2783 matches (`python coding/evaluate.py labor --priors energy`). Beat that, or it isn't an improvement. Energy alone, with no season before it, is 70.7% / 0.5688 on 1878 matches.
+## Benchmarks
 
-## Settled
+To count as an improvement, a change has to beat these walk-forward scores:
 
-- **Rating model:** TTT (`fit_through_time`) for the leaderboard, one time step per tournament; a separate single forward pass for match history, so each "before" uses only earlier rounds. TTT beat the forward pass out-of-sample (71.6% / 0.5528 vs 71.3% / 0.5584, labor unseeded), which is why the leaderboard uses it. The old 5-pass replay was dropped: it shrank σ by ~√5 on no new information, and its 80.7% was a replay, not a forecast.
-- **Scale:** μ 25, σ 25/3, β 25/6, γ 25/300 per tournament, ε 1e-4. Sweeps found **β and γ flat** — 1.5× β buys 0.005 nats and no accuracy; γ is flat from 0 to 8×, since one season is too short for drift. Keep both.
-- **Draws:** `draw_probability=0`. **Non-decisive rows** (closeouts, byes) are skipped.
-- **Global aff/neg offset — rejected.** Best offset is −0.25 to −0.5 skill points, worth 0.0008 nats. Noise. (Aff win rate: labor 47.7%.)
-- **Team identity:** a partnership, keyed by normalized sorted surnames; entries → speaker names → nearest-tournament code → initials → bare code. Entries beat speaker names because Tabroom shortens them. Labor's NU leaves 12 codes rated by code.
-- **Teams missing from entries are rated** (labor `nu`, `ndt`, `kentuckyrr`, `dartmouthrr`): +140 rounds, +4 ranked teams.
-- **Seasons:** energy (2024–25) → labor (2025–26) → arms (2026–27), chained by `prior_season`. Energy's order was confirmed by Cora and corroborated by seriation on 137 codes.
-- **#6 Ballot margins — built, off, closed.** The signal is real: unanimous panels had P(winner) 0.799 (n=300) against 0.587 for splits (n=237), a +0.212 gap at z = 11.0. But rating one match per ballot *costs* 0.0007 nats (72.6% / 0.5427) even after labor's early elims were re-exported to put margins at the front of the season, and it is worse at every β. Three judges watching one debate aren't three independent observations, and σ drops 1.76 → 1.54 unearned. Reopen only as a **weighted single match**, which needs a tuned knob. The re-export left `Judges` and `Votes` in the files for any later judge-level work.
-- **#5 Side advantage — closed.** The global offset was already rejected; the **per-tournament** offset is dead too. Aff win rates by tournament vary *less* than binomial noise — χ² = 1.8 on 7 df for energy (p = 0.97) and 3.6 on 9 df for labor (p = 0.94) — so there is no tournament-level side effect to estimate, let alone forecast. The unused **Aff/Neg side ratings** are gone: `_apply_round` no longer rates each side separately, and `Aff_Mu`, `Aff_Sigma`, `Neg_Mu`, `Neg_Sigma` have left `teams_*.csv`. `Aff_Rounds`/`Neg_Rounds` stay — the leaderboard sums them for its rounds column. Every other column and all of match history is byte-identical.
-- **Debater keys, two data fixes (2026-09-16).** Both broke a debater's key silently, so their prior never carried. (1) **`MoState` and `Missouri State` are one school**, both present in labor and only the first in arms; `SCHOOL_ALIASES` now normalizes it in every season, which reunites eight debaters' keys and stops the site listing one school twice. (2) **Hybrid entries** (`Harvard/Massachusetts, Amherst AL`) gave both debaters a compound school that matches nothing anywhere else; `debater_keys` now places each of them at whichever half of the pairing they debate for elsewhere that season, resolving 7 of 12 hybrid slots across the three seasons and leaving the compound as the fallback. Arms seeds 107 → 108 teams and scores 66.6% / 0.6051 → 67.4% / 0.6035; labor from energy is unmoved at 72.9% / 0.5420. The scores are noise — these are correctness fixes, and the visible win is that Missouri State is one school on the site.
-- **#7 Dynamics:** within a season, γ makes no measurable difference; between seasons, handled by `PRIOR_INFLATION` and `DEBATER_INFLATION`.
-- **#8 Cross-season priors — done, and the largest gain so far.** `fit_debaters` splits credit between partners, `seed_priors` sums a partnership's two debaters and adds `PRIOR_INFLATION` = 4 (swept 1–12; 4 is the minimum, curve shallow 2–6). Keyed on school + surname, with `_ambiguous_debaters` dropping keys that appear on two teams at one tournament. Confirmed twice: arms from labor, 50.0% → 66.6% on the opener; labor from energy, 50.0% → 70.7% on the opener and 71.6% → 73.2% across the whole season. The gain is largest where a season record is thin (`ada` −0.1055) and gone by the NDT (−0.0003) — the right shape for a prior.
-- **#9 Speaker points — measured, rejected.** Prelim files in the current Tabroom format carry points per debater (all of arms; labor's `uk`, `kentuckyrr`, `dartmouthrr`, `texas`, `ada`, `ndt`; energy's two round robins only). A team's past mean points, z-scored within each tournament, predicts wins well on its own — 68.1% accuracy, z = +14.9 — but it is **almost entirely redundant with the rating**. Stacked on the model's own logit, walk-forward on labor seeded from energy, the points gap is worth **0.001 nats and z = +1.6, in-sample** (1290 of 3246 matches have a points record on both teams); it never reaches significance in any subset. That is an upper bound, before any out-of-sample penalty, so there is nothing to ship. **Rerun on arms after Kentucky (2026-09-29): still no.** Coverage is 213 of 982 matches, not ~100%, since the opener has no past points to use; the stack is +0.014 nats, z = +2.4 in-sample. Fitted on labor and applied to arms, it is **+0.0055 ± 0.0034 nats (z = +1.6)**, out of sample, which is not significant. Look again at 4–5 arms tournaments, when coverage passes ~50%. The same run shows seeded arms ratings are **overconfident**: the logit slope is 0.63 ± 0.10 at Kentucky, against 0.89 for labor.
-- **Validation** (`coding/validate.py`, run before rating a tournament): even-round side flip ≥90%, mean record gap ≤1.5 from R3, fields under 16 skipped as round robins, an elim round flagged missing when over a third of its winners never reappear, `CONSOLATION_ROUNDS` (`semis_2`) checked against the previous round's losers. Every labor and arms tournament passes; it caught the merged Dartmouth GH in the old Kentucky files.
-- **Evaluation harness:** `coding/evaluate.py` scores walk-forward — fit on the tournaments before *k*, predict *k* — reporting accuracy, log loss and Brier, split by prelim/elim and by whether both teams were already rated. `--sweep beta,gamma,aff-offset,inflation` scans a parameter; `--model forward` scores the history pass; `--priors SEASON` seeds from a prior season. Read-only.
+| Run | Matches | Accuracy | Log loss |
+|---|---|---|---|
+| `evaluate.py labor --priors energy` | 3246 | **72.9%** | **0.5420** |
+| `evaluate.py arms --priors labor` (nu, kentuckyrr, uk) | 982 | 67.9% | 0.5938 |
+| `evaluate.py labor` (unseeded, opener not scored) | 2783 | 71.6% | 0.5529 |
+| `evaluate.py energy` (no prior season) | 1878 | 70.7% | 0.5688 |
+
+Seeded and unseeded runs score different match sets, because seeding makes the opener scorable. Compare a change against a row of the same kind.
 
 ## Open
 
-### 8. Priors, leftovers
-- Labor's **12 code-only teams** contribute no debater ratings downstream.
-- **True school transfers are still lost.** Surname-level detection finds 20 candidates across the two hops, and reading them shows why it can't be automated: most are common surnames (`smith` leaves four schools at once, `lee`, `jones`, `patel`), and entries files give surnames only, so there is no first name to confirm a match with. If it is worth fixing, it wants a hand-checked list of moves in `SEASONS`, the way `name_fixes` handles codes — not a heuristic.
+- **Arms priors are overconfident.** At Kentucky the logit slope is 0.63 ± 0.10; labor's is 0.89. `PRIOR_INFLATION` was tuned on labor from energy only, so re-sweep it on arms (`--sweep inflation`) once there are 4–5 tournaments.
+- **Speaker points: recheck at 4–5 arms tournaments**, when coverage passes about 50% (see Settled).
+- **School transfers are lost.** Surname matching can't handle them: common surnames (`smith`, `lee`, `jones`, `patel`) and surname-only entries files. If this is worth fixing, add a hand-checked list of moves to `SEASONS`, the way `name_fixes` works.
+- **Labor's 12 code-only teams** (mostly from NU) pass no debater ratings to arms.
+- **Eligibility.** σ is no longer shrunk by replays, so consider ranking by conservative score or showing σ bands, instead of the `MIN_TOURNAMENTS` filter.
 
-### 12. Data hygiene
-- **Eligibility:** σ is no longer shrunk by replays, so consider ranking by conservative score or showing σ bands instead of filtering by `MIN_TOURNAMENTS`.
-- **Storage:** keep data canonical in git. The Dropbox move left 0-byte placeholders and a broken `.git`.
+## Settled
+
+- **Model:** TTT over the season, one step per tournament, for the leaderboard; one forward pass for match history. TTT beats forward out of sample (71.6% / 0.5529 vs 71.3% / 0.5584). The old 5-pass replay was dropped because it shrank σ about √5 with no new information.
+- **Scale:** μ 25, σ 25/3, β 25/6, γ 25/300 per tournament, ε 1e-4. β and γ are flat in sweeps, since one season is too short for drift. Between seasons, drift is handled by `PRIOR_INFLATION`/`DEBATER_INFLATION`.
+- **Draws / non-decisive rows:** `draw_probability=0`. Closeouts and byes are skipped.
+- **Side advantage (#5): none.** A global offset is worth 0.0008 nats. Per-tournament aff rates vary *less* than binomial noise (χ² p = 0.97 energy, 0.94 labor). Aff/Neg side ratings were removed.
+- **Ballot margins (#6): off.** The signal is real (P(winner) 0.80 unanimous vs 0.59 split), but one match per ballot costs 0.0007 nats at every β, because judges aren't independent. Revisit only as a weighted single match. `Judges`/`Votes` are kept in the files.
+- **Cross-season priors (#8): shipped, and the largest gain so far.** Labor's opener goes from 50.0% to 70.7%; the full season, on the same matches, goes from 71.6% to 73.2%. `PRIOR_INFLATION` = 4 (swept 1–12, shallow from 2 to 6). The gain fades by the NDT, as it should.
+- **Speaker points (#9): redundant with the rating.** Labor stack: +0.001 nats, z = 1.6 in sample. Arms out of sample: +0.0055 ± 0.0034 nats.
+- **Team identity:** a sorted-surname partnership, resolved from entries, then speaker names, then the nearest tournament's code, then initials, then the bare code. Teams missing from entries are still rated.
+- **Debater keys:** `School/surname`. `SCHOOL_ALIASES` merges one school's two Tabroom names (`MoState`). A hybrid entry's debaters are placed at their other-season school.
+- **Seasons:** energy → labor → arms, chained by `prior_season`. Energy's tournament order was confirmed by hand and by seriation.
+- **Validation** (`validate.py`): side flips ≥90%, record gap ≤1.5 from R3, round robins skipped, missing elims detected, `CONSOLATION_ROUNDS` checked. Every labor and arms tournament passes.
+- **Storage:** data is canonical in git. The Dropbox damage (empty placeholder files, broken `.git`) is gone, and `git fsck` is clean.
