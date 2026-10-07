@@ -724,9 +724,13 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: 3px;
   background: linear-gradient(to right,
-    color-mix(in srgb, var(--unfavored) 70%, var(--surface)),
-    var(--surface),
-    color-mix(in srgb, var(--favored) 70%, var(--surface)));
+    color-mix(in srgb, var(--unfavored) 75%, var(--surface)) 15%,
+    color-mix(in srgb, var(--unfavored) 55%, var(--surface)) 15%,
+    color-mix(in srgb, var(--unfavored) 30%, var(--surface)) 45%,
+    var(--surface) 45% 55%,
+    color-mix(in srgb, var(--favored) 30%, var(--surface)) 55%,
+    color-mix(in srgb, var(--favored) 55%, var(--surface)) 85%,
+    color-mix(in srgb, var(--favored) 75%, var(--surface)) 85%);
 }
 .data-table.matrix > tbody > tr:hover {
   background: none;
