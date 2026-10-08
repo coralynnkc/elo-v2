@@ -623,11 +623,6 @@ a:hover {
   stroke-width: 4px;
   stroke-linejoin: round;
 }
-.rating-chart .season-line {
-  stroke: var(--text-dim);
-  stroke-dasharray: 5 4;
-  stroke-width: 1;
-}
 .rating-chart .rating-line {
   fill: none;
   stroke: var(--accent);

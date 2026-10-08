@@ -164,7 +164,7 @@ export default function TeamPage() {
           <div className="section-header">
             <h2>Rating Over the Season</h2>
           </div>
-          <RatingChart matches={matches} seasonMu={team?.Mu} />
+          <RatingChart matches={matches} />
         </>
       )}
 

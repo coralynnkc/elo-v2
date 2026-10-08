@@ -4,8 +4,8 @@ const W = 880
 const H = 260
 const PAD = { top: 16, right: 16, bottom: 40, left: 44 }
 
-// Rating after each round (chronological matches), plus the season-smoothed μ as a reference line
-export default function RatingChart({ matches, seasonMu }) {
+// Rating after each round (chronological matches)
+export default function RatingChart({ matches }) {
   const [hover, setHover] = useState(null)
   if (matches.length === 0) return null
 
@@ -15,7 +15,7 @@ export default function RatingChart({ matches, seasonMu }) {
     ...matches.map(m => ({ mu: m.muAfter, match: m })),
   ]
 
-  const values = points.map(p => p.mu).concat(seasonMu ?? [])
+  const values = points.map(p => p.mu)
   const lo = Math.floor(Math.min(...values) - 1)
   const hi = Math.ceil(Math.max(...values) + 1)
   const plotW = W - PAD.left - PAD.right
@@ -84,18 +84,7 @@ export default function RatingChart({ matches, seasonMu }) {
             </g>
           ))}
 
-          {seasonMu != null && (
-            <line className="season-line" x1={PAD.left} x2={W - PAD.right} y1={y(seasonMu)} y2={y(seasonMu)} />
-          )}
-
           <path className="rating-line" d={path} />
-
-          {/* Drawn after the line so its halo sits on top */}
-          {seasonMu != null && (
-            <text className="axis-label" x={PAD.left + 6} y={y(seasonMu) - 6}>
-              Season μ {seasonMu.toFixed(1)}
-            </text>
-          )}
 
           {hp && (
             <g>
