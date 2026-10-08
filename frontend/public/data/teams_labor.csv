@@ -1,267 +1,267 @@
-Team,Debaters,Mu,Sigma,Aff_Rounds,Neg_Rounds,Conservative,Tournaments,Ranked
-Emory GS,Gallagher & Song,44.579,1.139,42,47,41.162,9,True
-Michigan BP,Barrett & Park,42.338,1.03,43,46,39.249,9,True
-Kansas LS,Larson & Schultz,41.898,1.016,48,42,38.85,9,True
-Michigan BE,Barrett & Esmailzadeh,41.152,2.409,5,5,33.925,1,False
-Georgetown AC,Aggarwal & Cowan,40.401,0.973,49,47,37.483,10,True
-Emory GR,Gallagher & Rupp,40.263,2.704,5,4,32.15,1,False
-Michigan SS (Shah/Shih),Shah & Shih,40.098,1.126,33,40,36.72,7,True
-Kansas MS,Marshall & Suleman,39.678,2.547,5,5,32.037,1,False
-Northwestern LR,Li & Rubin,39.306,1.03,45,39,36.215,9,True
-CSU Long Beach OM,Ortega & Medina,38.859,0.992,41,46,35.882,9,True
-Binghamton CK,Cohn & King,38.223,1.046,36,36,35.085,8,True
-Michigan State GL,Gusis & Lewis,37.88,1.008,45,40,34.856,9,True
-Michigan SS (Shah/Shetty),Shah & Shetty,37.73,2.849,5,3,29.182,1,False
-Iowa AP,Anderson McElligott & Parfenoff,37.467,1.096,35,33,34.179,7,True
-Michigan ES,Esmailzadeh & Shetty,37.174,1.157,32,29,33.702,7,True
-Kansas HP,Hato & Persinger,36.972,1.175,27,27,33.446,6,True
-UC Berkeley MR,Menotti & Reichel,36.473,1.048,39,35,33.328,8,True
-Macalester KH,Kochel & Harrison,36.266,1.608,13,14,31.444,3,True
-Kansas OW,Owings & Willingham,36.018,1.044,38,34,32.885,8,True
-Emory KS,Kim & Shirts,35.956,1.249,27,26,32.208,6,True
-Emory LY,Lobo & Yang,35.852,1.053,39,33,32.694,8,True
-Wake Forest PS (Sencion/Patel),Sencion & Patel,35.692,2.772,5,4,27.376,1,False
-Northwestern PS,Pacconi & Souchet,35.022,1.189,28,27,31.455,6,True
-Kansas AU,Ain & Ulven,34.67,1.183,25,33,31.12,7,True
-Northwestern AT,Arney & Tahirkheli,34.52,1.198,30,29,30.927,7,True
-Emory RY,Rupp & Young,33.967,1.241,25,25,30.244,6,True
-Kentucky RW,Rimpson & Washington,33.615,1.724,10,15,28.445,3,True
-Northwestern NP,Nestor & Patterson,33.562,1.489,16,17,29.095,4,True
-Dartmouth CG,Cai & Goldberg,33.465,1.131,30,37,30.071,8,True
-Baylor DL,Darwish & Lassen,33.008,1.172,29,30,29.49,7,True
-Kentucky GS,Gabay & Slish,32.96,1.073,34,33,29.741,8,True
-Wake Forest SL,Sampat & Leverett,32.955,2.74,4,4,24.736,1,False
-Emory GM,Geevarghese & Maxwell,32.942,1.826,11,11,27.465,3,True
-West Georgia KK,Keller & Kennon,32.672,2.09,8,8,26.402,2,True
-Michigan CC,Chamarthy & Chen,32.603,1.331,24,23,28.609,6,True
-Harvard DS,Deshpande & Sridharan,32.556,1.26,27,24,28.776,6,True
-Stanford LL,Lai & Lai,32.472,1.673,11,13,27.454,3,True
-NYU MS,Makinde & Saigal,32.319,1.491,17,17,27.846,4,True
-Texas FL,Feinstein & Low,32.141,1.179,28,29,28.604,7,True
-UTD PR,Penumetcha & Ravi,31.985,1.101,34,31,28.683,8,True
-Liberty CL,Cunningham & Layton,31.853,1.162,27,31,28.366,7,True
-Northwestern AP,Arney & Patterson,31.546,2.649,5,4,23.598,1,False
-Iowa EW,Eltyeb & Weimar,31.517,1.199,28,30,27.921,7,True
-UC Berkeley BU,Urfalian & Boguslavsky,31.489,1.156,29,28,28.021,7,True
-Western Kentucky FN,Ney & Fournier,31.344,1.963,11,12,25.455,3,True
-Stanford LY,Lai & Yan,31.065,2.79,4,4,22.694,1,False
-Michigan State GS,Gearring & Shehzad,30.877,1.161,32,33,27.393,8,True
-Kansas BC,Blaser & Chidambaranathan,30.807,3.151,4,4,21.356,1,False
-Kansas SS,Shaw & Suleman,30.752,1.374,21,19,26.631,5,True
-UTD HK,Hale & Karthik,30.741,1.206,27,27,27.121,7,True
-Macalester WK,Winters & Kochel,30.663,3.408,4,4,20.438,1,False
-Emory TT,Tai & Taylor,30.613,3.393,3,3,20.433,1,False
-Michigan State FM,Foster & Martin,30.607,1.166,30,32,27.108,8,True
-Michigan CS (Cho/Saudek),Cho & Saudek,30.596,1.763,12,11,25.306,3,True
-Wake Forest LW,Leverett & Wolfe,30.493,1.304,22,23,26.582,6,True
-George Mason WW,Wright & Witkov,30.478,1.179,31,30,26.942,8,True
-Kansas BS,Blaser & Suleman,30.36,2.372,7,7,23.243,2,True
-Southern California BR,Rahman & Bhadani,30.34,1.257,23,24,26.57,6,True
-Michigan AO,Agustin & Ou,30.133,1.328,21,24,26.148,6,True
-Kansas BW,Walawender & Brown,30.016,1.144,28,27,26.583,7,True
-Kentucky SR,Schedler & Rimpson,29.993,1.592,15,18,25.218,4,True
-Emory AS,Aggarwal & Stumpff,29.953,1.47,20,17,25.542,5,True
-Kansas LP,LaPoint & Pace,29.402,3.482,4,4,18.955,1,False
-Harvard AB,Aoki & Bodet,29.355,1.487,16,16,24.894,4,True
-Wake Forest MP,Mbye & Peters,29.336,2.271,7,7,22.523,2,True
-Emory JR,Ravikumar & Jindal,29.274,2.961,4,4,20.393,1,False
-Michigan State JS,Jarman & Scully,29.148,1.245,25,26,25.412,7,True
-George Mason DG,Davis & Gorman,29.096,2.234,7,7,22.393,2,True
-Southern California DT,Dollinger & Turner,29.088,2.398,8,8,21.894,2,True
-Western Kentucky KC,Kumar & Carter,28.782,1.996,6,8,22.793,2,True
-Emory OP,okahata & Park,28.765,2.191,8,7,22.192,2,True
-Kansas TC,Terreros & Chaudhry,28.497,3.328,3,3,18.513,1,False
-Northwestern LL,Lundberg & Leonard,28.308,1.389,24,22,24.14,6,True
-Southern California BM,Bradley & Martin,28.159,1.453,19,20,23.8,5,True
-Emory CF (Feldman/Charabuddi),Feldman & Charabuddi,28.052,2.996,4,4,19.064,1,False
-Dartmouth JR,Jones & Rao,27.946,1.287,22,22,24.086,6,True
-Dartmouth MR,Majhail & Ross,27.939,3.191,3,3,18.366,1,False
-Kansas JB,June & Boyle,27.617,1.974,11,9,21.696,3,True
-UTD DD,Dickey & D'Antuono,27.426,1.425,23,21,23.151,6,True
-Wake Forest AB,Aderibigbe & Brown,27.41,1.556,17,19,22.743,5,True
-Wichita State GM,Griffith & Molina Chavez,27.38,1.266,27,26,23.582,7,True
-Kansas ST,Smith & Terreros,27.328,2.17,11,10,20.819,3,True
-Wake Forest DE,Dingley & Elliott,27.296,1.335,24,23,23.291,6,True
-Emory CS (Cannaday/Stearns),Cannaday & Stearns,27.134,3.656,3,3,16.167,1,False
-Georgia CK,Chapman & Kaidar-Heafetz,27.056,1.284,26,27,23.204,7,True
-Northwestern LW,Lee & Weisz,27.033,1.355,22,22,22.968,6,True
-Harvard JS,Synn & Jin,26.983,2.262,7,7,20.196,2,True
-Emory CT,Cross & Taylor,26.971,2.198,7,8,20.377,2,True
-Wake Forest HN,Hale & Namikas,26.896,1.445,19,19,22.562,5,True
-George Mason DE,Davis & Esteves,26.805,1.491,18,19,22.331,5,True
-Missouri State NS,Neal & Siever,26.666,1.307,26,26,22.745,7,True
-Southern California MT,Troup & Mills,26.56,1.52,18,19,22.001,5,True
-Gonzaga WW,Wellman & Weinhardt,26.386,2.001,8,8,20.382,2,True
-Houston IF,Ibarra & Fernandez,26.371,2.194,9,8,19.79,2,True
-Georgetown GT,Greenberg & Tamfu,26.106,1.488,18,19,21.642,5,True
-Michigan CS (Chamarthy/Sharma),Chamarthy & Sharma,26.094,2.854,4,4,17.531,1,False
-Dartmouth BC,Ben-Abdallah & Carpenter,26.025,1.387,19,20,21.865,6,True
-"Massachusetts, Amherst LM",Levitan & Moussavou,25.991,1.839,12,11,20.475,3,True
-Kansas CS,Chidambaranathan & Suleman,25.895,2.089,10,10,19.628,3,True
-Houston SF,Sheffield & Fernandez,25.79,3.327,4,3,15.81,1,False
-Western Kentucky CF,Carter & Fournier,25.751,2.224,8,7,19.078,2,True
-Southern California AS,Agrawal & Sood,25.725,3.56,3,4,15.045,1,False
-Western Kentucky SS (Schintgen/StPeter),Schintgen & StPeter,25.705,1.484,18,19,21.253,5,True
-Baylor LL,LoCicero & Li,25.566,3.193,4,4,15.986,1,False
-Kansas State DR (Raines/Day),Raines & Day,25.512,2.48,7,7,18.074,2,True
-Gonzaga RW,Wellman & Roe,25.418,1.635,14,15,20.512,4,True
-UC Berkeley GS,Situ & Gilrain-Lennon,25.38,1.497,18,18,20.89,5,True
-Emory CF (Cannaday/Feldman),Cannaday & Feldman,25.34,3.092,3,3,16.062,1,False
-Wake Forest PS (Patel/Sayoto),Patel & Sayoto,25.335,3.251,4,4,15.583,1,False
-Michigan GJ,Garvey & Joyce,25.326,2.983,4,4,16.376,1,False
-NYU JT,Jain & Theiding,25.314,1.745,15,14,20.079,4,True
-Kansas BM,Bath & McConnell,25.286,1.572,14,15,20.57,4,True
-Georgetown TP,Tamfu & Perez-Rubio,25.179,3.042,4,4,16.052,1,False
-Georgia CP,Cannon & Pack,25.146,1.349,26,25,21.098,7,True
-UTD HH,Hoch & Humphrey,25.013,1.591,14,16,20.241,5,True
-Kansas CF,Falin & Chaudhry,24.966,2.081,10,11,18.723,3,True
-Emory CS (Cross/Stumpff),Cross & Stumpff,24.906,3.199,4,3,15.308,1,False
-Western Kentucky KN,Kumar & Ney,24.903,1.691,15,13,19.831,4,True
-Kansas State AS,Ardis & Sand,24.876,2.226,8,7,18.197,2,True
-Baylor BK,Benton & Keeler,24.818,1.383,22,22,20.667,6,True
-Northwestern LO,LippSmith & Olorunsola,24.817,1.998,10,8,18.823,3,True
-Macalester HW,Harrison & Winters,24.785,2.379,7,7,17.649,2,True
-Trinity KP,Patterson & King,24.781,1.542,15,17,20.156,5,True
-Kansas LL,Levin & LaPoint,24.721,3.811,3,3,13.288,1,False
-Iowa BS,Bilicki & Sanderson,24.681,1.324,22,22,20.709,6,True
-Macalester WC,Costello & Winters,24.633,2.992,3,4,15.657,1,False
-Iowa KS,Kleiman & Severson,24.631,1.501,18,19,20.127,5,True
-Wake Forest SK (Sampat/Kampine),Sampat & Kampine,24.608,3.202,3,3,15.003,1,False
-UC Berkeley LS,Smith & Liu,24.595,3.005,4,4,15.58,1,False
-Dartmouth BJ,Ben-Abdallah & Jones,24.478,2.459,4,4,17.102,1,False
-"Harvard/Massachusetts, Amherst AL",Aoki & Levitan,24.463,3.485,3,3,14.009,1,False
-Kansas BP (Pace/Blaser),Pace & Blaser,24.45,2.474,7,6,17.029,2,True
-Michigan AM,Almand & Moon,24.341,1.799,13,12,18.944,4,True
-Gonzaga GW,Gibson & Weinhardt,24.331,3.566,3,3,13.634,1,False
-Kansas State RS,Robertson & Sum,24.22,2.064,6,7,18.028,2,True
-Kansas BP (Bauman/Persson),Bauman & Persson,24.2,2.191,9,9,17.629,3,True
-Dartmouth GM,Guo & Morley,24.196,2.542,4,4,16.571,1,False
-Minnesota HU,Haber-Fawcett & Usenov,24.06,1.283,25,26,20.209,7,True
-Emory CR,Ravikumar & Charabuddi,23.979,1.516,19,18,19.431,5,True
-Cal State Fullerton MA,Meza & Ayyala,23.937,2.734,3,4,15.736,1,False
-Georgetown LN,Lastelick & Nanji,23.846,1.268,30,29,20.044,8,True
-Dartmouth KR,Rao & Katyal,23.692,2.535,4,4,16.086,1,False
-Michigan HM,Hwang & McIlhenny,23.305,2.247,7,6,16.564,2,True
-Harvard BS,Bodet & Shen,23.288,3.312,3,4,13.352,1,False
-Liberty KS,Koenig & Soares,23.066,3.347,3,3,13.025,1,False
-Texas GS,Stevenson & Gade,22.914,1.572,16,15,18.198,4,True
-Liberty SS,Soares & Spencer,22.786,1.946,10,11,16.947,3,True
-Missouri State CG,Cooper & Granger,22.697,2.15,8,7,16.246,2,True
-Emory SW,So & Wang,22.632,2.117,8,8,16.279,2,True
-Missouri State HN,Hahn & Neal,22.61,2.13,9,10,16.221,3,True
-Georgetown CX,Correa & Xiao,22.545,3.041,4,4,13.421,1,False
-Louisville VJ,Van Dyke & Johnson,22.381,3.279,3,4,12.545,1,False
-Michigan OJ,Ou & Joyce,22.33,2.875,4,4,13.704,1,False
-Kansas BB,Boyle & Bath,22.308,2.526,4,4,14.731,1,False
-Kansas VF,Verma & Fordyce,22.281,3.949,3,3,10.433,1,False
-Arizona State SS,Smith & Saxena,22.215,2.155,8,8,15.749,2,True
-Northwestern AK,Arceo & Kung,22.07,1.473,17,18,17.651,5,True
-Towson DP,Darden & Persaud,22.051,2.153,8,7,15.592,2,True
-George Mason RT,Richter & Taxali,22.041,1.755,13,13,16.775,4,True
-Wyoming WW,Willson & Widi,22.016,1.597,18,19,17.226,5,True
-Dartmouth PT,Park & Tejavanija,21.996,4.172,3,3,9.482,1,False
-CSU Long Beach SS,Smith & Saenz,21.828,2.994,4,4,12.847,1,False
-Missouri State BK,Burns & Kimmerle,21.775,2.378,6,7,14.64,2,True
-Michigan BL,Baba & Ledesma,21.481,1.609,17,17,16.655,5,True
-Liberty TK,Tooley & Koenig,21.443,3.266,3,4,11.644,1,False
-Northwestern AH,Arceo & Hines,21.436,2.738,4,4,13.223,1,False
-Dartmouth BG,Brody & Goyal,21.355,2.011,11,11,15.321,3,True
-Kansas State DR (Day/Robertson),Day & Robertson,21.28,2.363,8,8,14.19,2,True
-Dartmouth GH (Guo/Hatton),Guo & Hatton,21.227,1.614,15,17,16.384,5,True
-Dartmouth BP,Ben-Abdallah & Park,21.191,4.068,3,2,8.987,1,False
-Kentucky ER,Ervin & Rushing,21.074,3.121,3,3,11.711,1,False
-Georgetown KL,Klingler & Li,21.058,2.062,10,9,14.871,3,True
-Emory PS,Pelli & Stearns,20.977,2.991,4,4,12.004,1,False
-Dartmouth HP (Park/Hatton),Park & Hatton,20.944,2.92,4,4,12.185,1,False
-Georgetown VP,Valame & Perez-Rubio,20.916,2.37,7,7,13.805,2,True
-Navy CR,Connor & Rea,20.871,1.92,11,10,15.11,3,True
-Wyoming CH,Campbell & Hawley,20.599,1.452,21,23,16.243,6,True
-Houston IH,Ibarra & Hendrix,20.308,3.384,4,3,10.157,1,False
-Kansas HL,Levin & Harker,20.279,1.609,16,15,15.451,4,True
-Macalester WD,Winters & Durbin,20.252,3.665,3,3,9.256,1,False
-North Texas VB,Vargas & bowman,20.112,3.492,4,4,9.636,1,False
-Utah WV,Watrin & Verbeck-O'Brien,20.109,3.085,4,4,10.854,1,False
-Baylor LP,Li & Phillips,19.889,3.546,3,3,9.252,1,False
-Wake Forest DK,Dingley & Kampine,19.73,3.858,3,3,8.156,1,False
-UT San Antonio CG,Carrillo & Garza,19.719,2.255,8,7,12.953,2,True
-Kansas FS,Sharman & Foust,19.596,2.101,7,7,13.292,2,True
-James Madison MO,Oehler & Matzen,19.591,2.04,11,11,13.471,3,True
-UC Davis MS,Shaikh & Mijares,19.569,3.079,4,4,10.332,1,False
-Emory/Columbia AH,Aggarwal & Hu,19.568,3.781,4,4,8.225,1,False
-Emory ST,Stearns & Tai,19.431,1.758,14,14,14.156,4,True
-Oklahoma BS,Smith & Ballinger,19.371,2.317,7,6,12.42,2,True
-Cornell LD,Diop & Liang,19.253,3.453,3,3,8.894,1,False
-Kentucky BS,Bisevac & Schedler,19.24,5.966,1,1,1.342,1,False
-UTD KR,Khakoo & Ramirez,19.236,1.978,11,10,13.302,3,True
-Indiana DJ,Duggal & Jones,19.116,3.163,4,3,9.628,1,False
-CSU Long Beach ES,Escobar & Saenz,18.904,1.853,12,11,13.346,3,True
-Kansas HF,Hefty & Fordyce,18.848,3.429,4,3,8.562,1,False
-Wake Forest SW,Sampat & Williams,18.753,3.305,3,4,8.839,1,False
-Baylor MP,merriwether & Phillips,18.686,1.638,17,18,13.772,5,True
-Missouri State DN,DeAngelis & Neal,18.61,2.1,11,10,12.309,3,True
-Western Kentucky IS,Ingram & Shockley,18.559,3.385,4,3,8.404,1,False
-Oklahoma DT,Davis & Toro,18.455,1.905,11,10,12.741,3,True
-Minnesota MW,Munson & Wells,18.389,4.156,2,3,5.921,1,False
-George Mason RS,Reyes & Shananier,18.258,1.85,14,15,12.709,4,True
-Western Kentucky SS (StPeter/Shockley),StPeter & Shockley,18.143,3.373,3,3,8.025,1,False
-Dartmouth HP (Park/Hant),Park & Hant,18.075,4.425,2,2,4.799,1,False
-Trinity CK,Crowley & Khalikov,18.035,3.001,4,4,9.032,1,False
-Cal State Fullerton CD,Catapang & Dominguez,17.983,2.287,8,7,11.121,2,True
-Wake Forest MS,Mbye & Sampat,17.954,3.474,3,4,7.533,1,False
-Cornell MD,Marcy & Dye,17.911,3.073,4,4,8.693,1,False
-North Texas GV,Ganesh & Vargas,17.717,4.054,3,3,5.555,1,False
-Western Kentucky IP,Ingram & Puranik,17.594,2.712,7,6,9.457,2,True
-Louisville NJ,Naidugari & Johnson,17.567,3.554,3,3,6.904,1,False
-North Texas VH,Vazquez & Hasper,17.545,2.563,7,6,9.855,2,True
-Central Oklahoma EW,Eckard & Walker,17.52,2.464,7,8,10.129,2,True
-Kansas LV,Verma & Lemaster,17.431,2.494,6,7,9.95,2,True
-Rochester OR,Ozcayir & Rahman,17.422,2.699,6,7,9.325,2,True
-Southern Nazarene HS,Horton & Stockstill,17.358,2.278,8,6,10.524,3,True
-Purdue HH,Hawksworth & Hansen,17.293,3.281,4,4,7.449,1,False
-Harvard CS,Chen & Saneyoshi,17.239,2.275,11,11,10.415,3,True
-Cornell DV,Dye & Vorontsova,17.166,2.935,6,6,8.361,2,True
-Cal State Fullerton MN,Martinez & Nworgu,17.003,2.308,8,7,10.078,2,True
-Northwestern HP,Heftman & Peltier,17.0,1.613,20,20,12.161,6,True
-Macalester CD,Durbin & Costello,16.738,2.45,7,7,9.388,2,True
-Trinity BK,Barden & Khalikov,16.698,2.452,7,8,9.342,2,True
-Utah PP,Parrish & Powers,16.692,2.421,8,7,9.429,2,True
-Emory CG,Chen & granchi,16.629,1.639,18,19,11.711,5,True
-Purdue AH,Ahmed & Hawksworth,16.452,3.582,3,3,5.707,1,False
-Emory KW,Wang & Kibe,16.209,2.005,11,12,10.193,3,True
-Kansas State LW,Lewis & Williamson,16.004,2.563,7,6,8.316,2,True
-Southern California ZB,Zhang & Bhuket,15.865,3.844,3,4,4.333,2,True
-UTD KU,Khakoo & Underwood,15.815,4.359,3,3,2.738,1,False
-Indiana FT,Fish & Truemper,15.805,1.606,20,20,10.988,6,True
-Dartmouth GH (Hant/Gonzalez Arce),Hant & Gonzalez Arce,15.763,3.206,7,6,6.144,2,True
-Navy LS,Lawrence & Satterfield,15.732,2.278,8,7,8.899,2,True
-Wyoming HP,Hedrick & Pierson,15.612,2.987,4,4,6.651,1,False
-Northwestern MO,Martinez & Olorunsola,15.528,3.543,3,3,4.9,1,False
-Southern California HV,Vega & Huerto,15.419,5.084,2,2,0.166,1,False
-Missouri State GC,Granger & Cowdrey-Mota,15.328,3.871,2,2,3.716,1,False
-Kansas SM,Smith & McConnell,15.252,3.617,3,3,4.401,1,False
-Harvard/Amherst SL,Synn & Lourenco,14.866,2.724,7,7,6.695,2,True
-Houston HM,Hendrix & Macasaet,14.805,2.42,8,8,7.546,2,True
-NYU KK,Khade & Khalif,14.729,3.578,4,4,3.997,1,False
-West Point OS,Opron & Song,14.473,2.149,11,12,8.027,3,True
-Wake Forest SK (Shakarov/Kampine),Shakarov & Kampine,14.382,4.187,4,3,1.822,1,False
-West Georgia KM,Kennon & Missell,14.364,2.749,7,8,6.118,2,True
-Oklahoma BW (Ballinger/Wright),Ballinger & Wright,14.262,3.765,3,4,2.968,1,False
-Wyoming LW,Lyday & Willson,14.058,3.142,4,4,4.632,1,False
-Texas SH,Sutton & hamstra,14.047,3.798,3,4,2.652,1,False
-Binghamton PT,Treulich & Patel,13.826,2.294,11,9,6.944,3,True
-Georgetown WC,Wang & Correa,13.629,3.693,4,2,2.55,1,False
-Minnesota BM,Brown & Munson,13.513,4.965,2,2,-1.384,1,False
-Kansas HM,Hernandez & Martinez,12.969,2.226,11,10,6.29,3,True
-Georgia CL,Chapman & Lackey,12.795,4.759,3,2,-1.481,1,False
-Kentucky RS,Rushing & Schedler,12.782,3.544,3,4,2.151,1,False
-Oklahoma BW (Werner/Bustos),Werner & Bustos,12.559,3.933,3,4,0.759,1,False
-Kansas State DS,Spurlock & Draeger,12.246,1.893,15,15,6.566,4,True
-Missouri State BH,Bates & Hahn,11.83,3.465,4,4,1.434,1,False
-Wake Forest NS,Nguyen & Sferrazza,11.734,4.791,2,3,-2.64,1,False
-James Madison KP,Kardos & Pinto,11.657,2.357,11,11,4.585,3,True
-Samford AS,Setzler & Alexander,11.15,3.891,4,4,-0.522,1,False
-Northern Iowa CD,Chapman & Doyle,10.603,2.943,8,7,1.775,2,True
-Missouri State BC,Cowdrey-Mota & Busenhart,10.03,3.404,5,7,-0.181,2,True
-Northern Iowa VM,Van Buren & Miller,9.757,4.637,2,4,-4.153,1,False
-Harvard FK,Facey & Kundu,6.213,3.319,9,10,-3.742,3,True
-Oklahoma DF,Duncan & Fulkerson,5.165,3.828,8,7,-6.318,2,True
+Team,Debaters,Initials,Mu,Sigma,Aff_Rounds,Neg_Rounds,Debater_IDs,Conservative,Tournaments,Ranked
+Emory GS,Gallagher & Song,d & i,43.023,1.065,42,47,Emory/d.gallagher|Emory/i.song,39.827,9,True
+Michigan BP,Barrett & Park,e & j,41.215,0.969,43,46,Michigan/e.barrett|Michigan/j.park,38.309,9,True
+Kansas LS,Larson & Schultz,r & l,40.567,0.961,48,42,Kansas/r.larson|Kansas/l.schultz,37.683,9,True
+Kansas MS,Marshall & Suleman,j & i,40.099,2.841,5,5,Kansas/j.marshall|Kansas/i.suleman,31.577,1,False
+Michigan BE,Barrett & Esmailzadeh,e & c,39.82,1.881,5,5,Michigan/e.barrett|Michigan/c.esmailzadeh,34.176,1,False
+Georgetown AC,Aggarwal & Cowan,a & c,39.343,0.963,49,47,Georgetown/a.aggarwal|Georgetown/c.cowan,36.455,10,True
+Michigan SS (Shah/Shih),Shah & Shih,a & c,38.732,1.046,33,40,Michigan/a.shah|Michigan/c.shih,35.595,7,True
+Emory GR,Gallagher & Rupp,d & s,38.575,2.031,5,4,Emory/d.gallagher|Emory/s.rupp,32.483,1,False
+Northwestern LR,Li & Rubin,m & v,38.251,1.017,45,39,Northwestern/m.li|Northwestern/v.rubin,35.2,9,True
+CSU Long Beach OM,Ortega & Medina,c & d,37.818,0.936,41,46,CSU Long Beach/c.ortega|CSU Long Beach/d.medina,35.01,9,True
+Binghamton CK,Cohn & King,j & a,37.129,0.995,36,36,Binghamton/j.cohn|Binghamton/a.king,34.143,8,True
+Michigan State GL,Gusis & Lewis,j & s,36.945,0.954,45,40,Michigan State/j.gusis|Michigan State/s.lewis,34.085,9,True
+Iowa AP,Anderson McElligott & Parfenoff,s & g,36.224,1.033,35,33,Iowa/s.andersonmcelligott|Iowa/g.parfenoff,33.126,7,True
+Michigan ES,Esmailzadeh & Shetty,c & r,36.108,1.082,32,29,Michigan/c.esmailzadeh|Michigan/r.shetty,32.861,7,True
+Kansas HP,Hato & Persinger,b & a,36.083,1.137,27,27,Kansas/b.hato|Kansas/a.persinger,32.672,6,True
+Michigan SS (Shah/Shetty),Shah & Shetty,a & r,35.437,2.06,5,3,Michigan/a.shah|Michigan/r.shetty,29.257,1,False
+Macalester KH,Kochel & Harrison,w & i,35.354,1.483,13,14,Macalester/w.kochel|Macalester/i.harrison,30.904,3,True
+UC Berkeley MR,Menotti & Reichel,e & r,35.288,0.997,39,35,UC Berkeley/e.menotti|UC Berkeley/r.reichel,32.298,8,True
+Emory LY,Lobo & Yang,l & c,35.167,0.996,39,33,Emory/l.lobo|Emory/c.yang,32.181,8,True
+Emory KS,Kim & Shirts,a & j,34.851,1.201,27,26,Emory/a.kim|Emory/j.shirts,31.247,6,True
+Kansas OW,Owings & Willingham,o & z,34.847,0.99,38,34,Kansas/o.owings|Kansas/z.willingham,31.878,8,True
+Wake Forest PS (Sencion/Patel),Sencion & Patel,r & v,34.578,2.696,5,4,Wake Forest/r.sencion|Wake Forest/v.patel,26.49,1,False
+Northwestern PS,Pacconi & Souchet,j & a,34.379,1.121,28,27,Northwestern/j.pacconi|Northwestern/a.souchet,31.015,6,True
+Kansas AU,Ain & Ulven,c & m,33.767,1.17,25,33,Kansas/c.ain|Kansas/m.ulven,30.257,7,True
+Northwestern AT,Arney & Tahirkheli,b & a,33.357,1.11,30,29,Northwestern/b.arney|Emory/a.tahirkheli,30.028,7,True
+Emory RY,Rupp & Young,s & j,33.342,1.16,25,25,Emory/s.rupp|Emory/j.young,29.863,6,True
+Dartmouth CG,Cai & Goldberg,n & l,32.924,1.047,30,37,Dartmouth/n.cai|Dartmouth/l.goldberg,29.784,8,True
+Kentucky RW,Rimpson & Washington,j & a,32.797,1.692,10,15,Kentucky/j.rimpson|Kentucky/a.washington,27.722,3,True
+Northwestern NP,Nestor & Patterson,m & l,32.78,1.483,16,17,Northwestern/m.nestor|Northwestern/l.patterson,28.332,4,True
+Emory GM,Geevarghese & Maxwell,s & r,32.35,1.615,11,11,Emory/s.geevarghese|Emory/r.maxwell,27.505,3,True
+Baylor DL,Darwish & Lassen,o & l,32.088,1.129,29,30,Baylor/o.darwish|Baylor/l.lassen,28.703,7,True
+Kentucky GS,Gabay & Slish,a & r,32.064,1.013,34,33,Kentucky/a.gabay|Kentucky/r.slish,29.024,8,True
+West Georgia KK,Keller & Kennon,j & j,31.901,2.05,8,8,West Georgia/j.keller|West Georgia/j.kennon,25.752,2,True
+NYU MS,Makinde & Saigal,e & v,31.809,1.361,17,17,NYU/e.makinde|NYU/v.saigal,27.725,4,True
+Michigan CC,Chamarthy & Chen,g & j,31.787,1.323,24,23,Michigan/g.chamarthy|Michigan/j.chen,27.819,6,True
+Stanford LL,Lai & Lai,d & k,31.782,1.57,11,13,Stanford/d.lai|Stanford/k.lai,27.073,3,True
+Harvard DS,Deshpande & Sridharan,n & a,31.611,1.192,27,24,Harvard/n.deshpande|Harvard/a.sridharan,28.035,6,True
+Texas FL,Feinstein & Low,l & s,31.333,1.167,28,29,Texas/l.feinstein|Texas/s.low,27.831,7,True
+UTD PR,Penumetcha & Ravi,r & s,31.229,1.043,34,31,UTD/r.penumetcha|UTD/s.ravi,28.101,8,True
+Liberty CL,Cunningham & Layton,j & e,31.176,1.104,27,31,Liberty/j.cunningham|Liberty/e.layton,27.864,7,True
+UC Berkeley BU,Urfalian & Boguslavsky,m & i,30.766,1.118,29,28,UC Berkeley/m.urfalian|UC Berkeley/i.boguslavsky,27.412,7,True
+Iowa EW,Eltyeb & Weimar,b & n,30.748,1.185,28,30,Iowa/b.eltyeb|Iowa/n.weimar,27.193,7,True
+Northwestern AP,Arney & Patterson,b & l,30.682,2.584,5,4,Northwestern/b.arney|Northwestern/l.patterson,22.929,1,False
+Wake Forest SL,Sampat & Leverett,j & e,30.631,2.288,4,4,Wake Forest/j.sampat|Wake Forest/e.leverett,23.768,1,False
+Western Kentucky FN,Ney & Fournier,r & r,30.517,1.927,11,12,Western Kentucky/r.ney|Western Kentucky/r.fournier,24.736,3,True
+Stanford LY,Lai & Yan,d & f,30.349,2.729,4,4,Stanford/d.lai|Stanford/f.yan,22.164,1,False
+Macalester WK,Winters & Kochel,n & w,30.164,3.273,4,4,Macalester/n.winters|Macalester/w.kochel,20.344,1,False
+UTD HK,Hale & Karthik,c & m,30.092,1.139,27,27,UTD/c.hale|UTD/m.karthik,26.674,7,True
+Kansas BC,Blaser & Chidambaranathan,c & k,30.076,3.128,4,4,Kansas/c.blaser|Kansas/k.chidambaranathan,20.693,1,False
+Wake Forest LW,Leverett & Wolfe,e & c,30.07,1.217,22,23,Wake Forest/e.leverett|Wake Forest/c.wolfe,26.419,6,True
+Kansas SS,Shaw & Suleman,k & n,29.977,1.359,21,19,Kansas/k.shaw|Kansas/n.suleman,25.898,5,True
+Michigan State GS,Gearring & Shehzad,a & h,29.883,1.112,32,33,Michigan State/a.gearring|Michigan State/h.shehzad,26.547,8,True
+Michigan State FM,Foster & Martin,i & h,29.881,1.159,30,32,Michigan State/i.foster|Michigan State/h.martin,26.404,8,True
+Michigan CS (Cho/Saudek),Cho & Saudek,s & b,29.815,1.736,12,11,Michigan/s.cho|Michigan/b.saudek,24.608,3,True
+Kansas BS,Blaser & Suleman,c & i,29.789,2.377,7,7,Kansas/c.blaser|Kansas/i.suleman,22.657,2,True
+Southern California BR,Rahman & Bhadani,r & a,29.74,1.179,23,24,Southern California/r.rahman|Southern California/a.bhadani,26.203,6,True
+George Mason WW,Wright & Witkov,a & b,29.727,1.165,31,30,George Mason/a.wright|George Mason/b.witkov,26.232,8,True
+Emory TT,Tai & Taylor,e & k,29.561,3.253,3,3,Emory/e.tai|Emory/k.taylor,19.802,1,False
+Kansas BW,Walawender & Brown,h & c,29.315,1.103,28,27,Kansas/h.walawender|Kansas/c.brown,26.007,7,True
+Kentucky SR,Schedler & Rimpson,h & j,29.271,1.573,15,18,Kentucky/h.schedler|Kentucky/j.rimpson,24.553,4,True
+Emory AS,Aggarwal & Stumpff,s & j,29.258,1.461,20,17,Emory/s.aggarwal|Emory/j.stumpff,24.876,5,True
+Michigan AO,Agustin & Ou,w & r,29.144,1.234,21,24,Michigan/w.agustin|Michigan/r.ou,25.443,6,True
+Harvard AB,Aoki & Bodet,s & j,28.853,1.382,16,16,Harvard/s.aoki|Harvard/j.bodet,24.707,4,True
+Kansas LP,LaPoint & Pace,p & l,28.726,3.441,4,4,Kansas/p.lapoint|Kansas/l.pace,18.402,1,False
+Wake Forest MP,Mbye & Peters,m & r,28.685,2.241,7,7,Wake Forest/m.mbye|Wake Forest/r.peters,21.963,2,True
+Emory JR,Ravikumar & Jindal,a & t,28.615,2.88,4,4,Emory/a.ravikumar|Emory/t.jindal,19.975,1,False
+Michigan State JS,Jarman & Scully,z & g,28.561,1.176,25,26,Michigan State/z.jarman|Michigan State/g.scully,25.034,7,True
+George Mason DG,Davis & Gorman,a & d,28.447,2.184,7,7,George Mason/a.davis|George Mason/d.gorman,21.896,2,True
+Southern California DT,Dollinger & Turner,j & c,28.412,2.369,8,8,Southern California/j.dollinger|Southern California/c.turner,21.305,2,True
+Emory OP,okahata & Park,m & c,28.06,1.924,8,7,Emory/m.okahata|Emory/c.park,22.288,2,True
+Western Kentucky KC,Kumar & Carter,v & s,28.034,1.967,6,8,Western Kentucky/v.kumar|Western Kentucky/s.carter,22.134,2,True
+Kansas TC,Terreros & Chaudhry,j & h,27.732,3.284,3,3,Kansas/j.terreros|Kansas/h.chaudhry,17.88,1,False
+Northwestern LL,Lundberg & Leonard,a & s,27.649,1.373,24,22,Northwestern/a.lundberg|Northwestern/s.leonard,23.531,6,True
+Southern California BM,Bradley & Martin,c & s,27.413,1.432,19,20,Southern California/c.bradley|Southern California/s.martin,23.115,5,True
+Dartmouth MR,Majhail & Ross,k & m,27.413,3.185,3,3,Dartmouth/k.majhail|Dartmouth/m.ross,17.859,1,False
+Emory CF (Feldman/Charabuddi),Feldman & Charabuddi,c & v,27.196,2.902,4,4,Emory/c.feldman|Emory/v.charabuddi,18.489,1,False
+Kansas JB,June & Boyle,a & n,26.916,1.941,11,9,Kansas/a.june|Kansas/n.boyle,21.095,3,True
+Dartmouth JR,Jones & Rao,j & s,26.812,1.219,22,22,Dartmouth/j.jones|Dartmouth/s.rao,23.156,6,True
+UTD DD,Dickey & D'Antuono,j & j,26.73,1.408,23,21,UTD/j.dickey|UTD/j.dantuono,22.507,6,True
+Wake Forest AB,Aderibigbe & Brown,a & j,26.713,1.547,17,19,Wake Forest/a.aderibigbe|Wake Forest/j.brown,22.072,5,True
+Kansas ST,Smith & Terreros,q & j,26.653,2.146,11,10,Kansas/q.smith|Kansas/j.terreros,20.215,3,True
+Emory CS (Cannaday/Stearns),Cannaday & Stearns,w & m,26.507,3.394,3,3,Emory/w.cannaday|Emory/m.stearns,16.323,1,False
+Wake Forest DE,Dingley & Elliott,m & e,26.423,1.271,24,23,Wake Forest/m.dingley|Wake Forest/e.elliott,22.612,6,True
+Northwestern LW,Lee & Weisz,m & s,26.415,1.335,22,22,Northwestern/m.lee|Northwestern/s.weisz,22.409,6,True
+Wichita State GM,Griffith & Molina Chavez,m & m,26.382,1.198,27,26,Wichita State/m.griffith|Wichita State/m.molinachavez,22.79,7,True
+Harvard JS,Synn & Jin,m & a,26.326,2.253,7,7,Harvard/m.synn|Harvard/a.jin,19.567,2,True
+Georgia CK,Chapman & Kaidar-Heafetz,i & e,26.315,1.269,26,27,Georgia/i.chapman|West Georgia/e.kaidarheafetz,22.508,7,True
+Emory CT,Cross & Taylor,t & k,26.272,2.184,7,8,Emory/t.cross|Emory/k.taylor,19.721,2,True
+George Mason DE,Davis & Esteves,a & a,26.13,1.476,18,19,George Mason/a.davis|George Mason/a.esteves,21.703,5,True
+Missouri State NS,Neal & Siever,n & e,26.059,1.287,26,26,Missouri State/n.neal|Missouri State/e.siever,22.198,7,True
+Gonzaga WW,Wellman & Weinhardt,k & d,26.027,1.798,8,8,Gonzaga/k.wellman|Gonzaga/d.weinhardt,20.633,2,True
+Wake Forest HN,Hale & Namikas,d & k,26.012,1.379,19,19,Wake Forest/d.hale|Wake Forest/k.namikas,21.875,5,True
+Southern California MT,Troup & Mills,m & j,25.953,1.441,18,19,Southern California/m.troup|Southern California/j.mills,21.629,5,True
+Houston IF,Ibarra & Fernandez,o & a,25.838,2.147,9,8,Houston/o.ibarra|Houston/a.fernandez,19.396,2,True
+Western Kentucky CF,Carter & Fournier,s & r,25.657,1.951,8,7,Western Kentucky/s.carter|Western Kentucky/r.fournier,19.803,2,True
+Michigan CS (Chamarthy/Sharma),Chamarthy & Sharma,g & i,25.606,2.773,4,4,Michigan/g.chamarthy|Michigan/i.sharma,17.286,1,False
+Georgetown GT,Greenberg & Tamfu,m & l,25.442,1.466,18,19,Georgetown/m.greenberg|Georgetown/l.tamfu,21.043,5,True
+Dartmouth BC,Ben-Abdallah & Carpenter,s & e,25.428,1.298,19,20,Dartmouth/s.benabdallah|Dartmouth/e.carpenter,21.534,6,True
+Kansas CS,Chidambaranathan & Suleman,k & i,25.316,2.086,10,10,Kansas/k.chidambaranathan|Kansas/i.suleman,19.057,3,True
+Houston SF,Sheffield & Fernandez,b & a,25.311,3.207,4,3,Houston/b.sheffield|Houston/a.fernandez,15.689,1,False
+Southern California AS,Agrawal & Sood,a & d,25.302,3.42,3,4,Southern California/a.agrawal|Southern California/d.sood,15.041,1,False
+UMass Amherst LM,Levitan & Moussavou,j & m,25.227,1.82,12,11,UMass Amherst/j.levitan|UMass Amherst/m.moussavou,19.766,3,True
+Gonzaga RW,Wellman & Roe,k & e,25.218,1.563,14,15,Gonzaga/k.wellman|Gonzaga/e.roe,20.528,4,True
+Emory CF (Cannaday/Feldman),Cannaday & Feldman,w & c,25.145,2.832,3,3,Emory/w.cannaday|Emory/c.feldman,16.649,1,False
+Wake Forest PS (Patel/Sayoto),Patel & Sayoto,v & j,25.026,3.149,4,4,Wake Forest/v.patel|Wake Forest/j.sayoto,15.58,1,False
+Baylor LL,LoCicero & Li,i & y,24.919,3.097,4,4,Baylor/i.locicero|Baylor/y.li,15.628,1,False
+UC Berkeley GS,Situ & Gilrain-Lennon,a & d,24.825,1.486,18,18,UC Berkeley/a.situ|UC Berkeley/d.gilrainlennon,20.368,5,True
+Western Kentucky SS (Schintgen/StPeter),Schintgen & StPeter,n & j,24.798,1.416,18,19,Western Kentucky/n.schintgen|Western Kentucky/j.stpeter,20.55,5,True
+Kansas State DR (Raines/Day),Raines & Day,j & t,24.733,2.424,7,7,Kansas State/j.raines|Kansas State/t.day,17.461,2,True
+Michigan GJ,Garvey & Joyce,a & j,24.69,2.967,4,4,Michigan/a.garvey|Michigan/j.joyce,15.79,1,False
+Georgetown TP,Tamfu & Perez-Rubio,l & n,24.662,3.023,4,4,Georgetown/l.tamfu|Georgetown/n.perezrubio,15.593,1,False
+NYU JT,Jain & Theiding,a & c,24.626,1.702,15,14,NYU/a.jain|NYU/c.theiding,19.521,4,True
+Georgia CP,Cannon & Pack,z & l,24.563,1.324,26,25,Georgia/z.cannon|Samford/l.pack,20.59,7,True
+Kansas CF,Falin & Chaudhry,g & h,24.537,2.058,10,11,Kansas/g.falin|Kansas/h.chaudhry,18.362,3,True
+UTD HH,Hoch & Humphrey,i & a,24.47,1.58,14,16,UTD/i.hoch|UTD/a.humphrey,19.731,5,True
+Emory CS (Cross/Stumpff),Cross & Stumpff,t & j,24.44,3.162,4,3,Emory/t.cross|Emory/j.stumpff,14.955,1,False
+Trinity KP,Patterson & King,r & b,24.37,1.447,15,17,Trinity/r.patterson|Trinity/b.king,20.029,5,True
+Western Kentucky KN,Kumar & Ney,v & r,24.298,1.679,15,13,Western Kentucky/v.kumar|Western Kentucky/r.ney,19.262,4,True
+Harvard/UMass Amherst AL,Aoki & Levitan,s & j,24.287,3.323,3,3,Harvard/s.aoki|UMass Amherst/j.levitan,14.317,1,False
+Kansas BM,Bath & McConnell,c & s,24.222,1.475,14,15,Kansas/c.bath|Kansas/s.mcconnell,19.798,4,True
+Northwestern LO,LippSmith & Olorunsola,f & t,24.192,1.987,10,8,Northwestern/f.lippsmith|Northwestern/t.olorunsola,18.231,3,True
+Iowa BS,Bilicki & Sanderson,r & c,24.191,1.292,22,22,Iowa/r.bilicki|Iowa/c.sanderson,20.314,6,True
+Kansas LL,Levin & LaPoint,a & p,24.19,3.627,3,3,Kansas/a.levin|Kansas/p.lapoint,13.31,1,False
+Iowa KS,Kleiman & Severson,b & l,24.168,1.448,18,19,Iowa/b.kleiman|Iowa/l.severson,19.824,5,True
+Macalester HW,Harrison & Winters,i & n,24.167,2.318,7,7,Macalester/i.harrison|Macalester/n.winters,17.214,2,True
+Wake Forest SK (Sampat/Kampine),Sampat & Kampine,j & j,24.15,3.095,3,3,Wake Forest/j.sampat|Wake Forest/j.kampine,14.865,1,False
+Macalester WC,Costello & Winters,m & n,24.115,2.985,3,4,Macalester/m.costello|Macalester/n.winters,15.16,1,False
+Gonzaga GW,Gibson & Weinhardt,k & d,24.092,3.397,3,3,Gonzaga/k.gibson|Gonzaga/d.weinhardt,13.9,1,False
+Dartmouth KR,Rao & Katyal,s & h,24.082,2.108,4,4,Dartmouth/s.rao|Dartmouth/h.katyal,17.757,1,False
+UC Berkeley LS,Smith & Liu,g & j,24.048,2.989,4,4,UC Berkeley/g.smith|UC Berkeley/j.liu,15.082,1,False
+Baylor BK,Benton & Keeler,s & a,23.954,1.322,22,22,Baylor/s.benton|Baylor/a.keeler,19.99,6,True
+Kansas BP (Pace/Blaser),Pace & Blaser,l & c,23.855,2.448,7,6,Kansas/l.pace|Kansas/c.blaser,16.513,2,True
+Kansas State AS,Ardis & Sand,l & c,23.814,2.029,8,7,Kansas State/l.ardis|Kansas State/c.sand,17.727,2,True
+Michigan AM,Almand & Moon,a & a,23.773,1.786,13,12,Michigan/a.almand|Michigan/a.moon,18.415,4,True
+Kansas BP (Bauman/Persson),Bauman & Persson,t & s,23.688,2.179,9,9,Kansas/t.bauman|Kansas/s.persson,17.15,3,True
+Dartmouth BJ,Ben-Abdallah & Jones,s & j,23.548,2.071,4,4,Dartmouth/s.benabdallah|Dartmouth/j.jones,17.333,1,False
+Emory CR,Ravikumar & Charabuddi,a & v,23.49,1.492,19,18,Emory/a.ravikumar|Emory/v.charabuddi,19.014,5,True
+Minnesota HU,Haber-Fawcett & Usenov,b & t,23.423,1.214,25,26,Minnesota/b.haberfawcett|Minnesota/t.usenov,19.78,7,True
+Kansas State RS,Robertson & Sum,d & r,23.258,1.941,6,7,Kansas State/d.robertson|Kansas State/r.sum,17.434,2,True
+Georgetown LN,Lastelick & Nanji,l & a,23.226,1.251,30,29,Georgetown/l.lastelick|Georgetown/a.nanji,19.473,8,True
+Harvard BS,Bodet & Shen,j & p,23.145,3.189,3,4,Harvard/j.bodet|Harvard/p.shen,13.579,1,False
+Dartmouth GM,Guo & Morley,s & k,23.033,2.225,4,4,Dartmouth/s.guo|Dartmouth/k.morley,16.359,1,False
+Michigan HM,Hwang & McIlhenny,c & i,22.759,2.21,7,6,Michigan/c.hwang|Michigan/i.mcilhenny,16.129,2,True
+Emory SW,So & Wang,e & m,22.662,1.937,8,8,Emory/e.so|Emory/m.wang,16.849,2,True
+Liberty KS,Koenig & Soares,n & a,22.563,3.317,3,3,Liberty/n.koenig|Liberty/a.soares,12.61,1,False
+Texas GS,Stevenson & Gade,d & v,22.507,1.55,16,15,Texas/d.stevenson|Texas/v.gade,17.857,4,True
+Liberty SS,Soares & Spencer,a & w,22.271,1.931,10,11,Liberty/a.soares|Liberty/w.spencer,16.477,3,True
+Georgetown CX,Correa & Xiao,j & c,22.203,3.02,4,4,Georgetown/j.correa|Georgetown/c.xiao,13.144,1,False
+Michigan OJ,Ou & Joyce,r & j,22.103,2.797,4,4,Michigan/r.ou|Michigan/j.joyce,13.712,1,False
+Kansas VF,Verma & Fordyce,a & a,21.931,3.883,3,3,Kansas/a.verma|Kansas/a.fordyce,10.283,1,False
+Navy CR,Connor & Rea,t & a,21.892,1.693,11,10,Navy/t.connor|Navy/a.rea,16.812,3,True
+Louisville VJ,Van Dyke & Johnson,a & t,21.883,3.242,3,4,Louisville/a.vandyke|Louisville/t.johnson,12.157,1,False
+Cal State Fullerton MA,Meza & Ayyala,j & a,21.882,2.347,3,4,Cal State Fullerton/j.meza|Cal State Fullerton/a.ayyala,14.84,1,False
+Missouri State CG,Cooper & Granger,q & j,21.877,2.035,8,7,Missouri State/q.cooper|Missouri State/j.granger,15.772,2,True
+Missouri State HN,Hahn & Neal,s & a,21.829,2.137,9,10,Missouri State/s.hahn|Missouri State/a.neal,15.418,3,True
+Dartmouth PT,Park & Tejavanija,e & a,21.769,4.099,3,3,Dartmouth/e.park|Dartmouth/a.tejavanija,9.474,1,False
+Northwestern AH,Arceo & Hines,a & b,21.663,2.416,4,4,Northwestern/a.arceo|Northwestern/b.hines,14.416,1,False
+Towson DP,Darden & Persaud,n & a,21.588,2.123,8,7,Towson/n.darden|Towson/a.persaud,15.22,2,True
+Wyoming WW,Willson & Widi,j & s,21.571,1.577,18,19,Wyoming/j.willson|Wyoming/s.widi,16.84,5,True
+Northwestern AK,Arceo & Kung,a & g,21.566,1.452,17,18,Northwestern/a.arceo|Northwestern/g.kung,17.21,5,True
+CSU Long Beach SS,Smith & Saenz,g & m,21.553,2.939,4,4,CSU Long Beach/g.smith|CSU Long Beach/m.saenz,12.737,1,False
+George Mason RT,Richter & Taxali,d & r,21.504,1.731,13,13,George Mason/d.richter|George Mason/r.taxali,16.312,4,True
+Kansas BB,Boyle & Bath,n & c,21.328,2.247,4,4,Kansas/n.boyle|Kansas/c.bath,14.587,1,False
+Missouri State BK,Burns & Kimmerle,c & a,21.163,2.145,6,7,Missouri State/c.burns|Missouri State/a.kimmerle,14.727,2,True
+Arizona State SS,Smith & Saxena,a & a,21.102,1.963,8,8,Arizona State/a.smith|Arizona State/a.saxena,15.212,2,True
+Liberty TK,Tooley & Koenig,e & n,21.074,3.25,3,4,Liberty/e.tooley|Liberty/n.koenig,11.325,1,False
+Dartmouth BP,Ben-Abdallah & Park,s & e,21.066,3.812,3,2,Dartmouth/s.benabdallah|Dartmouth/e.park,9.63,1,False
+Michigan BL,Baba & Ledesma,m & g,20.87,1.537,17,17,Michigan/m.baba|Michigan/g.ledesma,16.259,5,True
+Dartmouth BG,Brody & Goyal,c & s,20.863,1.993,11,11,Dartmouth/c.brody|Dartmouth/s.goyal,14.885,3,True
+Dartmouth GH (Guo/Hatton),Guo & Hatton,s & e,20.804,1.589,15,17,Dartmouth/s.guo|Dartmouth/e.hatton,16.036,5,True
+Kentucky ER,Ervin & Rushing,w & j,20.79,3.039,3,3,Kentucky/w.ervin|Kentucky/j.rushing,11.674,1,False
+Georgetown VP,Valame & Perez-Rubio,v & n,20.485,2.32,7,7,Georgetown/v.valame|Georgetown/n.perezrubio,13.525,2,True
+Georgetown KL,Klingler & Li,m & n,20.479,2.032,10,9,Georgetown/m.klingler|Georgetown/n.li,14.384,3,True
+Dartmouth HP (Park/Hatton),Park & Hatton,e & e,20.474,2.899,4,4,Dartmouth/e.park|Dartmouth/e.hatton,11.776,1,False
+Emory PS,Pelli & Stearns,m & m,20.463,2.847,4,4,Emory/m.pelli|Emory/m.stearns,11.922,1,False
+Kansas State DR (Day/Robertson),Day & Robertson,t & d,20.4,2.182,8,8,Kansas State/t.day|Kansas State/d.robertson,13.853,2,True
+Macalester WD,Winters & Durbin,n & a,20.03,3.495,3,3,Macalester/n.winters|Macalester/a.durbin,9.544,1,False
+Wyoming CH,Campbell & Hawley,j & j,19.968,1.394,21,23,Wyoming/j.campbell|Wyoming/j.hawley,15.786,6,True
+Houston IH,Ibarra & Hendrix,o & a,19.944,3.364,4,3,Houston/o.ibarra|Houston/a.hendrix,9.85,1,False
+Kansas HL,Levin & Harker,a & a,19.86,1.523,16,15,Kansas/a.levin|Kansas/a.harker,15.292,4,True
+North Texas VB,Vargas & bowman,e & r,19.816,3.45,4,4,North Texas/e.vargas|North Texas/r.bowman,9.465,1,False
+Utah WV,Watrin & Verbeck-O'Brien,s & b,19.68,3.052,4,4,Utah/s.watrin|Utah/b.verbeckobrien,10.525,1,False
+Wake Forest DK,Dingley & Kampine,m & j,19.582,3.683,3,3,Wake Forest/m.dingley|Wake Forest/j.kampine,8.533,1,False
+Baylor LP,Li & Phillips,y & t,19.574,3.505,3,3,Baylor/y.li|Baylor/t.phillips,9.057,1,False
+James Madison MO,Oehler & Matzen,a & m,19.372,1.998,11,11,James Madison/a.oehler|James Madison/m.matzen,13.377,3,True
+UT San Antonio CG,Carrillo & Garza,i & e,19.27,2.237,8,7,UT San Antonio/i.carrillo|UT San Antonio/e.garza,12.56,2,True
+UC Davis MS,Shaikh & Mijares,u & m,19.132,3.04,4,4,UC Davis/u.shaikh|UC Davis/m.mijares,10.013,1,False
+Emory/Columbia AH,Aggarwal & Hu,s & f,19.127,3.68,4,4,Emory/s.aggarwal|Emory/Columbia/f.hu,8.087,1,False
+Kansas FS,Sharman & Foust,s & a,19.111,1.984,7,7,Kansas/s.sharman|Kansas/a.foust,13.16,2,True
+Oklahoma BS,Smith & Ballinger,b & l,19.016,2.272,7,6,Oklahoma/b.smith|Oklahoma/l.ballinger,12.201,2,True
+Emory ST,Stearns & Tai,m & e,18.949,1.693,14,14,Emory/m.stearns|Emory/e.tai,13.868,4,True
+Kentucky BS,Bisevac & Schedler,h & h,18.93,5.902,1,1,Kentucky/h.bisevac|Kentucky/h.schedler,1.224,1,False
+UTD KR,Khakoo & Ramirez,t & l,18.804,1.963,11,10,UTD/t.khakoo|UTD/l.ramirez,12.914,3,True
+Indiana DJ,Duggal & Jones,j & l,18.715,3.156,4,3,Indiana/j.duggal|Indiana/l.jones,9.248,1,False
+Cornell LD,Diop & Liang,a & d,18.688,3.337,3,3,Cornell/a.diop|Cornell/d.liang,8.676,1,False
+CSU Long Beach ES,Escobar & Saenz,a & m,18.599,1.826,12,11,CSU Long Beach/a.escobar|CSU Long Beach/m.saenz,13.122,3,True
+Minnesota MW,Munson & Wells,t & k,18.572,3.879,2,3,Minnesota/t.munson|Minnesota/k.wells,6.934,1,False
+Wake Forest SW,Sampat & Williams,j & s,18.564,3.188,3,4,Wake Forest/j.sampat|Wake Forest/s.williams,8.999,1,False
+Kansas HF,Hefty & Fordyce,c & a,18.463,3.407,4,3,Kansas/c.hefty|Kansas/a.fordyce,8.243,1,False
+Western Kentucky IS,Ingram & Shockley,k & c,18.381,3.243,4,3,Western Kentucky/k.ingram|Western Kentucky/c.shockley,8.652,1,False
+Western Kentucky SS (StPeter/Shockley),StPeter & Shockley,j & c,18.283,2.812,3,3,Western Kentucky/j.stpeter|Western Kentucky/c.shockley,9.847,1,False
+Baylor MP,merriwether & Phillips,j & t,18.251,1.618,17,18,Baylor/j.merriwether|Baylor/t.phillips,13.397,5,True
+Oklahoma DT,Davis & Toro,a & l,17.969,1.821,11,10,Oklahoma/a.davis|Oklahoma/l.toro,12.507,3,True
+Wake Forest MS,Mbye & Sampat,m & j,17.92,3.344,3,4,Wake Forest/m.mbye|Wake Forest/j.sampat,7.888,1,False
+Missouri State DN,DeAngelis & Neal,l & a,17.899,2.117,11,10,Missouri State/l.deangelis|Missouri State/a.neal,11.549,3,True
+Trinity CK,Crowley & Khalikov,l & m,17.866,2.948,4,4,Trinity/l.crowley|Trinity/m.khalikov,9.021,1,False
+George Mason RS,Reyes & Shananier,b & a,17.848,1.831,14,15,George Mason/b.reyes|George Mason/a.shananier,12.356,4,True
+Dartmouth HP (Park/Hant),Park & Hant,e & a,17.755,4.374,2,2,Dartmouth/e.park|Dartmouth/a.hant,4.633,1,False
+North Texas GV,Ganesh & Vargas,n & e,17.738,3.891,3,3,North Texas/n.ganesh|North Texas/e.vargas,6.064,1,False
+Cal State Fullerton CD,Catapang & Dominguez,s & i,17.561,2.276,8,7,Cal State Fullerton/s.catapang|Cal State Fullerton/i.dominguez,10.734,2,True
+Cornell MD,Marcy & Dye,s & m,17.467,2.973,4,4,Cornell/s.marcy|Cornell/m.dye,8.547,1,False
+Western Kentucky IP,Ingram & Puranik,k & a,17.299,2.697,7,6,Western Kentucky/k.ingram|Western Kentucky/a.puranik,9.207,2,True
+North Texas VH,Vazquez & Hasper,d & j,17.214,2.529,7,6,North Texas/d.vazquez|North Texas/j.hasper,9.626,2,True
+Central Oklahoma EW,Eckard & Walker,e & k,17.202,2.413,7,8,Central Oklahoma/e.eckard|Central Oklahoma/k.walker,9.962,2,True
+Louisville NJ,Naidugari & Johnson,d & t,17.188,3.542,3,3,Louisville/d.naidugari|Louisville/t.johnson,6.561,1,False
+Purdue AH,Ahmed & Hawksworth,t & r,17.177,3.128,3,3,Purdue/t.ahmed|Purdue/r.hawksworth,7.793,1,False
+Purdue HH,Hawksworth & Hansen,r & p,17.114,3.175,4,4,Purdue/r.hawksworth|Purdue/p.hansen,7.589,1,False
+Southern Nazarene HS,Horton & Stockstill,i & k,17.109,2.163,8,6,Southern Nazarene/i.horton|Southern Nazarene/k.stockstill,10.621,3,True
+Rochester OR,Ozcayir & Rahman,l & a,16.973,2.528,6,7,Rochester/l.ozcayir|Rochester/a.rahman,9.389,2,True
+Kansas LV,Verma & Lemaster,a & b,16.921,2.482,6,7,Kansas/a.verma|Kansas/b.lemaster,9.474,2,True
+Harvard CS,Chen & Saneyoshi,d & m,16.862,2.247,11,11,Harvard/d.chen|Harvard/m.saneyoshi,10.121,3,True
+Cornell DV,Dye & Vorontsova,m & a,16.83,2.84,6,6,Cornell/m.dye|Cornell/a.vorontsova,8.311,2,True
+Cal State Fullerton MN,Martinez & Nworgu,d & o,16.804,2.253,8,7,Cal State Fullerton/d.martinez|Cal State Fullerton/o.nworgu,10.046,2,True
+Northwestern HP,Heftman & Peltier,n & n,16.647,1.599,20,20,Northwestern/n.heftman|Northwestern/n.peltier,11.851,6,True
+Macalester CD,Durbin & Costello,a & m,16.486,2.391,7,7,Macalester/a.durbin|Macalester/m.costello,9.312,2,True
+Emory CG,Chen & granchi,j & a,16.33,1.627,18,19,Emory/j.chen|Emory/a.granchi,11.449,5,True
+Trinity BK,Barden & Khalikov,g & m,16.326,2.401,7,8,Trinity/g.barden|Trinity/m.khalikov,9.122,2,True
+Utah PP,Parrish & Powers,j & a,16.281,2.407,8,7,Utah/j.parrish|Utah/a.powers,9.061,2,True
+UTD KU,Khakoo & Underwood,t & r,16.11,4.095,3,3,UTD/t.khakoo|UTD/r.underwood,3.825,1,False
+Southern California ZB,Zhang & Bhuket,i & n,16.067,3.604,3,4,Southern California/i.zhang|Southern California/n.bhuket,5.254,2,True
+Emory KW,Wang & Kibe,t & s,15.921,2.001,11,12,Emory/t.wang|Emory/s.kibe,9.92,3,True
+Northwestern MO,Martinez & Olorunsola,m & t,15.771,3.396,3,3,Northwestern/m.martinez|Northwestern/t.olorunsola,5.584,1,False
+Kansas State LW,Lewis & Williamson,a & a,15.692,2.549,7,6,Kansas State/a.lewis|Kansas State/a.williamson,8.044,2,True
+Kansas SM,Smith & McConnell,q & s,15.638,3.442,3,3,Kansas/q.smith|Kansas/s.mcconnell,5.311,1,False
+Dartmouth GH (Hant/Gonzalez Arce),Hant & Gonzalez Arce,a & j,15.545,3.136,7,6,Dartmouth/a.hant|Dartmouth/j.gonzalezarce,6.138,2,True
+Indiana FT,Fish & Truemper,z & m,15.512,1.581,20,20,Indiana/z.fish|Indiana/m.truemper,10.77,6,True
+Navy LS,Lawrence & Satterfield,j & g,15.39,2.092,8,7,Navy/j.lawrence|Navy/g.satterfield,9.114,2,True
+Wyoming HP,Hedrick & Pierson,a & a,15.282,2.978,4,4,Wyoming/a.hedrick|Wyoming/a.pierson,6.349,1,False
+Missouri State GC,Granger & Cowdrey-Mota,j & g,15.203,3.359,2,2,Missouri State/j.granger|Missouri State/g.cowdreymota,5.127,1,False
+Southern California HV,Vega & Huerto,j & a,15.04,5.029,2,2,Southern California/j.vega|Southern California/a.huerto,-0.048,1,False
+West Point OS,Opron & Song,d & j,14.656,2.049,11,12,West Point/d.opron|West Point/j.song,8.509,3,True
+Harvard/Amherst SL,Synn & Lourenco,m & a,14.577,2.702,7,7,Harvard/m.synn|Harvard/Amherst/a.lourenco,6.473,2,True
+Houston HM,Hendrix & Macasaet,a & p,14.528,2.4,8,8,Houston/a.hendrix|Houston/p.macasaet,7.328,2,True
+NYU KK,Khade & Khalif,a & m,14.455,3.554,4,4,NYU/a.khade|NYU/m.khalif,3.793,1,False
+Wake Forest SK (Shakarov/Kampine),Shakarov & Kampine,h & j,14.312,4.034,4,3,Wake Forest/h.shakarov|Wake Forest/j.kampine,2.21,1,False
+West Georgia KM,Kennon & Missell,j & b,14.146,2.698,7,8,West Georgia/j.kennon|West Georgia/b.missell,6.052,2,True
+Oklahoma BW (Ballinger/Wright),Ballinger & Wright,l & j,13.919,3.729,3,4,Oklahoma/l.ballinger|Oklahoma/j.wright,2.733,1,False
+Wyoming LW,Lyday & Willson,b & r,13.78,3.134,4,4,Wyoming/b.lyday|Wyoming/r.willson,4.379,1,False
+Texas SH,Sutton & hamstra,b & p,13.718,3.753,3,4,Texas/b.sutton|Texas/p.hamstra,2.458,1,False
+Georgetown WC,Wang & Correa,l & j,13.25,3.666,4,2,Georgetown/l.wang|Georgetown/j.correa,2.254,1,False
+Minnesota BM,Brown & Munson,a & t,13.221,4.925,2,2,Minnesota/a.brown|Minnesota/t.munson,-1.553,1,False
+Binghamton PT,Treulich & Patel,a & n,13.091,2.207,11,9,Binghamton/a.treulich|Binghamton/n.patel,6.469,3,True
+Wake Forest NS,Nguyen & Sferrazza,k & s,12.98,4.438,2,3,Wake Forest/k.nguyen|Wake Forest/s.sferrazza,-0.334,1,False
+Kansas HM,Hernandez & Martinez,e & i,12.796,2.142,11,10,Kansas/e.hernandez|Kansas/i.martinez,6.371,3,True
+Kentucky RS,Rushing & Schedler,j & h,12.631,3.512,3,4,Kentucky/j.rushing|Kentucky/h.schedler,2.096,1,False
+Oklahoma BW (Werner/Bustos),Werner & Bustos,f & y,12.622,3.8,3,4,Oklahoma/f.werner|Oklahoma/y.bustos,1.222,1,False
+Georgia CL,Chapman & Lackey,i & c,12.427,4.72,3,2,Georgia/i.chapman|Georgia/c.lackey,-1.733,1,False
+Kansas State DS,Spurlock & Draeger,c & k,12.158,1.851,15,15,Kansas State/c.spurlock|Kansas State/k.draeger,6.606,4,True
+Missouri State BH,Bates & Hahn,a & s,11.612,3.442,4,4,Missouri State/a.bates|Missouri State/s.hahn,1.286,1,False
+James Madison KP,Kardos & Pinto,g & m,11.42,2.326,11,11,James Madison/g.kardos|James Madison/m.pinto,4.442,3,True
+Samford AS,Setzler & Alexander,s & k,10.904,3.855,4,4,Samford/s.setzler|Samford/k.alexander,-0.659,1,False
+Northern Iowa CD,Chapman & Doyle,q & b,10.84,2.838,8,7,Northern Iowa/q.chapman|Northern Iowa/b.doyle,2.325,2,True
+Missouri State BC,Cowdrey-Mota & Busenhart,g & l,10.462,3.222,5,7,Missouri State/g.cowdreymota|Missouri State/l.busenhart,0.796,2,True
+Northern Iowa VM,Van Buren & Miller,k & t,10.358,4.237,2,4,Northern Iowa/k.vanburen|Northern Iowa/t.miller,-2.355,1,False
+Harvard FK,Facey & Kundu,z & k,7.928,2.609,9,10,Harvard/z.facey|Harvard/k.kundu,0.1,3,True
+Oklahoma DF,Duncan & Fulkerson,a & e,5.041,3.795,8,7,Oklahoma/a.duncan|Oklahoma/e.fulkerson,-6.345,2,True

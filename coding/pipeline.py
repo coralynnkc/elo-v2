@@ -35,9 +35,25 @@ SPLIT_BALLOTS = False
 
 # Skill points of uncertainty added to a partnership seeded from a previous season,
 # covering the off-season and the fact that a new partnership is not its debaters' sum
-PRIOR_INFLATION = 4.0
-# The same gap on the per-debater scale, so two debaters' variances sum to PRIOR_INFLATION^2
-DEBATER_INFLATION = PRIOR_INFLATION / math.sqrt(2)
+PRIOR_INFLATION = 2.0
+# Uncertainty added to each debater between seasons, when their rating is carried down
+# the prior_season chain. Tuned separately: tightening it with PRIOR_INFLATION costs arms.
+DEBATER_INFLATION = 4.0 / math.sqrt(2)
+
+# One debater listed under two first names in Tabroom: (school, surname as normalized,
+# initial) -> the initial to use. Leverett alternates E/L between tournaments.
+INITIAL_ALIASES = {
+    ('Wake Forest', 'leverett', 'l'): 'e',
+}
+
+# Two debaters at one school with the same surname *and* first initial, who can only be
+# told apart by partner: debater key -> {partner's normalized surname: the other one's key}.
+# Applied in every season.
+NAMESAKES = {
+    # Energy had two N. Cais. The one who debated with Bald continues with Goldberg from
+    # labor on; this is the other.
+    'Dartmouth/n.cai': {'wallace': 'Dartmouth/n.cai-2', 'guddati': 'Dartmouth/n.cai-2'},
+}
 
 # Tabroom suffixes stripped from team codes in every season
 SUFFIX_FIXES = {
@@ -48,7 +64,9 @@ SUFFIX_FIXES = {
 # One school, two names in Tabroom. Applied in every season, before name_fixes: a school
 # that changes name between seasons splits its debaters' keys and breaks their priors.
 SCHOOL_ALIASES = {
-    'MoState ': 'Missouri State ',
+    'MoState': 'Missouri State',
+    'Massachusetts, Amherst': 'UMass Amherst',
+    'Fullerton': 'Cal State Fullerton',
 }
 
 # A debater whose surname changed, keyed by (school, old surname as normalized). Applied in
@@ -62,6 +80,9 @@ DEBATER_ALIASES = {
 #                Add new codes here in the order they were held; files with other
 #                prefixes are ignored.
 #   prior_season: season whose debater ratings seed this one's teams (optional).
+#   transfers:   debaters who changed school since prior_season, as their key there
+#                ('School/initial.surname') -> new school. Hand-checked: a shared name at
+#                two schools is usually two people.
 #   name_fixes:  code fixes (wrong -> right) for that season only. Only needed when a code
 #                can't be tied to its debaters (no speaker names or entries) and differs
 #                from the code used elsewhere.
@@ -77,6 +98,11 @@ SEASONS = {
     'labor': {
         'data_dir': 'data_labor',
         'prior_season': 'energy',
+        'transfers': {
+            'Emory/a.tahirkheli': 'Northwestern',
+            'West Georgia/e.kaidarheafetz': 'Georgia',
+            'Samford/l.pack': 'Georgia',
+        },
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt'],
         'name_fixes': {
             'Emory CrTa': 'Emory CT',  # Northwestern code for Cross & Taylor
@@ -92,6 +118,7 @@ SEASONS = {
         'data_dir': 'data_arms',
         'tournaments': ['nu', 'kentuckyrr', 'uk'],
         'prior_season': 'labor',
+        'transfers': {'Emory/i.song': 'Michigan'},
         'name_fixes': {},
         'teams_file': 'teams_arms.csv',
         'history_file': 'match_history_arms.csv',
@@ -132,7 +159,13 @@ def _round_names(data_dir: str, tournament_order: list[str]) -> list[str]:
 def clean_teams(series: pd.Series, *fixes: dict | None) -> pd.Series:
     """Strip Tabroom suffixes and school aliases, then apply each fixes dict in order."""
     s = series.copy()
-    for fix in (SUFFIX_FIXES, SCHOOL_ALIASES, *fixes):
+    for wrong, right in SUFFIX_FIXES.items():
+        s = s.str.replace(wrong, right, regex=False)
+    # Whole school names only (either half of a hybrid), so 'Fullerton' leaves
+    # 'Cal State Fullerton' alone
+    for wrong, right in SCHOOL_ALIASES.items():
+        s = s.str.replace(rf'(^|/){re.escape(wrong)} ', lambda m: f'{m.group(1)}{right} ', regex=True)
+    for fix in fixes:
         for wrong, right in (fix or {}).items():
             s = s.str.replace(wrong, right, regex=False)
     return s
@@ -156,14 +189,14 @@ def _entry_surnames(entry) -> list[str] | None:
     return names if len(names) == 2 else None
 
 
-def _speaker_surnames(cell) -> list[str] | None:
-    """'AHant 28.6 JGonzalez Arce 28.7' -> ['Hant', 'Gonzalez Arce']. Names are Tabroom's
+def _speaker_names(cell) -> list[str] | None:
+    """'AHant 28.6 JGonzalez Arce 28.7' -> ['AHant', 'JGonzalez Arce']. Names are Tabroom's
     first initial + surname. None unless exactly two speakers are listed (mavericks fall
     back to the team code)."""
     if pd.isna(cell):
         return None
     names = [m.group(1).strip() for m in _SPEAKER.finditer(re.sub(r'\s+', ' ', str(cell)))]
-    return [n[1:] for n in names] if len(names) == 2 else None
+    return names if len(names) == 2 else None
 
 
 def _apply_aliases(code, surnames: list[str] | None) -> list[str] | None:
@@ -172,6 +205,23 @@ def _apply_aliases(code, surnames: list[str] | None) -> list[str] | None:
         return surnames
     school = code.rpartition(' ')[0]
     return [DEBATER_ALIASES.get((school, _normalize_surname(s)), s) for s in surnames]
+
+
+def _match_speakers(surnames: list[str], speakers: list[str], initials: list[str]) -> list[tuple[int, str]]:
+    """(debater index, first initial) for each speaker that can be tied to one of a
+    partnership's two surnames. Entries and speaker names can disagree (Tabroom shortens
+    'Sayoto' to 'Say'), so a prefix counts as a match. Partners who share a surname are
+    ordered by initial instead."""
+    want = [_normalize_surname(s) for s in surnames]
+    if want[0] == want[1]:
+        return list(enumerate(sorted(initials)))
+    matched = []
+    for speaker, initial in zip(speakers, initials):
+        have = _normalize_surname(speaker)
+        fits = [i for i, w in enumerate(want) if have and (w.startswith(have) or have.startswith(w))]
+        if len(fits) == 1:
+            matched.append((fits[0], initial))
+    return matched if len({i for i, _ in matched}) == len(matched) else []
 
 
 def _initials_signature(code: str) -> str:
@@ -215,8 +265,13 @@ def load_season(
         for side in ('Aff', 'Neg'):
             out[side] = clean_teams(df[side], name_fixes)
             points = next((c for c in df.columns if c.startswith(side) and 'Points' in c), None)
-            out[f'{side}_Speakers'] = ([_apply_aliases(c, _speaker_surnames(p)) for c, p in zip(out[side], df[points])]
-                                       if points else None)
+            speakers = [_speaker_names(p) for p in df[points]] if points else [None] * len(df)
+            out[f'{side}_Speakers'] = [_apply_aliases(c, s and [n[1:] for n in s])
+                                       for c, s in zip(out[side], speakers)]
+            out[f'{side}_Initials'] = [
+                s and [INITIAL_ALIASES.get((_school(c), _normalize_surname(n[1:]), n[0].lower()), n[0].lower())
+                       for n in s]
+                for c, s in zip(out[side], speakers)]
         win = df['Win'].astype(str).str.strip().str.upper()
         # Forfeits ("AFF FFT NEG BYE") name both sides but weren't debated, so they stay raw
         out['Win'] = win.map(lambda x: x if 'FFT' in x else 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
@@ -275,14 +330,23 @@ def load_season(
         return f'code:{code}'
 
     tournaments_by_code = defaultdict(lambda: defaultdict(set))  # key -> code -> tournaments
+    initials_seen = defaultdict(lambda: (Counter(), Counter()))  # key -> a tally per debater
     for name, df in rounds.items():
         tournament = name.partition('_')[0]
         for side in ('Aff', 'Neg'):
             keys = [resolve(c, s, tournament) for c, s in zip(df[side], df[f'{side}_Speakers'])]
-            for key, code in zip(keys, df[side]):
+            for key, code, speakers, initials in zip(keys, df[side], df[f'{side}_Speakers'],
+                                                     df[f'{side}_Initials']):
                 if key:
                     tournaments_by_code[key][code].add(tournament_order.index(tournament))
+                if key in surnames_by_key and speakers:
+                    for i, initial in _match_speakers(surnames_by_key[key], speakers, initials):
+                        initials_seen[key][i][initial] += 1
             df[f'{side}_Key'] = keys
+
+    def first_initials(key) -> str:
+        """'c & j', aligned with Debaters; blank where the points column never named them."""
+        return ' & '.join(c.most_common(1)[0][0] if c else '' for c in initials_seen[key])
 
     # Display name: the initials ordering-group used at the most tournaments (ties: most
     # recent), shown in its alphabetically first ordering so names stay stable
@@ -313,6 +377,7 @@ def load_season(
     teams = pd.DataFrame({
         'Team': [display[k] for k in keys],
         'Debaters': [' & '.join(surnames_by_key[k]) if k in surnames_by_key else '' for k in keys],
+        'Initials': [first_initials(k) if k in surnames_by_key else '' for k in keys],
         'Mu': MU, 'Sigma': SIGMA,
         'Aff_Rounds': 0, 'Neg_Rounds': 0,
     })
@@ -473,36 +538,97 @@ def _school(team: str) -> str:
 
 
 def debater_keys(teams: pd.DataFrame) -> dict[str, list[str]]:
-    """Team display name -> one key per debater, 'Emory/wang'.
+    """Team display name -> one id per debater. Ids come from identify_debaters, which
+    keeps a person's id the same in every season; without it they are this season's keys."""
+    if 'Debater_IDs' in teams:
+        return {team: ids.split('|') for team, ids in zip(teams['Team'], teams['Debater_IDs']) if ids}
+    return _season_keys(teams)
 
-    Keyed by school as well as surname: across two seasons, surname alone merges eight
-    different Smiths, while school and surname together leave only a handful of clashes
-    (see _ambiguous_debaters). Teams with no debater names are absent.
+
+def _season_keys(teams: pd.DataFrame) -> dict[str, list[str]]:
+    """Team display name -> one key per debater, 'Emory/t.wang'.
+
+    Keyed by school and first initial as well as surname: across two seasons, surname
+    alone merges eight different Smiths, and school and surname still merge teammates
+    (Emory's C. and J. Yang). The few who also share an initial go in NAMESAKES once
+    known; until then _ambiguous_debaters keeps them out of the cross-season ratings. A debater the points column never named has no initial
+    ('Emory/wang'). Teams with no debater names are absent.
 
     A hybrid entry carries both schools ('Harvard/Massachusetts, Amherst AL'), which
     would give its debaters a key that matches nothing in any other season. Each of them
     is placed at whichever half of the pairing they debate for elsewhere this season; a
     debater who only ever appears in the hybrid keeps the compound school.
     """
-    named = [(team, debaters.split(' & ')) for team, debaters in
-             zip(teams['Team'], teams['Debaters']) if debaters]
-    solo = {(_school(team), _normalize_surname(n))
-            for team, names in named for n in names if '/' not in _school(team)}
-
-    def key(school: str, name: str) -> str:
+    def person(name: str, initial: str) -> str:
         surname = _normalize_surname(name)
+        return f'{initial}.{surname}' if initial else surname
+
+    named = [(team, [person(n, i) for n, i in zip(debaters.split(' & '), initials.split(' & '))])
+             for team, debaters, initials in zip(teams['Team'], teams['Debaters'], teams['Initials'])
+             if debaters]
+    solo = {(_school(team), p) for team, people in named for p in people if '/' not in _school(team)}
+
+    def key(school: str, p: str) -> str:
         if '/' in school:
-            halves = [h for h in school.split('/') if (h, surname) in solo]
+            halves = [h for h in school.split('/') if (h, p) in solo]
             if len(halves) == 1:
                 school = halves[0]
-        return f'{school}/{surname}'
+        return f'{school}/{p}'
 
-    return {team: [key(_school(team), n) for n in names] for team, names in named}
+    keys = {team: [key(_school(team), p) for p in people] for team, people in named}
+    for team_keys in keys.values():
+        for i, k in enumerate(team_keys):
+            partner = team_keys[1 - i].rpartition('/')[2].rpartition('.')[2]
+            team_keys[i] = NAMESAKES.get(k, {}).get(partner, k)
+    return keys
+
+
+def identify_debaters(season: str, load, cache: dict | None = None) -> tuple[pd.DataFrame, dict]:
+    """A season's (teams, results) with a Debater_IDs column: one id per debater, joined
+    by '|' in Debaters order, the same in every season that person appears in.
+
+    An id is the debater's key in their first season. Seasons are walked oldest first
+    along prior_season, so a key seen before is the same person, with two corrections:
+    `transfers` moves an id to the debater's new school, and a hybrid debater who never
+    debates for one school alone this season is placed at the half they were last seen at.
+    A newcomer whose key was someone else's before they transferred gets '#season' appended.
+    """
+    cache = {} if cache is None else cache
+    if season not in cache:
+        cfg = SEASONS[season]
+        prior = cfg.get('prior_season')
+        known = {}  # key -> id, for everyone seen in an earlier season
+        if prior:
+            identify_debaters(prior, load, cache)
+            known = dict(cache[prior][2])
+        for old_key, school in cfg.get('transfers', {}).items():
+            if old_key in known:
+                known[f"{school}/{old_key.rpartition('/')[2]}"] = known.pop(old_key)
+
+        teams, results = load(season)
+        teams = teams.copy()
+        taken = set(known.values())
+
+        def debater_id(key: str) -> str:
+            school, _, person = key.rpartition('/')
+            if key not in known and '/' in school:
+                halves = [f'{h}/{person}' for h in school.split('/') if f'{h}/{person}' in known]
+                if len(halves) == 1:
+                    return known[halves[0]]
+            if key not in known:
+                known[key] = f'{key}#{season}' if key in taken else key
+            return known[key]
+
+        ids = {team: '|'.join(debater_id(k) for k in keys) for team, keys in _season_keys(teams).items()}
+        teams['Debater_IDs'] = teams['Team'].map(ids).fillna('')
+        cache[season] = (teams, results, known)
+    return cache[season][:2]
 
 
 def _ambiguous_debaters(keys: dict[str, list[str]], results: dict[str, pd.DataFrame]) -> set[str]:
     """Keys that competed on two teams at the same tournament, so they are really two
-    people who share a school and a surname (labor has 4, arms 3). Nobody debates twice
+    people who share a school, a surname and a first initial (none at present: the known
+    pair is in NAMESAKES). Nobody debates twice
     in one tournament, but changing partners between tournaments is ordinary."""
     ambiguous = set()
     for name, rd in results.items():

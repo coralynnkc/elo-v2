@@ -86,25 +86,17 @@ export function headToHead(rawHistory) {
   return h2h
 }
 
-function normalizeSurname(name) {
-  return name.normalize('NFKD').replace(/[^a-z]/gi, '').toLowerCase()
-}
-
-// Frontend approximation of the pipeline's School/surname debater keys. Team names are
-// "School XY" or "School XY (A/B)"; a hybrid's school is "A/B", and each debater could
-// belong to either half, so a debater gets one key per school.
-export function debaterKeys(team) {
-  if (!team.Debaters) return []
-  const schools = team.Team.replace(/ \(.*\)$/, '').replace(/ \S+$/, '').split('/')
-  return team.Debaters.split(' & ').map(name => ({
-    name,
-    keys: schools.map(school => `${school}/${normalizeSurname(name)}`),
-  }))
+// The pipeline's cross-season debater ids ("Emory/c.yang|Emory/j.stumpff"), in Debaters
+// order. An id stays with a person through transfers and tells same-surname teammates apart.
+export function debaterIds(team) {
+  if (!team.Debaters || !team.Debater_IDs) return []
+  const ids = team.Debater_IDs.split('|')
+  return team.Debaters.split(' & ').map((name, i) => ({ name, id: ids[i] }))
 }
 
 // Teams in other seasons sharing a debater with this one, newest season first
 export async function otherSeasonTeams(season, team) {
-  const debaters = debaterKeys(team)
+  const debaters = debaterIds(team)
   if (debaters.length === 0) return []
   const found = []
   for (const other of Object.keys(SEASONS)) {
@@ -112,8 +104,8 @@ export async function otherSeasonTeams(season, team) {
     let teams
     try { teams = await loadTeams(other) } catch { continue }
     for (const t of teams) {
-      const theirs = new Set(debaterKeys(t).flatMap(d => d.keys))
-      const shared = debaters.filter(d => d.keys.some(k => theirs.has(k))).map(d => d.name)
+      const theirs = new Set(debaterIds(t).map(d => d.id))
+      const shared = debaters.filter(d => theirs.has(d.id)).map(d => d.name)
       if (shared.length) found.push({ season: other, team: t, shared })
     }
   }

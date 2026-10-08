@@ -2,8 +2,8 @@
 import os
 import shutil
 import sys
-from pipeline import (CURRENT_SEASON, SEASONS, load_season, run_pipeline, season_debaters,
-                      seed_priors)
+from pipeline import (CURRENT_SEASON, SEASONS, identify_debaters, load_season, run_pipeline,
+                      season_debaters, seed_priors)
 
 CODING_DIR = os.path.dirname(__file__)
 FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
@@ -12,23 +12,30 @@ FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
 _DEBATERS = {}   # cached so labor is fitted once, for its own run and for arms
 
 
-def load(season: str):
+_IDENTIFIED = {}  # so every season's debaters carry ids that match across seasons
+_UNRESOLVED = {}
+
+
+def _load_raw(season: str):
     cfg = SEASONS[season]
-    teams, results, _ = load_season(
+    teams, results, _UNRESOLVED[season] = load_season(
         os.path.join(CODING_DIR, cfg['data_dir']), cfg['tournaments'], cfg['name_fixes'],
     )
     return teams, results
 
 
+def load(season: str):
+    return identify_debaters(season, _load_raw, _IDENTIFIED)
+
+
 def run_season(season: str):
     cfg = SEASONS[season]
-    data_dir = os.path.join(CODING_DIR, cfg['data_dir'])
     output_teams = os.path.join(CODING_DIR, cfg['teams_file'])
     output_history = os.path.join(CODING_DIR, cfg['history_file'])
 
     print(f"Loading {season} data...")
-    teams, results, unresolved = load_season(data_dir, cfg['tournaments'], cfg['name_fixes'])
-    if unresolved:
+    teams, results = load(season)
+    if (unresolved := _UNRESOLVED[season]):
         print(f"  {len(unresolved)} code(s) not tied to debaters, rated by code: {', '.join(unresolved)}")
 
     priors = None

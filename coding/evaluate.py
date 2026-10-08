@@ -13,7 +13,7 @@ Usage: python evaluate.py [season ...|all] [options]
   --aff-offset N        skill points added to the aff before predicting (default 0)
   --priors SEASON       seed teams from that season's debater ratings, which makes the
                         first tournament predictable too
-  --inflation N         uncertainty added to a seeded team (default 4, needs --priors)
+  --inflation N         uncertainty added to a seeded team (default 2, needs --priors)
   --ballots             rate a paneled round once per judge, so a 3-0 counts more than a 2-1
   --sweep beta|gamma|aff-offset|inflation[,...]   scan parameters and print a table
 """
@@ -24,7 +24,7 @@ import pandas as pd
 from trueskill import TrueSkill, Rating, rate_1vs1
 from pipeline import (
     BETA, CURRENT_SEASON, GAMMA, MU, PRIOR_INFLATION, SEASONS, SIGMA,
-    fit_through_time, load_season, round_matches, season_debaters, seed_priors,
+    fit_through_time, identify_debaters, load_season, round_matches, season_debaters, seed_priors,
 )
 import os
 
@@ -218,7 +218,7 @@ def sweep(results, parameters: list[str], reseed=None, **kwargs) -> pd.DataFrame
     """Rescore the season once per value of each swept parameter, holding the rest fixed.
 
     beta and gamma are scanned as multiples of the pipeline default; aff-offset and
-    inflation are absolute, since their default of 0 / 4 has no useful multiples.
+    inflation are absolute, since their default of 0 / 2 has no useful multiples.
     """
     defaults = {'beta': BETA, 'gamma': GAMMA, 'aff-offset': 0.0, 'inflation': PRIOR_INFLATION}
     absolute = {'aff-offset', 'inflation'}
@@ -283,11 +283,18 @@ def parse_args(argv: list[str]) -> tuple[list[str], dict, list[str]]:
     return seasons, options, swept
 
 
-def _load(season: str):
+_IDENTIFIED = {}  # so every season's debaters carry ids that match across seasons
+
+
+def _load_raw(season: str):
     cfg = SEASONS[season]
     return load_season(
         os.path.join(CODING_DIR, cfg['data_dir']), cfg['tournaments'], cfg['name_fixes']
-    )
+    )[:2]
+
+
+def _load(season: str):
+    return identify_debaters(season, _load_raw, _IDENTIFIED)
 
 
 def main():
@@ -296,7 +303,7 @@ def main():
     inflation = options.pop('inflation', PRIOR_INFLATION)
 
     for season in seasons:
-        teams, results, _ = _load(season)
+        teams, results = _load(season)
         settings = {'model': 'ttt', 'beta': BETA, 'gamma': GAMMA, 'sigma': SIGMA,
                     'aff_offset': 0.0, 'split_ballots': False}
         settings.update(options)
@@ -305,7 +312,7 @@ def main():
         if prior_season:
             if prior_season == season:
                 sys.exit(f"Can't seed {season} from itself")
-            debaters = season_debaters(prior_season, lambda s: _load(s)[:2])
+            debaters = season_debaters(prior_season, _load)
             reseed = lambda n, t=teams, d=debaters: seed_priors(t, d, n)
             settings['priors'] = reseed(inflation)
             print(f'\n  seeded {len(settings["priors"])} of {len(teams)} {season} teams '
