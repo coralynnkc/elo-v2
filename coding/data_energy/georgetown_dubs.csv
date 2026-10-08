@@ -1,15 +1,15 @@
-,Aff,Neg,Win
-0,UC Berkeley TB,Northwestern DR,Neg
-1,Dartmouth CaGu,Michigan BP,Neg
-2,Dartmouth BC,Kansas WH,Aff
-3,NYU MS,Michigan SS,Aff
-4,Macalester PK,Northwestern PS,Aff
-5,Wake Forest BW,Emory GH,Neg
-6,Texas AF,Wake Forest LS,Aff
-7,Michigan State GL,Iowa AP,Aff
-8,Kansas LS,Harvard DS,Aff
-9,Michigan ES,Kentucky AM,Aff
-10,Emory CP,UC Berkeley MR,Aff
-11,Binghamton TC,Emory MR,Aff
-12,Georgetown CS,Wake Forest BM,Neg
-13,West Georgia DK,CSU Long Beach OM,Neg
+Aff,Neg,Judges,Votes,Win
+UC Berkeley TB,Northwestern DR,"Gabriel Morbeck																																						Grace Kessler																																						Eugenia Giampetruzzi","Neg																															Neg																															Neg","3-0																															NEG"
+Dartmouth CaGu,Michigan PB,"Carly Wunderlich																																						Jordan Di																																						Matthew Granstrom","Neg																															Neg																															Neg","3-0																															NEG"
+Dartmouth BC,Kansas WH,"Kieran Lawless																																						Jeff Buntin																																						Ethan Greer","Aff																															Aff																															Aff","3-0																															AFF"
+NYU MS,Michigan SS,"Justin Green																																						Hunter McCullough																																						Christopher Callahan","Neg																															Aff																															Aff","2-1																															AFF"
+Macalester PK,Northwestern PS,"Taylor Brough																																						Will Baker																																						Eleanor Tilmes","Aff																															Neg																															Aff","2-1																															AFF"
+Wake Forest BW,Emory GH,"Kwudjwa Osei																																						Jimin Park																																						Abhis Sedhai","Neg																															Neg																															Neg","3-0																															NEG"
+Texas AF,Wake Forest LS,"Deven Cooper																																						Geoff Lundeen																																						Jared Burke","Neg																															Aff																															Aff","2-1																															AFF"
+Michigan State GL,Iowa AP,"Nikola Stamenkovic Diez																																						Armands Revelins																																						Mikaela Malsin","Aff																															Aff																															Aff","3-0																															AFF"
+Kansas SL,Harvard DS,"Devane Murphy																																						Joe Weideman																																						Kristopher Wallen","Aff																															Neg																															Aff","2-1																															AFF"
+Michigan ES,Kentucky AM,"Kevin McCaffrey																																						Zahir Shaikh																																						Nick Fleming","Aff																															Aff																															Aff","3-0																															AFF"
+Emory CP,UC Berkeley MR,"Anthony Trufanov																																						David Cram Helwich																																						Kevin Hirn","Aff																															Aff																															Aff","3-0																															AFF"
+Binghamton TC,Emory MR,"Jared DeMunbrun																																						Brendon Bankey																																						Kurt Fifelski","Aff																															Aff																															Neg","2-1																															AFF"
+Georgetown CS,Wake Forest BM,"David Griffith																																						Michael Scott																																						Brett Bricker","Neg																															Aff																															Neg","2-1																															NEG"
+West Georgia KD,CSU Long Beach OM - ONLINE,"Tessa Harper																																						Tyler Snelling																																						Natalie Yehezkel","Neg																															Aff																															Neg","2-1																															NEG"

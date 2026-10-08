@@ -1,9 +1,9 @@
-,Aff,Neg,Win
-0,Michigan BP,Emory GH,Neg
-1,Kansas MR,Northwestern PS,Aff
-2,Kentucky AM,Binghamton TC,Aff
-3,NYU MS,Michigan SS,Neg
-4,Wake Forest LS,CSU Long Beach OM,Neg
-5,Kansas LS,Emory LY,Neg
-6,Dartmouth BC,Michigan State GL,Aff
-7,Georgetown CS,Northwestern DR,Neg
+Aff,Neg,Judges,Votes,Win
+Michigan BP,Emory GH,"Gabe Lewis																																						Nick Fleming																																						Jordan Di","Neg																															Neg																															Neg","3-0																															NEG"
+Kansas RM,Northwestern PS,"John Turner																																						Jenny Vazquez Torres																																						Dustin Meyers-Levy","Aff																															Aff																															Aff","3-0																															AFF"
+Kentucky AM,Binghamton TC,"Ali Abdulla																																						Mikaela Malsin																																						Derek Hilligoss","Aff																															Aff																															Aff","3-0																															AFF"
+NYU MS,Michigan SS,"Justin Green																																						Shannon Howley																																						Joshua Michael","Neg																															Neg																															Neg","3-0																															NEG"
+Wake Forest LS,CSU Long Beach OM,"Will Baker																																						Azja Butler																																						Max Breiling","Neg																															Neg																															Aff","2-1																															NEG"
+Kansas LS,Emory LY,"Ari Davidson																																						Brian DeLong																																						Kwudjwa Osei","Neg																															Aff																															Neg","2-1																															NEG"
+Dartmouth BC,Michigan State GL,"Brandon Kelley																																						Jeff Buntin																																						Brett Bricker","Aff																															Aff																															Aff","3-0																															AFF"
+Georgetown CS,Northwestern DR,"Kevin McCaffrey																																						Valerie McIntosh																																						Kevin Hirn","Neg																															Neg																															Aff","2-1																															NEG"

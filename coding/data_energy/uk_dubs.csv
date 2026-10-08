@@ -1,17 +1,17 @@
-,Aff,Neg,Win
-0,Kansas MR,Baylor LC,Aff
-1,Kansas WW,Michigan State GL,Neg
-2,Emory GY,Kansas LS,Neg
-3,George Mason WR,Michigan BP,Neg
-4,West Georgia DK,Kentucky AM,Neg
-5,CSU Long Beach OM,Kentucky GS,Neg
-6,Wake Forest EP,Binghamton TC,Neg
-7,Wake Forest BW,Dartmouth BC,Neg
-8,Michigan State MM,Houston AK,Aff
-9,Emory MR,Georgetown CS,Neg
-10,Michigan SS,Emory KP,Neg
-11,Dartmouth CW,Emory CP,Neg
-12,Emory LY,Wake Forest LS,Aff
-13,Emory GH,Texas AF,Aff
-14,Dartmouth CG,Northwestern DR,Neg
-15,Michigan ES,UTD KP,Neg
+Aff,Neg,Judges,Votes,Win
+Kansas MR,Baylor LC,"Eric Morris																																						jasmine stidham																																						Gabriel Morbeck","Aff																															Aff																															Aff","3-0																															AFF"
+Kansas WW,Michigan State GL,"Mikaela Malsin																																						Ethan Greer																																						Maverick Edwards","Neg																															Neg																															Neg","3-0																															NEG"
+Emory GY,Kansas LS,"Hunter McCullough																																						Sherry Hall																																						Nikola Stamenkovic Diez","Neg																															Aff																															Neg","2-1																															NEG"
+George Mason WR,Michigan BP,"Grace Blackwell																																						Matthew Granstrom																																						Jackson Posey","Neg																															Neg																															Neg","3-0																															NEG"
+West Georgia DK,Kentucky AM,"John Turner																																						Manny Navarrete																																						Scott Harris","Neg																															Neg																															Neg","3-0																															NEG"
+CSU Long Beach OM,Kentucky GS,"Shannon Howley																																						Brian DeLong																																						Valerie McIntosh","Neg																															Aff																															Neg","2-1																															NEG"
+Wake Forest EP,Binghamton TC,"Adam Symonds																																						Joshua Harrington																																						Holden Bukowsky","Neg																															Neg																															Aff","2-1																															NEG"
+Wake Forest BW,Dartmouth BC,"Jackie Poapst																																						Geoff Lundeen																																						Kristopher Wallen","Neg																															Neg																															Neg","3-0																															NEG"
+Michigan State MM,Houston AK,"Tim Freehan																																						Aaron Kall																																						Jordan Di","Aff																															Aff																															Aff","3-0																															AFF"
+Emory MR,Georgetown CS,"Hamza Jamal																																						Kurt Fifelski																																						Josh Miller","Neg																															Aff																															Neg","2-1																															NEG"
+Michigan SS,Emory KP,"Rishi Mukherjee																																						Alaina Walberg																																						Dustyn Beutelspacher","Neg																															Aff																															Neg","2-1																															NEG"
+Dartmouth CW,Emory CP,"Kevin McCaffrey																																						Azja Butler																																						Kevin Hirn","Neg																															Aff																															Neg","2-1																															NEG"
+Emory LY,Wake Forest LS,"Solomon Watson																																						AJ Byrne																																						Kristiana Baez-Gustavson","Neg																															Aff																															Aff","2-1																															AFF"
+Emory GH,Texas AF,"Scott Phillips																																						Colin Quinn																																						Josiah Ferguson","Aff																															Aff																															Aff","3-0																															AFF"
+Dartmouth CG,Northwestern DR,"Grace Kessler																																						Ec Powers																																						Dallas Perkins","Neg																															Neg																															Neg","3-0																															NEG"
+Michigan ES,UTD KP,"Anthony Trufanov																																						Ned Gidley																																						Jeff Buntin","Neg																															Aff																															Neg","2-1																															NEG"

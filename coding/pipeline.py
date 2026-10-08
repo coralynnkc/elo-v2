@@ -51,6 +51,12 @@ SCHOOL_ALIASES = {
     'MoState ': 'Missouri State ',
 }
 
+# A debater whose surname changed, keyed by (school, old surname as normalized). Applied in
+# every season so their partnerships and cross-season debater ratings stay one person.
+DEBATER_ALIASES = {
+    ('Kansas', 'williams'): 'Owings',
+}
+
 # Per-season config.
 #   tournaments: chronological order of tournament codes — controls round ordering.
 #                Add new codes here in the order they were held; files with other
@@ -63,7 +69,7 @@ SEASONS = {
     'energy': {
         'data_dir': 'data_energy',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'georgetown',
-                        'dartmouthrr', 'texas'],
+                        'dartmouthrr', 'texas', 'ada', 'ndt'],
         'name_fixes': {},
         'teams_file': 'teams_energy.csv',
         'history_file': 'match_history_energy.csv',
@@ -160,6 +166,14 @@ def _speaker_surnames(cell) -> list[str] | None:
     return [n[1:] for n in names] if len(names) == 2 else None
 
 
+def _apply_aliases(code, surnames: list[str] | None) -> list[str] | None:
+    """Swap in DEBATER_ALIASES for the school in this team code."""
+    if not surnames or not isinstance(code, str):
+        return surnames
+    school = code.rpartition(' ')[0]
+    return [DEBATER_ALIASES.get((school, _normalize_surname(s)), s) for s in surnames]
+
+
 def _initials_signature(code: str) -> str:
     """'Baylor PM' and 'Baylor MP' share a signature."""
     school, _, initials = code.rpartition(' ')
@@ -192,7 +206,7 @@ def load_season(
             e = pd.read_csv(f)
             for code, entry in zip(clean_teams(e['Code'], name_fixes), e['Entry']):
                 if (surnames := _entry_surnames(entry)):
-                    entries[tournament][code] = surnames
+                    entries[tournament][code] = _apply_aliases(code, surnames)
 
     rounds = {}
     for name in _round_names(data_dir, tournament_order):
@@ -201,9 +215,11 @@ def load_season(
         for side in ('Aff', 'Neg'):
             out[side] = clean_teams(df[side], name_fixes)
             points = next((c for c in df.columns if c.startswith(side) and 'Points' in c), None)
-            out[f'{side}_Speakers'] = df[points].map(_speaker_surnames) if points else None
+            out[f'{side}_Speakers'] = ([_apply_aliases(c, _speaker_surnames(p)) for c, p in zip(out[side], df[points])]
+                                       if points else None)
         win = df['Win'].astype(str).str.strip().str.upper()
-        out['Win'] = win.map(lambda x: 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
+        # Forfeits ("AFF FFT NEG BYE") name both sides but weren't debated, so they stay raw
+        out['Win'] = win.map(lambda x: x if 'FFT' in x else 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
         # Paneled rounds report the ballot count in Win ("3-0 AFF"); one-judge rounds don't
         ballots = win.str.extract(r'(\d+)\s*-\s*(\d+)').astype('Int64')
         out['Ballots_Win'], out['Ballots_Lose'] = ballots[0], ballots[1]
