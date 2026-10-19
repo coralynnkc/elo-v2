@@ -13,6 +13,7 @@ const TOURNAMENT_NAMES = {
   nu: 'Northwestern',
   kentuckyrr: 'Kentucky RR',
   uk: 'Kentucky',
+  minn: 'Minnesota',
   gonzaga: 'Gonzaga',
   wake: 'Wake Forest',
   gt: 'Georgetown',
