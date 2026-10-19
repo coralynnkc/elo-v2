@@ -8,7 +8,7 @@ The site has a sortable leaderboard for each season and a page per team with its
 
 | Season | Topic key | Tournaments |
 |---|---|---|
-| 2026–27 | `arms` | Northwestern, Kentucky RR, Kentucky |
+| 2026–27 | `arms` | Northwestern, Kentucky RR, Kentucky, Minnesota |
 | 2025–26 | `labor` | Northwestern, Kentucky RR, Kentucky, Gonzaga, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 | 2024–25 | `energy` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 
