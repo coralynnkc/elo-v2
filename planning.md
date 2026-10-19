@@ -9,7 +9,7 @@ To count as an improvement, a change has to beat these walk-forward scores:
 | Run | Matches | Accuracy | Log loss |
 |---|---|---|---|
 | `evaluate.py labor --priors energy` | 3246 | **73.7%** | **0.5286** |
-| `evaluate.py arms --priors labor` (nu, kentuckyrr, uk) | 982 | 69.3% | 0.5747 |
+| `evaluate.py arms --priors labor` (nu, kentuckyrr, uk, minn) | 1163 | 68.9% | 0.5823 |
 | `evaluate.py labor` (unseeded, opener not scored) | 2783 | 71.8% | 0.5472 |
 | `evaluate.py energy` (no prior season) | 2396 | 71.2% | 0.5596 |
 
