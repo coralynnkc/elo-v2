@@ -69,10 +69,12 @@ SCHOOL_ALIASES = {
     'Fullerton': 'Cal State Fullerton',
 }
 
-# A debater whose surname changed, keyed by (school, old surname as normalized). Applied in
-# every season so their partnerships and cross-season debater ratings stay one person.
+# A debater whose surname changed, keyed by (school, old surname, partner's surname), all
+# normalized. The partner keeps the alias off others who share the old surname (Kansas has
+# a C. Williams too). Applied in every season so their partnerships and cross-season
+# debater ratings stay one person.
 DEBATER_ALIASES = {
-    ('Kansas', 'williams'): 'Owings',
+    ('Kansas', 'williams', 'willingham'): 'Owings',
 }
 
 # Per-season config.
@@ -116,7 +118,7 @@ SEASONS = {
     },
     'arms': {
         'data_dir': 'data_arms',
-        'tournaments': ['nu', 'kentuckyrr', 'uk', 'minn'],
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'minn', 'harvard'],
         'prior_season': 'labor',
         'transfers': {'Emory/i.song': 'Michigan'},
         'name_fixes': {},
@@ -204,7 +206,9 @@ def _apply_aliases(code, surnames: list[str] | None) -> list[str] | None:
     if not surnames or not isinstance(code, str):
         return surnames
     school = code.rpartition(' ')[0]
-    return [DEBATER_ALIASES.get((school, _normalize_surname(s)), s) for s in surnames]
+    norm = [_normalize_surname(s) for s in surnames]
+    return [DEBATER_ALIASES.get((school, n, partner), s)
+            for s, n, partner in zip(surnames, norm, reversed(norm))]
 
 
 def _match_speakers(surnames: list[str], speakers: list[str], initials: list[str]) -> list[tuple[int, str]]:
