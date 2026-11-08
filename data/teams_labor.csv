@@ -33,7 +33,7 @@ Baylor DL,Darwish & Lassen,o & l,35.609,1.133,29,30,Baylor/o.darwish|Wyoming/l.l
 Kentucky GS,Gabay & Slish,a & r,35.501,1.019,34,33,Kentucky/a.gabay|Kentucky/r.slish,32.445,8,True
 NYU MS,Makinde & Saigal,e & v,35.423,1.369,17,17,NYU/e.makinde|NYU/v.saigal,31.316,4,True
 Stanford LL,Lai & Lai,d & k,35.269,1.581,11,13,Stanford/d.lai|Stanford/k.lai,30.525,3,True
-Harvard DS,Deshpande & Sridharan,n & a,35.055,1.201,27,24,Harvard/n.deshpande|Harvard/a.sridharan,31.45,6,True
+Harvard DS,Deshpande & Sridharan,n & a,35.055,1.201,27,24,Harvard/n.deshpande|Harvard/a.sridharan,31.451,6,True
 Michigan CC,Chamarthy & Chen,g & j,35.026,1.33,24,23,Michigan/g.chamarthy|Michigan/j.chen,31.036,6,True
 UTD PR,Penumetcha & Ravi,r & s,34.88,1.047,34,31,Indiana/r.penumetcha|UTD/s.ravi,31.74,8,True
 West Georgia KK,Keller & Kennon,j & j,34.878,2.059,8,8,West Georgia/j.keller|West Georgia/j.kennon,28.702,2,True
@@ -138,8 +138,8 @@ UC Berkeley LS,Smith & Liu,g & j,26.597,3.028,4,4,UC Berkeley/g.smith|UC Berkele
 Kansas BP (Bauman/Persson),Bauman & Persson,t & s,26.423,2.204,9,9,Kansas/t.bauman|Kansas/s.persson,19.811,3,True
 Emory CR,Ravikumar & Charabuddi,a & v,26.366,1.509,19,18,Emory/a.ravikumar|Emory/v.charabuddi,21.839,5,True
 Dartmouth GM,Guo & Morley,s & k,26.233,2.237,4,4,Dartmouth/s.guo|Dartmouth/k.morley,19.522,1,False
-Georgetown LN,Lastelick & Nanji,l & a,26.115,1.267,30,29,Georgetown/l.lastelick|Georgetown/a.nanji,22.316,8,True
-Emory SW,So & Wang,e & m,25.916,1.931,8,8,Emory/e.so|Emory/m.wang,20.124,2,True
+Georgetown LN,Lastelick & Nanji,l & a,26.116,1.267,30,29,Georgetown/l.lastelick|Georgetown/a.nanji,22.316,8,True
+Emory SW,So & Wang,e & m,25.917,1.931,8,8,Emory/e.so|Emory/m.wang,20.124,2,True
 Kansas State RS,Robertson & Sum,d & r,25.835,1.933,6,7,Kansas State/d.robertson|Kansas State/r.sum,20.037,2,True
 Harvard BS,Bodet & Shen,j & p,25.781,3.229,3,4,Harvard/j.bodet|Harvard/p.shen,16.094,1,False
 Michigan HM,Hwang & McIlhenny,c & i,25.655,2.223,7,6,Michigan/c.hwang|Michigan/i.mcilhenny,18.984,2,True
@@ -173,7 +173,7 @@ Kentucky ER,Ervin & Rushing,w & j,23.547,3.068,3,3,Kentucky/w.ervin|Kentucky/j.r
 Emory PS,Pelli & Stearns,m & m,23.529,2.859,4,4,Emory/m.pelli|Emory/m.stearns,14.951,1,False
 Liberty TK,Tooley & Koenig,e & n,23.38,3.287,3,4,Liberty/e.tooley|Liberty/n.koenig,13.52,1,False
 Georgetown VP,Valame & Perez-Rubio,v & n,23.336,2.349,7,7,Georgetown/v.valame|Georgetown/n.perezrubio,16.289,2,True
-Georgetown KL,Klingler & Li,m & n,23.2,2.058,10,9,Georgetown/m.klingler|Georgetown/n.li,17.027,3,True
+Georgetown KL,Klingler & Li,m & n,23.2,2.058,10,9,Georgetown/m.klingler|Georgetown/n.li,17.028,3,True
 Dartmouth HP (Park/Hatton),Park & Hatton,e & e,23.103,2.938,4,4,Dartmouth/e.park|Dartmouth/e.hatton,14.288,1,False
 Macalester WD,Winters & Durbin,n & a,23.002,3.519,3,3,Macalester/n.winters|Macalester/a.durbin,12.446,1,False
 Wyoming CH,Campbell & Hawley,j & j,22.982,1.403,21,23,Wyoming/j.campbell|Wyoming/j.hawley,18.774,6,True
