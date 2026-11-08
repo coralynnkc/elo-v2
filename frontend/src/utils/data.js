@@ -7,6 +7,7 @@ export const SEASONS = {
   arms: { label: '2026–27', teams: 'teams_arms.csv', history: 'match_history_arms.csv' },
   labor: { label: '2025–26', teams: 'teams_labor.csv', history: 'match_history.csv' },
   energy: { label: '2024–25', teams: 'teams_energy.csv', history: 'match_history_energy.csv' },
+  nukes: { label: '2023–24', teams: 'teams_nukes.csv', history: 'match_history_nukes.csv' },
 }
 
 const TOURNAMENT_NAMES = {
@@ -19,6 +20,7 @@ const TOURNAMENT_NAMES = {
   gt: 'Georgetown',
   georgetown: 'Georgetown',
   harvard: 'Harvard',
+  longbeach: 'Long Beach',
   dartmouthrr: 'Dartmouth RR',
   texas: 'Texas',
   ada: 'ADA',
@@ -26,6 +28,7 @@ const TOURNAMENT_NAMES = {
 }
 
 const ELIM_LABELS = {
+  triples: 'Triples',
   dubs: 'Doubles',
   octas: 'Octafinals',
   quarters: 'Quarterfinals',

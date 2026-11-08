@@ -11,6 +11,7 @@ The site has a sortable leaderboard for each season and a page per team with its
 | 2026–27 | `arms` | Northwestern, Kentucky RR, Kentucky, Minnesota, Harvard |
 | 2025–26 | `labor` | Northwestern, Kentucky RR, Kentucky, Gonzaga, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 | 2024–25 | `energy` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
+| 2023–24 | `nukes` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Long Beach, Dartmouth RR, Texas, ADA, NDT |
 
 ## How ratings work
 
@@ -18,7 +19,7 @@ Each team has a skill estimate **μ** (starting at 25) and an uncertainty **σ**
 
 - **Leaderboard ratings:** [TrueSkill Through Time](https://github.com/glandfried/TrueSkillThroughTime.py), fit over the whole season. Each rating uses all of a team's results, earlier and later, and skill can drift a little between tournaments.
 - **Match history:** a single chronological TrueSkill pass. Each round's before/after rating uses only the results before it, so the history shows what that round did at the time.
-- **Carry-over between seasons:** a team starts from its two debaters' ratings the season before, with extra uncertainty added, instead of from 25.
+- **Carry-over between seasons:** a team starts from its two debaters' ratings the season before, plus a year's typical improvement and extra uncertainty, instead of from 25.
 - **Leaderboard order:** by μ.
 - **Conservative score:** μ − 3σ, a lower bound that penalizes teams with few rounds.
 - **Eligibility:** a team needs at least 2 tournaments to be ranked. Until a season has 2 tournaments, every team is shown and the site marks the rankings as provisional.

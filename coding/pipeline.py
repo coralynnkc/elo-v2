@@ -39,6 +39,10 @@ PRIOR_INFLATION = 2.0
 # Uncertainty added to each debater between seasons, when their rating is carried down
 # the prior_season chain. Tuned separately: tightening it with PRIOR_INFLATION costs arms.
 DEBATER_INFLATION = 4.0 / math.sqrt(2)
+# Skill a returning debater gains over an off-season, added to the carried mean. Returning
+# debaters' ratings rise about +1 a year (+0.75 to +1.0 in every pair of seasons), and
+# without it the deeper nukes -> energy -> labor -> arms chain makes labor and arms worse.
+DEBATER_GROWTH = 1.0
 
 # One debater listed under two first names in Tabroom: (school, surname as normalized,
 # initial) -> the initial to use. Leverett alternates E/L between tournaments.
@@ -89,8 +93,32 @@ DEBATER_ALIASES = {
 #                can't be tied to its debaters (no speaker names or entries) and differs
 #                from the code used elsewhere.
 SEASONS = {
+    'nukes': {
+        'data_dir': 'data_nukes',
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'longbeach',
+                        'dartmouthrr', 'texas', 'ada', 'ndt'],
+        # Maverick entries coded by a debater's name; each pair debates for this school
+        # elsewhere (Fuchs & Davis are George Mason DF at the NDT)
+        'name_fixes': {
+            'Austin Davis': 'George Mason DF',
+            'Clara Conry': 'Emory CY',
+            'Easton Logback': 'Kansas LS',
+            'Grey Parfenoff': 'Iowa AP',
+            'Hina Shehzad': 'Michigan State SS',
+            'Joshua StPeter': 'Western Kentucky SM',
+        },
+        'teams_file': 'teams_nukes.csv',
+        'history_file': 'match_history_nukes.csv',
+    },
     'energy': {
         'data_dir': 'data_energy',
+        'prior_season': 'nukes',
+        'transfers': {
+            'Kansas/j.park': 'Michigan',
+            'Oklahoma/b.yarborough': 'Southern Nazarene',
+            'Wayne State/i.rezahusain': 'Binghamton',
+            'Wyoming/l.lassen': 'Baylor',
+        },
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'georgetown',
                         'dartmouthrr', 'texas', 'ada', 'ndt'],
         'name_fixes': {},
@@ -130,8 +158,8 @@ SEASONS = {
 CURRENT_SEASON = 'arms'
 
 # Elim round sort order (prelim numbers sort before these automatically)
-_ELIM_ORDER = {'dubs': 100, 'octas': 101, 'quarters': 102, 'semis': 103,
-               'semis_2': 104, 'finals': 105}  # semis_2: Harvard's third-place debate
+_ELIM_ORDER = {'triples': 100, 'dubs': 101, 'octas': 102, 'quarters': 103, 'semis': 104,
+               'semis_2': 105, 'finals': 106}  # semis_2: Harvard's third-place debate
 
 # Teams must appear in this many tournaments to be ranked (capped at the number loaded).
 # Unranked teams are still exported, with Ranked = False, so the frontend can show them.
@@ -697,9 +725,10 @@ def carry_debaters(
     debater_fit: dict[str, ttt.Gaussian],
     inflation: float = DEBATER_INFLATION,
 ) -> dict[str, ttt.Gaussian]:
-    """Widen a season's debater ratings so they can prime the next season's fit."""
+    """Widen a season's debater ratings, and add a year's growth, so they can prime the
+    next season's fit."""
     return {
-        debater: ttt.Gaussian(r.mu, math.sqrt(r.sigma ** 2 + inflation ** 2))
+        debater: ttt.Gaussian(r.mu + DEBATER_GROWTH, math.sqrt(r.sigma ** 2 + inflation ** 2))
         for debater, r in debater_fit.items()
     }
 
@@ -727,6 +756,7 @@ def seed_priors(
     """Team display name -> starting rating, built from last season's debater ratings.
 
     A partnership's skill is its debaters' sum, so the means add and the variances add.
+    Each returning debater gets a year's growth (DEBATER_GROWTH).
     A debater who didn't compete last season contributes the default half-team prior, so
     a returning debater with a novice partner still starts above a wholly unknown team.
     Teams with no rated debater at all are left out and keep the flat prior.
@@ -736,7 +766,7 @@ def seed_priors(
         if not any(key in debater_fit for key in keys):
             continue
         rated = [debater_fit.get(key) for key in keys]
-        mu = sum(r.mu if r else DEBATER_MU for r in rated)
+        mu = sum(r.mu + DEBATER_GROWTH if r else DEBATER_MU for r in rated)
         variance = sum(r.sigma ** 2 if r else DEBATER_SIGMA ** 2 for r in rated)
         priors[team] = ttt.Gaussian(mu, math.sqrt(variance + inflation ** 2))
     return priors
