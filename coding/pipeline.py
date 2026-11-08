@@ -64,6 +64,8 @@ NAMESAKES = {
 SUFFIX_FIXES = {
     ' - ONLINE': '',
     ' - ONL': '',  # truncated in exports that use full entry names
+    ' _ ONLINE': '',
+    ' ONLINE': '',
     ' - HYBRID': '',
 }
 
@@ -74,6 +76,13 @@ SCHOOL_ALIASES = {
     'Massachusetts, Amherst': 'UMass Amherst',
     'Fullerton': 'Cal State Fullerton',
     'GMU': 'George Mason',
+    'Pennslyvania': 'Pennsylvania',
+    'UPenn': 'Pennsylvania',
+    'UT Dallas': 'UTD',
+    'United States Military': 'West Point',
+    'Columbia Policy': 'Columbia',
+    'UMass Amherst Policy': 'UMass Amherst',
+    'Washington University in St. Louis': 'WashU',
 }
 
 # A debater whose surname changed, keyed by (school, old surname, partner's surname), all
@@ -96,26 +105,94 @@ DEBATER_ALIASES = {
 #                can't be tied to its debaters (no speaker names or entries) and differs
 #                from the code used elsewhere.
 SEASONS = {
+    'alliances': {
+        'data_dir': 'data_alliances',
+        # Northwestern hosted twice; fullertown is Georgetown and Fullerton's joint tournament
+        'tournaments': ['nu1', 'uk', 'harvardrr', 'gonzaga', 'fullertown', 'dartmouthrr',
+                        'texas', 'nu2', 'ada', 'ndt'],
+        # Maverick entries coded by a debater's name -> the school each pair debates for
+        'name_fixes': {
+            'Bryan Perez Rivas': 'Cal State Fullerton',
+            'Cleo Spiers': 'Oklahoma',
+            'David Griffith': 'Kentucky',
+            'Ihwa Hussain': 'NYU',
+            'Jay-Z Flores': 'CSU Long Beach',
+            'Kat Butler': 'New School',
+            'Lyd Haindfield': 'West Georgia',
+            'Maeve Ella': 'Iowa',
+            'Nick Loew': 'George Mason',
+            'Sai Karavadi': 'NYU',
+            'Sira Ahuja': 'Binghamton',
+            'Temitope Ogundare': 'Rutgers-Newark',
+        },
+        'teams_file': 'teams_alliances.csv',
+        'history_file': 'match_history_alliances.csv',
+    },
+    'antitrust': {
+        'prior_season': 'alliances',
+        'transfers': {
+            'CSU Long Beach/n.christiansen': 'Southern California',  # a maverick pair in alliances
+            'Iowa/m.pieropan': 'Kansas',
+            'Missouri State/j.parrish': 'Minnesota',
+        },
+        'data_dir': 'data_antitrust',
+        # fullertown: Fullerton and Georgetown's joint tournament
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'fullertown',
+                        'dartmouthrr', 'texas', 'ada', 'ndt'],
+        # Maverick entries coded by a debater's name -> the school each pair debates for
+        # this season or the next two
+        'name_fixes': {
+            'astrid clough': 'West Georgia',
+            'David Griffith': 'Kentucky',
+            'Eli T. Louis': 'Binghamton',
+            'Ihwa Hussain': 'NYU',
+            'Jared Adam': 'Kentucky',
+            # A. Shaw debates for Washington the next season
+            'Joshua StPeter': 'Washington/Western Kentucky',
+            'Kat Butler': 'New School',
+            'Lyd Haindfield': 'West Georgia',
+            'Maeve Ella': 'Iowa',
+            'Miguel Molina Chavez': 'Wichita State',
+            'Nick Loew': 'George Mason',
+            'Nikita Tanguturi': 'Wake Forest',
+            'Nine Abad': 'Houston',
+            'Sira Ahuja': 'Binghamton',
+            'Spencer Anderson McElligott': 'Minnesota',
+            'Spiro Hoxha': 'Houston',
+            'Teddy Munson': 'Minnesota',
+            'Temitope Ogundare': 'Rutgers-Newark',
+            'Tony Miklovis': 'Michigan State',
+            'Willow Roark': 'Washington/West Georgia',
+        },
+        'teams_file': 'teams_antitrust.csv',
+        'history_file': 'match_history_antitrust.csv',
+    },
     'personhood': {
+        'prior_season': 'antitrust',
+        'transfers': {
+            'Johnson County Community/t.babcock': 'Wichita State',
+            'Tufts/m.stinson': 'UMass Amherst',
+        },
         'data_dir': 'data_personhood',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'georgetown',
                         'dartmouthrr', 'texas', 'ada', 'ndt'],
-        # Maverick entries coded by a debater's name; each pair debates for this school
+        # Maverick entries coded by a debater's name -> the school each pair debates for
         # this season or the next
         'name_fixes': {
-            'astrid clough': 'West Georgia LC',
-            'Benjy Haber-Fawcett': 'Minnesota BH',
-            'Bryan Perez Rivas': 'Cal State Fullerton LP',
-            'Clara Conry': 'Emory RC',
-            'Eli T. Louis': 'Binghamton TP',
-            'Jay Fuchs': 'George Mason BF',
-            'Jay-Z Flores': 'CSU Long Beach OF',
-            'Louis Gleason': 'Boston College CG',
-            'Luna Schultz': 'Kansas LuS',
-            'Lyd Haindfield': 'West Georgia HR',
-            'Navya Simha': 'Michigan NS',
-            'Rayeed Rahman': 'Southern California RR',
-            'Teddy Munson': 'Minnesota MH',
+            'astrid clough': 'West Georgia',
+            'Benjy Haber-Fawcett': 'Minnesota',
+            'Bryan Perez Rivas': 'Cal State Fullerton',
+            'Clara Conry': 'Emory',
+            'Eli T. Louis': 'Binghamton',
+            'Jay Fuchs': 'George Mason',
+            'Jay-Z Flores': 'CSU Long Beach',
+            'Louis Gleason': 'Boston College',
+            'Luna Schultz': 'Kansas',
+            'Lyd Haindfield': 'West Georgia',
+            'Navya Simha': 'Michigan',
+            'Nine Abad': 'Houston',
+            'Rayeed Rahman': 'Southern California',
+            'Teddy Munson': 'Minnesota',
         },
         'teams_file': 'teams_personhood.csv',
         'history_file': 'match_history_personhood.csv',
@@ -129,21 +206,20 @@ SEASONS = {
             'Mary Washington/a.dover': 'George Mason',
             'Michigan/p.ippagunta': 'Georgia',
             'Minnesota/s.andersonmcelligott': 'Iowa',
-            'Nine/n.abad': 'Houston',  # 'Nine Abad' maverick entries in personhood
         },
         'data_dir': 'data_nukes',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'longbeach',
                         'dartmouthrr', 'texas', 'ada', 'ndt'],
-        # Maverick entries coded by a debater's name; each pair debates for this school
+        # Maverick entries coded by a debater's name -> the school each pair debates for
         # elsewhere (Fuchs & Davis are George Mason DF at the NDT)
         'name_fixes': {
-            'Austin Davis': 'George Mason DF',
-            'Clara Conry': 'Emory CY',
-            'Easton Logback': 'Kansas LS',
-            'Grey Parfenoff': 'Iowa AP',
-            'Hina Shehzad': 'Michigan State SS',
-            'Joshua StPeter': 'Western Kentucky SM',
-            'Teddy Munson': 'Minnesota MH',
+            'Austin Davis': 'George Mason',
+            'Clara Conry': 'Emory',
+            'Easton Logback': 'Kansas',
+            'Grey Parfenoff': 'Iowa',
+            'Hina Shehzad': 'Michigan State',
+            'Joshua StPeter': 'Western Kentucky',
+            'Teddy Munson': 'Minnesota',
             'UMass MS': 'UMass Amherst MS',
         },
         'teams_file': 'teams_nukes.csv',
@@ -204,6 +280,9 @@ _ELIM_ORDER = {'triples': 100, 'dubs': 101, 'octas': 102, 'quarters': 103, 'semi
 # Unranked teams are still exported, with Ranked = False, so the frontend can show them.
 MIN_TOURNAMENTS = 2
 
+# The initials that end a code: 'BP', 'BrRe', 'AnMc'
+_INITIALS = re.compile(r'(?:[A-Z][a-z]?){2,4}')
+
 # One speaker in a points cell: "JGonzalez Arce 28.7" (several scores when judged by a panel)
 _SPEAKER = re.compile(r'([^\d\s][^\d]*?)\s+(?:\d+(?:\.\d+)?\s*)+')
 
@@ -233,7 +312,7 @@ def clean_teams(series: pd.Series, *fixes: dict | None) -> pd.Series:
     # Whole school names only (either half of a hybrid), so 'Fullerton' leaves
     # 'Cal State Fullerton' alone
     for wrong, right in SCHOOL_ALIASES.items():
-        s = s.str.replace(rf'(^|/){re.escape(wrong)} ', lambda m: f'{m.group(1)}{right} ', regex=True)
+        s = s.str.replace(rf'(^|/){re.escape(wrong)}(?=[ /])', lambda m: f'{m.group(1)}{right}', regex=True)
     for fix in fixes:
         for wrong, right in (fix or {}).items():
             s = s.str.replace(wrong, right, regex=False)
@@ -352,16 +431,37 @@ def load_season(
     frames = {name: pd.read_csv(os.path.join(data_dir, f'{name}.csv')) for name in names}
     codes = pd.concat([clean_teams(df[side], name_fixes) for df in frames.values()
                        for side in ('Aff', 'Neg')]).dropna()
-    abbreviations = _abbreviate_entry_names(codes, {_school(c) for c in codes if ' & ' not in c})
+    schools = {_school(c) for c in codes if ' & ' not in c} - {''}
+    abbreviations = _abbreviate_entry_names(codes, schools)
+    # name_fixes map maverick codes ('Nick Loew') to a bare school, which gets initials below
+    schools |= set((name_fixes or {}).values())
 
+    def bare(code) -> bool:
+        return (isinstance(code, str) and code in schools
+                and not (' ' in code and _INITIALS.fullmatch(code.rpartition(' ')[2])))
+
+    pairs_seen = defaultdict(set)  # (tournament, raw code) -> codes given to it in prelims
     rounds = {}
     for name in names:
         df = frames[name]
+        tournament = name.partition('_')[0]
         out = pd.DataFrame(index=df.index)
         for side in ('Aff', 'Neg'):
+            raw = clean_teams(df[side])
             out[side] = clean_teams(df[side], name_fixes).replace(abbreviations)
             points = next((c for c in df.columns if c.startswith(side) and 'Points' in c), None)
             speakers = [_speaker_names(p) for p in df[points]] if points else [None] * len(df)
+            # A bare school name as the code (a round robin's 'Kansas', or a maverick mapped
+            # by name_fixes) takes the speakers' initials. Rows without speakers (elims, byes)
+            # are filled in below, once every prelim has been read.
+            codes_out = []
+            for r, c, sp in zip(raw, out[side], speakers):
+                if bare(c) and sp:
+                    c = f'{c} ' + ''.join(n[1:2].upper() for n in sp)
+                    pairs_seen[(tournament, r)].add(c)
+                codes_out.append(c)
+            out[side] = codes_out
+            out[f'{side}_Raw'] = raw
             out[f'{side}_Speakers'] = [_apply_aliases(c, s and [n[1:] for n in s])
                                        for c, s in zip(out[side], speakers)]
             out[f'{side}_Initials'] = [
@@ -377,6 +477,15 @@ def load_season(
         ballots = win.str.extract(r'(\d+)\s*-\s*(\d+)').astype('Int64')
         out['Ballots_Win'], out['Ballots_Lose'] = ballots[0], ballots[1]
         rounds[name] = out
+
+    # A bare code left without speakers takes the one code its raw name had at that
+    # tournament; with two partnerships under one maverick name it stays bare
+    for name, out in rounds.items():
+        tournament = name.partition('_')[0]
+        for side in ('Aff', 'Neg'):
+            out[side] = [next(iter(pairs_seen[(tournament, r)]))
+                         if bare(c) and len(pairs_seen[(tournament, r)]) == 1 else c
+                         for c, r in zip(out[side], out.pop(f'{side}_Raw'))]
 
     # Where each partnership appeared under each code / initials signature this season
     surnames_by_key = {}

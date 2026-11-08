@@ -9,10 +9,15 @@ export const SEASONS = {
   energy: { label: '2024–25', teams: 'teams_energy.csv', history: 'match_history_energy.csv' },
   nukes: { label: '2023–24', teams: 'teams_nukes.csv', history: 'match_history_nukes.csv' },
   personhood: { label: '2022–23', teams: 'teams_personhood.csv', history: 'match_history_personhood.csv' },
+  antitrust: { label: '2021–22', teams: 'teams_antitrust.csv', history: 'match_history_antitrust.csv' },
+  alliances: { label: '2020–21', teams: 'teams_alliances.csv', history: 'match_history_alliances.csv' },
 }
 
 const TOURNAMENT_NAMES = {
   nu: 'Northwestern',
+  nu1: 'Northwestern 1',
+  nu2: 'Northwestern 2',
+  harvardrr: 'Harvard RR',
   kentuckyrr: 'Kentucky RR',
   uk: 'Kentucky',
   minn: 'Minnesota',
@@ -21,6 +26,7 @@ const TOURNAMENT_NAMES = {
   gt: 'Georgetown',
   georgetown: 'Georgetown',
   harvard: 'Harvard',
+  fullertown: 'Fullerton–Georgetown',
   longbeach: 'Long Beach',
   dartmouthrr: 'Dartmouth RR',
   texas: 'Texas',
