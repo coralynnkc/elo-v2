@@ -52,7 +52,7 @@ Emory HT,Hight & Tharp,c & l,32.689,1.945,11,11,Emory/c.hight|Emory/l.tharp,26.8
 Wake Forest MP,McDonald & Prabhakar,l & a,32.571,3.838,3,3,Wake Forest/l.mcdonald|Wake Forest/a.prabhakar,21.059,1,False
 Western Kentucky KN (Kumar/Ney),Kumar & Ney,v & r,32.57,1.476,11,12,Western Kentucky/v.kumar|Western Kentucky/r.ney,28.142,3,True
 Texas AL (Low/Andrew),Low & Andrew,s & e,32.559,3.484,2,2,Texas/s.low|Texas/e.andrew,22.108,1,False
-Georgetown LN,Lastelick & Nanji,l & a,32.468,1.893,7,7,Georgetown/l.lastelick|Georgetown/a.nanji,26.788,2,True
+Georgetown LN,Lastelick & Nanji,l & a,32.469,1.893,7,7,Georgetown/l.lastelick|Georgetown/a.nanji,26.788,2,True
 Western Kentucky IN,Niendorf & Ingram,k & c,32.271,1.713,13,12,Western Kentucky/k.niendorf|Western Kentucky/c.ingram,27.133,3,True
 Emory MW,Mansoor & Walsh,s & z,32.172,1.593,17,16,Emory/s.mansoor|Emory/z.walsh,27.394,4,True
 UTD RH,Ravi & Hoch,s & i,31.855,2.082,4,4,UTD/s.ravi|UTD/i.hoch,25.608,1,False
@@ -209,7 +209,7 @@ Georgetown CX,Ciancanelli & Xiao,m & c,18.504,3.236,4,4,Georgetown/m.ciancanelli
 West Georgia KM,Kennon & Missell,j & b,18.458,3.054,3,3,West Georgia/j.kennon|West Georgia/b.missell,9.295,1,False
 Kansas AJ,Adedipe & Jijo,e & j,18.457,3.738,3,4,Kansas/e.adedipe|Kansas/j.jijo,7.244,1,False
 Baylor KA,Arroyo & Krikorian,p & a,18.38,3.158,4,4,Baylor/p.arroyo|Baylor/a.krikorian,8.905,1,False
-Utah VP,Verbeck-O'Brien & Parrish,b & j,18.339,2.913,4,4,Utah/b.verbeckobrien|Utah/j.parrish,9.599,1,False
+Utah VP,Verbeck-O'Brien & Parrish,b & j,18.339,2.913,4,4,Utah/b.verbeckobrien|Utah/j.parrish,9.6,1,False
 Liberty KR,Koenig & Ronchetti,n & a,18.204,3.766,3,3,Liberty/n.koenig|Liberty/a.ronchetti,6.907,1,False
 Kansas LL,Lemaster & Levin,b & a,17.146,2.54,4,4,Kansas/b.lemaster|Kansas/a.levin,9.525,1,False
 Washburn JS,Jackson & Smith,z & g,17.016,4.051,3,3,Washburn/z.jackson|Washburn/g.smith,4.863,1,False

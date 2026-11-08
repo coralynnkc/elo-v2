@@ -108,8 +108,8 @@ SEASONS = {
     'alliances': {
         'data_dir': 'data_alliances',
         # Northwestern hosted twice; fullertown is Georgetown and Fullerton's joint tournament
-        'tournaments': ['nu1', 'uk', 'harvardrr', 'gonzaga', 'fullertown', 'dartmouthrr',
-                        'texas', 'nu2', 'ada', 'ndt'],
+        'tournaments': ['nu1', 'uk', 'harvardrr', 'gonzaga', 'fullertown', 'wake',
+                        'dartmouthrr', 'nu2', 'ada', 'ndt'],
         # Maverick entries coded by a debater's name -> the school each pair debates for
         'name_fixes': {
             'Bryan Perez Rivas': 'Cal State Fullerton',
@@ -219,6 +219,7 @@ SEASONS = {
             'Grey Parfenoff': 'Iowa',
             'Hina Shehzad': 'Michigan State',
             'Joshua StPeter': 'Western Kentucky',
+            'Lizzie Place': 'Harvard',
             'Teddy Munson': 'Minnesota',
             'UMass MS': 'UMass Amherst MS',
         },

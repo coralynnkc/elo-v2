@@ -14,7 +14,7 @@ The site has a sortable leaderboard for each season and a page per team with its
 | 2023–24 | `nukes` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Long Beach, Dartmouth RR, Texas, ADA, NDT |
 | 2022–23 | `personhood` | Northwestern, Kentucky RR, Kentucky, Gonzaga, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 | 2021–22 | `antitrust` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Fullerton–Georgetown, Dartmouth RR, Texas, ADA, NDT |
-| 2020–21 | `alliances` | Northwestern 1, Kentucky, Harvard RR, Gonzaga, Fullerton–Georgetown, Dartmouth RR, Texas, Northwestern 2, ADA, NDT |
+| 2020–21 | `alliances` | Northwestern 1, Kentucky, Harvard RR, Gonzaga, Fullerton–Georgetown, Wake Forest, Dartmouth RR, Northwestern 2, ADA, NDT |
 
 ## How ratings work
 
