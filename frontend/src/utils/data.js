@@ -8,6 +8,7 @@ export const SEASONS = {
   labor: { label: '2025–26', teams: 'teams_labor.csv', history: 'match_history.csv' },
   energy: { label: '2024–25', teams: 'teams_energy.csv', history: 'match_history_energy.csv' },
   nukes: { label: '2023–24', teams: 'teams_nukes.csv', history: 'match_history_nukes.csv' },
+  personhood: { label: '2022–23', teams: 'teams_personhood.csv', history: 'match_history_personhood.csv' },
 }
 
 const TOURNAMENT_NAMES = {

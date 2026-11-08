@@ -12,6 +12,7 @@ The site has a sortable leaderboard for each season and a page per team with its
 | 2025–26 | `labor` | Northwestern, Kentucky RR, Kentucky, Gonzaga, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 | 2024–25 | `energy` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 | 2023–24 | `nukes` | Northwestern, Kentucky RR, Kentucky, Harvard, Wake Forest, Long Beach, Dartmouth RR, Texas, ADA, NDT |
+| 2022–23 | `personhood` | Northwestern, Kentucky RR, Kentucky, Gonzaga, Wake Forest, Georgetown, Dartmouth RR, Texas, ADA, NDT |
 
 ## How ratings work
 

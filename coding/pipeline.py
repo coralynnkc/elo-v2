@@ -37,8 +37,9 @@ SPLIT_BALLOTS = False
 # covering the off-season and the fact that a new partnership is not its debaters' sum
 PRIOR_INFLATION = 2.0
 # Uncertainty added to each debater between seasons, when their rating is carried down
-# the prior_season chain. Tuned separately: tightening it with PRIOR_INFLATION costs arms.
-DEBATER_INFLATION = 4.0 / math.sqrt(2)
+# the prior_season chain. Tuned separately: tightening it with PRIOR_INFLATION costs arms,
+# and with five seasons chained, 4 beats 4/√2 in energy, labor and arms.
+DEBATER_INFLATION = 4.0
 # Skill a returning debater gains over an off-season, added to the carried mean. Returning
 # debaters' ratings rise about +1 a year (+0.75 to +1.0 in every pair of seasons), and
 # without it the deeper nukes -> energy -> labor -> arms chain makes labor and arms worse.
@@ -62,6 +63,7 @@ NAMESAKES = {
 # Tabroom suffixes stripped from team codes in every season
 SUFFIX_FIXES = {
     ' - ONLINE': '',
+    ' - ONL': '',  # truncated in exports that use full entry names
     ' - HYBRID': '',
 }
 
@@ -71,6 +73,7 @@ SCHOOL_ALIASES = {
     'MoState': 'Missouri State',
     'Massachusetts, Amherst': 'UMass Amherst',
     'Fullerton': 'Cal State Fullerton',
+    'GMU': 'George Mason',
 }
 
 # A debater whose surname changed, keyed by (school, old surname, partner's surname), all
@@ -93,7 +96,41 @@ DEBATER_ALIASES = {
 #                can't be tied to its debaters (no speaker names or entries) and differs
 #                from the code used elsewhere.
 SEASONS = {
+    'personhood': {
+        'data_dir': 'data_personhood',
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'georgetown',
+                        'dartmouthrr', 'texas', 'ada', 'ndt'],
+        # Maverick entries coded by a debater's name; each pair debates for this school
+        # this season or the next
+        'name_fixes': {
+            'astrid clough': 'West Georgia LC',
+            'Benjy Haber-Fawcett': 'Minnesota BH',
+            'Bryan Perez Rivas': 'Cal State Fullerton LP',
+            'Clara Conry': 'Emory RC',
+            'Eli T. Louis': 'Binghamton TP',
+            'Jay Fuchs': 'George Mason BF',
+            'Jay-Z Flores': 'CSU Long Beach OF',
+            'Louis Gleason': 'Boston College CG',
+            'Luna Schultz': 'Kansas LuS',
+            'Lyd Haindfield': 'West Georgia HR',
+            'Navya Simha': 'Michigan NS',
+            'Rayeed Rahman': 'Southern California RR',
+            'Teddy Munson': 'Minnesota MH',
+        },
+        'teams_file': 'teams_personhood.csv',
+        'history_file': 'match_history_personhood.csv',
+    },
     'nukes': {
+        'prior_season': 'personhood',
+        'transfers': {
+            'Emporia State/s.reedvalizan': 'Wichita State',
+            'Indiana/r.penumetcha': 'UTD',
+            'Kentucky/s.dalpra': 'West Georgia',
+            'Mary Washington/a.dover': 'George Mason',
+            'Michigan/p.ippagunta': 'Georgia',
+            'Minnesota/s.andersonmcelligott': 'Iowa',
+            'Nine/n.abad': 'Houston',  # 'Nine Abad' maverick entries in personhood
+        },
         'data_dir': 'data_nukes',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'longbeach',
                         'dartmouthrr', 'texas', 'ada', 'ndt'],
@@ -106,6 +143,8 @@ SEASONS = {
             'Grey Parfenoff': 'Iowa AP',
             'Hina Shehzad': 'Michigan State SS',
             'Joshua StPeter': 'Western Kentucky SM',
+            'Teddy Munson': 'Minnesota MH',
+            'UMass MS': 'UMass Amherst MS',
         },
         'teams_file': 'teams_nukes.csv',
         'history_file': 'match_history_nukes.csv',
@@ -262,6 +301,25 @@ def _initials_signature(code: str) -> str:
     return f"{school} {''.join(sorted(initials))}"
 
 
+def _abbreviate_entry_names(codes, schools: set[str]) -> dict[str, str]:
+    """'Emory Giampetruzzi & Kessler' -> 'Emory GK', for tournaments that export entry
+    names instead of codes. The school is the longest one seen in a normal code this season.
+    Names that would share a short code get two letters per surname ('Wake Forest LeTo'),
+    since elims have no speaker names to tell them apart."""
+    def split(code):
+        school = max((sc for sc in schools if code.startswith(sc + ' ')), key=len, default=None)
+        if school is None:  # a school seen only here: assume one-word surnames
+            school = code.rpartition(' & ')[0].rpartition(' ')[0]
+        first, _, second = code[len(school) + 1:].partition(' & ')
+        return school, first, second
+
+    parts = {c: split(c) for c in set(codes) if ' & ' in c}
+    short = {c: f'{sc} {(a[:1] + b[:1]).upper()}' for c, (sc, a, b) in parts.items()}
+    clashes = {v for v in short.values() if list(short.values()).count(v) > 1}
+    return {c: f'{sc} {a[:2].title()}{b[:2].title()}' if short[c] in clashes else short[c]
+            for c, (sc, a, b) in parts.items()}
+
+
 def load_season(
     data_dir: str,
     tournament_order: list[str],
@@ -290,12 +348,18 @@ def load_season(
                 if (surnames := _entry_surnames(entry)):
                     entries[tournament][code] = _apply_aliases(code, surnames)
 
+    names = _round_names(data_dir, tournament_order)
+    frames = {name: pd.read_csv(os.path.join(data_dir, f'{name}.csv')) for name in names}
+    codes = pd.concat([clean_teams(df[side], name_fixes) for df in frames.values()
+                       for side in ('Aff', 'Neg')]).dropna()
+    abbreviations = _abbreviate_entry_names(codes, {_school(c) for c in codes if ' & ' not in c})
+
     rounds = {}
-    for name in _round_names(data_dir, tournament_order):
-        df = pd.read_csv(os.path.join(data_dir, f'{name}.csv'))
+    for name in names:
+        df = frames[name]
         out = pd.DataFrame(index=df.index)
         for side in ('Aff', 'Neg'):
-            out[side] = clean_teams(df[side], name_fixes)
+            out[side] = clean_teams(df[side], name_fixes).replace(abbreviations)
             points = next((c for c in df.columns if c.startswith(side) and 'Points' in c), None)
             speakers = [_speaker_names(p) for p in df[points]] if points else [None] * len(df)
             out[f'{side}_Speakers'] = [_apply_aliases(c, s and [n[1:] for n in s])
@@ -304,7 +368,9 @@ def load_season(
                 s and [INITIAL_ALIASES.get((_school(c), _normalize_surname(n[1:]), n[0].lower()), n[0].lower())
                        for n in s]
                 for c, s in zip(out[side], speakers)]
-        win = df['Win'].astype(str).str.strip().str.upper()
+        win = df['Win'].fillna('').astype(str).str.strip().str.upper()
+        # A side with no team (a bye, or an entry deleted from Tabroom later) can't be rated
+        win = win.where(out['Aff'].notna() & out['Neg'].notna(), 'NO OPPONENT')
         # Forfeits ("AFF FFT NEG BYE") name both sides but weren't debated, so they stay raw
         out['Win'] = win.map(lambda x: x if 'FFT' in x else 'Aff' if 'AFF' in x else ('Neg' if 'NEG' in x else x))
         # Paneled rounds report the ballot count in Win ("3-0 AFF"); one-judge rounds don't
