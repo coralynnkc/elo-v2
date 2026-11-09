@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { SEASONS, getTournaments } from '../utils/data'
 
 // Title, season switcher, subtitle and view tabs shared by the leaderboard and H2H pages.
@@ -6,6 +6,7 @@ import { SEASONS, getTournaments } from '../utils/data'
 export default function SeasonHeader({ season, rawHistory, view }) {
   const tournaments = getTournaments(rawHistory)
   const latest = tournaments[tournaments.length - 1]
+  const navigate = useNavigate()
 
   return (
     <header className="page-header">
@@ -17,6 +18,17 @@ export default function SeasonHeader({ season, rawHistory, view }) {
           </NavLink>
         ))}
       </nav>
+      {/* Phones get a dropdown instead of the pill bar */}
+      <select
+        className="season-select"
+        aria-label="Season"
+        value={season}
+        onChange={e => navigate(`/${e.target.value}${view}`)}
+      >
+        {Object.entries(SEASONS).map(([key, s]) => (
+          <option key={key} value={key}>{s.label}</option>
+        ))}
+      </select>
       <p className="subtitle">
         TrueSkill Through Time ratings ·{' '}
         <span className="has-tip" tabIndex={0} data-tip={tournaments.join(' → ')}>
