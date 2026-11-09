@@ -108,7 +108,7 @@ SEASONS = {
     'alliances': {
         'data_dir': 'data_alliances',
         # Northwestern hosted twice; fullertown is Georgetown and Fullerton's joint tournament
-        'tournaments': ['nu1', 'uk', 'harvardrr', 'gonzaga', 'fullertown', 'wake',
+        'tournaments': ['nu1', 'uk', 'harvardrr', 'gonzaga', 'wake', 'fullertown',
                         'dartmouthrr', 'nu2', 'ada', 'ndt'],
         # Maverick entries coded by a debater's name -> the school each pair debates for
         'name_fixes': {

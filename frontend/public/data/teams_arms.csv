@@ -115,7 +115,7 @@ Wichita State GZ,Griffith & Zdrojewski,m & a,27.863,2.81,4,4,Wichita State/m.gri
 Oklahoma BW,Ballinger & Wright,l & j,27.828,2.027,10,9,Oklahoma/l.ballinger|Oklahoma/j.wright,21.746,3,True
 Southern California ZP,Zhang & Parampath,i & n,27.802,3.055,3,4,Southern California/i.zhang|Southern California/n.parampath,18.637,1,False
 Michigan AR,Apfaltrer & Ryan,f & a,27.528,3.161,4,4,Michigan/f.apfaltrer|Michigan/a.ryan,18.045,1,False
-Wake Forest NS,Sampat & Nounawon-Castro,j & n,27.459,2.224,7,7,Wake Forest/j.sampat|Wake Forest/n.nounawoncastro,20.787,2,True
+Wake Forest NS,Sampat & Nounawon-Castro,j & n,27.46,2.224,7,7,Wake Forest/j.sampat|Wake Forest/n.nounawoncastro,20.787,2,True
 Wyoming HW,Hawley & Widi,j & s,27.393,1.546,14,14,Wyoming/j.hawley|Wyoming/s.widi,22.756,4,True
 Harvard JO,Jin & Ohr,a & o,27.369,3.436,3,3,Harvard/a.jin|Harvard/o.ohr,17.06,1,False
 Baylor PL,Li & Phillips,y & t,27.225,2.633,3,3,Baylor/y.li|Baylor/t.phillips,19.327,1,False
@@ -225,7 +225,7 @@ Emory GW,granchi & Wang,a & t,14.768,2.178,10,10,Emory/a.granchi|Emory/t.wang,8.
 Kansas CD,Dittmar & Caylor,d & a,14.655,4.921,3,2,Kansas/d.dittmar|Kansas/a.caylor,-0.107,1,False
 Macalester FS,Scott & Farrowhurst,c & t,13.952,4.072,3,3,Macalester/c.scott|Macalester/t.farrowhurst,1.737,1,False
 Southern Nazarene HL,Hudson & Luce,c & t,12.987,4.589,4,3,Southern Nazarene/c.hudson|Southern Nazarene/t.luce,-0.78,1,False
-Missouri State CR,Cowdrey-Mota & Rice,g & j,11.496,4.536,3,2,Missouri State/g.cowdreymota|Missouri State/j.rice,-2.112,1,False
+Missouri State CR,Cowdrey-Mota & Rice,g & j,11.497,4.536,3,2,Missouri State/g.cowdreymota|Missouri State/j.rice,-2.112,1,False
 Harvard/Boston FJ,Facey & Jones,z & f,11.385,3.618,7,6,Harvard/z.facey|Harvard/Boston/f.jones,0.531,2,True
 Dartmouth CF,Figueroa & Chen,l & b,10.656,3.661,6,6,Dartmouth/l.figueroa|Dartmouth/b.chen,-0.326,2,True
 George Mason/Samford PA,Alexander & Poteet,k & i,10.345,4.962,3,3,Samford/k.alexander|George Mason/Samford/i.poteet,-4.542,1,False
