@@ -133,7 +133,7 @@ Georgetown SW,Spurlock & White,a & a,24.452,3.384,3,3,Georgetown/a.spurlock|Geor
 Baylor CS,Chatur & Sturgeon,s & m,24.299,3.537,3,3,Baylor/s.chatur|Baylor/m.sturgeon,13.689,1,False
 Kentucky FS,Flaherty & Stockstill,c & a,24.237,3.137,3,3,Kentucky/c.flaherty|Kentucky/a.stockstill,14.826,1,False
 UTD LW,Watson & Lasseter,s & s,24.209,1.5,18,19,UTD/s.watson|UTD/s.lasseter,19.707,6,True
-West Georgia FC,Forsyth & clough,r & a,24.148,1.945,9,10,West Georgia/r.forsyth|West Georgia/a.clough,18.313,3,True
+West Georgia FC,Forsyth & Clough,r & a,24.148,1.945,9,10,West Georgia/r.forsyth|West Georgia/a.clough,18.313,3,True
 Harvard/Amherst GM,Gilmer-Hill & Mukherjee,c & r,24.124,1.224,23,24,Harvard/Amherst/c.gilmerhill|Harvard/Amherst/r.mukherjee,20.452,8,True
 Missouri State CR,Reeves & Cade,p & s,24.108,2.538,3,3,Missouri State/p.reeves|Missouri State/s.cade,16.495,1,False
 Georgia MW,Wakefield & Mruz,d & j,24.081,2.407,4,4,Georgia/d.wakefield|Georgia/j.mruz,16.861,2,True
@@ -151,7 +151,7 @@ Cal State Fullerton ML,Meza & Loayza,j & b,23.397,6.067,0,1,Cal State Fullerton/
 Wyoming MS,Swidecki & Mitchell,m & j,23.31,3.053,3,3,Wyoming/m.swidecki|Wyoming/j.mitchell,14.151,1,False
 Baylor WH,Wyatt & Hudson,a & l,23.287,3.13,3,3,Baylor/a.wyatt|Baylor/l.hudson,13.897,1,False
 Minnesota DP,Parrish & Davis,j & r,23.197,1.914,9,9,Missouri State/j.parrish|Minnesota/r.davis,17.454,3,True
-Wyoming CP,Cole & powers,s & e,23.172,2.302,6,8,Wyoming/s.cole|Wyoming/e.powers,16.266,2,True
+Wyoming CP,Cole & Powers,s & e,23.172,2.302,6,8,Wyoming/s.cole|Wyoming/e.powers,16.266,2,True
 Wayne State HR (Howard/Reza Husain),Howard & Reza Husain,f & i,23.158,2.351,6,6,Wayne State/f.howard|Wayne State/i.rezahusain,16.104,2,True
 Emporia State KR,Krambeer & Reed-Valizan,b & s,23.137,2.237,7,7,Emporia State/b.krambeer|Emporia State/s.reedvalizan,16.426,2,True
 Georgia MV (Mruz/Vale),Mruz & Vale,j & r,23.073,2.289,7,7,Georgia/j.mruz|Georgia/r.vale,16.205,2,True
@@ -189,7 +189,7 @@ Emory HN,Hazelbrook & Navarrete,e & m,20.377,3.432,3,3,Emory/e.hazelbrook|Emory/
 Wichita State HM,Hummingbird & Molina Chavez,f & m,20.259,2.21,8,9,Wichita State/f.hummingbird|Wichita State/m.molinachavez,13.629,3,True
 NYU SZ,Scott & Ziabkin,a & i,20.011,3.431,3,3,NYU/a.scott|NYU/i.ziabkin,9.719,1,False
 Wayne State HR (Howard/Reynolds),Howard & Reynolds,f & b,20.009,3.353,4,4,Wayne State/f.howard|Wayne State/b.reynolds,9.949,2,True
-Wyoming PS,Swidecki & powers,m & e,19.798,2.867,5,5,Wyoming/m.swidecki|Wyoming/e.powers,11.197,2,True
+Wyoming PS,Swidecki & Powers,m & e,19.798,2.867,5,5,Wyoming/m.swidecki|Wyoming/e.powers,11.197,2,True
 Minnesota AP (Amundsen/Prost),Amundsen & Prost,a & c,19.543,1.887,12,12,Minnesota/a.amundsen|Minnesota/c.prost,13.881,4,True
 Weber State PS,Stephens & Phelps,j & h,19.484,1.875,13,13,Weber State/j.stephens|Weber State/h.phelps,13.86,4,True
 Boston College CC,Cheek & Carter,c & s,19.448,1.819,13,13,Boston College/c.cheek|Boston College/s.carter,13.989,4,True

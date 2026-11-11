@@ -33,7 +33,7 @@ Kansas HP,Hato & Persinger,b & a,34.927,1.9,10,11,Kansas/b.hato|Kansas/a.persing
 Emory WP,Pierce & Wallen,d & k,34.844,1.139,26,26,Emory/d.pierce|Emory/k.wallen,31.427,7,True
 Michigan State KL,Lewis & Koster,s & d,34.438,1.204,25,28,Michigan State/s.lewis|Michigan State/d.koster,30.826,7,True
 UC Berkeley FT,Tsan & Fleming,t & n,34.432,1.311,24,23,UC Berkeley/t.tsan|UC Berkeley/n.fleming,30.5,6,True
-Wyoming LP,Lassen & powers,l & e,34.417,1.093,27,26,Wyoming/l.lassen|Wyoming/e.powers,31.139,7,True
+Wyoming LP,Lassen & Powers,l & e,34.417,1.093,27,26,Wyoming/l.lassen|Wyoming/e.powers,31.139,7,True
 Macalester KN,Kochel & Northrop,w & k,34.392,2.7,4,4,Macalester/w.kochel|Macalester/k.northrop,26.292,1,False
 Kentucky AM,Adam & McBlain,j & l,34.091,1.063,31,31,Kentucky/j.adam|Kentucky/l.mcblain,30.901,8,True
 Dartmouth/Pennsylvania CE,Cai & El-Sharif,n & m,33.995,1.29,22,24,Dartmouth/n.cai|Pennsylvania/m.elsharif,30.125,6,True
@@ -144,7 +144,7 @@ Northwestern OW,Ouyang & Wu,t & d,25.981,3.774,3,3,Northwestern/t.ouyang|Northwe
 Southern Nazarene HW,Hough & Williams,t & k,25.956,3.305,3,3,Southern Nazarene/t.hough|Southern Nazarene/k.williams,16.04,1,False
 Southern California CG,Channa & Griffin,d & k,25.946,2.466,7,6,Southern California/d.channa|Southern California/k.griffin,18.549,2,True
 Texas DL,Davis & Liu,c & e,25.828,3.742,3,3,Texas/c.davis|Texas/e.liu,14.601,1,False
-Wyoming MP,Medina & powers,p & e,25.826,3.247,4,4,Wyoming/p.medina|Wyoming/e.powers,16.084,1,False
+Wyoming MP,Medina & Powers,p & e,25.826,3.247,4,4,Wyoming/p.medina|Wyoming/e.powers,16.084,1,False
 Iowa BP,Bilicki & Parfenoff,r & g,25.793,3.533,3,3,Iowa/r.bilicki|Iowa/g.parfenoff,15.193,1,False
 Michigan SB (Simha/Bloom),Simha & Bloom,n & g,25.751,3.286,3,3,Michigan/n.simha|Michigan/g.bloom,15.894,1,False
 Minnesota HH,Haber-Fawcett & Herzer,b & j,25.709,2.789,3,3,Minnesota/b.haberfawcett|Minnesota/j.herzer,17.343,1,False
@@ -235,7 +235,7 @@ Oklahoma TS,Teague & Sullivan,b & j,20.267,2.608,3,3,Oklahoma/b.teague|Oklahoma/
 NYU TJ,Theiding & Jain,c & a,20.227,2.71,6,6,NYU/c.theiding|NYU/a.jain,12.098,2,True
 Michigan MK,Mikelson & Kuo,m & j,20.037,1.959,9,9,Michigan/m.mikelson|Michigan/j.kuo,14.159,3,True
 Navy CR,Rea & Connor,a & t,19.873,1.876,14,13,Navy/a.rea|Navy/t.connor,14.246,4,True
-Michigan State ZB,Zi & buck,m & t,19.837,3.948,3,3,Michigan State/m.zi|Michigan State/t.buck,7.993,1,False
+Michigan State ZB,Zi & Buck,m & t,19.837,3.948,3,3,Michigan State/m.zi|Michigan State/t.buck,7.993,1,False
 Emory LR,Liu & Ravikumar,d & a,19.826,3.849,3,3,Emory/d.liu|Emory/a.ravikumar,8.277,1,False
 Houston KS,Kidd & Schnitzer,r & j,19.817,3.916,3,3,Houston/r.kidd|Houston/j.schnitzer,8.069,1,False
 Harvard LM (unidentified),,,19.778,6.46,0,1,,0.398,1,False

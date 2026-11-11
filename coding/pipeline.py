@@ -325,6 +325,11 @@ def _normalize_surname(name: str) -> str:
     return re.sub(r'[^a-z]', '', ascii_name.casefold())
 
 
+def _display_surname(name: str) -> str:
+    """Capitalize a surname Tabroom has in all lowercase ('clough' -> 'Clough')."""
+    return ' '.join(w[:1].upper() + w[1:] for w in name.split(' ')) if name == name.lower() else name
+
+
 def _partnership_key(surnames: list[str]) -> str:
     """Order-, case-, accent- and punctuation-insensitive key for a set of debaters."""
     return '/'.join(sorted(_normalize_surname(s) for s in surnames))
@@ -495,7 +500,7 @@ def load_season(
 
     def observe(code, surnames, tournament):
         key = _partnership_key(surnames)
-        surnames_by_key.setdefault(key, surnames)
+        surnames_by_key.setdefault(key, [_display_surname(n) for n in surnames])
         t_idx = tournament_order.index(tournament)
         by_code[code][key].add(t_idx)
         by_signature[_initials_signature(code)][key].add(t_idx)

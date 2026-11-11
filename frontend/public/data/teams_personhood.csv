@@ -57,7 +57,7 @@ Emory BP (Bellam/Pak),Bellam & Pak,s & a,32.345,1.834,11,10,Emory/s.bellam|Emory
 Kansas SeMa,Marshall & Semrick,j & j,32.268,3.22,5,3,Kansas/j.marshall|Kansas/j.semrick,22.607,1,False
 Texas AB,Anderson & Bhasin,r & i,31.779,1.746,14,14,Texas/r.anderson|Texas/i.bhasin,26.54,4,True
 Liberty PW,Wallenmeyer & Posey,j & j,31.691,1.655,15,14,Liberty/j.wallenmeyer|Liberty/j.posey,26.726,4,True
-West Georgia LC,Larson & clough,r & a,31.649,1.426,17,18,West Georgia/r.larson|West Georgia/a.clough,27.371,5,True
+West Georgia LC,Larson & Clough,r & a,31.649,1.426,17,18,West Georgia/r.larson|West Georgia/a.clough,27.371,5,True
 Kentucky DG,Gabay & Di,a & j,31.451,1.429,22,22,Kentucky/a.gabay|Kentucky/j.di,27.163,6,True
 Michigan QS,Shih & Qian,c & j,31.412,4.011,3,3,Michigan/c.shih|Michigan/j.qian,19.378,1,False
 Wake Forest DS,Dua & Say,r & j,31.397,1.86,8,9,Wake Forest/r.dua|Wake Forest/j.say,25.817,3,True
@@ -85,7 +85,7 @@ Kentucky AW,Adam & Weinhardt,j & d,29.796,1.405,16,15,Kentucky/j.adam|Kentucky/d
 Emory RB,Roytburg & Bedi,d & a,29.776,2.639,3,3,Emory/d.roytburg|Emory/a.bedi,21.858,1,False
 Dartmouth DL,Laurent & Datel,e & a,29.763,3.271,3,3,Dartmouth/e.laurent|Dartmouth/a.datel,19.949,1,False
 Emory MS,Sandhu & Moodley,h & s,29.748,2.058,6,6,Emory/h.sandhu|Emory/s.moodley,23.573,2,True
-Wyoming LP,Lassen & powers,l & e,29.582,1.111,28,31,Wyoming/l.lassen|Wyoming/e.powers,26.25,8,True
+Wyoming LP,Lassen & Powers,l & e,29.582,1.111,28,31,Wyoming/l.lassen|Wyoming/e.powers,26.25,8,True
 Georgetown KL,Lowenstein & Kumar,a & h,29.534,3.162,3,3,Georgetown/a.lowenstein|Georgetown/h.kumar,20.048,1,False
 Georgetown MS,Sayers & Manens,b & b,29.533,3.283,4,4,Georgetown/b.sayers|Georgetown/b.manens,19.685,2,True
 Michigan IS,Ippagunta & Shih,p & c,29.531,1.782,14,13,Michigan/p.ippagunta|Michigan/c.shih,24.185,4,True
@@ -145,11 +145,11 @@ Texas HN,Healey & Noriega,s & b,25.814,2.003,6,6,Texas/s.healey|Texas/b.noriega,
 Baylor BD,Barsoumian & Darwish,d & o,25.711,3.565,3,3,Baylor/d.barsoumian|Baylor/o.darwish,15.018,1,False
 Kentucky DS,Stockstill & Dal Pra,a & s,25.679,1.596,13,13,Kentucky/a.stockstill|Kentucky/s.dalpra,20.893,4,True
 UTD SL,Sendejas & Lasseter,a & s,25.519,2.301,4,4,UTD/a.sendejas|UTD/s.lasseter,18.617,1,False
-Kansas OY,ortwein & Yang,h & s,25.396,3.662,3,3,Kansas/h.ortwein|Kansas/s.yang,14.409,1,False
+Kansas OY,Ortwein & Yang,h & s,25.396,3.662,3,3,Kansas/h.ortwein|Kansas/s.yang,14.409,1,False
 UTD KR,Rios & Karthik,t & m,25.168,2.969,3,3,UTD/t.rios|UTD/m.karthik,16.262,1,False
 West Georgia KL,Keller & Larson,j & r,25.114,3.142,4,4,West Georgia/j.keller|West Georgia/r.larson,15.69,1,False
 Baylor MN,Nguyen & McClinton,k & c,24.875,2.091,6,6,Baylor/k.nguyen|Baylor/c.mcclinton,18.6,2,True
-Kansas HO,Hines & ortwein,b & h,24.865,3.143,3,3,Kansas/b.hines|Kansas/h.ortwein,15.435,1,False
+Kansas HO,Hines & Ortwein,b & h,24.865,3.143,3,3,Kansas/b.hines|Kansas/h.ortwein,15.435,1,False
 Oklahoma ST,Teague & Sullivan,b & j,24.767,1.916,10,9,Oklahoma/b.teague|Oklahoma/j.sullivan,19.019,3,True
 Emory BeWi,Wilson & Bellam,m & s,24.659,2.764,5,6,Emory/m.wilson|Emory/s.bellam,16.368,2,True
 Dartmouth BN,Niblett & Baugher,a & c,24.659,1.952,10,10,Dartmouth/a.niblett|Dartmouth/c.baugher,18.804,3,True
