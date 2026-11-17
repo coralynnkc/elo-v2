@@ -262,7 +262,7 @@ SEASONS = {
     },
     'arms': {
         'data_dir': 'data_arms',
-        'tournaments': ['nu', 'kentuckyrr', 'uk', 'minn', 'harvard'],
+        'tournaments': ['nu', 'kentuckyrr', 'uk', 'minn', 'harvard', 'wake'],
         'prior_season': 'labor',
         'transfers': {'Emory/i.song': 'Michigan'},
         'name_fixes': {},
