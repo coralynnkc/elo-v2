@@ -8,18 +8,18 @@ To count as an improvement, a change has to beat these walk-forward scores:
 
 | Run | Matches | Accuracy | Log loss |
 |---|---|---|---|
-| `evaluate.py labor --priors energy` | 3246 | **74.8%** | **0.5181** |
-| `evaluate.py arms --priors labor` (nu, kentuckyrr, uk, minn, harvard) | 1573 | 70.6% | 0.5601 |
-| `evaluate.py energy --priors nukes` | 2835 | 72.4% | 0.5350 |
-| `evaluate.py nukes --priors personhood` | 2833 | 72.9% | 0.5399 |
-| `evaluate.py personhood --priors antitrust` | 2562 | 73.0% | 0.5341 |
-| `evaluate.py antitrust --priors alliances` | 2259 | 71.6% | 0.5361 |
-| `evaluate.py labor` (unseeded, opener not scored) | 2783 | 71.8% | 0.5472 |
-| `evaluate.py energy` (unseeded, opener not scored) | 2396 | 71.2% | 0.5596 |
-| `evaluate.py nukes` (unseeded, opener not scored) | 2436 | 71.0% | 0.5598 |
-| `evaluate.py personhood` (unseeded, opener not scored) | 2212 | 70.3% | 0.5627 |
-| `evaluate.py antitrust` (unseeded, opener not scored) | 1910 | 70.2% | 0.5584 |
-| `evaluate.py alliances` (no prior season) | 2149 | 67.2% | 0.5980 |
+| `evaluate.py labor --priors energy` | 3246 | **75.1%** | **0.5136** |
+| `evaluate.py arms --priors labor` (nu, kentuckyrr, uk, minn, harvard, wake) | 2133 | 70.8% | 0.5491 |
+| `evaluate.py energy --priors nukes` | 2835 | 72.7% | 0.5323 |
+| `evaluate.py nukes --priors personhood` | 2833 | 73.3% | 0.5346 |
+| `evaluate.py personhood --priors antitrust` | 2562 | 72.6% | 0.5269 |
+| `evaluate.py antitrust --priors alliances` | 2259 | 72.2% | 0.5297 |
+| `evaluate.py labor` (unseeded, opener not scored) | 2783 | 71.7% | 0.5451 |
+| `evaluate.py energy` (unseeded, opener not scored) | 2396 | 71.3% | 0.5572 |
+| `evaluate.py nukes` (unseeded, opener not scored) | 2436 | 70.9% | 0.5559 |
+| `evaluate.py personhood` (unseeded, opener not scored) | 2212 | 70.3% | 0.5588 |
+| `evaluate.py antitrust` (unseeded, opener not scored) | 1910 | 70.3% | 0.5540 |
+| `evaluate.py alliances` (no prior season) | 2149 | 67.5% | 0.5929 |
 
 Seeded and unseeded runs score different match sets, because seeding makes the opener scorable. Compare a change against a row of the same kind.
 
@@ -27,11 +27,10 @@ These are on the full re-export (2026-10-07): every prelim in all three seasons 
 
 ## Open
 
-- **β is too small for log loss, but not for accuracy.** The model is overconfident within a season: the logit slope is 0.83–0.86 in all three seasons, and about 0.73 at each season's Kentucky. β = 5.2 fixes some of that (labor 0.5286 → 0.5276, arms 0.5747 → 0.5715, energy 0.5596 → 0.5569) but costs accuracy in labor (73.7% → 73.6%) and arms (69.3% → 69.1%), so it wasn't applied. Re-check with `--sweep beta` when arms has 4–5 tournaments.
 - **Possible transfers, unconfirmed.** Same initial and surname at a new school the next season, and gone from the old one. Add the real ones to `SEASONS[season]['transfers']` and delete the rest.
   - energy → labor: B. Lemaster (Oklahoma → Kansas), J. Parrish (Minnesota → Utah), V. Patel (Iowa → Wake Forest).
   - labor → arms: A. Hendrix (Houston → Western Kentucky), E. Garza (UT San Antonio → Texas), J. Raines (Kansas State → Washburn), N. Patel (Binghamton → Michigan State), J. Song (West Point → Dartmouth).
-- **Older seasons are still slightly over-trusted.** With growth and `DEBATER_INFLATION` = 4, chaining nukes costs arms about 0.003 nats against an energy-rooted chain. Antitrust helped nukes (−0.0020) but cost energy (+0.0020) and arms (+0.0011); alliances then helped every season but arms (personhood −0.0058, labor −0.0010, arms +0.0001). `DEBATER_INFLATION` 5 and 6 are no better on the seven-season chain. A carry that widens with the number of seasons since a debater was last seen, or growth that depends on experience (first-years improve most), might fix both. Labor and energy prefer more growth (1.5–2), but arms gets worse past 1.0.
+- **Older seasons are still slightly over-trusted.** With growth and `DEBATER_INFLATION` = 4, chaining nukes costs arms about 0.003 nats against an energy-rooted chain. Antitrust helped nukes (−0.0020) but cost energy (+0.0020) and arms (+0.0011); alliances then helped every season but arms (personhood −0.0058, labor −0.0010, arms +0.0001). `DEBATER_INFLATION` 5 and 6 are no better on the seven-season chain. Growth by experience is now in (see Settled). Still untried: a carry that widens with the seasons since a debater was last seen; today a debater who misses a season is dropped from the chain.
 - **Possible transfers, unconfirmed (common surnames):**
   - personhood → nukes: B. Smith (Oklahoma → James Madison), J. Campbell (Wyoming → Missouri State), B. Hines (Kansas → Northwestern), M. Ramesh (Pennsylvania → Northwestern), K. Williams (Central Oklahoma → Southern Nazarene).
   - antitrust → personhood: J. Crowley (Wake Forest → Western Washington), L. Smith (Central Oklahoma → Wichita State).
@@ -41,8 +40,9 @@ These are on the full re-export (2026-10-07): every prelim in all three seasons 
 
 ## Settled
 
-- **Model:** TTT over the season, one step per tournament, for the leaderboard; one forward pass for match history. TTT beats forward out of sample (labor seeded 73.4% / 0.5309 vs 73.1% / 0.5326; energy 71.2% / 0.5596 vs 70.1% / 0.5722). The old 5-pass replay was dropped because it shrank σ about √5 with no new information.
-- **Scale:** μ 25, σ 25/3, β 25/6, γ 25/300 per tournament, ε 1e-4. γ is flat from 0 to 8× in every season, since one season is too short for drift. β is under review (see Open).
+- **Model:** TTT over the season, one step per tournament, for the leaderboard; each round's exact share of that fit for match history (`season_contributions`, Nov 2026), so the history adds up to the leaderboard μ and judges each round against the opponent's whole-season rating; it replaced the forward pass's "rating at the time" numbers. TTT beats forward out of sample (labor seeded 73.4% / 0.5309 vs 73.1% / 0.5326; energy 71.2% / 0.5596 vs 70.1% / 0.5722). The old 5-pass replay was dropped because it shrank σ about √5 with no new information.
+- **Scale:** μ 25, σ 25/3, β 5.0, γ 25/300 per tournament, ε 1e-4. γ is flat from 0 to 8× in every season, since one season is too short for drift.
+- **β = 5.0 (Nov 2026), up from 25/6.** The model was overconfident (logit slope 0.83–0.86). On all six seeded seasons with the new growth, 5.0 lowers log loss in every one (−0.0019 to −0.0048) and Brier is equal or better; accuracy moves ±0.3 by season (arms −0.2). 6.25 is too far. The debater fit keeps (25/6)/√2, the value growth and inflation were tuned with.
 - **Draws / non-decisive rows:** `draw_probability=0`. Closeouts and byes are skipped.
 - **Side advantage (#5): none.** The best global offset (−0.5, towards the neg) is worth 0.0012 nats in labor and 0.0002 in energy. Aff/Neg side ratings were removed. Rechecked across all seven seasons (Nov 2026): the best offset is within ±0.25 of 0 in every one. Arms' elims run 56% aff (CME's rankings adjust for this), but every earlier season's elims run 44–50%, so an elim-only offset would be fitting noise.
 - **Ballot margins (#6): off.** With every elim's split now in the data, one match per ballot gains 0.0028 nats in energy but loses 0.0011 in labor and 0.0033 in arms. Judges on one panel aren't independent. Revisit only as a weighted single match. Across all seven seasons (14,903 rounds): 70.24% / 0.5652 off vs 70.18% / 0.5641 on, a wash.
@@ -50,6 +50,7 @@ These are on the full re-export (2026-10-07): every prelim in all three seasons 
   - `PRIOR_INFLATION` is 2, down from 4: +0.4 points of accuracy in both labor and arms (0.5310 → 0.5286, 0.5777 → 0.5747). The seeds were too loose, not too tight: the opener's logit slope was 1.46 in labor and 1.05 in arms.
   - `DEBATER_INFLATION` (the per-season carry down the chain) is 4, up from 4/√2 once five seasons were chained: energy 0.5338 → 0.5333, labor 0.5201 → 0.5193, arms 0.5596 → 0.5589. 5 and 6 are no better. Halving it costs arms 0.006 nats.
   - `DEBATER_GROWTH` = 1.0 is added to each returning debater's carried mean, both down the chain and in the seed. Returning debaters rise +0.75 to +1.0 a year in every pair of seasons. Without growth, chaining nukes made labor (0.5286 → 0.5329) and arms (0.5650 → 0.5723) worse; with it, they reach 0.5179 and 0.5599. Published μ rises in later seasons as a result (+2 labor, +3 arms), but rankings barely move.
+  - Growth now depends on experience (Nov 2026): `DEBATER_GROWTH` = (1.5, 1.0), +1.5 after a debater's first season in the data and +1.0 after later ones (`debater_experience` counts consecutive seasons rated). It beats flat +1 in all six seeded seasons (pooled log loss 0.5347 → 0.5329, accuracy 72.8% → 73.0%). (2.0, 1.0) is better pooled (0.5324) but worse for arms; less than +1.0 for later years is worse everywhere. The data starts in 2020–21, so "first season" means first seen, not first-year.
 - **Speaker points (#9): redundant with the rating.** Now tested with full coverage: stack the model's logit with each team's past points margin, fit the weights on one season, score another. Five of six season pairs get worse (−0.0003 to −0.0077 nats); only labor → energy gains (+0.0013), and energy is the unseeded season. Adjusting for judge leniency doesn't change it.
 - **Team identity:** a sorted-surname partnership, resolved from entries, then speaker names, then the nearest tournament's code, then initials, then the bare code.
 - **Debater identity:** `School/initial.surname`, with the first initial read from the points column (100% coverage). `identify_debaters` turns that into an id that stays with a person across seasons, exported as `Debater_IDs` and used for both the priors and the team page's cross-season links.
@@ -65,4 +66,4 @@ These are on the full re-export (2026-10-07): every prelim in all three seasons 
 
 ## Frontend
 
-- **Handle load errors.** A failed CSV fetch leaves "Loading…" up forever. Show an error message and a retry. Not urgent. Note that `parseCsv` now caches the fetch promise, so a failed fetch stays cached until reload.
+- **Load errors: done.** `useSeasonData` shows an error with a Retry button, and `parseCsv` drops a failed fetch from its cache.

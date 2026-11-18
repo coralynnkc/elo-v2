@@ -25,6 +25,7 @@ from trueskill import TrueSkill, Rating, rate_1vs1
 from pipeline import (
     BETA, CURRENT_SEASON, GAMMA, MU, PRIOR_INFLATION, SEASONS, SIGMA,
     fit_through_time, identify_debaters, load_season, round_matches, season_debaters, seed_priors,
+    debater_experience,
 )
 import os
 
@@ -284,6 +285,7 @@ def parse_args(argv: list[str]) -> tuple[list[str], dict, list[str]]:
 
 
 _IDENTIFIED = {}  # so every season's debaters carry ids that match across seasons
+_DEBATERS = {}  # season_debaters / debater_experience cache, shared across seasons
 
 
 def _load_raw(season: str):
@@ -312,8 +314,9 @@ def main():
         if prior_season:
             if prior_season == season:
                 sys.exit(f"Can't seed {season} from itself")
-            debaters = season_debaters(prior_season, _load)
-            reseed = lambda n, t=teams, d=debaters: seed_priors(t, d, n)
+            debaters = season_debaters(prior_season, _load, _DEBATERS)
+            experience = debater_experience(prior_season, _load, _DEBATERS)
+            reseed = lambda n, t=teams, d=debaters, e=experience: seed_priors(t, d, e, n)
             settings['priors'] = reseed(inflation)
             print(f'\n  seeded {len(settings["priors"])} of {len(teams)} {season} teams '
                   f'from {len(debaters)} {prior_season} debaters (inflation {inflation})')

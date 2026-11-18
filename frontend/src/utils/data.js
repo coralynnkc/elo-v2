@@ -65,8 +65,15 @@ const _files = {}
 
 function parseCsv(file) {
   _files[file] ??= fetch(`${import.meta.env.BASE_URL}data/${file}`)
-    .then(res => res.text())
+    .then(res => {
+      if (!res.ok) throw new Error(`${file}: HTTP ${res.status}`)
+      return res.text()
+    })
     .then(text => Papa.parse(text, { header: true, dynamicTyping: true, skipEmptyLines: true }).data)
+    .catch(err => {
+      delete _files[file]  // so a retry fetches again
+      throw err
+    })
   return _files[file]
 }
 

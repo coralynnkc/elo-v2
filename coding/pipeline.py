@@ -11,7 +11,9 @@ from trueskill import TrueSkill, Rating, rate_1vs1
 
 MU = 25.0
 SIGMA = MU / 3
-BETA = SIGMA / 2    # TrueSkill default: performance noise per round
+# Performance noise per round. TrueSkill's default is SIGMA / 2 (4.17); at that the model is
+# overconfident, and 5.0 lowers log loss in all six seasons scored from a prior (Nov 2026).
+BETA = 5.0
 GAMMA = SIGMA / 100  # TrueSkill's default tau, applied here once per tournament
 
 # TrueSkill Through Time convergence
@@ -23,7 +25,7 @@ TTT_EPSILON = 1e-4
 # rated partnership back on the team scale above.
 DEBATER_MU = MU / 2
 DEBATER_SIGMA = SIGMA / math.sqrt(2)
-DEBATER_BETA = BETA / math.sqrt(2)
+DEBATER_BETA = (SIGMA / 2) / math.sqrt(2)  # tuned with the default β; not re-swept
 DEBATER_GAMMA = GAMMA / math.sqrt(2)
 
 # Rate a paneled round once per judge, so a 3-0 moves ratings further than a 2-1.
@@ -40,10 +42,16 @@ PRIOR_INFLATION = 2.0
 # the prior_season chain. Tuned separately: tightening it with PRIOR_INFLATION costs arms,
 # and with five seasons chained, 4 beats 4/√2 in energy, labor and arms.
 DEBATER_INFLATION = 4.0
-# Skill a returning debater gains over an off-season, added to the carried mean. Returning
-# debaters' ratings rise about +1 a year (+0.75 to +1.0 in every pair of seasons), and
-# without it the deeper nukes -> energy -> labor -> arms chain makes labor and arms worse.
-DEBATER_GROWTH = 1.0
+# Skill a returning debater gains over an off-season, added to the carried mean, by how
+# many seasons they've been seen in so far: (after one season, after two or more). Without
+# growth the deeper chain makes labor and arms worse; a flat +1 was the first fix, and
+# more after a debater's first season in the data beats it in every season (Nov 2026).
+DEBATER_GROWTH = (1.5, 1.0)
+
+
+def debater_growth(seasons_seen: int) -> float:
+    """A year's growth for a debater rated in `seasons_seen` consecutive seasons so far."""
+    return DEBATER_GROWTH[min(max(seasons_seen, 1), len(DEBATER_GROWTH)) - 1]
 
 # One debater listed under two first names in Tabroom: (school, surname as normalized,
 # initial) -> the initial to use. Leverett alternates E/L between tournaments.
@@ -714,7 +722,8 @@ def fit_through_time(
     beta: float = BETA,
     priors: dict[str, ttt.Gaussian] | None = None,
     split_ballots: bool = False,
-) -> dict[str, ttt.Gaussian]:
+    contributions: bool = False,
+):
     """Fit TrueSkill Through Time over a season, one time step per tournament.
 
     Every rating is smoothed over all results, before and after, so it doesn't depend
@@ -724,16 +733,18 @@ def fit_through_time(
     pipeline always uses the module defaults. `priors` overrides the flat starting
     rating for named teams, e.g. with seed_priors from the previous season.
 
-    Returns each team's rating as of the last tournament it attended.
+    Returns each team's rating as of the last tournament it attended. With
+    `contributions`, also returns season_contributions' split of that rating by round.
     """
     tournaments = list(dict.fromkeys(name.partition('_')[0] for name in results))
-    composition, outcomes, times = [], [], []
+    composition, outcomes, times, keys = [], [], [], []
     for name, rd in results.items():
         t_idx = tournaments.index(name.partition('_')[0])
         for aff, neg, aff_won in round_matches(rd, split_ballots):
             composition.append([[aff], [neg]])
             outcomes.append([1, 0] if aff_won else [0, 1])  # higher score wins
             times.append(t_idx)
+            keys.append((name, aff, neg))
 
     players = {
         team: ttt.Player(ttt.Gaussian(prior.mu, prior.sigma), beta, gamma)
@@ -742,7 +753,56 @@ def fit_through_time(
     history = ttt.History(composition, outcomes, times, players,
                           mu=mu, sigma=sigma, beta=beta, gamma=gamma)
     history.convergence(epsilon=TTT_EPSILON, iterations=TTT_ITERATIONS, verbose=False)
-    return {team: curve[-1][1] for team, curve in history.learning_curves().items()}
+    fit = {team: curve[-1][1] for team, curve in history.learning_curves().items()}
+    if not contributions:
+        return fit
+    return fit, season_contributions(history, keys, times)
+
+
+def season_contributions(history: ttt.History, keys: list[tuple], times: list[int]):
+    """Split each team's season rating into one share per round.
+
+    A team's fitted rating at its last tournament is its prior times the Gaussian
+    message each of its rounds sent it (the forward filter of the converged fit,
+    widened by gamma between tournaments). The posterior mean is therefore a weighted
+    average of the prior mean and the messages' means, with weights summing to 1, so
+    w_i * (m_i - prior mean) splits the rating's move from the prior exactly. Each
+    message was computed from the opponent's whole-season rating, and rounds at the
+    same tournament are weighted alike whatever order they were debated in.
+
+    Returns ({(round, aff, neg): (aff share, neg share)}, {team: prior mean}).
+    """
+    order = ttt.sortperm(times)  # History's event order: by tournament, stable
+    messages = {}  # team -> [(batch, event key, mean, precision)] in time order
+    k = 0
+    for b, batch in enumerate(history.batches):
+        for event in batch.events:
+            key = keys[order[k]]
+            k += 1
+            for team in event.teams:
+                item = team.items[0]
+                messages.setdefault(item.name, []).append((batch.time, key, item.likelihood))
+
+    shares, starts = {}, {}
+    for name, msgs in messages.items():
+        player = history.agents[name].player
+        mu0, precision = player.prior.mu, player.prior.sigma ** -2
+        prior_weight, weights, last_time = 1.0, [], msgs[0][0]
+        for time, _, lik in msgs:
+            if time != last_time:  # forget between tournaments, as TTT's forward pass does
+                precision = 1 / (1 / precision + (time - last_time) * player.gamma ** 2)
+                last_time = time
+            pi = lik.sigma ** -2 if math.isfinite(lik.sigma) else 0.0
+            shrink = precision / (precision + pi)
+            prior_weight *= shrink
+            weights = [w * shrink for w in weights] + [pi / (precision + pi)]
+            precision += pi
+        starts[name] = mu0
+        for w, (_, key, lik) in zip(weights, msgs):
+            if w:
+                shares[(key, name)] = shares.get((key, name), 0.0) + w * (lik.mu - mu0)
+    return ({key: (shares.get((key, key[1]), 0.0), shares.get((key, key[2]), 0.0))
+             for key in dict.fromkeys(keys)}, starts)
 
 
 def _school(team: str) -> str:
@@ -904,12 +964,14 @@ def fit_debaters(
 
 def carry_debaters(
     debater_fit: dict[str, ttt.Gaussian],
+    experience: dict[str, int],
     inflation: float = DEBATER_INFLATION,
 ) -> dict[str, ttt.Gaussian]:
     """Widen a season's debater ratings, and add a year's growth, so they can prime the
     next season's fit."""
     return {
-        debater: ttt.Gaussian(r.mu + DEBATER_GROWTH, math.sqrt(r.sigma ** 2 + inflation ** 2))
+        debater: ttt.Gaussian(r.mu + debater_growth(experience.get(debater, 1)),
+                              math.sqrt(r.sigma ** 2 + inflation ** 2))
         for debater, r in debater_fit.items()
     }
 
@@ -924,20 +986,37 @@ def season_debaters(season: str, load, cache: dict | None = None) -> dict[str, t
     cache = {} if cache is None else cache
     if season not in cache:
         prior = SEASONS[season].get('prior_season')
-        priors = carry_debaters(season_debaters(prior, load, cache)) if prior else None
+        priors = None
+        if prior:
+            priors = carry_debaters(season_debaters(prior, load, cache),
+                                    debater_experience(prior, load, cache))
         cache[season] = fit_debaters(*load(season), priors=priors)
     return cache[season]
+
+
+def debater_experience(season: str, load, cache: dict | None = None) -> dict[str, int]:
+    """Debater -> how many consecutive seasons, ending with this one, they were rated in.
+    The data starts in 2020-21, so this counts seasons seen, not years debated."""
+    cache = {} if cache is None else cache
+    key = ('experience', season)
+    if key not in cache:
+        prior = SEASONS[season].get('prior_season')
+        before = debater_experience(prior, load, cache) if prior else {}
+        cache[key] = {d: before.get(d, 0) + 1 for d in season_debaters(season, load, cache)}
+    return cache[key]
 
 
 def seed_priors(
     teams: pd.DataFrame,
     debater_fit: dict[str, ttt.Gaussian],
+    experience: dict[str, int],
     inflation: float = PRIOR_INFLATION,
 ) -> dict[str, ttt.Gaussian]:
     """Team display name -> starting rating, built from last season's debater ratings.
 
     A partnership's skill is its debaters' sum, so the means add and the variances add.
-    Each returning debater gets a year's growth (DEBATER_GROWTH).
+    Each returning debater gets a year's growth (debater_growth, by `experience` from
+    debater_experience).
     A debater who didn't compete last season contributes the default half-team prior, so
     a returning debater with a novice partner still starts above a wholly unknown team.
     Teams with no rated debater at all are left out and keep the flat prior.
@@ -947,7 +1026,8 @@ def seed_priors(
         if not any(key in debater_fit for key in keys):
             continue
         rated = [debater_fit.get(key) for key in keys]
-        mu = sum(r.mu + DEBATER_GROWTH if r else DEBATER_MU for r in rated)
+        mu = sum(r.mu + debater_growth(experience.get(key, 1)) if r else DEBATER_MU
+                 for key, r in zip(keys, rated))
         variance = sum(r.sigma ** 2 if r else DEBATER_SIGMA ** 2 for r in rated)
         priors[team] = ttt.Gaussian(mu, math.sqrt(variance + inflation ** 2))
     return priors
@@ -963,13 +1043,15 @@ def run_pipeline(
     """
     Rate a season.
 
-    Match history (and round counts): one forward chronological TrueSkill
-    pass, so each round's before/after uses only earlier results.
     Leaderboard Mu/Sigma: TrueSkill Through Time over the whole season.
+    Match history: each round's share of that rating (season_contributions), summed
+    in order from the team's starting rating, so the last After is the leaderboard μ
+    and every round is judged against its opponent's whole-season rating. Round
+    counts still come from one forward chronological TrueSkill pass.
 
     `priors` (from seed_priors) starts named teams above or below the flat 25, so a
-    returning partnership isn't treated as unknown. Both the forward pass and the TTT
-    fit use them, so a seeded team's first "Before" in the history is its seed.
+    returning partnership isn't treated as unknown. A seeded team's first "Before" in
+    the history is its seed.
 
     Returns (teams_df, match_history_df).
     """
@@ -987,7 +1069,18 @@ def run_pipeline(
                                       round_name=name, split_ballots=split_ballots)
         all_history.extend(history)
 
-    fit = fit_through_time(results, priors=priors, split_ballots=split_ballots)
+    fit, (shares, starts) = fit_through_time(results, priors=priors, split_ballots=split_ballots,
+                                             contributions=True)
+    # History shows the season fit's split, so a team's last After is its leaderboard μ
+    running = dict(starts)
+    for row in all_history:
+        for side in ('Aff', 'Neg'):
+            team = row[side]
+            share = shares[(row['Round'], row['Aff'], row['Neg'])][side == 'Neg']
+            row[f'{side}_Mu_Before'] = round(running[team], 3)
+            running[team] += share
+            row[f'{side}_Mu_After'] = round(running[team], 3)
+            row[f'{side}_Mu_Delta'] = round(share, 3)
     teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
     teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)
     teams['Conservative'] = teams['Mu'] - 3 * teams['Sigma']

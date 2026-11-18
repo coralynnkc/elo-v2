@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { SEASONS, loadData, getTeamMatches, otherSeasonTeams } from '../utils/data'
+import { SEASONS, getTeamMatches, otherSeasonTeams } from '../utils/data'
+import { useSeasonData, LoadState } from '../utils/useSeasonData'
 import RatingChart from '../components/RatingChart'
 
 function record(matches) {
@@ -28,7 +29,7 @@ function Delta({ value }) {
   )
 }
 
-function MatchRow({ m, season }) {
+function MatchRow({ m, season, oppMu }) {
   return (
     <tr>
       <td>{m.roundDisplay}</td>
@@ -37,8 +38,9 @@ function MatchRow({ m, season }) {
       </td>
       <td>{m.side}</td>
       <td className={m.win ? 'win' : 'loss'}>{m.win ? 'Win' : 'Loss'}</td>
-      <td className="num">{m.muBefore.toFixed(2)}</td>
-      <td className="num">{m.muAfter.toFixed(2)}</td>
+      <td className="num dim">{oppMu[m.opponent]?.toFixed(2) ?? '–'}</td>
+      <td className="num col-before">{m.muBefore.toFixed(2)}</td>
+      <td className="num col-after">{m.muAfter.toFixed(2)}</td>
       <td className="num"><Delta value={m.delta} /></td>
     </tr>
   )
@@ -47,16 +49,12 @@ function MatchRow({ m, season }) {
 export default function TeamPage() {
   const { season, teamName } = useParams()
   const name = decodeURIComponent(teamName)
-  const [data, setData] = useState(null)
+  const { data, error, retry } = useSeasonData(season)
   const [sortBy, setSortBy] = useState('chronological')
   const [open, setOpen] = useState(null)
   const [others, setOthers] = useState([])
 
-  useEffect(() => {
-    if (SEASONS[season]) loadData(season).then(d => setData({ season, ...d }))
-  }, [season])
-
-  const team = data?.season === season ? data.teams.find(t => t.Team === name) : undefined
+  const team = data?.teams.find(t => t.Team === name)
 
   useEffect(() => {
     setOthers([])
@@ -65,7 +63,7 @@ export default function TeamPage() {
   }, [season, team])
 
   if (!SEASONS[season]) return <Navigate to="/" replace />
-  if (!data || data.season !== season) return <div className="loading">Loading…</div>
+  if (!data) return <LoadState error={error} retry={retry} />
 
   const { teams, rawHistory } = data
   const ranked = teams.filter(t => t.Ranked)
@@ -93,6 +91,8 @@ export default function TeamPage() {
   const allOpen = groups.every(g => openSet.has(g.tournament))
 
   const consequential = [...matches].sort((a, b) => b.absDelta - a.absDelta)
+  const oppMu = Object.fromEntries(teams.map(t => [t.Team, t.Mu]))
+  const start = matches[0]?.muBefore
 
   return (
     <div className="page">
@@ -187,8 +187,11 @@ export default function TeamPage() {
       </div>
 
       <p className="table-note">
-        Before and After show the rating at the time, from earlier rounds only. The rating
-        above uses the whole season, so it can differ from the last After.
+        Each round's Δ is its share of the season rating, judged against the opponent's
+        whole-season rating (Opp. μ). Rounds at one tournament count alike whatever order
+        they came in, so the Δs add up from the starting rating
+        {start !== undefined && <> ({start.toFixed(2)}{start === 25 ? '' : ', carried over from last season'})</>}
+        {' '}to the rating above.
         {sortBy === 'chronological' && groups.length > 1 && (
           <>
             {' '}
@@ -211,14 +214,15 @@ export default function TeamPage() {
               <th>Opponent</th>
               <th>Side</th>
               <th>Result</th>
-              <th className="align-right has-tip" data-tip="Rating going into the round">Before</th>
-              <th className="align-right has-tip" data-tip="Rating after the round">After</th>
-              <th className="align-right has-tip" data-tip="Change from this round">Δ Rating</th>
+              <th className="align-right has-tip" data-tip="The opponent's whole-season rating">Opp. <span className="greek">μ</span></th>
+              <th className="align-right has-tip col-before" data-tip="Running total of the season's Δs before this round">Before</th>
+              <th className="align-right has-tip col-after" data-tip="Running total after this round. The last After is the rating above">After</th>
+              <th className="align-right has-tip" data-tip="This round's share of the season rating">Δ Rating</th>
             </tr>
           </thead>
           {sortBy === 'consequential' ? (
             <tbody>
-              {consequential.map((m, i) => <MatchRow key={i} m={m} season={season} />)}
+              {consequential.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} />)}
             </tbody>
           ) : (
             groups.map(g => {
@@ -227,7 +231,7 @@ export default function TeamPage() {
               return (
                 <tbody key={g.tournament}>
                   <tr className="group-row">
-                    <td colSpan={7}>
+                    <td colSpan={8}>
                       <button
                         type="button"
                         aria-expanded={isOpen}
@@ -240,7 +244,7 @@ export default function TeamPage() {
                       </button>
                     </td>
                   </tr>
-                  {isOpen && g.matches.map((m, i) => <MatchRow key={i} m={m} season={season} />)}
+                  {isOpen && g.matches.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} />)}
                 </tbody>
               )
             })

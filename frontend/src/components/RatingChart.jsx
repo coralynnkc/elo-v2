@@ -4,7 +4,7 @@ const W = 880
 const H = 260
 const PAD = { top: 16, right: 16, bottom: 40, left: 44 }
 
-// Rating after each round (chronological matches)
+// Running total of each round's share of the season rating (chronological matches)
 export default function RatingChart({ matches }) {
   const [hover, setHover] = useState(null)
   if (matches.length === 0) return null
@@ -117,7 +117,7 @@ export default function RatingChart({ matches }) {
               </>
             ) : (
               <>
-                <div className="tt-title">Start of season</div>
+                <div className="tt-title">{hp.mu === 25 ? 'Start of season' : 'Start of season (carried over)'}</div>
                 <div className="tt-value">μ {hp.mu.toFixed(2)}</div>
               </>
             )}

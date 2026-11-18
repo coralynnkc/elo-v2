@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { SEASONS, loadData, getTeamMatches } from "../utils/data";
+import { SEASONS, getTeamMatches } from "../utils/data";
+import { useSeasonData, LoadState } from "../utils/useSeasonData";
 import SeasonHeader from "../components/SeasonHeader";
 
 const COLUMNS = [
@@ -18,7 +19,7 @@ const COLUMNS = [
 
 export default function Leaderboard() {
   const { season } = useParams();
-  const [data, setData] = useState(null);
+  const { data, error, retry } = useSeasonData(season);
   const [expanded, setExpanded] = useState(new Set());
   const [sort, setSort] = useState({ key: "rank", dir: "asc" });
   const [showAll, setShowAll] = useState(false);
@@ -28,7 +29,6 @@ export default function Leaderboard() {
     if (!SEASONS[season]) return;
     setExpanded(new Set());
     setQuery("");
-    loadData(season).then((d) => setData({ season, ...d }));
   }, [season]);
 
   function toggle(teamName) {
@@ -40,7 +40,7 @@ export default function Leaderboard() {
   }
 
   if (!SEASONS[season]) return <Navigate to="/" replace />;
-  if (!data || data.season !== season) return <div className="loading">Loading…</div>;
+  if (!data) return <LoadState error={error} retry={retry} />;
 
   const { teams, rawHistory } = data;
 

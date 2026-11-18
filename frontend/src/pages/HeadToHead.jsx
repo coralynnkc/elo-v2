@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { SEASONS, loadData, headToHead } from '../utils/data'
+import { SEASONS, headToHead } from '../utils/data'
+import { useSeasonData, LoadState } from '../utils/useSeasonData'
 import SeasonHeader from '../components/SeasonHeader'
 
 const SIZE = 16
@@ -21,15 +22,11 @@ function cellColor(w, l) {
 
 export default function HeadToHead() {
   const { season } = useParams()
-  const [data, setData] = useState(null)
+  const { data, error, retry } = useSeasonData(season)
   const [hover, setHover] = useState(null)
 
-  useEffect(() => {
-    if (SEASONS[season]) loadData(season).then(d => setData({ season, ...d }))
-  }, [season])
-
   if (!SEASONS[season]) return <Navigate to="/" replace />
-  if (!data || data.season !== season) return <div className="loading">Loading…</div>
+  if (!data) return <LoadState error={error} retry={retry} />
 
   const { teams, rawHistory } = data
   const top = teams.filter(t => t.Ranked).slice(0, SIZE)
