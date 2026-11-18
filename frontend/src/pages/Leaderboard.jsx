@@ -90,13 +90,13 @@ export default function Leaderboard() {
         <p>
           Ratings use TrueSkill Through Time, which fits the whole season at once, so a
           result at a later tournament also informs the earlier estimates. A team page's
-          match history instead shows the rating as it stood before each round, using
-          earlier rounds only, so the leaderboard μ can differ from the last After.
+          match history splits that rating into each round's contribution, so its last
+          After is the leaderboard μ.
         </p>
         <p>
-          From 2025–26 on, teams start from their debaters' ratings the season before,
-          widened for change over the summer. A team is ranked once it has debated at two
-          tournaments.
+          From 2021–22 on, teams start from their debaters' ratings the season before,
+          nudged up for a year's growth and widened for change over the summer. A team is
+          ranked once it has debated at two tournaments.
         </p>
       </details>
 
