@@ -842,8 +842,7 @@ a:hover {
   .expanded-content {
     padding-left: 1rem;
   }
-  .match-table .col-before,
-  .match-table .col-after {
+  .match-table .col-before {
     display: none;
   }
 }

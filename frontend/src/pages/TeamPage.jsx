@@ -29,7 +29,14 @@ function Delta({ value }) {
   )
 }
 
-function MatchRow({ m, season, oppMu }) {
+function Performance({ value, rating }) {
+  // Above the team's rating, the round lifted it; below, it pulled it down
+  if (value == null) return <span className="dim">–</span>
+  if (rating == null) return value.toFixed(2)
+  return <span className={value >= rating ? 'positive' : 'negative'}>{value.toFixed(2)}</span>
+}
+
+function MatchRow({ m, season, oppMu, rating }) {
   return (
     <tr>
       <td>{m.roundDisplay}</td>
@@ -40,7 +47,7 @@ function MatchRow({ m, season, oppMu }) {
       <td className={m.win ? 'win' : 'loss'}>{m.win ? 'Win' : 'Loss'}</td>
       <td className="num dim">{oppMu[m.opponent]?.toFixed(2) ?? '–'}</td>
       <td className="num col-before">{m.muBefore.toFixed(2)}</td>
-      <td className="num col-after">{m.muAfter.toFixed(2)}</td>
+      <td className="num"><Performance value={m.performance} rating={rating} /></td>
       <td className="num"><Delta value={m.delta} /></td>
     </tr>
   )
@@ -216,13 +223,13 @@ export default function TeamPage() {
               <th>Result</th>
               <th className="align-right has-tip" data-tip="The opponent's whole-season rating">Opp. <span className="greek">μ</span></th>
               <th className="align-right has-tip col-before" data-tip="Running total of the season's Δs before this round">Before</th>
-              <th className="align-right has-tip col-after" data-tip="Running total after this round. The last After is the rating above">After</th>
+              <th className="align-right has-tip" data-tip="The rating this result alone points to. Green beat the team's rating and lifted it; red fell short and pulled it down">Played like</th>
               <th className="align-right has-tip" data-tip="This round's share of the season rating">Δ Rating</th>
             </tr>
           </thead>
           {sortBy === 'consequential' ? (
             <tbody>
-              {consequential.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} />)}
+              {consequential.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} rating={team?.Mu} />)}
             </tbody>
           ) : (
             groups.map(g => {
@@ -244,7 +251,7 @@ export default function TeamPage() {
                       </button>
                     </td>
                   </tr>
-                  {isOpen && g.matches.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} />)}
+                  {isOpen && g.matches.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} rating={team?.Mu} />)}
                 </tbody>
               )
             })

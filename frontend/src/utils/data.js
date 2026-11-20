@@ -148,6 +148,7 @@ export function getTeamMatches(rawHistory, teamName) {
         delta,
         muBefore: isAff ? m.Aff_Mu_Before : m.Neg_Mu_Before,
         muAfter: isAff ? m.Aff_Mu_After : m.Neg_Mu_After,
+        performance: (isAff ? m.Aff_Perf : m.Neg_Perf) ?? null,
         absDelta: Math.abs(delta),
       }
     })

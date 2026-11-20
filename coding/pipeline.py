@@ -770,7 +770,13 @@ def season_contributions(history: ttt.History, keys: list[tuple], times: list[in
     message was computed from the opponent's whole-season rating, and rounds at the
     same tournament are weighted alike whatever order they were debated in.
 
-    Returns ({(round, aff, neg): (aff share, neg share)}, {team: prior mean}).
+    Each message's mean is also the round's performance: the rating the result alone
+    points to. One below the team's season rating pulled it down, whatever the share's
+    sign says, since the share measures the move from the prior, not from the rating.
+
+    Returns ({(round, aff, neg): (aff share, neg share)}, {team: prior mean},
+    {(round, aff, neg): (aff performance, neg performance)}), performance None when a
+    round sent no information.
     """
     order = ttt.sortperm(times)  # History's event order: by tournament, stable
     messages = {}  # team -> [(batch, event key, mean, precision)] in time order
@@ -783,16 +789,19 @@ def season_contributions(history: ttt.History, keys: list[tuple], times: list[in
                 item = team.items[0]
                 messages.setdefault(item.name, []).append((batch.time, key, item.likelihood))
 
-    shares, starts = {}, {}
+    shares, starts, evidence = {}, {}, {}
     for name, msgs in messages.items():
         player = history.agents[name].player
         mu0, precision = player.prior.mu, player.prior.sigma ** -2
         prior_weight, weights, last_time = 1.0, [], msgs[0][0]
-        for time, _, lik in msgs:
+        for time, key, lik in msgs:
             if time != last_time:  # forget between tournaments, as TTT's forward pass does
                 precision = 1 / (1 / precision + (time - last_time) * player.gamma ** 2)
                 last_time = time
             pi = lik.sigma ** -2 if math.isfinite(lik.sigma) else 0.0
+            ev = evidence.setdefault((key, name), [0.0, 0.0])  # split ballots: pool by precision
+            ev[0] += pi
+            ev[1] += pi * lik.mu
             shrink = precision / (precision + pi)
             prior_weight *= shrink
             weights = [w * shrink for w in weights] + [pi / (precision + pi)]
@@ -801,8 +810,14 @@ def season_contributions(history: ttt.History, keys: list[tuple], times: list[in
         for w, (_, key, lik) in zip(weights, msgs):
             if w:
                 shares[(key, name)] = shares.get((key, name), 0.0) + w * (lik.mu - mu0)
-    return ({key: (shares.get((key, key[1]), 0.0), shares.get((key, key[2]), 0.0))
-             for key in dict.fromkeys(keys)}, starts)
+    def performance(key, team):
+        pi, weighted = evidence.get((key, team), (0.0, 0.0))
+        return weighted / pi if pi else None
+
+    unique = dict.fromkeys(keys)
+    return ({key: (shares.get((key, key[1]), 0.0), shares.get((key, key[2]), 0.0)) for key in unique},
+            starts,
+            {key: (performance(key, key[1]), performance(key, key[2])) for key in unique})
 
 
 def _school(team: str) -> str:
@@ -1069,7 +1084,7 @@ def run_pipeline(
                                       round_name=name, split_ballots=split_ballots)
         all_history.extend(history)
 
-    fit, (shares, starts) = fit_through_time(results, priors=priors, split_ballots=split_ballots,
+    fit, (shares, starts, performance) = fit_through_time(results, priors=priors, split_ballots=split_ballots,
                                              contributions=True)
     # History shows the season fit's split, so a team's last After is its leaderboard μ
     running = dict(starts)
@@ -1081,6 +1096,8 @@ def run_pipeline(
             running[team] += share
             row[f'{side}_Mu_After'] = round(running[team], 3)
             row[f'{side}_Mu_Delta'] = round(share, 3)
+            perf = performance[(row['Round'], row['Aff'], row['Neg'])][side == 'Neg']
+            row[f'{side}_Perf'] = round(perf, 3) if perf is not None else None
     teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
     teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)
     teams['Conservative'] = teams['Mu'] - 3 * teams['Sigma']
