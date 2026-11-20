@@ -90,7 +90,6 @@ export default function TeamPage() {
 
   const consequential = [...matches].sort((a, b) => b.absDelta - a.absDelta)
   const oppMu = Object.fromEntries(teams.map(t => [t.Team, t.Mu]))
-  const start = matches[0]?.muBefore
 
   return (
     <div className="page">
@@ -184,25 +183,17 @@ export default function TeamPage() {
         </div>
       </div>
 
-      <p className="table-note">
-        Δ is how much each round moved this team's rating, judged against the opponent's
-        whole-season rating (Opp. μ): a win lifts it more against a stronger opponent, and
-        a loss costs more against a weaker one. A tournament's total is how far the rating
-        moved there
-        {start !== undefined && start !== 25 && <> (it started at {start.toFixed(2)}, carried over from last season)</>}.
-        {sortBy === 'chronological' && groups.length > 1 && (
-          <>
-            {' '}
-            <button
-              type="button"
-              className="link-button"
-              onClick={() => setOpen(new Set(allOpen ? [] : groups.map(g => g.tournament)))}
-            >
-              {allOpen ? 'Collapse all' : 'Expand all'}
-            </button>
-          </>
-        )}
-      </p>
+      {sortBy === 'chronological' && groups.length > 1 && (
+        <p className="table-note">
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => setOpen(new Set(allOpen ? [] : groups.map(g => g.tournament)))}
+          >
+            {allOpen ? 'Collapse all' : 'Expand all'}
+          </button>
+        </p>
+      )}
 
       <div className="table-wrap">
         <table className="data-table match-table">
