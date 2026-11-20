@@ -90,9 +90,7 @@ export default function Leaderboard() {
         <p>
           Ratings use TrueSkill Through Time, which fits the whole season at once, so a
           result at a later tournament also informs the earlier estimates. A team page's
-          match history shows what each round's result alone points to ("Played like") and
-          how much the round moved the team's rating: up when it played above the rating,
-          down when below.
+          match history shows how much each round moved the team's rating.
         </p>
         <p>
           From 2021–22 on, teams start from their debaters' ratings the season before,

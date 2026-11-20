@@ -29,14 +29,7 @@ function Delta({ value }) {
   )
 }
 
-function Performance({ value, rating }) {
-  // Above the team's rating, the round lifted it; below, it pulled it down
-  if (value == null) return <span className="dim">–</span>
-  if (rating == null) return value.toFixed(2)
-  return <span className={value >= rating ? 'positive' : 'negative'}>{value.toFixed(2)}</span>
-}
-
-function MatchRow({ m, season, oppMu, rating }) {
+function MatchRow({ m, season, oppMu }) {
   return (
     <tr>
       <td>{m.roundDisplay}</td>
@@ -46,7 +39,6 @@ function MatchRow({ m, season, oppMu, rating }) {
       <td>{m.side}</td>
       <td className={m.win ? 'win' : 'loss'}>{m.win ? 'Win' : 'Loss'}</td>
       <td className="num dim">{oppMu[m.opponent]?.toFixed(2) ?? '–'}</td>
-      <td className="num"><Performance value={m.performance} rating={rating} /></td>
       <td className="num"><Delta value={m.delta} /></td>
     </tr>
   )
@@ -193,10 +185,10 @@ export default function TeamPage() {
       </div>
 
       <p className="table-note">
-        "Played like" is the rating a round's result alone points to, judged against the
-        opponent's whole-season rating (Opp. μ). Above this team's {team ? team.Mu.toFixed(2) : 'rating'} it
-        lifted the rating, below it pulled it down, and Δ is by how much. A tournament's
-        total is how far the rating moved there
+        Δ is how much each round moved this team's rating, judged against the opponent's
+        whole-season rating (Opp. μ): a win lifts it more against a stronger opponent, and
+        a loss costs more against a weaker one. A tournament's total is how far the rating
+        moved there
         {start !== undefined && start !== 25 && <> (it started at {start.toFixed(2)}, carried over from last season)</>}.
         {sortBy === 'chronological' && groups.length > 1 && (
           <>
@@ -221,13 +213,12 @@ export default function TeamPage() {
               <th>Side</th>
               <th>Result</th>
               <th className="align-right has-tip" data-tip="The opponent's whole-season rating">Opp. <span className="greek">μ</span></th>
-              <th className="align-right has-tip" data-tip="The rating this result alone points to. Green beat the team's rating and lifted it; red fell short and pulled it down">Played like</th>
               <th className="align-right has-tip" data-tip="How much this round moved the season rating: about what it would lose (or, if red, gain) without the round">Δ Rating</th>
             </tr>
           </thead>
           {sortBy === 'consequential' ? (
             <tbody>
-              {consequential.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} rating={team?.Mu} />)}
+              {consequential.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} />)}
             </tbody>
           ) : (
             groups.map(g => {
@@ -236,7 +227,7 @@ export default function TeamPage() {
               return (
                 <tbody key={g.tournament}>
                   <tr className="group-row">
-                    <td colSpan={7}>
+                    <td colSpan={6}>
                       <button
                         type="button"
                         aria-expanded={isOpen}
@@ -249,7 +240,7 @@ export default function TeamPage() {
                       </button>
                     </td>
                   </tr>
-                  {isOpen && g.matches.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} rating={team?.Mu} />)}
+                  {isOpen && g.matches.map((m, i) => <MatchRow key={i} m={m} season={season} oppMu={oppMu} />)}
                 </tbody>
               )
             })
