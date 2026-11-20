@@ -90,9 +90,9 @@ export default function Leaderboard() {
         <p>
           Ratings use TrueSkill Through Time, which fits the whole season at once, so a
           result at a later tournament also informs the earlier estimates. A team page's
-          match history splits that rating into each round's contribution. "Played like"
-          is the rating a round's result alone points to: below the team's μ, the round
-          pulled the rating down, even if its contribution reads positive.
+          match history shows what each round's result alone points to ("Played like") and
+          how much the round moved the team's rating: up when it played above the rating,
+          down when below.
         </p>
         <p>
           From 2021–22 on, teams start from their debaters' ratings the season before,

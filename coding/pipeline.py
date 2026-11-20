@@ -734,7 +734,7 @@ def fit_through_time(
     rating for named teams, e.g. with seed_priors from the previous season.
 
     Returns each team's rating as of the last tournament it attended. With
-    `contributions`, also returns season_contributions' split of that rating by round.
+    `contributions`, also returns season_contributions' per-round impacts, performances and ratings.
     """
     tournaments = list(dict.fromkeys(name.partition('_')[0] for name in results))
     composition, outcomes, times, keys = [], [], [], []
@@ -760,28 +760,30 @@ def fit_through_time(
 
 
 def season_contributions(history: ttt.History, keys: list[tuple], times: list[int]):
-    """Split each team's season rating into one share per round.
+    """Each round's effect on its teams' season ratings, and how good the result was.
 
     A team's fitted rating at its last tournament is its prior times the Gaussian
     message each of its rounds sent it (the forward filter of the converged fit,
-    widened by gamma between tournaments). The posterior mean is therefore a weighted
-    average of the prior mean and the messages' means, with weights summing to 1, so
-    w_i * (m_i - prior mean) splits the rating's move from the prior exactly. Each
-    message was computed from the opponent's whole-season rating, and rounds at the
-    same tournament are weighted alike whatever order they were debated in.
+    widened by gamma between tournaments). The posterior mean μ is therefore a weighted
+    average of the prior mean and the messages' means m_i, with weights summing to 1.
 
-    Each message's mean is also the round's performance: the rating the result alone
-    points to. One below the team's season rating pulled it down, whatever the share's
-    sign says, since the share measures the move from the prior, not from the rating.
+    A message's mean is the round's performance: the rating the result alone points to.
+    Its impact is how far μ would move without it, holding the rest of the fit fixed:
+    w(m − μ)/(1 − w). That is negative exactly when the round played below μ, so a loss
+    to a top team hurts even though it beat an unknown team's 25. Impacts don't sum to μ.
 
-    Returns ({(round, aff, neg): (aff share, neg share)}, {team: prior mean},
-    {(round, aff, neg): (aff performance, neg performance)}), performance None when a
-    round sent no information.
+    Returns ({(round, aff, neg): (aff impact, neg impact)}, {team: prior mean},
+    {key: (aff performance, neg performance)} with None for a round that sent no
+    information, {key: (aff rating, neg rating)} after that round's tournament).
+
+    That rating is the forward estimate: the prior and the team's rounds so far, the
+    same weighted average stopped at that tournament. It ends at μ. (The smoothed TTT
+    curve isn't used: with γ this small it is nearly flat across a season.)
     """
     order = ttt.sortperm(times)  # History's event order: by tournament, stable
-    messages = {}  # team -> [(batch, event key, mean, precision)] in time order
+    messages = {}  # team -> [(batch time, event key, likelihood)] in time order
     k = 0
-    for b, batch in enumerate(history.batches):
+    for batch in history.batches:
         for event in batch.events:
             key = keys[order[k]]
             k += 1
@@ -789,35 +791,42 @@ def season_contributions(history: ttt.History, keys: list[tuple], times: list[in
                 item = team.items[0]
                 messages.setdefault(item.name, []).append((batch.time, key, item.likelihood))
 
-    shares, starts, evidence = {}, {}, {}
+    impacts, starts, performances, forward = {}, {}, {}, {}
     for name, msgs in messages.items():
         player = history.agents[name].player
         mu0, precision = player.prior.mu, player.prior.sigma ** -2
-        prior_weight, weights, last_time = 1.0, [], msgs[0][0]
+        prior_weight, weights, last_time, mean = 1.0, [], msgs[0][0], mu0
         for time, key, lik in msgs:
             if time != last_time:  # forget between tournaments, as TTT's forward pass does
                 precision = 1 / (1 / precision + (time - last_time) * player.gamma ** 2)
                 last_time = time
             pi = lik.sigma ** -2 if math.isfinite(lik.sigma) else 0.0
-            ev = evidence.setdefault((key, name), [0.0, 0.0])  # split ballots: pool by precision
-            ev[0] += pi
-            ev[1] += pi * lik.mu
             shrink = precision / (precision + pi)
+            mean = shrink * mean + (1 - shrink) * lik.mu
+            forward[(time, name)] = mean  # the last round at a tournament wins
             prior_weight *= shrink
             weights = [w * shrink for w in weights] + [pi / (precision + pi)]
             precision += pi
         starts[name] = mu0
+        evidence = {}  # key -> [Σw, Σw·m]; split ballots send several messages per round
         for w, (_, key, lik) in zip(weights, msgs):
             if w:
-                shares[(key, name)] = shares.get((key, name), 0.0) + w * (lik.mu - mu0)
-    def performance(key, team):
-        pi, weighted = evidence.get((key, team), (0.0, 0.0))
-        return weighted / pi if pi else None
+                ev = evidence.setdefault(key, [0.0, 0.0])
+                ev[0] += w
+                ev[1] += w * lik.mu
+        mu = prior_weight * mu0 + sum(m for _, m in evidence.values())
+        for key, (w, wm) in evidence.items():
+            impacts[(key, name)] = (wm - w * mu) / (1 - w)
+            performances[(key, name)] = wm / w
 
     unique = dict.fromkeys(keys)
-    return ({key: (shares.get((key, key[1]), 0.0), shares.get((key, key[2]), 0.0)) for key in unique},
-            starts,
-            {key: (performance(key, key[1]), performance(key, key[2])) for key in unique})
+    def pair(d, default):
+        return {key: (d.get((key, key[1]), default), d.get((key, key[2]), default)) for key in unique}
+    rating = {}
+    for name, msgs in messages.items():
+        for time, key, _ in msgs:
+            rating[(key, name)] = forward[(time, name)]
+    return pair(impacts, 0.0), starts, pair(performances, None), pair(rating, None)
 
 
 def _school(team: str) -> str:
@@ -1059,9 +1068,9 @@ def run_pipeline(
     Rate a season.
 
     Leaderboard Mu/Sigma: TrueSkill Through Time over the whole season.
-    Match history: each round's share of that rating (season_contributions), summed
-    in order from the team's starting rating, so the last After is the leaderboard μ
-    and every round is judged against its opponent's whole-season rating. Round
+    Match history: the fitted rating before and after each tournament, each round's
+    performance, and its impact on the season rating (season_contributions), every
+    round judged against its opponent's whole-season rating. Round
     counts still come from one forward chronological TrueSkill pass.
 
     `priors` (from seed_priors) starts named teams above or below the flat 25, so a
@@ -1084,19 +1093,28 @@ def run_pipeline(
                                       round_name=name, split_ballots=split_ballots)
         all_history.extend(history)
 
-    fit, (shares, starts, performance) = fit_through_time(results, priors=priors, split_ballots=split_ballots,
-                                             contributions=True)
-    # History shows the season fit's split, so a team's last After is its leaderboard μ
-    running = dict(starts)
+    fit, (impacts, starts, performance, rating) = fit_through_time(
+        results, priors=priors, split_ballots=split_ballots, contributions=True)
+    # Before/After: the team's fitted rating going into and out of each tournament, so
+    # the last After is the leaderboard μ. Delta: the round's impact on that rating.
+    state = {}  # team -> (tournament, before, after)
     for row in all_history:
-        for side in ('Aff', 'Neg'):
+        key = (row['Round'], row['Aff'], row['Neg'])
+        for i, side in enumerate(('Aff', 'Neg')):
             team = row[side]
-            share = shares[(row['Round'], row['Aff'], row['Neg'])][side == 'Neg']
-            row[f'{side}_Mu_Before'] = round(running[team], 3)
-            running[team] += share
-            row[f'{side}_Mu_After'] = round(running[team], 3)
-            row[f'{side}_Mu_Delta'] = round(share, 3)
-            perf = performance[(row['Round'], row['Aff'], row['Neg'])][side == 'Neg']
+            prev = state.get(team)
+            if prev is None:
+                before = starts[team]
+            elif prev[0] != row['Tournament']:
+                before = prev[2]
+            else:
+                before = prev[1]
+            after = rating[key][i] if rating.get(key, (None, None))[i] is not None else before
+            state[team] = (row['Tournament'], before, after)
+            row[f'{side}_Mu_Before'] = round(before, 3)
+            row[f'{side}_Mu_After'] = round(after, 3)
+            row[f'{side}_Mu_Delta'] = round(impacts[key][i], 3)
+            perf = performance[key][i]
             row[f'{side}_Perf'] = round(perf, 3) if perf is not None else None
     teams['Mu'] = teams['Team'].map(lambda t: fit[t].mu if t in fit else MU)
     teams['Sigma'] = teams['Team'].map(lambda t: fit[t].sigma if t in fit else SIGMA)

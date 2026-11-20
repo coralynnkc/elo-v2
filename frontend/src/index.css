@@ -667,6 +667,9 @@ a:hover {
   stroke: var(--text-dim);
   stroke-width: 1;
 }
+.rating-chart .point-dot {
+  fill: var(--accent);
+}
 .rating-chart .hover-dot {
   fill: var(--accent);
   stroke: var(--surface);
@@ -841,8 +844,5 @@ a:hover {
   }
   .expanded-content {
     padding-left: 1rem;
-  }
-  .match-table .col-before {
-    display: none;
   }
 }

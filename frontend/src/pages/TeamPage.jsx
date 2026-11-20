@@ -46,7 +46,6 @@ function MatchRow({ m, season, oppMu, rating }) {
       <td>{m.side}</td>
       <td className={m.win ? 'win' : 'loss'}>{m.win ? 'Win' : 'Loss'}</td>
       <td className="num dim">{oppMu[m.opponent]?.toFixed(2) ?? '–'}</td>
-      <td className="num col-before">{m.muBefore.toFixed(2)}</td>
       <td className="num"><Performance value={m.performance} rating={rating} /></td>
       <td className="num"><Delta value={m.delta} /></td>
     </tr>
@@ -194,11 +193,11 @@ export default function TeamPage() {
       </div>
 
       <p className="table-note">
-        Each round's Δ is its share of the season rating, judged against the opponent's
-        whole-season rating (Opp. μ). Rounds at one tournament count alike whatever order
-        they came in, so the Δs add up from the starting rating
-        {start !== undefined && <> ({start.toFixed(2)}{start === 25 ? '' : ', carried over from last season'})</>}
-        {' '}to the rating above.
+        "Played like" is the rating a round's result alone points to, judged against the
+        opponent's whole-season rating (Opp. μ). Above this team's {team ? team.Mu.toFixed(2) : 'rating'} it
+        lifted the rating, below it pulled it down, and Δ is by how much. A tournament's
+        total is how far the rating moved there
+        {start !== undefined && start !== 25 && <> (it started at {start.toFixed(2)}, carried over from last season)</>}.
         {sortBy === 'chronological' && groups.length > 1 && (
           <>
             {' '}
@@ -222,9 +221,8 @@ export default function TeamPage() {
               <th>Side</th>
               <th>Result</th>
               <th className="align-right has-tip" data-tip="The opponent's whole-season rating">Opp. <span className="greek">μ</span></th>
-              <th className="align-right has-tip col-before" data-tip="Running total of the season's Δs before this round">Before</th>
               <th className="align-right has-tip" data-tip="The rating this result alone points to. Green beat the team's rating and lifted it; red fell short and pulled it down">Played like</th>
-              <th className="align-right has-tip" data-tip="This round's share of the season rating">Δ Rating</th>
+              <th className="align-right has-tip" data-tip="How much this round moved the season rating: about what it would lose (or, if red, gain) without the round">Δ Rating</th>
             </tr>
           </thead>
           {sortBy === 'consequential' ? (
@@ -238,7 +236,7 @@ export default function TeamPage() {
               return (
                 <tbody key={g.tournament}>
                   <tr className="group-row">
-                    <td colSpan={8}>
+                    <td colSpan={7}>
                       <button
                         type="button"
                         aria-expanded={isOpen}

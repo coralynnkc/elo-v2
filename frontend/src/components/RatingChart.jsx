@@ -4,45 +4,46 @@ const W = 880
 const H = 260
 const PAD = { top: 16, right: 16, bottom: 40, left: 44 }
 
-// Running total of each round's share of the season rating (chronological matches)
+// The rating after each tournament: the fit's estimate from the team's rounds so far
 export default function RatingChart({ matches }) {
   const [hover, setHover] = useState(null)
   if (matches.length === 0) return null
 
-  // Point 0 is the rating going into the first round
-  const points = [
-    { mu: matches[0].muBefore, match: null },
-    ...matches.map(m => ({ mu: m.muAfter, match: m })),
-  ]
+  // Point 0 is the starting rating; then one point per tournament, in order
+  const points = [{ mu: matches[0].muBefore, tournament: null }]
+  for (const m of matches) {
+    const last = points[points.length - 1]
+    if (last.tournament === m.tournament) {
+      last.mu = m.muAfter
+      last.wins += m.win ? 1 : 0
+      last.losses += m.win ? 0 : 1
+    } else {
+      points.push({
+        mu: m.muAfter, tournament: m.tournament, name: m.tournamentName,
+        before: last.mu, wins: m.win ? 1 : 0, losses: m.win ? 0 : 1,
+      })
+    }
+  }
 
   const values = points.map(p => p.mu)
   const lo = Math.floor(Math.min(...values) - 1)
   const hi = Math.ceil(Math.max(...values) + 1)
   const plotW = W - PAD.left - PAD.right
   const plotH = H - PAD.top - PAD.bottom
-  const x = i => PAD.left + (points.length === 1 ? plotW / 2 : (i / (points.length - 1)) * plotW)
+  const x = i => PAD.left + (i / (points.length - 1)) * plotW
   const y = v => PAD.top + (1 - (v - lo) / (hi - lo)) * plotH
 
   const ticks = niceTicks(lo, hi)
   const path = points.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.mu).toFixed(1)}`).join('')
 
-  // Tournament spans: first and last point index of each tournament's matches
-  const spans = []
-  matches.forEach((m, i) => {
-    const last = spans[spans.length - 1]
-    if (last && last.tournament === m.tournament) last.end = i + 1
-    else spans.push({ tournament: m.tournament, name: m.tournamentName, start: i + 1, end: i + 1 })
-  })
-
-  // Tournament labels: centred under each span; a label that would collide with the
-  // previous one on its row drops to the second row, or is skipped if both are taken
+  // Tournament labels under each point; a label that would collide with the previous
+  // one on its row drops to the second row, or is skipped if both are taken
   const rowEnds = [-Infinity, -Infinity]
-  spans.forEach((s, k) => {
-    s.mid = (x(k === 0 ? 0 : s.start - 0.5) + x(s.end)) / 2
-    const half = s.name.length * 3.3 + 4
-    const row = rowEnds.findIndex(end => s.mid - half > end)
-    s.row = row
-    if (row >= 0) rowEnds[row] = s.mid + half
+  points.forEach((p, i) => {
+    if (!i) return
+    const half = p.name.length * 3.3 + 4
+    p.row = rowEnds.findIndex(end => x(i) - half > end)
+    if (p.row >= 0) rowEnds[p.row] = x(i) + half
   })
 
   function onMove(e) {
@@ -60,7 +61,7 @@ export default function RatingChart({ matches }) {
         <svg
           viewBox={`0 0 ${W} ${H}`}
           role="img"
-          aria-label={`Rating over ${matches.length} rounds, from ${points[0].mu.toFixed(1)} to ${points[points.length - 1].mu.toFixed(1)}`}
+          aria-label={`Rating over ${points.length - 1} tournaments, from ${points[0].mu.toFixed(1)} to ${points[points.length - 1].mu.toFixed(1)}`}
           onMouseMove={onMove}
           onMouseLeave={() => setHover(null)}
         >
@@ -71,20 +72,15 @@ export default function RatingChart({ matches }) {
             </g>
           ))}
 
-          {spans.map((s, k) => (
-            <g key={s.tournament}>
-              {k > 0 && (
-                <line className="divider" x1={x(s.start - 0.5)} x2={x(s.start - 0.5)} y1={PAD.top} y2={H - PAD.bottom} />
-              )}
-              {s.row >= 0 && (
-                <text className="axis-label" x={s.mid} y={H - PAD.bottom + 16 + s.row * 14} textAnchor="middle">
-                  {s.name}
-                </text>
-              )}
-            </g>
+          {points.map((p, i) => i > 0 && p.row >= 0 && (
+            <text key={p.tournament} className="axis-label" x={x(i)} y={H - PAD.bottom + 16 + p.row * 14}
+              textAnchor={i === points.length - 1 ? 'end' : 'middle'}>
+              {p.name}
+            </text>
           ))}
 
           <path className="rating-line" d={path} />
+          {points.map((p, i) => <circle key={i} className="point-dot" cx={x(i)} cy={y(p.mu)} r={3} />)}
 
           {hp && (
             <g>
@@ -103,16 +99,17 @@ export default function RatingChart({ matches }) {
               transform: `translate(${hover > points.length / 2 ? 'calc(-100% - 12px)' : '12px'}, -50%)`,
             }}
           >
-            {hp.match ? (
+            {hp.tournament ? (
               <>
-                <div className="tt-title">{hp.match.roundDisplay}</div>
+                <div className="tt-title">{hp.name}</div>
                 <div>
-                  <span className={hp.match.win ? 'win' : 'loss'}>{hp.match.win ? 'W' : 'L'}</span>
-                  {' '}vs {hp.match.opponent} ({hp.match.side})
+                  <span className="win">{hp.wins}</span>
+                  <span className="dim">–</span>
+                  <span className="loss">{hp.losses}</span>
                 </div>
                 <div className="tt-value">
                   μ {hp.mu.toFixed(2)}{' '}
-                  <span className="dim">({hp.match.delta > 0 ? '+' : ''}{hp.match.delta.toFixed(2)})</span>
+                  <span className="dim">({hp.mu >= hp.before ? '+' : ''}{(hp.mu - hp.before).toFixed(2)})</span>
                 </div>
               </>
             ) : (
