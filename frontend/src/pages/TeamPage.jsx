@@ -204,7 +204,7 @@ export default function TeamPage() {
               <th>Side</th>
               <th>Result</th>
               <th className="align-right has-tip" data-tip="The opponent's whole-season rating">Opp. <span className="greek">μ</span></th>
-              <th className="align-right has-tip" data-tip="How much this round moved the season rating: about what it would lose (or, if red, gain) without the round">Δ Rating</th>
+              <th className="align-right has-tip" data-tip="This round's effect on the end-of-season rating: about what the team would lose (or, if red, gain) without it. Rounds don't add up to the tournament total, which measures something different.">Δ Rating</th>
             </tr>
           </thead>
           {sortBy === 'consequential' ? (
@@ -227,7 +227,7 @@ export default function TeamPage() {
                         <span className="group-caret" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
                         <span className="group-name">{g.name}</span>
                         <span className="group-record"><Record {...record(g.matches)} /></span>
-                        <span className="group-delta num"><Delta value={net} /></span>
+                        <span className="group-delta num align-right has-tip" data-tip="Rating change over this tournament: where the team stood after it minus before it. Not the sum of the rounds' Δ, which compare each round to the end-of-season rating."><Delta value={net} /></span>
                       </button>
                     </td>
                   </tr>
