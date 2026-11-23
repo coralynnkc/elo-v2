@@ -66,6 +66,12 @@ NAMESAKES = {
     # Energy had two N. Cais. The one who debated with Bald continues with Goldberg from
     # labor on; this is the other.
     'Dartmouth/n.cai': {'wallace': 'Dartmouth/n.cai-2', 'guddati': 'Dartmouth/n.cai-2'},
+    # Kansas had two J. Parks. Jimin (2020-23: Ottinger, Mantis, Luce, Semrick, Wilkus)
+    # keeps the key; Jiyoon started in 2022-23 with Marshall, then transferred to Michigan
+    # and debated with Barrett. Kansas PP (Park & Park, 2022-23) can't be split by partner
+    # and stays on Jimin's key.
+    'Kansas/j.park': {'marshall': 'Kansas/j.park-2'},
+    'Michigan/j.park': {'barrett': 'Michigan/j.park-2'},
 }
 
 # Tabroom suffixes stripped from team codes in every season
@@ -238,7 +244,7 @@ SEASONS = {
         'data_dir': 'data_energy',
         'prior_season': 'nukes',
         'transfers': {
-            'Kansas/j.park': 'Michigan',
+            'Kansas/j.park-2': 'Michigan',
             'Oklahoma/b.yarborough': 'Southern Nazarene',
             'Wayne State/i.rezahusain': 'Binghamton',
             'Wyoming/l.lassen': 'Baylor',
