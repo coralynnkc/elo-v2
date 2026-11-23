@@ -188,9 +188,9 @@ export default function TeamPage() {
         rating would lose without that round, or gain if it's red. Unexpected results count
         most, so beating a higher-rated opponent (Opp. μ) helps more, and losing to a
         lower-rated one hurts more. A tournament's total adds
-        up its rounds' Δ. It won't match that tournament's step on the chart, which shows the
-        rating as it stood at the time, when early results moved it most, while Δ weighs each
-        round with the whole season known.
+        up its rounds' Δ. It won't match that tournament's step on the chart, though, because
+        the chart shows the rating as it stood at the time, when early results moved it most;
+        Δ weighs each round with the whole season known.
         {sortBy === 'chronological' && groups.length > 1 && (
           <>
             {' '}

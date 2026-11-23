@@ -37,8 +37,8 @@ export default function SeasonHeader({ season, rawHistory, view }) {
       </p>
       {tournaments.length < 2 && (
         <p className="provisional">
-          Provisional — based on one tournament. Ratings and σ will settle as more
-          tournaments are added.
+          Provisional: only one tournament is in so far, so ratings and σ will settle as
+          more are added.
         </p>
       )}
       <nav className="view-tabs" aria-label="View">
