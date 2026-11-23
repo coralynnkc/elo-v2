@@ -183,17 +183,25 @@ export default function TeamPage() {
         </div>
       </div>
 
-      {sortBy === 'chronological' && groups.length > 1 && (
-        <p className="table-note">
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => setOpen(new Set(allOpen ? [] : groups.map(g => g.tournament)))}
-          >
-            {allOpen ? 'Collapse all' : 'Expand all'}
-          </button>
-        </p>
-      )}
+      <p className="table-note">
+        Each round's Δ is its effect on the team's end-of-season rating: roughly what the
+        rating would lose without that round, or gain if it's red. Unexpected results count
+        most, so beating a higher-rated opponent (Opp. μ) helps more, and losing to a
+        lower-rated one hurts more. A tournament's total adds
+        up its rounds' Δ.
+        {sortBy === 'chronological' && groups.length > 1 && (
+          <>
+            {' '}
+            <button
+              type="button"
+              className="link-button"
+              onClick={() => setOpen(new Set(allOpen ? [] : groups.map(g => g.tournament)))}
+            >
+              {allOpen ? 'Collapse all' : 'Expand all'}
+            </button>
+          </>
+        )}
+      </p>
 
       <div className="table-wrap">
         <table className="data-table match-table">
@@ -204,7 +212,7 @@ export default function TeamPage() {
               <th>Side</th>
               <th>Result</th>
               <th className="align-right has-tip" data-tip="The opponent's whole-season rating">Opp. <span className="greek">μ</span></th>
-              <th className="align-right has-tip" data-tip="This round's effect on the end-of-season rating: about what the team would lose (or, if red, gain) without it. A tournament's total adds up its rounds.">Δ Rating</th>
+              <th className="align-right">Δ Rating</th>
             </tr>
           </thead>
           {sortBy === 'consequential' ? (
@@ -227,7 +235,7 @@ export default function TeamPage() {
                         <span className="group-caret" aria-hidden="true">{isOpen ? '▾' : '▸'}</span>
                         <span className="group-name">{g.name}</span>
                         <span className="group-record"><Record {...record(g.matches)} /></span>
-                        <span className="group-delta num align-right has-tip" data-tip="This tournament's effect on the end-of-season rating: its rounds' Δ added up."><Delta value={net} /></span>
+                        <span className="group-delta num align-right"><Delta value={net} /></span>
                       </button>
                     </td>
                   </tr>
