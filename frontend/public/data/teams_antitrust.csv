@@ -85,7 +85,7 @@ Wake Forest MS,Majeed & Say,e & j,28.602,3.697,3,3,Wake Forest/e.majeed|Wake For
 Baylor BL,Barsoumian & Laibe,d & c,28.523,3.599,3,3,Baylor/d.barsoumian|Baylor/c.laibe,17.726,1,False
 Baylor HL,Hudson & Laibe,l & c,28.472,2.189,10,10,Baylor/l.hudson|Baylor/c.laibe,21.906,3,True
 Columbia/WashU DA,Alexis & Datel,e & a,28.408,2.883,7,6,Columbia/WashU/e.alexis|Columbia/WashU/a.datel,19.759,2,True
-Dartmouth CS (Cai/Sullivan),Cai & Sullivan,n & e,28.31,4.045,3,3,Dartmouth/n.cai|Dartmouth/e.sullivan,16.175,1,False
+Dartmouth CS (Cai/Sullivan),Cai & Sullivan,n & e,28.31,4.045,3,3,Dartmouth/n.cai-2|Dartmouth/e.sullivan,16.175,1,False
 Dartmouth LW,Lin & Wang,z & d,28.269,2.735,3,3,Dartmouth/z.lin|Dartmouth/d.wang,20.063,1,False
 Kentucky KW,Kiihnl & Weinhardt,a & d,28.181,3.563,4,3,Kentucky/a.kiihnl|Kentucky/d.weinhardt,17.491,1,False
 Liberty WS,Wittstock & Solsman,r & r,28.131,2.716,3,3,Liberty/r.wittstock|Liberty/r.solsman,19.983,1,False
@@ -122,7 +122,7 @@ Missouri State GL,Lucas & Grace,b & o,25.718,2.452,3,3,Missouri State/b.lucas|Mi
 Tufts RS,Stinson & Raman,m & r,25.686,3.517,4,4,Tufts/m.stinson|Tufts/r.raman,15.134,1,False
 Tufts SW,Weiss & Stinson,s & m,25.594,3.775,3,3,Tufts/s.weiss|Tufts/m.stinson,14.268,1,False
 Emory PS,Shafiro & Pierce,s & d,25.578,2.78,6,7,Emory/s.shafiro|Emory/d.pierce,17.239,2,True
-Dartmouth CL,Cai & Lin,n & z,25.477,3.823,3,3,Dartmouth/n.cai|Dartmouth/z.lin,14.01,1,False
+Dartmouth CL,Cai & Lin,n & z,25.477,3.823,3,3,Dartmouth/n.cai-2|Dartmouth/z.lin,14.01,1,False
 Georgetown LS,Spurlock & Lawless,a & k,25.419,3.002,6,6,Georgetown/a.spurlock|Georgetown/k.lawless,16.413,2,True
 Cal State Fullerton WL,White & Loayza,v & b,25.2,3.435,4,4,Cal State Fullerton/v.white|Cal State Fullerton/b.loayza,14.895,1,False
 Georgia MW,Wakefield & Mruz,d & j,24.991,2.601,4,4,Georgia/d.wakefield|Georgia/j.mruz,17.189,2,True

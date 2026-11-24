@@ -65,7 +65,9 @@ INITIAL_ALIASES = {
 NAMESAKES = {
     # Energy had two N. Cais. The one who debated with Bald continues with Goldberg from
     # labor on; this is the other.
-    'Dartmouth/n.cai': {'wallace': 'Dartmouth/n.cai-2', 'guddati': 'Dartmouth/n.cai-2'},
+    # Neo Cai also debated with El-Sharif (Pennsylvania) and Ben Abdallah in 2023-24; Nora was with Bald.
+    # Neo also debated with Sullivan and Lin (2021-22) and Vazquez-Torres (2022-23, NDT speaker list).
+    'Dartmouth/n.cai': {'sullivan': 'Dartmouth/n.cai-2', 'lin': 'Dartmouth/n.cai-2', 'vazqueztorres': 'Dartmouth/n.cai-2', 'wallace': 'Dartmouth/n.cai-2', 'guddati': 'Dartmouth/n.cai-2', 'elsharif': 'Dartmouth/n.cai-2', 'benabdallah': 'Dartmouth/n.cai-2'},
     # Kansas had two J. Parks. Jimin (2020-23: Ottinger, Mantis, Luce, Semrick, Wilkus)
     # keeps the key; Jiyoon started in 2022-23 with Marshall, then transferred to Michigan
     # and debated with Barrett. Kansas PP (Park & Park, 2022-23) can't be split by partner
@@ -186,6 +188,8 @@ SEASONS = {
         'transfers': {
             'Johnson County Community/t.babcock': 'Wichita State',
             'Tufts/m.stinson': 'UMass Amherst',
+            'Pennsylvania/Northeastern/m.elsharif': 'Pennsylvania',  # Maya El-Sharif: hybrid in 2021-22
+            'Pennsylvania/Northeastern/m.ramesh': 'Pennsylvania',  # her partner, same hybrid
         },
         'data_dir': 'data_personhood',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'georgetown',
