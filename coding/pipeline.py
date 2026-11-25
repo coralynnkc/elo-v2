@@ -224,6 +224,8 @@ SEASONS = {
             'Mary Washington/a.dover': 'George Mason',
             'Michigan/p.ippagunta': 'Georgia',
             'Minnesota/s.andersonmcelligott': 'Iowa',
+            'Southwestern/j.arreola': 'Southern California',  # Joaquin Arreola, last seen 2020-21
+            'Southwestern/k.griffin': 'Southern California',  # Khamani Griffin, Arreola's partner
         },
         'data_dir': 'data_nukes',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'longbeach',
@@ -252,6 +254,10 @@ SEASONS = {
             'Oklahoma/b.yarborough': 'Southern Nazarene',
             'Wayne State/i.rezahusain': 'Binghamton',
             'Wyoming/l.lassen': 'Baylor',
+            'Kentucky/d.weinhardt': 'Gonzaga',  # Dashiell Weinhardt, last seen 2022-23
+            'West Georgia/r.larson': 'Kansas',  # Rose Larson, last seen 2022-23
+            'UMass Amherst/Northeastern/v.valame': 'Georgetown',  # hybrid in 2023-24
+            'UTD/Utah/i.sharma': 'Michigan',  # Ishan Sharma, hybrid in 2023-24
         },
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'harvard', 'wake', 'georgetown',
                         'dartmouthrr', 'texas', 'ada', 'ndt'],
@@ -266,6 +272,8 @@ SEASONS = {
             'Emory/a.tahirkheli': 'Northwestern',
             'West Georgia/e.kaidarheafetz': 'Georgia',
             'Samford/l.pack': 'Georgia',
+            'Iowa/v.patel': 'Wake Forest',  # Vriti Patel
+            'Wake Forest/s.cho': 'Michigan',  # Sebastian Cho, last seen 2023-24
         },
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'gonzaga', 'wake', 'gt', 'dartmouthrr', 'texas', 'ada', 'ndt'],
         'name_fixes': {
@@ -282,7 +290,11 @@ SEASONS = {
         'data_dir': 'data_arms',
         'tournaments': ['nu', 'kentuckyrr', 'uk', 'minn', 'harvard', 'wake'],
         'prior_season': 'labor',
-        'transfers': {'Emory/i.song': 'Michigan'},
+        'transfers': {
+            'Emory/i.song': 'Michigan',
+            'UT San Antonio/e.garza': 'Texas',  # Emilio Garza
+            'West Georgia/a.clough': 'George Mason',  # Astrid Clough, last seen 2022-23
+        },
         'name_fixes': {},
         'teams_file': 'teams_arms.csv',
         'history_file': 'match_history_arms.csv',
