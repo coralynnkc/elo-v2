@@ -118,7 +118,7 @@ Emory PR,Ravikumar & Palmer,a & j,28.656,2.918,6,7,Emory/a.ravikumar|Emory/j.pal
 UC Davis MS,Shaikh & Mijares,u & m,28.562,2.573,8,8,UC Davis/u.shaikh|UC Davis/m.mijares,20.843,2,True
 Kansas PM,Pham & McConnell,r & s,28.558,3.653,3,3,Kansas/r.pham|Kansas/s.mcconnell,17.6,1,False
 Northwestern ArRa,Arney & Ramesh,b & m,28.529,2.998,7,7,Northwestern/b.arney|Northwestern/m.ramesh,19.535,2,True
-Southern California GA,Griffin & Arreola,k & j,28.496,2.715,7,7,Southern California/k.griffin|Southern California/j.arreola,20.35,2,True
+Southern California GA,Griffin & Arreola,k & j,28.496,2.715,7,7,Southwestern/k.griffin|Southwestern/j.arreola,20.35,2,True
 NYU ZM,Modi & Ziabkin,s & i,28.353,3.584,3,3,NYU/s.modi|NYU/i.ziabkin,17.602,1,False
 Minnesota MH,Munson & Herzer,t & j,28.333,2.604,7,7,Minnesota/t.munson|Minnesota/j.herzer,20.523,2,True
 Wyoming CW,Campbell & Willson,j & j,28.329,2.11,7,7,Wyoming/j.campbell|Wyoming/j.willson,21.999,2,True
@@ -143,7 +143,7 @@ Texas DL,Davis & Liu,c & e,26.44,4.133,3,3,Texas/c.davis|Texas/e.liu,14.041,1,Fa
 Iowa/Dartmouth WB,Weimar & Ben-Abdallah,n & s,26.413,3.747,3,3,Iowa/n.weimar|Dartmouth/s.benabdallah,15.171,1,False
 Emory WS,Wang & So,m & e,26.342,2.701,8,10,Emory/m.wang|Emory/e.so,18.238,3,True
 Kentucky RS (Rimpson/Slish),Rimpson & Slish,j & r,26.31,2.84,7,5,Kentucky/j.rimpson|Kentucky/r.slish,17.79,2,True
-Southern California CG,Channa & Griffin,d & k,26.208,2.812,7,6,Southern California/d.channa|Southern California/k.griffin,17.773,2,True
+Southern California CG,Channa & Griffin,d & k,26.208,2.812,7,6,Southern California/d.channa|Southwestern/k.griffin,17.773,2,True
 Michigan SB (Simha/Bloom),Simha & Bloom,n & g,26.175,3.697,3,3,Michigan/n.simha|Michigan/g.bloom,15.085,1,False
 Minnesota HH,Haber-Fawcett & Herzer,b & j,26.088,3.033,3,3,Minnesota/b.haberfawcett|Minnesota/j.herzer,16.988,1,False
 Kansas State RT,Robertson & Turner,d & t,26.032,2.112,10,10,Kansas State/d.robertson|Kansas State/t.turner,19.696,3,True
@@ -204,7 +204,7 @@ Central Oklahoma SW,Smith & Walker,l & k,22.154,2.91,7,7,Central Oklahoma/l.smit
 Baylor CK,Chatur & Keeler,s & a,22.079,2.004,13,13,Baylor/s.chatur|Baylor/a.keeler,16.066,4,True
 Northwestern LA,Lee & Avery,m & n,22.041,2.208,7,8,Northwestern/m.lee|Northwestern/n.avery,15.419,2,True
 UTD/Utah DS,Sharma & D'Antuono,i & j,22.032,2.161,12,14,UTD/Utah/i.sharma|UTD/j.dantuono,15.549,4,True
-Southern California CA (Channa/Arreola),Channa & Arreola,d & j,21.878,3.728,4,3,Southern California/d.channa|Southern California/j.arreola,10.696,1,False
+Southern California CA (Channa/Arreola),Channa & Arreola,d & j,21.878,3.728,4,3,Southern California/d.channa|Southwestern/j.arreola,10.696,1,False
 Cornell GJ,Jotsinghani & Gunendran,d & p,21.867,1.981,14,15,Cornell/d.jotsinghani|Cornell/p.gunendran,15.925,4,True
 Southern California KM,Khan & Mirza,s & s,21.861,2.592,8,8,Southern California/s.khan|Southern California/s.mirza,14.085,2,True
 Northwestern AH,Avery & Hines,n & b,21.82,3.649,3,3,Northwestern/n.avery|Northwestern/b.hines,10.873,1,False
@@ -276,7 +276,7 @@ Missouri State SN,Shockley & Neal,j & n,16.802,4.032,3,3,Missouri State/j.shockl
 Macalester DN,Daniels & Northrop,j & k,16.8,4.485,3,3,Macalester/j.daniels|Macalester/k.northrop,3.346,1,False
 Missouri State AK,Abdelhakiem & Kimmerle,a & a,16.627,2.999,6,7,Missouri State/a.abdelhakiem|Missouri State/a.kimmerle,7.631,2,True
 Missouri State GK,Granger & Kimmerle,j & a,15.903,4.158,3,3,Missouri State/j.granger|Missouri State/a.kimmerle,3.427,1,False
-Southern California OA,Ortega & Arreola,i & j,15.669,4.192,3,3,Southern California/i.ortega|Southern California/j.arreola,3.093,1,False
+Southern California OA,Ortega & Arreola,i & j,15.669,4.192,3,3,Southern California/i.ortega|Southwestern/j.arreola,3.093,1,False
 Oklahoma HS (Houston/Shadman),Houston & Shadman,r & k,15.13,3.385,7,6,Oklahoma/r.houston|Oklahoma/k.shadman,4.975,2,True
 Western Kentucky SM,StPeter & Missell,j & b,15.126,4.542,3,2,Western Kentucky/j.stpeter|Western Kentucky/b.missell,1.499,1,False
 Cal State Fullerton DV,Vasquez & Delgado,t & n,15.049,3.289,7,6,Cal State Fullerton/t.vasquez|Cal State Fullerton/n.delgado,5.183,2,True
