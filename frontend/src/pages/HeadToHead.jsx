@@ -10,14 +10,14 @@ const SIZE = 16
 // red when it trails, the plain surface at even. A split series runs 30–55% so a close one
 // (3–2) still shows on the dark surface, and a sweep jumps to 75% so undefeated records
 // stand apart; opacity stays below 1 so the text on it stays readable. The legend gradient
-// in index.css uses the same stops.
+// in index.css uses the same stops. --h2h-k softens every fill in light mode.
 function cellColor(w, l) {
   if (w === l) return 'var(--surface)'
   const share = w / (w + l)
   const margin = Math.abs(share - 0.5) * 2
   const strength = margin === 1 ? 75 : Math.round(30 + margin * 25)
   const hue = share > 0.5 ? 'var(--favored)' : 'var(--unfavored)'
-  return `color-mix(in srgb, ${hue} ${strength}%, var(--surface))`
+  return `color-mix(in srgb, ${hue} calc(${strength}% * var(--h2h-k)), var(--surface))`
 }
 
 export default function HeadToHead() {

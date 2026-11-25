@@ -14,25 +14,29 @@
   --favored: #388bfd;
   --unfavored: #f85149;
   --shadow: rgba(0, 0, 0, 0.4);
+  /* Scales the head-to-head cell fills; light mode needs them softer */
+  --h2h-k: 1;
 }
 
 /* data-theme is set before first paint by the script in index.html */
 :root[data-theme="light"] {
+  /* Matches seven-years: warm paper, ink text, navy accent */
   color-scheme: light;
-  --bg: #ffffff;
-  --surface: #f6f8fa;
-  --surface2: #eaeef2;
-  --border: #d0d7de;
-  --text: #1f2328;
-  --text-dim: #59636e;
-  --accent: #0969da;
-  --win: #1a7f37;
-  --loss: #cf222e;
-  --positive: #1a7f37;
-  --negative: #cf222e;
-  --favored: #0969da;
-  --unfavored: #cf222e;
-  --shadow: rgba(31, 35, 40, 0.12);
+  --bg: #fbfaf7;
+  --surface: #f4f2ec;
+  --surface2: #efece4;
+  --border: #e7e4dc;
+  --text: #1d1c19;
+  --text-dim: #76726a;
+  --accent: #1f4e79;
+  --win: #2f7d4f;
+  --loss: #b5452f;
+  --positive: #2f7d4f;
+  --negative: #b5452f;
+  --favored: #1f4e79;
+  --unfavored: #b5452f;
+  --h2h-k: 0.7;
+  --shadow: rgba(29, 28, 25, 0.08);
 }
 
 * {
@@ -44,8 +48,15 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 a {
@@ -117,7 +128,7 @@ a:hover {
 }
 .page-header h1 {
   font-size: 1.75rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 .subtitle {
   color: var(--text-dim);
@@ -417,7 +428,7 @@ a:hover {
   color: var(--text);
   font-size: 0.75rem;
   font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.4;
   letter-spacing: normal;
   text-transform: none;
@@ -529,7 +540,7 @@ a:hover {
 }
 .team-header h1 {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 .team-rank {
   display: block;
@@ -753,13 +764,13 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: 3px;
   background: linear-gradient(to right,
-    color-mix(in srgb, var(--unfavored) 75%, var(--surface)) 15%,
-    color-mix(in srgb, var(--unfavored) 55%, var(--surface)) 15%,
-    color-mix(in srgb, var(--unfavored) 30%, var(--surface)) 45%,
+    color-mix(in srgb, var(--unfavored) calc(75% * var(--h2h-k)), var(--surface)) 15%,
+    color-mix(in srgb, var(--unfavored) calc(55% * var(--h2h-k)), var(--surface)) 15%,
+    color-mix(in srgb, var(--unfavored) calc(30% * var(--h2h-k)), var(--surface)) 45%,
     var(--surface) 45% 55%,
-    color-mix(in srgb, var(--favored) 30%, var(--surface)) 55%,
-    color-mix(in srgb, var(--favored) 55%, var(--surface)) 85%,
-    color-mix(in srgb, var(--favored) 75%, var(--surface)) 85%);
+    color-mix(in srgb, var(--favored) calc(30% * var(--h2h-k)), var(--surface)) 55%,
+    color-mix(in srgb, var(--favored) calc(55% * var(--h2h-k)), var(--surface)) 85%,
+    color-mix(in srgb, var(--favored) calc(75% * var(--h2h-k)), var(--surface)) 85%);
 }
 .data-table.matrix > tbody > tr:hover {
   background: none;
@@ -843,4 +854,52 @@ a:hover {
   .expanded-content {
     padding-left: 1rem;
   }
+}
+
+/* ── Light mode, seven-years style: ink links with a hairline underline, records in
+   ink and grey instead of green and red, and deltas as tinted chips ── */
+:root[data-theme="light"] {
+  --pos-bg: #e9f3ec;
+  --neg-bg: #f8e9e4;
+  --line2: #d6d2c7;
+}
+:root[data-theme="light"] a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line2);
+}
+:root[data-theme="light"] a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--text);
+}
+:root[data-theme="light"] .season-nav a {
+  border-bottom: none;
+}
+:root[data-theme="light"] .view-tabs a {
+  border-bottom: 2px solid transparent;
+}
+:root[data-theme="light"] .view-tabs a.active {
+  border-bottom-color: var(--text);
+}
+:root[data-theme="light"] .explainer summary,
+:root[data-theme="light"] .link-button {
+  color: var(--text);
+}
+:root[data-theme="light"] .win {
+  color: var(--text);
+  font-weight: 500;
+}
+:root[data-theme="light"] .loss {
+  color: var(--text-dim);
+}
+:root[data-theme="light"] .positive,
+:root[data-theme="light"] .negative {
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+:root[data-theme="light"] .positive {
+  background: var(--pos-bg);
+}
+:root[data-theme="light"] .negative {
+  background: var(--neg-bg);
 }
