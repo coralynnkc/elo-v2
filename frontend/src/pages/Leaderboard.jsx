@@ -238,11 +238,11 @@ export default function Leaderboard() {
                                   <td className={m.win ? "win" : "loss"}>
                                     {m.win ? "Win" : "Loss"}
                                   </td>
-                                  <td className="num">
-                                    <span className={m.delta > 0 ? "positive" : "negative"}>
-                                      {m.delta > 0 ? "+" : ""}
-                                      {m.delta.toFixed(2)}
-                                    </span>
+                                  <td
+                                    className={`num ${m.delta > 0 ? "positive" : "negative"}`}
+                                  >
+                                    {m.delta > 0 ? "+" : ""}
+                                    {m.delta.toFixed(2)}
                                   </td>
                                 </tr>
                               ))}
