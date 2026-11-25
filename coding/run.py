@@ -3,7 +3,7 @@ import os
 import shutil
 import sys
 from pipeline import (CURRENT_SEASON, SEASONS, identify_debaters, load_season, run_pipeline,
-                      season_debaters, seed_priors, debater_experience)
+                      carried_debaters, seed_priors, debater_experience)
 
 CODING_DIR = os.path.dirname(__file__)
 FRONTEND_DATA = os.path.join(CODING_DIR, '..', 'frontend', 'public', 'data')
@@ -41,7 +41,7 @@ def run_season(season: str):
     priors = None
     if (prior_season := cfg.get('prior_season')):
         print(f"Seeding from {prior_season}...")
-        priors = seed_priors(teams, season_debaters(prior_season, load, _DEBATERS),
+        priors = seed_priors(teams, carried_debaters(prior_season, load, _DEBATERS),
                              debater_experience(prior_season, load, _DEBATERS))
         print(f"  {len(priors)} of {len(teams)} teams start from last season's debaters")
 

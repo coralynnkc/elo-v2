@@ -47,6 +47,10 @@ DEBATER_INFLATION = 4.0
 # growth the deeper chain makes labor and arms worse; a flat +1 was the first fix, and
 # more after a debater's first season in the data beats it in every season (Nov 2026).
 DEBATER_GROWTH = (1.5, 1.0)
+# A debater missing from a season (sat out, or debated only at tournaments not in the data)
+# keeps their last rating for up to this many seasons, widened by DEBATER_INFLATION for each
+# one missed and with no growth until they return. Longer gaps start fresh.
+DEBATER_MAX_GAP = 3
 
 
 def debater_growth(seasons_seen: int) -> float:
@@ -1034,10 +1038,34 @@ def season_debaters(season: str, load, cache: dict | None = None) -> dict[str, t
         prior = SEASONS[season].get('prior_season')
         priors = None
         if prior:
-            priors = carry_debaters(season_debaters(prior, load, cache),
+            priors = carry_debaters(carried_debaters(prior, load, cache),
                                     debater_experience(prior, load, cache))
         cache[season] = fit_debaters(*load(season), priors=priors)
     return cache[season]
+
+
+def carried_debaters(season: str, load, cache: dict | None = None) -> dict[str, ttt.Gaussian]:
+    """Debaters available to seed the season after `season`: everyone rated in it, plus
+    anyone rated in the last DEBATER_MAX_GAP seasons who is missing from it. A missing
+    debater keeps their rating, widened by DEBATER_INFLATION per season missed, so a
+    transfer or a year out of the data doesn't restart them at the flat prior."""
+    cache = {} if cache is None else cache
+    key, gap_key = ('carried', season), ('gap', season)
+    if key not in cache:
+        fit = season_debaters(season, load, cache)
+        out, gaps = dict(fit), {}
+        prior = SEASONS[season].get('prior_season')
+        if prior:
+            before = carried_debaters(prior, load, cache)
+            before_gaps = cache[('gap', prior)]
+            for debater, r in before.items():
+                gap = before_gaps.get(debater, 0) + 1
+                if debater in fit or gap > DEBATER_MAX_GAP:
+                    continue
+                out[debater] = ttt.Gaussian(r.mu, math.sqrt(r.sigma ** 2 + DEBATER_INFLATION ** 2))
+                gaps[debater] = gap
+        cache[key], cache[gap_key] = out, gaps
+    return cache[key]
 
 
 def debater_experience(season: str, load, cache: dict | None = None) -> dict[str, int]:

@@ -24,7 +24,7 @@ import pandas as pd
 from trueskill import TrueSkill, Rating, rate_1vs1
 from pipeline import (
     BETA, CURRENT_SEASON, GAMMA, MU, PRIOR_INFLATION, SEASONS, SIGMA,
-    fit_through_time, identify_debaters, load_season, round_matches, season_debaters, seed_priors,
+    fit_through_time, identify_debaters, load_season, round_matches, carried_debaters, seed_priors,
     debater_experience,
 )
 import os
@@ -314,7 +314,7 @@ def main():
         if prior_season:
             if prior_season == season:
                 sys.exit(f"Can't seed {season} from itself")
-            debaters = season_debaters(prior_season, _load, _DEBATERS)
+            debaters = carried_debaters(prior_season, _load, _DEBATERS)
             experience = debater_experience(prior_season, _load, _DEBATERS)
             reseed = lambda n, t=teams, d=debaters, e=experience: seed_priors(t, d, e, n)
             settings['priors'] = reseed(inflation)
